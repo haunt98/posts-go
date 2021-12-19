@@ -1,6 +1,6 @@
 # Dockerfile for Go
 
-Each time I start new Go project, I repeat many steps.
+Each time I start a new Go project, I repeat many steps.
 Like set up `.gitignore`, CI configs, Dockerfile, ...
 
 So I decide to have a baseline Dockerfile like this:
@@ -23,3 +23,53 @@ COPY --from=builder /build/app /app
 
 ENTRYPOINT ["/app"]
 ```
+
+I use [multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/) to keep my image size small.
+First stage is [Go official image](https://hub.docker.com/_/golang),
+second stage is [Distroless](https://github.com/GoogleContainerTools/distroless).
+
+Before Distroless, I use [Alpine official image](https://hub.docker.com/_/alpine),
+There is a whole discussion on the Internet to choose which is the best base image for Go.
+After reading some blogs, I discover Distroless as a small and secure base image.
+So I stick with it for a while.
+
+```Dockerfile
+FROM golang:1.18beta1-bullseye as builder
+```
+
+This is Go image I use as a build stage.
+
+```Dockerfile
+WORKDIR /build
+
+COPY go.mod .
+COPY go.sum .
+COPY vendor .
+COPY . .
+```
+
+I use `/build` to emphasize that I am building something in that directory.
+
+The 4 `COPY` lines are familiar if you use Go enough.
+First is `go.mod` and `go.sum` because it defines Go modules.
+The second is `vendor` because I use it a lot, this is not necessary but I use it because I don't want each time I build Dockerfile, I need to redownload Go modules.
+
+```Dockerfile
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app main.go
+```
+
+This is where I build Go program.
+`CGO_ENABLED=0` because I don't want to mess with C libraries.
+`GOOS=linux GOARCH=amd64` is easy to explain, Linux with x86-64.
+`GOAMD64=v3` is new since [Go 1.18](https://tip.golang.org/doc/go1.18#amd64),
+I use v3 because I read about AMD64 version in [Arch Linux rfcs](https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst). TLDR's newer computers are already x86-64-v3.
+
+```Dockerfile
+FROM gcr.io/distroless/base-debian11
+
+COPY --from=builder /build/app /app
+
+ENTRYPOINT ["/app"]
+```
+
+Finally, I copy `app` to Distroless base image.
