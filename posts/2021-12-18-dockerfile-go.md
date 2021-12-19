@@ -33,6 +33,8 @@ There is a whole discussion on the Internet to choose which is the best base ima
 After reading some blogs, I discover Distroless as a small and secure base image.
 So I stick with it for a while.
 
+Also, remember to match Distroless Debian version with Go official image Debian version.
+
 ```Dockerfile
 FROM golang:1.18beta1-bullseye as builder
 ```
