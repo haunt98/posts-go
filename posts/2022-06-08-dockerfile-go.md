@@ -6,7 +6,10 @@ Like set up `.gitignore`, CI configs, Dockerfile, ...
 So I decide to have a baseline Dockerfile like this:
 
 ```Dockerfile
-FROM golang:1.18beta1-bullseye as builder
+FROM golang:1.18-bullseye as builder
+
+RUN go install golang.org/dl/go1.18@latest \
+    && go1.18 download
 
 WORKDIR /build
 
@@ -36,10 +39,19 @@ So I stick with it for a while.
 Also, remember to match Distroless Debian version with Go official image Debian version.
 
 ```Dockerfile
-FROM golang:1.18beta1-bullseye as builder
+FROM golang:1.18-bullseye as builder
 ```
 
 This is Go image I use as a build stage.
+This can be official Go image or custom image is required in some companies.
+
+```Dockerfile
+RUN go install golang.org/dl/go1.18@latest \
+    && go1.18 download
+```
+
+This is optional.
+In my case, my company is slow to update Go image so I use this trick to install latest Go version.
 
 ```Dockerfile
 WORKDIR /build
@@ -54,10 +66,10 @@ I use `/build` to emphasize that I am building something in that directory.
 
 The 4 `COPY` lines are familiar if you use Go enough.
 First is `go.mod` and `go.sum` because it defines Go modules.
-The second is `vendor` because I use it a lot, this is not necessary but I use it because I don't want each time I build Dockerfile, I need to redownload Go modules.
+The second is `vendor`, this is optional but I use it because I don't want each time I build Dockerfile, I need to redownload Go modules.
 
 ```Dockerfile
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app .
 ```
 
 This is where I build Go program.
