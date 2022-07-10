@@ -18,6 +18,16 @@ const (
 )
 
 func main() {
+	// Cleanup generated path
+	if err := os.RemoveAll(generatedPath); err != nil {
+		log.Fatalln("Failed to remove all", generatedPath, err)
+	}
+
+	if err := os.MkdirAll(generatedPath, 0o777); err != nil {
+		log.Fatalln("Failed to mkdir all", generatedPath)
+	}
+
+	// Read needed files
 	headHTML, err := os.ReadFile(headHTMLPath)
 	if err != nil {
 		log.Fatalln("Failed to read file", headHTML)
@@ -28,26 +38,22 @@ func main() {
 		log.Fatalln("Failed to read dir", postsPath)
 	}
 
-	if err := os.RemoveAll(generatedPath); err != nil {
-		log.Fatalln("Failed to remove all", generatedPath, err)
-	}
-
-	if err := os.MkdirAll(generatedPath, 0o777); err != nil {
-		log.Fatalln("Failed to mkdir all", generatedPath)
-	}
-
 	for _, file := range files {
 		if file.IsDir() {
 			continue
 		}
 
+		// Generate HTML
 		filePath := filepath.Join(postsPath, file.Name())
 		md, err := os.ReadFile(filePath)
 		if err != nil {
 			log.Fatalln("Failed to read file", filePath)
 		}
 
-		htmlFlags := html.CommonFlags | html.CompletePage | html.TOC
+		htmlFlags := html.CommonFlags |
+			html.CompletePage |
+			html.TOC |
+			html.LazyLoadImages
 		htmlRendererOtps := html.RendererOptions{
 			Title: file.Name(),
 			Head:  headHTML,
