@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2022-07-10-bootstrap-go.md</title>
+  <meta name="GENERATOR" content="github.com/gomarkdown/markdown markdown processor for Go">
+  <meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,0..1&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  body {
+    font-family: "Recursive", sans-serif;
+    font-variation-settings: "MONO" 0, "CASL" 1;
+  }
+
+  code {
+    font-family: "Recursive", monospace;
+    font-variation-settings: "MONO" 1, "CASL" 1;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+
+<ul>
+<li><a href="#toc_0">Bootstrap Go</a>
+<ul>
+<li><a href="#toc_1">Structure</a></li>
+
+<li><a href="#toc_2">Do not repeat!</a></li>
+
+<li><a href="#toc_3">External libs</a>
+<ul>
+<li><a href="#toc_4">Don&rsquo;t use cli libs (<a href="https://github.com/spf13/cobra">spf13/cobra</a>, <a href="https://github.com/urfave/cli">urfave/cli</a>) just for Go service</a></li>
+
+<li><a href="#toc_5">Don&rsquo;t use <a href="https://github.com/grpc-ecosystem/grpc-gateway">grpc-ecosystem/grpc-gateway</a></a></li>
+
+<li><a href="#toc_6">Don&rsquo;t use <a href="https://github.com/uber/prototool">uber/prototool</a>, use <a href="https://github.com/bufbuild/buf">bufbuild/buf</a></a></li>
+
+<li><a href="#toc_7">Use <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a> for REST.</a></li>
+
+<li><a href="#toc_8">If you want log, just use <a href="https://github.com/uber-go/zap">uber-go/zap</a></a></li>
+
+<li><a href="#toc_9">Don&rsquo;t overuse ORM libs, no need to handle another layer above SQL.</a></li>
+
+<li><a href="#toc_10">If you want test, just use <a href="https://github.com/stretchr/testify">stretchr/testify</a>.</a></li>
+
+<li><a href="#toc_11">Replace <code>go fmt</code>, <code>goimports</code> with <a href="https://github.com/mvdan/gofumpt">mvdan/gofumpt</a>.</a></li>
+
+<li><a href="#toc_12">Use <a href="https://github.com/golangci/golangci-lint">golangci/golangci-lint</a>.</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+</nav>
+
+<h1 id="toc_0">Bootstrap Go</h1>
+
+<p>It is hard to write bootstrap tool to quickly create Go service.
+So I write this guide instead.
+This is a quick checklist for me every damn time I need to write a Go service from scratch.
+Also, this is my personal opinion, so feel free to comment.</p>
+
+<h2 id="toc_1">Structure</h2>
+
+<pre><code class="language-txt">main.go
+internal
+| business_1
+| | http
+| | | handler.go
+| | | service.go
+| | | repository.go
+| | | models.go
+| | grpc
+| | | handler.go
+| | | service.go
+| | | repository.go
+| | | models.go
+| | service.go
+| | repository.go
+| | models.go
+| business_2
+| | grpc
+| | | handler.go
+| | | service.go
+| | | repository.go
+| | | models.go
+</code></pre>
+
+<p>All business codes are inside <code>internal</code>.
+Each business has a different directory (<code>business_1</code>, <code>business_2</code>).</p>
+
+<p>Inside each business, there are 2 handlers: <code>http</code>, <code>grpc</code>:</p>
+
+<ul>
+<li><code>http</code> is for public APIs (Android, iOS,&hellip; are clients).</li>
+<li><code>grpc</code> is for internal APIs (other services are clients).</li>
+</ul>
+
+<p>Inside each handler, there are usually 3 layers: <code>handler</code>, <code>service</code>, <code>repository</code>:</p>
+
+<ul>
+<li><code>handler</code> interacts directly with gRPC or REST using specific codes (cookies,&hellip;)</li>
+<li><code>service</code> is where we write business/logic codes, and only business/logic codes is written here.</li>
+<li><code>repository</code> is where we write codes which interacts with database/cache like MySQL, Redis, &hellip;</li>
+</ul>
+
+<p><code>handler</code> must exist inside <code>grpc</code>, <code>http</code>.
+But <code>service</code>, <code>repository</code>, <code>models</code> can exist directly inside <code>business</code> if both <code>grpc</code>, <code>http</code> has same business/logic.</p>
+
+<h2 id="toc_2">Do not repeat!</h2>
+
+<p>If we have too many services, some of the logic will be overlapped.</p>
+
+<p>For example, service A and service B both need to make POST call API to service C.
+If service A and service B both have libs to call service C to do that API, we need to move the libs to some common pkg libs.
+So in the future, service D which needs to call C will not need to copy libs to handle service C api but only need to import from common pkg libs.</p>
+
+<p>Another bad practice is adapter service.
+No need to write a new service if what we need is just common pkg libs.</p>
+
+<h2 id="toc_3">External libs</h2>
+
+<h3 id="toc_4">Don&rsquo;t use cli libs (<a href="https://github.com/spf13/cobra">spf13/cobra</a>, <a href="https://github.com/urfave/cli">urfave/cli</a>) just for Go service</h3>
+
+<p>What is the point to pass many params (<code>--abc</code>, <code>--xyz</code>) when what we only need is start service?</p>
+
+<p>In my case, service starts with only config, and config should be read from file or environment like <a href="https://12factor.net/">The Twelve Factors</a> guide.</p>
+
+<h3 id="toc_5">Don&rsquo;t use <a href="https://github.com/grpc-ecosystem/grpc-gateway">grpc-ecosystem/grpc-gateway</a></h3>
+
+<p>Just don&rsquo;t.</p>
+
+<p>Use <a href="https://github.com/protocolbuffers/protobuf-go">protocolbuffers/protobuf-go</a>, <a href="https://github.com/grpc/grpc-go">grpc/grpc-go</a> for gRPC.</p>
+
+<p>Write 1 for both gRPC, REST sounds good, but in the end, it is not worth it.</p>
+
+<h3 id="toc_6">Don&rsquo;t use <a href="https://github.com/uber/prototool">uber/prototool</a>, use <a href="https://github.com/bufbuild/buf">bufbuild/buf</a></h3>
+
+<p>prototool is deprecated, and buf can generate, lint, format as good as prototool.</p>
+
+<h3 id="toc_7">Use <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a> for REST.</h3>
+
+<p>Don&rsquo;t use <code>gin.Context</code> when pass context from handler layer to service layer, use <code>gin.Context.Request.Context()</code> instead.</p>
+
+<h3 id="toc_8">If you want log, just use <a href="https://github.com/uber-go/zap">uber-go/zap</a></h3>
+
+<p>It is fast!</p>
+
+<ul>
+<li><p>Don&rsquo;t overuse <code>func (*Logger) With</code>. Because if log line is too long, there is a possibility that we can lost it.</p></li>
+
+<li><p>Use <code>MarshalLogObject</code> when we need to hide some field of object when log (field has long or sensitive value)</p></li>
+
+<li><p>Don&rsquo;t use <code>Panic</code>. Use <code>Fatal</code> for errors when start service to check dependencies. If you really need panic level, use <code>DPanic</code>.</p></li>
+
+<li><p>Use <code>contextID</code> or <code>traceID</code> in every log lines for easily debug.</p></li>
+</ul>
+
+<h3 id="toc_9">Don&rsquo;t overuse ORM libs, no need to handle another layer above SQL.</h3>
+
+<p>Each ORM libs has each different syntax.
+To learn and use those libs correctly is time consuming.
+So just stick to plain SQL.
+It is easier to debug when something is wrong.</p>
+
+<p>But <code>database/sql</code> has its own limit.
+For example, it is hard to get primary key after insert/update.
+So may be you want to use ORM for those cases.</p>
+
+<h3 id="toc_10">If you want test, just use <a href="https://github.com/stretchr/testify">stretchr/testify</a>.</h3>
+
+<p>It is easy to write a suite test, thanks to testify.
+Also, for mocking, there are many options out there.
+Pick 1 then sleep peacefully.</p>
+
+<h3 id="toc_11">Replace <code>go fmt</code>, <code>goimports</code> with <a href="https://github.com/mvdan/gofumpt">mvdan/gofumpt</a>.</h3>
+
+<p><code>gofumpt</code> provides more rules when format Go codes.</p>
+
+<h3 id="toc_12">Use <a href="https://github.com/golangci/golangci-lint">golangci/golangci-lint</a>.</h3>
+
+<p>No need to say more.
+Lint or get the f out!</p>
+
+</body>
+</html>

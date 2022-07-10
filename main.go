@@ -13,7 +13,7 @@ import (
 const (
 	postsPath     = "posts"
 	headHTMLPath  = "custom/head.html"
-	generatedPath = "generated"
+	generatedPath = "docs"
 	htmlExt       = ".html"
 )
 
@@ -32,7 +32,7 @@ func main() {
 		log.Fatalln("Failed to remove all", generatedPath, err)
 	}
 
-	if err := os.MkdirAll(generatedPath, 0777); err != nil {
+	if err := os.MkdirAll(generatedPath, 0o777); err != nil {
 		log.Fatalln("Failed to mkdir all", generatedPath)
 	}
 
@@ -60,7 +60,7 @@ func main() {
 		generatedFileName := strings.TrimSuffix(file.Name(), filepath.Ext(file.Name())) + htmlExt
 		generatedFilePath := filepath.Join(generatedPath, generatedFileName)
 
-		if err := os.WriteFile(generatedFilePath, generatedHTML, 0666); err != nil {
+		if err := os.WriteFile(generatedFilePath, generatedHTML, 0o666); err != nil {
 			log.Fatalln("Failed to write file", generatedFilePath, err)
 		}
 	}
