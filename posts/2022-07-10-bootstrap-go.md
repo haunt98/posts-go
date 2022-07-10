@@ -76,22 +76,23 @@ Use [protocolbuffers/protobuf-go](https://github.com/protocolbuffers/protobuf-go
 
 Write 1 for both gRPC, REST sounds good, but in the end, it is not worth it.
 
+### Don't use [uber/prototool](https://github.com/uber/prototool), use [bufbuild/buf](https://github.com/bufbuild/buf)
+
+prototool is deprecated, and buf can generate, lint, format as good as prototool.
+
 ### Use [gin-gonic/gin](https://github.com/gin-gonic/gin) for REST.
 
 Don't use `gin.Context` when pass context from handler layer to service layer, use `gin.Context.Request.Context()` instead.
-
-### Don't use [uber/prototool](https://github.com/uber/prototool), use [bufbuild/buf](https://github.com/bufbuild/buf)
-
-prototool is deprecated, and buf can generate, lint as good as prototool.
 
 ### If you want log, just use [uber-go/zap](https://github.com/uber-go/zap)
 
 It is fast!
 
-- Don't overuse `func (*Logger) With`.
-  Because if log line is too long, there is a possibility that we can lost it.
+- Don't overuse `func (*Logger) With`. Because if log line is too long, there is a possibility that we can lost it.
 
 - Use `MarshalLogObject` when we need to hide some field of object when log (field has long or sensitive value)
+
+- Don't use `Panic`. Use `Fatal` for errors when start service to check dependencies. If you really need panic level, use `DPanic`.
 
 - Use `contextID` or `traceID` in every log lines for easily debug.
 
@@ -103,7 +104,7 @@ So just stick to plain SQL.
 It is easier to debug when something is wrong.
 
 But `database/sql` has its own limit.
-For example, it is hard to get id after insert/update.
+For example, it is hard to get primary key after insert/update.
 So may be you want to use ORM for those cases.
 
 ### If you want test, just use [stretchr/testify](https://github.com/stretchr/testify).
@@ -111,3 +112,12 @@ So may be you want to use ORM for those cases.
 It is easy to write a suite test, thanks to testify.
 Also, for mocking, there are many options out there.
 Pick 1 then sleep peacefully.
+
+### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt).
+
+`gofumpt` provides more rules when format Go codes.
+
+### Use [golangci/golangci-lint](https://github.com/golangci/golangci-lint).
+
+No need to say more.
+Lint or get the f out!
