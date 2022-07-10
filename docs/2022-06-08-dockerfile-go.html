@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2022-06-08-dockerfile-go.md</title>
+  <meta name="GENERATOR" content="github.com/gomarkdown/markdown markdown processor for Go">
+  <meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,0..1&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  body {
+    font-family: "Recursive", sans-serif;
+    font-variation-settings: "MONO" 0, "CASL" 1;
+  }
+
+  code {
+    font-family: "Recursive", monospace;
+    font-variation-settings: "MONO" 1, "CASL" 1;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+
+<ul>
+<li><a href="#toc_0">Dockerfile for Go</a></li>
+</ul>
+
+</nav>
+
+<h1 id="toc_0">Dockerfile for Go</h1>
+
+<p>Each time I start a new Go project, I repeat many steps.
+Like set up <code>.gitignore</code>, CI configs, Dockerfile, &hellip;</p>
+
+<p>So I decide to have a baseline Dockerfile like this:</p>
+
+<pre><code class="language-Dockerfile">FROM golang:1.18-bullseye as builder
+
+RUN go install golang.org/dl/go1.18@latest \
+    &amp;&amp; go1.18 download
+
+WORKDIR /build
+
+COPY go.mod .
+COPY go.sum .
+COPY vendor .
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath .
+
+FROM gcr.io/distroless/base-debian11
+
+COPY --from=builder /build/app /app
+
+ENTRYPOINT [&quot;/app&quot;]
+</code></pre>
+
+<p>I use <a href="https://docs.docker.com/develop/develop-images/multistage-build/">multi-stage build</a> to keep my image size small.
+First stage is <a href="https://hub.docker.com/_/golang">Go official image</a>,
+second stage is <a href="https://github.com/GoogleContainerTools/distroless">Distroless</a>.</p>
+
+<p>Before Distroless, I use <a href="https://hub.docker.com/_/alpine">Alpine official image</a>,
+There is a whole discussion on the Internet to choose which is the best base image for Go.
+After reading some blogs, I discover Distroless as a small and secure base image.
+So I stick with it for a while.</p>
+
+<p>Also, remember to match Distroless Debian version with Go official image Debian version.</p>
+
+<pre><code class="language-Dockerfile">FROM golang:1.18-bullseye as builder
+</code></pre>
+
+<p>This is Go image I use as a build stage.
+This can be official Go image or custom image is required in some companies.</p>
+
+<pre><code class="language-Dockerfile">RUN go install golang.org/dl/go1.18@latest \
+    &amp;&amp; go1.18 download
+</code></pre>
+
+<p>This is optional.
+In my case, my company is slow to update Go image so I use this trick to install latest Go version.</p>
+
+<pre><code class="language-Dockerfile">WORKDIR /build
+
+COPY go.mod .
+COPY go.sum .
+COPY vendor .
+COPY . .
+</code></pre>
+
+<p>I use <code>/build</code> to emphasize that I am building something in that directory.</p>
+
+<p>The 4 <code>COPY</code> lines are familiar if you use Go enough.
+First is <code>go.mod</code> and <code>go.sum</code> because it defines Go modules.
+The second is <code>vendor</code>, this is optional but I use it because I don&rsquo;t want each time I build Dockerfile, I need to redownload Go modules.</p>
+
+<pre><code class="language-Dockerfile">RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath .
+</code></pre>
+
+<p>This is where I build Go program.</p>
+
+<p><code>CGO_ENABLED=0</code> because I don&rsquo;t want to mess with C libraries.
+<code>GOOS=linux GOARCH=amd64</code> is easy to explain, Linux with x86-64.
+<code>GOAMD64=v3</code> is new since <a href="https://go.dev/doc/go1.18#amd64">Go 1.18</a>,
+I use v3 because I read about AMD64 version in <a href="https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst">Arch Linux rfcs</a>. TLDR&rsquo;s newer computers are already x86-64-v3.</p>
+
+<p><code>-tags timetzdata</code> to embed timezone database incase base image does not have.
+<code>-trimpath</code> to support reproduce build.</p>
+
+<pre><code class="language-Dockerfile">FROM gcr.io/distroless/base-debian11
+
+COPY --from=builder /build/app /app
+
+ENTRYPOINT [&quot;/app&quot;]
+</code></pre>
+
+<p>Finally, I copy <code>app</code> to Distroless base image.</p>
+
+</body>
+</html>
