@@ -1,21 +1,40 @@
 package main
 
 import (
+	"bytes"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+	"text/template"
 
-	"github.com/gomarkdown/markdown"
-	"github.com/gomarkdown/markdown/html"
+	"github.com/tdewolff/minify/v2"
+	minify_css "github.com/tdewolff/minify/v2/css"
+	minify_html "github.com/tdewolff/minify/v2/html"
+	"github.com/yuin/goldmark"
+	gm_extension "github.com/yuin/goldmark/extension"
+	gm_html "github.com/yuin/goldmark/renderer/html"
 )
 
 const (
-	postsPath     = "posts"
-	headHTMLPath  = "custom/head.html"
+	postFilesPath    = "posts"
+	templatePostPath = "templates/post.html"
+
+	templateCSSPath = "templates/styles.css"
+	cssFilename     = "styles.css"
+
 	generatedPath = "docs"
-	htmlExt       = ".html"
+
+	extHTML = ".html"
+
+	mimeTypeHTML = "text/html"
+	mimeTypeCSS  = "text/css"
 )
+
+type templatePostData struct {
+	Body string
+}
 
 func main() {
 	// Cleanup generated path
@@ -27,47 +46,99 @@ func main() {
 		log.Fatalln("Failed to mkdir all", generatedPath)
 	}
 
-	// Read needed files
-	headHTML, err := os.ReadFile(headHTMLPath)
+	// Read post files directory
+	postFiles, err := os.ReadDir(postFilesPath)
 	if err != nil {
-		log.Fatalln("Failed to read file", headHTML)
+		log.Fatalln("Failed to read dir", postFilesPath)
 	}
 
-	files, err := os.ReadDir(postsPath)
+	// Prepare template
+	templatePostBytes, err := os.ReadFile(templatePostPath)
 	if err != nil {
-		log.Fatalln("Failed to read dir", postsPath)
+		log.Fatalln("Failed to read file", templatePostPath, err)
 	}
 
-	for _, file := range files {
-		if file.IsDir() {
+	templatePost, err := template.New("post").Parse(string(templatePostBytes))
+	if err != nil {
+		log.Fatalln("Failed to parse template", err)
+	}
+
+	// Prepare parse markdown
+	gm := goldmark.New(
+		goldmark.WithExtensions(
+			gm_extension.GFM,
+		),
+		goldmark.WithRendererOptions(
+			gm_html.WithHardWraps(),
+		),
+	)
+
+	// Prepare minify
+	m := minify.New()
+	m.AddFunc(mimeTypeHTML, minify_html.Minify)
+	m.AddFunc(mimeTypeCSS, minify_css.Minify)
+
+	// Generate post files
+	for _, postFile := range postFiles {
+		if postFile.IsDir() {
 			continue
 		}
 
-		// Generate HTML
-		filePath := filepath.Join(postsPath, file.Name())
-		md, err := os.ReadFile(filePath)
+		// Prepare post file
+		mdFilename := filepath.Join(postFilesPath, postFile.Name())
+		mdFileBytes, err := os.ReadFile(mdFilename)
 		if err != nil {
-			log.Fatalln("Failed to read file", filePath)
+			log.Fatalln("Failed to read file", mdFilename, err)
 		}
 
-		htmlFlags := html.CommonFlags |
-			html.CompletePage |
-			html.TOC |
-			html.LazyLoadImages
-		htmlRendererOtps := html.RendererOptions{
-			Title: file.Name(),
-			Head:  headHTML,
-			Flags: htmlFlags,
+		// Prepare html file
+		htmlFilename := strings.TrimSuffix(postFile.Name(), filepath.Ext(postFile.Name())) + extHTML
+		htmlFilepath := filepath.Join(generatedPath, htmlFilename)
+
+		htmlFile, err := os.OpenFile(htmlFilepath, os.O_RDWR|os.O_CREATE, 0o600)
+		if err != nil {
+			log.Fatalln("Failed to open file", htmlFilepath, err)
 		}
 
-		htmlRenderer := html.NewRenderer(htmlRendererOtps)
-		generatedHTML := markdown.ToHTML(md, nil, htmlRenderer)
-
-		generatedFileName := strings.TrimSuffix(file.Name(), filepath.Ext(file.Name())) + htmlExt
-		generatedFilePath := filepath.Join(generatedPath, generatedFileName)
-
-		if err := os.WriteFile(generatedFilePath, generatedHTML, 0o666); err != nil {
-			log.Fatalln("Failed to write file", generatedFilePath, err)
+		// Parse markdown
+		var markdownBuf bytes.Buffer
+		if err := gm.Convert(mdFileBytes, &markdownBuf); err != nil {
+			log.Fatalln("Failed to convert markdown", err)
 		}
+
+		tmpReader, tmpWriter := io.Pipe()
+
+		// Template
+		go func() {
+			if err := templatePost.Execute(tmpWriter, templatePostData{
+				Body: markdownBuf.String(),
+			}); err != nil {
+				log.Fatalln("Failed to execute html template", err)
+			}
+			tmpWriter.Close()
+		}()
+
+		// Minify
+		if err := m.Minify(mimeTypeHTML, htmlFile, tmpReader); err != nil {
+			log.Fatalln("Failed to minify html", err)
+		}
+		tmpReader.Close()
+		htmlFile.Close()
+	}
+
+	// Copy css file
+	templateCSSFile, err := os.OpenFile(templateCSSPath, os.O_RDONLY, 0o600)
+	if err != nil {
+		log.Fatalln("Failed to open file", templateCSSPath, err)
+	}
+
+	cssFilename := filepath.Join(generatedPath, cssFilename)
+	cssFile, err := os.OpenFile(cssFilename, os.O_RDWR|os.O_CREATE, 0o600)
+	if err != nil {
+		log.Fatalln("Failed to open file", cssFilename, err)
+	}
+
+	if err := m.Minify(mimeTypeCSS, cssFile, templateCSSFile); err != nil {
+		log.Fatalln("Failed to minify css", err)
 	}
 }
