@@ -1,0 +1,9 @@
+body {
+  font-family: "Recursive", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 1;
+}
+
+code {
+  font-family: "Recursive", monospace;
+  font-variation-settings: "MONO" 1, "CASL" 1;
+}
