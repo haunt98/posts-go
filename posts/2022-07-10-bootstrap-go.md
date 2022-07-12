@@ -60,6 +60,51 @@ So in the future, service D which needs to call C will not need to copy libs to 
 Another bad practice is adapter service.
 No need to write a new service if what we need is just common pkg libs.
 
+## Taste on style guide
+
+### Use functional options, but don't overuse it!
+
+For simple struct with 1 or 2 fields, no need to use functional options.
+
+[Example](https://go.dev/play/p/0XnOLiHuoz3):
+
+```go
+func main() {
+	s := NewS(WithA(1), WithB("b"))
+	fmt.Printf("%+v\n", s)
+}
+
+type S struct {
+	fieldA int
+	fieldB string
+}
+
+type OptionS func(s *S)
+
+func WithA(a int) OptionS {
+	return func(s *S) {
+		s.fieldA = a
+	}
+}
+
+func WithB(b string) OptionS {
+	return func(s *S) {
+		s.fieldB = b
+	}
+}
+
+func NewS(opts ...OptionS) *S {
+	s := &S{}
+	for _, opt := range opts {
+		opt(s)
+	}
+	return s
+}
+```
+
+In above example, I construct `s` with `WithA` and `WithB` option.
+No need to pass direct field inside `s`.
+
 ## External libs
 
 ### Don't use cli libs ([spf13/cobra](https://github.com/spf13/cobra), [urfave/cli](https://github.com/urfave/cli)) just for Go service
@@ -121,3 +166,8 @@ Pick 1 then sleep peacefully.
 
 No need to say more.
 Lint or get the f out!
+
+## Thanks
+
+- [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
+- [Functional options for friendly APIs](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis)
