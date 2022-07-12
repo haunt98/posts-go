@@ -12,3 +12,9 @@ Steps:
 # Genrate HTML
 go run ./main.go
 ```
+
+## Thanks
+
+- https://motherfuckingwebsite.com/
+- http://bettermotherfuckingwebsite.com/
+- https://evenbettermotherfucking.website/

@@ -1,6 +1,9 @@
 body {
   font-family: "Recursive", sans-serif;
   font-variation-settings: "MONO" 0, "CASL" 1;
+  margin: 5% auto;
+  max-width: 75%;
+  line-height: 1.8;
 }
 
 code {
