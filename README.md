@@ -9,8 +9,8 @@ Steps:
 
 # Update index in posts/index.md
 
-# Genrate HTML
-go run ./main.go
+# Generate HTML
+make
 ```
 
 ## Thanks
