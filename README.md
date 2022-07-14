@@ -18,3 +18,7 @@ make
 - https://motherfuckingwebsite.com/
 - http://bettermotherfuckingwebsite.com/
 - https://evenbettermotherfucking.website/
+- https://thebestmotherfucking.website/
+- https://perfectmotherfuckingwebsite.com/
+- https://primer.style/design/foundations/color
+- https://primer.style/primitives/colors
