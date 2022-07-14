@@ -4,9 +4,32 @@ body {
   margin: 5% auto;
   max-width: 75%;
   line-height: 1.8;
+  color: #24292f;
+  background: #ffffff;
 }
 
 code {
   font-family: "Recursive", monospace;
   font-variation-settings: "MONO" 1, "CASL" 1;
+  display: inline-block;
+  background: #f6f8fa;
+}
+
+a {
+  color: #0969da;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #c9d1d9;
+    background: #0d1117;
+  }
+
+  code {
+    background: #161b22;
+  }
+
+  a {
+    color: #58a6ff;
+  }
 }
