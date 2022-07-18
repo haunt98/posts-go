@@ -107,6 +107,10 @@ No need to pass direct field inside `s`.
 
 ## External libs
 
+### No need `vendor`
+
+Only need if you need something from `vendor`, to generate mock or something else.
+
 ### Don't use cli libs ([spf13/cobra](https://github.com/spf13/cobra), [urfave/cli](https://github.com/urfave/cli)) just for Go service
 
 What is the point to pass many params (`--abc`, `--xyz`) when what we only need is start service?
