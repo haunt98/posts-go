@@ -137,6 +137,10 @@ If use `vendor`:
 - Replace `buf generate` with `buf generate --exclude-path vendor`.
 - Replace `buf format -w` with `buf format -w --exclude-path vendor`.
 
+Replace `import "third_party/googleapis/google/api/annotations.proto";` with `import "google/api/annotations.proto";`
+
+Delete `security_definitions`, `security`, in `option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)`.
+
 The last step is delete `prototool.yaml`.
 
 ## Thanks
