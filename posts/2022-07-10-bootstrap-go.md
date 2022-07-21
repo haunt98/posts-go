@@ -143,6 +143,8 @@ It is fast!
 
 - Don't use `Panic`. Use `Fatal` for errors when start service to check dependencies. If you really need panic level, use `DPanic`.
 
+- If doubt, use `zap.Any`.
+
 - Use `contextID` or `traceID` in every log lines for easily debug.
 
 ### Don't overuse ORM libs, no need to handle another layer above SQL.
