@@ -10,44 +10,41 @@ Also, this is my personal opinion, so feel free to comment.
 ```txt
 main.go
 internal
-| business_1
+| business
 | | http
 | | | handler.go
 | | | service.go
-| | | repository.go
 | | | models.go
 | | grpc
 | | | handler.go
+| | | models.go
+| | consumer
+| | | handler.go
 | | | service.go
-| | | repository.go
 | | | models.go
 | | service.go
 | | repository.go
 | | models.go
-| business_2
-| | grpc
-| | | handler.go
-| | | service.go
-| | | repository.go
-| | | models.go
 ```
 
 All business codes are inside `internal`.
-Each business has a different directory (`business_1`, `business_2`).
+Each business has a different directory `business`.
 
 Inside each business, there are 2 handlers: `http`, `grpc`:
 
-- `http` is for public APIs (Android, iOS,... are clients).
+- `http` is for public APIs (Android, iOS, ... are clients).
 - `grpc` is for internal APIs (other services are clients).
+- `consumer` is for consuming messages from queue (Kafka, RabbitMQ, ...).
 
-Inside each handler, there are usually 3 layers: `handler`, `service`, `repository`:
+For each handler, there are usually 3 layers: `handler`, `service`, `repository`:
 
-- `handler` interacts directly with gRPC or REST using specific codes (cookies,...)
+- `handler` interacts directly with gRPC, REST or consumer using specific codes (cookies, ...) In case gRPC, there are frameworks outside handle for us so we can write business/logic codes here too. But remember, gRPC only.
 - `service` is where we write business/logic codes, and only business/logic codes is written here.
-- `repository` is where we write codes which interacts with database/cache like MySQL, Redis, ...
+- `repository` is where we write codes which interacts with database/cache like MySQL, Redis, ... And we should place it directly inside of `business`.
+- `models` is where we put all request, response, data models.
 
 `handler` must exist inside `grpc`, `http`.
-But `service`, `repository`, `models` can exist directly inside `business` if both `grpc`, `http` has same business/logic.
+But `service`, `models` can exist directly inside of `business` if both `grpc`, `http` has same business/logic.
 
 ## Do not repeat!
 
@@ -113,7 +110,7 @@ Only need if you need something from `vendor`, to generate mock or something els
 
 ### Don't use cli libs ([spf13/cobra](https://github.com/spf13/cobra), [urfave/cli](https://github.com/urfave/cli)) just for Go service
 
-What is the point to pass many params (`--abc`, `--xyz`) when what we only need is start service?
+What is the point to pass many params (`do-it`, `--abc`, `--xyz`) when what we only need is start service?
 
 In my case, service starts with only config, and config should be read from file or environment like [The Twelve Factors](https://12factor.net/) guide.
 
@@ -139,7 +136,7 @@ It is fast!
 
 - Don't overuse `func (*Logger) With`. Because if log line is too long, there is a possibility that we can lost it.
 
-- Use `MarshalLogObject` when we need to hide some field of object when log (field has long or sensitive value)
+- Use `MarshalLogObject` when we need to hide some field of object when log (field is long or has sensitive value)
 
 - Don't use `Panic`. Use `Fatal` for errors when start service to check dependencies. If you really need panic level, use `DPanic`.
 
@@ -172,6 +169,16 @@ Pick 1 then sleep peacefully.
 
 No need to say more.
 Lint or get the f out!
+
+If you get `fieldalignment` error, use [fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment) to fix them.
+
+```sh
+# Install
+go install golang.org/x/tools/go/analysis/passes/fieldalignment@latest
+
+# Fix
+fieldalignment -fix ./internal/business/*.go
+```
 
 ## Thanks
 
