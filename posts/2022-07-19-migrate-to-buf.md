@@ -2,10 +2,10 @@
 
 Why? Because `prototool` is outdated, and can not run on M1 mac.
 
-There are 2 usecase:
+There are 2 use cases:
 
-- For services only provide GRPC
-- For services provide REST and GRPC, which make use of [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway).
+- For services only provide gRPC.
+- For services provide both REST and gRPC, which make use of [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway).
 
 We need 3 files:
 
@@ -18,7 +18,7 @@ FYI, the libs version I use:
 - [golang/protobuf v1.5.2](https://github.com/golang/protobuf/releases/tag/v1.5.2)
 - [grpc-ecosystem/grpc-gateway v1.16.0](https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0)
 
-## GRPC only
+## gRPC only
 
 `build.go`:
 
@@ -66,7 +66,7 @@ gen:
 
 Then run `make gen` to check result.
 
-## REST and GRPC using grpc-gateway
+## REST and gRPC using grpc-gateway
 
 `build.go`:
 
@@ -137,11 +137,17 @@ If use `vendor`:
 - Replace `buf generate` with `buf generate --exclude-path vendor`.
 - Replace `buf format -w` with `buf format -w --exclude-path vendor`.
 
-Replace `import "third_party/googleapis/google/api/annotations.proto";` with `import "google/api/annotations.proto";`
+If you use grpc-gateway:
 
-Delete `security_definitions`, `security`, in `option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)`.
+- Replace `import "third_party/googleapis/google/api/annotations.proto";` with `import "google/api/annotations.proto";`
+- Delete `security_definitions`, `security`, in `option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)`.
 
 The last step is delete `prototool.yaml`.
+
+If you are not migrate but start new:
+
+- Add `buf lint` to make sure your proto is good.
+- Add `buf breaking --against "https://your-grpc-repo-goes-here.git"` to make sure each time you update proto, you don't break backward compatibility.
 
 ## Thanks
 
