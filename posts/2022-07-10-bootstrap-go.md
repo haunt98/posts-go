@@ -111,6 +111,33 @@ No need to pass direct field inside `s`.
 
 Only need if you need something from `vendor`, to generate mock or something else.
 
+### Use `build.go` to include build tools in go.mod
+
+To easily control version of build tools.
+
+For example `build.go`:
+
+```go
+//go:build tools
+// +build tools
+
+package main
+
+import (
+	_ "github.com/golang/protobuf/protoc-gen-go"
+)
+```
+
+And then in `Makefile`:
+
+```Makefile
+build:
+    go install github.com/golang/protobuf/protoc-gen-go
+```
+
+We always get the version of build tools in `go.mod` each time we install it.
+Future contributors will not cry anymore.
+
 ### Don't use cli libs ([spf13/cobra](https://github.com/spf13/cobra), [urfave/cli](https://github.com/urfave/cli)) just for Go service
 
 What is the point to pass many params (`do-it`, `--abc`, `--xyz`) when what we only need is start service?
