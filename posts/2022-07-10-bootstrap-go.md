@@ -40,11 +40,14 @@ For each handler, there are usually 3 layers: `handler`, `service`, `repository`
 
 - `handler` interacts directly with gRPC, REST or consumer using specific codes (cookies, ...) In case gRPC, there are frameworks outside handle for us so we can write business/logic codes here too. But remember, gRPC only.
 - `service` is where we write business/logic codes, and only business/logic codes is written here.
-- `repository` is where we write codes which interacts with database/cache like MySQL, Redis, ... And we should place it directly inside of `business`.
+- `repository` is where we write codes which interacts with database/cache like MySQL, Redis, ...
 - `models` is where we put all request, response, data models.
 
-`handler` must exist inside `grpc`, `http`.
-But `service`, `models` can exist directly inside of `business` if both `grpc`, `http` has same business/logic.
+Location:
+
+- `handler` must exist inside `grpc`, `http`, `consumer`.
+- `service`, `models` can exist directly inside of `business` if both `grpc`, `http`, `consumer` has same business/logic.
+- `repository` should be placed directly inside of `business`.
 
 ## Do not repeat!
 
