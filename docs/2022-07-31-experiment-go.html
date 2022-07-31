@@ -1,0 +1,29 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..800,0..1,0..1&display=swap" rel=stylesheet><link rel=stylesheet href=styles.css><a href=index>Index</a><h1>Experiment Go</h1><p>There come a time when you need to experiment new things, new style, new approach.<br>So this post serves as it is named.<h1>Design API by trimming down the interface/struct or whatever</h1><p>Instead of:<pre><code class=language-go>type Client interface {
+    GetUser()
+    AddUser()
+    GetAccount()
+    RemoveAccount()
+}
+
+// c is Client
+c.GetUser()
+c.RemoveAccount()
+</code></pre><p>Try:<pre><code class=language-go>type Client struct {
+    User ClientUser
+    Account ClientAccount
+}
+
+type ClientUser interface {
+    Get()
+    Add()
+}
+
+type ClientAccount interface {
+    Get()
+    Remove()
+}
+
+// c is Client
+c.User.Get()
+c.Account.Remove()
+</code></pre><p>The difference is <code>c.GetUser()</code> -> <code>c.User.Get()</code>.<p>For example we have client which connect to bank.<br>There are many functions like <code>GetUser</code>, <code>GetTransaction</code>, <code>VerifyAccount</code>, ...<br>So split big client to many children, each child handle single aspect, like user or transaction.<p>My concert is we replace an interface with a struct which contains multiple interfaces aka children.<br>I don't know if this is the right call.<p>This pattern is used by <a href=https://github.com/google/go-github>google/go-github</a>.<h1>Thanks</h1><ul><li><a href=https://blog.gopheracademy.com/advent-2019/api-clients-humans/>API Clients for Humans</a></ul><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
