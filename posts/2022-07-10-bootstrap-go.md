@@ -62,6 +62,15 @@ No need to write a new service if what we need is just common pkg libs.
 
 ## Taste on style guide
 
+### Stop using global var
+
+If I see someone using global var, I swear I shoot twice in the face.
+
+Why?
+
+- Can not write unit test.
+- Is not thread safe.
+
 ### Use functional options, but don't overuse it!
 
 For simple struct with 1 or 2 fields, no need to use functional options.
