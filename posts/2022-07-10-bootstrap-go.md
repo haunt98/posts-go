@@ -183,6 +183,16 @@ It is fast!
 
 - Use `contextID` or `traceID` in every log lines for easily debug.
 
+### To read config, use [spf13/viper](https://github.com/spf13/viper)
+
+Only init config in main or cmd layer.
+Do not use `viper.Get...` in business layer or inside business layer.
+
+Why?
+
+- Hard to mock and test
+- Put all config in single place for easily tracking
+
 ### Don't overuse ORM libs, no need to handle another layer above SQL.
 
 Each ORM libs has each different syntax.
