@@ -223,7 +223,7 @@ If you get `fieldalignment` error, use [fieldalignment](https://pkg.go.dev/golan
 
 ```sh
 # Install
-go install golang.org/x/tools/go/analysis/passes/fieldalignment@latest
+go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
 
 # Fix
 fieldalignment -fix ./internal/business/*.go
