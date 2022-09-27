@@ -20,6 +20,10 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+
   body {
     color: #c9d1d9;
     background: #0d1117;
