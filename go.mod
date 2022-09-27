@@ -3,7 +3,7 @@ module github.com/haunt98/posts-go
 go 1.18
 
 require (
-	github.com/tdewolff/minify/v2 v2.12.1
+	github.com/tdewolff/minify/v2 v2.12.2
 	github.com/yuin/goldmark v1.5.2
 )
 
