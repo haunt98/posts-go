@@ -22,3 +22,6 @@ make
 - https://perfectmotherfuckingwebsite.com/
 - https://primer.style/design/foundations/color
 - https://primer.style/primitives/colors
+- https://github.com/arrowtype/recursive
+- https://github.com/be5invis/Iosevka
+- https://github.com/ntk148v/iosevkawebfont
