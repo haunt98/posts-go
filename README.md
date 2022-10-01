@@ -25,3 +25,4 @@ make
 - https://github.com/arrowtype/recursive
 - https://github.com/be5invis/Iosevka
 - https://github.com/ntk148v/iosevkawebfont
+- https://gist.github.com/JoeyBurzynski/617fb6201335779f8424ad9528b72c41
