@@ -6,10 +6,10 @@ Like set up `.gitignore`, CI configs, Dockerfile, ...
 So I decide to have a baseline Dockerfile like this:
 
 ```Dockerfile
-FROM golang:1.18-bullseye as builder
+FROM golang:1.19-bullseye as builder
 
-RUN go install golang.org/dl/go1.18@latest \
-    && go1.18 download
+RUN go install golang.org/dl/go1.19@latest \
+    && go1.19 download
 
 WORKDIR /build
 
@@ -39,15 +39,15 @@ So I stick with it for a while.
 Also, remember to match Distroless Debian version with Go official image Debian version.
 
 ```Dockerfile
-FROM golang:1.18-bullseye as builder
+FROM golang:1.19-bullseye as builder
 ```
 
 This is Go image I use as a build stage.
 This can be official Go image or custom image is required in some companies.
 
 ```Dockerfile
-RUN go install golang.org/dl/go1.18@latest \
-    && go1.18 download
+RUN go install golang.org/dl/go1.19@latest \
+    && go1.19 download
 ```
 
 This is optional.
