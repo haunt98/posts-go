@@ -1,7 +1,7 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..800,0..1,0..1&display=swap" rel=stylesheet><link href=https://haunt98.github.io/iosevka_webfont/iosevka-term-ss08/iosevka-term-ss08.css rel=stylesheet><link rel=stylesheet href=styles.css><a href=index>Index</a><h1>Dockerfile for Go</h1><p>Each time I start a new Go project, I repeat many steps.<br>Like set up <code>.gitignore</code>, CI configs, Dockerfile, ...<p>So I decide to have a baseline Dockerfile like this:<pre><code class=language-Dockerfile>FROM golang:1.18-bullseye as builder
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..800,0..1,0..1&display=swap" rel=stylesheet><link href=https://haunt98.github.io/iosevka_webfont/iosevka-term-ss08/iosevka-term-ss08.css rel=stylesheet><link rel=stylesheet href=styles.css><a href=index>Index</a><h1>Dockerfile for Go</h1><p>Each time I start a new Go project, I repeat many steps.<br>Like set up <code>.gitignore</code>, CI configs, Dockerfile, ...<p>So I decide to have a baseline Dockerfile like this:<pre><code class=language-Dockerfile>FROM golang:1.19-bullseye as builder
 
-RUN go install golang.org/dl/go1.18@latest \
-    &amp;&amp; go1.18 download
+RUN go install golang.org/dl/go1.19@latest \
+    &amp;&amp; go1.19 download
 
 WORKDIR /build
 
@@ -17,9 +17,9 @@ FROM gcr.io/distroless/base-debian11
 COPY --from=builder /build/app /app
 
 ENTRYPOINT [&quot;/app&quot;]
-</code></pre><p>I use <a href=https://docs.docker.com/develop/develop-images/multistage-build/>multi-stage build</a> to keep my image size small.<br>First stage is <a href=https://hub.docker.com/_/golang>Go official image</a>,<br>second stage is <a href=https://github.com/GoogleContainerTools/distroless>Distroless</a>.<p>Before Distroless, I use <a href=https://hub.docker.com/_/alpine>Alpine official image</a>,<br>There is a whole discussion on the Internet to choose which is the best base image for Go.<br>After reading some blogs, I discover Distroless as a small and secure base image.<br>So I stick with it for a while.<p>Also, remember to match Distroless Debian version with Go official image Debian version.<pre><code class=language-Dockerfile>FROM golang:1.18-bullseye as builder
-</code></pre><p>This is Go image I use as a build stage.<br>This can be official Go image or custom image is required in some companies.<pre><code class=language-Dockerfile>RUN go install golang.org/dl/go1.18@latest \
-    &amp;&amp; go1.18 download
+</code></pre><p>I use <a href=https://docs.docker.com/develop/develop-images/multistage-build/>multi-stage build</a> to keep my image size small.<br>First stage is <a href=https://hub.docker.com/_/golang>Go official image</a>,<br>second stage is <a href=https://github.com/GoogleContainerTools/distroless>Distroless</a>.<p>Before Distroless, I use <a href=https://hub.docker.com/_/alpine>Alpine official image</a>,<br>There is a whole discussion on the Internet to choose which is the best base image for Go.<br>After reading some blogs, I discover Distroless as a small and secure base image.<br>So I stick with it for a while.<p>Also, remember to match Distroless Debian version with Go official image Debian version.<pre><code class=language-Dockerfile>FROM golang:1.19-bullseye as builder
+</code></pre><p>This is Go image I use as a build stage.<br>This can be official Go image or custom image is required in some companies.<pre><code class=language-Dockerfile>RUN go install golang.org/dl/go1.19@latest \
+    &amp;&amp; go1.19 download
 </code></pre><p>This is optional.<br>In my case, my company is slow to update Go image so I use this trick to install latest Go version.<pre><code class=language-Dockerfile>WORKDIR /build
 
 COPY go.mod .
