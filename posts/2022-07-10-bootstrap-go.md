@@ -215,6 +215,14 @@ Pick 1 then sleep peacefully.
 The first is easy to use but not powerful as the later.
 If you want to make sure mock func is called with correct times, use the later.
 
+Example with `matryer/moq`:
+
+```golang
+// Only gen mock if source code file is newer than mock file
+// https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen
+//go:generate sh -c "test service_mock_generated.go -nt $GOFILE && exit 0; moq -rm -out service_mock_generated.go . Service"
+```
+
 ### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt).
 
 `gofumpt` provides more rules when format Go codes.
