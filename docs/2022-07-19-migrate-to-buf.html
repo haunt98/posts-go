@@ -1,39 +1,19 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..800,0..1,0..1&display=swap" rel=stylesheet><link href=https://haunt98.github.io/iosevka_webfont/iosevka-term-ss08/iosevka-term-ss08.css rel=stylesheet><link rel=stylesheet href=styles.css><a href=index>Index</a><h1>Migrate to <code>buf</code> from <code>prototool</code></h1><p>Why? Because <code>prototool</code> is outdated, and can not run on M1 mac.<p>There are 2 use cases:<ul><li>For services only provide gRPC.<li>For services provide both REST and gRPC, which make use of <a href=https://github.com/grpc-ecosystem/grpc-gateway>grpc-ecosystem/grpc-gateway</a>.</ul><p>We need 3 files:<ul><li><code>build.go</code>: need to install protoc-gen-* binaries with pin version in <code>go.mod</code><li><code>buf.yaml</code><li><code>buf.gen.yaml</code></ul><p>FYI, the libs version I use:<ul><li><a href=https://github.com/golang/protobuf/releases/tag/v1.5.2>golang/protobuf v1.5.2</a><li><a href=https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0>grpc-ecosystem/grpc-gateway v1.16.0</a></ul><h2>gRPC only</h2><p><code>build.go</code>:<pre><code class=language-go>//go:build tools
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..800,0..1,0..1&display=swap" rel=stylesheet><link href=https://haunt98.github.io/iosevka_webfont/iosevka-term-ss08/iosevka-term-ss08.css rel=stylesheet><link rel=stylesheet href=styles.css><a href=index>Index</a><h1>Migrate to <code>buf</code> from <code>prototool</code></h1><p>Why? Because <code>prototool</code> is outdated, and can not run on M1 mac.<p>We need 3 files:<ul><li><code>build.go</code>: need to install protoc-gen-* binaries with pin version in <code>go.mod</code><li><code>buf.yaml</code><li><code>buf.gen.yaml</code></ul><p>FYI, the libs version I use:<ul><li><a href=https://github.com/golang/protobuf/releases/tag/v1.5.2>golang/protobuf v1.5.2</a><li><a href=https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0>grpc-ecosystem/grpc-gateway v1.16.0</a><li><a href=github.com/envoyproxy/protoc-gen-validate>envoyproxy/protoc-gen-validate</a><li><a href=github.com/kei2100/protoc-gen-marshal-zap>kei2100/protoc-gen-marshal-zap</a></ul><p><code>build.go</code>:<pre><code class=language-go>//go:build tools
 // +build tools
 
 import (
-	_ &quot;github.com/golang/protobuf/protoc-gen-go&quot;
-)
-</code></pre><p><code>buf.yaml</code>:<pre><code class=language-yaml>version: v1
-breaking:
-  use:
-    - FILE
-lint:
-  use:
-    - DEFAULT
-</code></pre><p><code>buf.gen.yml</code><pre><code class=language-yaml>version: v1
-plugins:
-  - name: go
-    out: pkg
-    opt:
-      - plugins=grpc
-</code></pre><p>Update <code>Makefile</code>:<pre><code class=language-Makefile>gen:
-	go install github.com/golang/protobuf/protoc-gen-go
-	go install github.com/bufbuild/buf/cmd/buf@latest
-	buf format -w
-	buf generate
-</code></pre><p>Then run <code>make gen</code> to check result.<h2>REST and gRPC using grpc-gateway</h2><p><code>build.go</code>:<pre><code class=language-go>//go:build tools
-// +build tools
-
-import (
-	_ &quot;github.com/golang/protobuf/protoc-gen-go&quot;
-	_ &quot;github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway&quot;
-	_ &quot;github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger&quot;
+  _ &quot;github.com/envoyproxy/protoc-gen-validate&quot;
+  _ &quot;github.com/golang/protobuf/protoc-gen-go&quot;
+  _ &quot;github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway&quot;
+  _ &quot;github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger&quot;
+  _ &quot;github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap&quot;
 )
 </code></pre><p><code>buf.yaml</code><pre><code class=language-yaml>version: v1
 deps:
   - buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c
   - buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7
+  - buf.build/haunt98/protoc-gen-validate:2686264610fc4ad4a9fcc932647e279d
+  - buf.build/haunt98/marshal-zap:2a593ca925134680a5820d3f13c1be5a
 breaking:
   use:
     - FILE
@@ -54,12 +34,20 @@ plugins:
     out: .
     opt:
       - logtostderr=true
+  - name: validate
+    out: pkg
+    opt:
+      - lang=go
+  - name: marshal-zap
+    out: pkg
 </code></pre><p>Update <code>Makefile</code>:<pre><code class=language-Makefile>gen:
-	go install github.com/golang/protobuf/protoc-gen-go
-	go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
-	go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-	go install github.com/bufbuild/buf/cmd/buf@latest
-	buf format -w
-	buf mod update
-	buf generate
-</code></pre><p>Run <code>make gen</code> to get fun of course.<h2>FAQ</h2><p>If use <code>vendor</code>:<ul><li>Replace <code>buf generate</code> with <code>buf generate --exclude-path vendor</code>.<li>Replace <code>buf format -w</code> with <code>buf format -w --exclude-path vendor</code>.</ul><p>If you use grpc-gateway:<ul><li>Replace <code>import "third_party/googleapis/google/api/annotations.proto";</code> with <code>import "google/api/annotations.proto";</code><li>Delete <code>security_definitions</code>, <code>security</code>, in <code>option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)</code>.</ul><p>The last step is delete <code>prototool.yaml</code>.<p>If you are not migrate but start new:<ul><li>Add <code>buf lint</code> to make sure your proto is good.<li>Add <code>buf breaking --against "https://your-grpc-repo-goes-here.git"</code> to make sure each time you update proto, you don't break backward compatibility.</ul><h2>Thanks</h2><ul><li><a href=https://github.com/uber/prototool>uber/prototool</a><li><a href=https://github.com/bufbuild/buf>bufbuild/buf</a></ul><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
+  go install github.com/golang/protobuf/protoc-gen-go
+  go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+  go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+  go install github.com/envoyproxy/protoc-gen-validate
+  go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap
+  go install github.com/bufbuild/buf/cmd/buf@latest
+  buf mod update
+  buf format -w
+  buf generate
+</code></pre><p>Run <code>make gen</code> to have fun of course.<h2>FAQ</h2><p>Remember <code>grpc-ecosystem/grpc-gateway</code>, <code>envoyproxy/protoc-gen-validate</code>, <code>kei2100/protoc-gen-marshal-zap</code> is optional, so feel free to delete if you don't use theme.<p>If use <code>vendor</code>:<ul><li>Replace <code>buf generate</code> with <code>buf generate --exclude-path vendor</code>.<li>Replace <code>buf format -w</code> with <code>buf format -w --exclude-path vendor</code>.</ul><p>If you use grpc-gateway:<ul><li>Replace <code>import "third_party/googleapis/google/api/annotations.proto";</code> with <code>import "google/api/annotations.proto";</code><li>Delete <code>security_definitions</code>, <code>security</code>, in <code>option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)</code>.</ul><p>The last step is delete <code>prototool.yaml</code>.<p>If you are not migrate but start from scratch:<ul><li>Add <code>buf lint</code> to make sure your proto is good.<li>Add <code>buf breaking --against "https://your-grpc-repo-goes-here.git"</code> to make sure each time you update proto, you don't break backward compatibility.</ul><h2>Thanks</h2><ul><li><a href=https://github.com/uber/prototool>uber/prototool</a><li><a href=https://github.com/bufbuild/buf>bufbuild/buf</a></ul><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
