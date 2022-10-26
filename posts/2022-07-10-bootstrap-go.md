@@ -142,6 +142,10 @@ if err := eg.Wait(); err != nil {
 }
 ```
 
+### Use [semaphore](https://pkg.go.dev/golang.org/x/sync/semaphore) when need to implement WorkerPool
+
+Please don't use external libs for WorkerPool, I don't want to deal with dependency hell.
+
 ## External libs
 
 ### No need `vendor`
