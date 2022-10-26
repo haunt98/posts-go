@@ -46,7 +46,22 @@ func NewS(opts ...OptionS) *S {
 	}
 	return s
 }
-</code></pre><p>In above example, I construct <code>s</code> with <code>WithA</code> and <code>WithB</code> option.<br>No need to pass direct field inside <code>s</code>.<h2>External libs</h2><h3>No need <code>vendor</code></h3><p>Only need if you need something from <code>vendor</code>, to generate mock or something else.<h3>Use <code>build.go</code> to include build tools in go.mod</h3><p>To easily control version of build tools.<p>For example <code>build.go</code>:<pre><code class=language-go>//go:build tools
+</code></pre><p>In above example, I construct <code>s</code> with <code>WithA</code> and <code>WithB</code> option.<br>No need to pass direct field inside <code>s</code>.<h3>Use <a href=https://pkg.go.dev/golang.org/x/sync/errgroup>errgroup</a> as much as possible</h3><p>If business logic involves calling too many APIs, but they are not depend on each other.<br>We can fire them parallel :)<p>Personally, I prefer <code>errgroup</code> to <code>WaitGroup</code> (<a href=https://pkg.go.dev/sync#WaitGroup)>https://pkg.go.dev/sync#WaitGroup)</a>.<br>Because I always need deal with error.<p>Example:<pre><code class=language-golang>eg, egCtx := errgroup.WithContext(ctx)
+
+eg.Go(func() error {
+	// Do some thing
+	return nil
+})
+
+eg.Go(func() error {
+	// Do other thing
+	return nil
+})
+
+if err := eg.Wait(); err != nil {
+	// Handle error
+}
+</code></pre><h2>External libs</h2><h3>No need <code>vendor</code></h3><p>Only need if you need something from <code>vendor</code>, to generate mock or something else.<h3>Use <code>build.go</code> to include build tools in go.mod</h3><p>To easily control version of build tools.<p>For example <code>build.go</code>:<pre><code class=language-go>//go:build tools
 // +build tools
 
 package main

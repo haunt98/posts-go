@@ -114,6 +114,34 @@ func NewS(opts ...OptionS) *S {
 In above example, I construct `s` with `WithA` and `WithB` option.
 No need to pass direct field inside `s`.
 
+### Use [errgroup](https://pkg.go.dev/golang.org/x/sync/errgroup) as much as possible
+
+If business logic involves calling too many APIs, but they are not depend on each other.
+We can fire them parallel :)
+
+Personally, I prefer `errgroup` to `WaitGroup` (https://pkg.go.dev/sync#WaitGroup).
+Because I always need deal with error.
+
+Example:
+
+```golang
+eg, egCtx := errgroup.WithContext(ctx)
+
+eg.Go(func() error {
+	// Do some thing
+	return nil
+})
+
+eg.Go(func() error {
+	// Do other thing
+	return nil
+})
+
+if err := eg.Wait(); err != nil {
+	// Handle error
+}
+```
+
 ## External libs
 
 ### No need `vendor`
