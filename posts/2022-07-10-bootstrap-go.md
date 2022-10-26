@@ -223,6 +223,18 @@ Example with `matryer/moq`:
 //go:generate sh -c "test service_mock_generated.go -nt $GOFILE && exit 0; moq -rm -out service_mock_generated.go . Service"
 ```
 
+### Be careful with [spf13/cast](https://github.com/spf13/cast)
+
+Don't cast proto enum:
+
+```golang
+// Don't
+a := cast.ToInt32(servicev1.ReasonCode_ABC)
+
+// Do
+a := int32(servicev1.ReasonCode_ABC)
+```
+
 ### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt).
 
 `gofumpt` provides more rules when format Go codes.
