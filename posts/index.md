@@ -10,3 +10,4 @@ This is where I dump my thoughts.
 - [SQL](2022-07-31-sql)
 - [Experiment go](2022-07-31-experiment-go)
 - [gitignore](2022-08-10-gitignore)
+- [Reload config](2022-10-26-reload-config)
