@@ -261,10 +261,10 @@ Example with `matryer/moq`:
 Don't cast proto enum:
 
 ```go
-// Don't
+// Bad
 a := cast.ToInt32(servicev1.ReasonCode_ABC)
 
-// Do
+// Good
 a := int32(servicev1.ReasonCode_ABC)
 ```
 
