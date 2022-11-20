@@ -90,7 +90,7 @@ const (
 
 # Run inside directory which contains Drink
 stringer -type=Drink
-</code></pre><h3>Replace <code>go fmt</code>, <code>goimports</code> with <a href=https://github.com/mvdan/gofumpt>mvdan/gofumpt</a>.</h3><p><code>gofumpt</code> provides more rules when format Go codes.<h3>Use <a href=https://github.com/golangci/golangci-lint>golangci/golangci-lint</a>.</h3><p>No need to say more.<br>Lint or get the f out!<p>If you get <code>fieldalignment</code> error, use <a href=https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment>fieldalignment</a> to fix them.<pre><code class=language-sh># Install
+</code></pre><h3>Don't waste your time rewrite rate limiter if your use case is simple, use <a href=https://pkg.go.dev/golang.org/x/time/rate>rate</a> or <a href=https://github.com/go-redis/redis_rate>go-redis/redis_rate</a></h3><p>rate if you want rate limiter locally in your single instance of service.<br>redis_rate if you want rate limiter distributed across all your instances of service.<h3>Replace <code>go fmt</code>, <code>goimports</code> with <a href=https://github.com/mvdan/gofumpt>mvdan/gofumpt</a>.</h3><p><code>gofumpt</code> provides more rules when format Go codes.<h3>Use <a href=https://github.com/golangci/golangci-lint>golangci/golangci-lint</a>.</h3><p>No need to say more.<br>Lint or get the f out!<p>If you get <code>fieldalignment</code> error, use <a href=https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment>fieldalignment</a> to fix them.<pre><code class=language-sh># Install
 go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
 
 # Fix
