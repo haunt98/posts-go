@@ -235,6 +235,7 @@ It is easier to debug when something is wrong.
 But `database/sql` has its own limit.
 For example, it is hard to get primary key after insert/update.
 So may be you want to use ORM for those cases.
+I hear that [go-gorm/gorm](https://github.com/go-gorm/gorm), [ent/ent](https://github.com/ent/ent) is good.
 
 ### If you want test, just use [stretchr/testify](https://github.com/stretchr/testify).
 
@@ -309,3 +310,4 @@ fieldalignment -fix ./internal/business/*.go
 
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
 - [Functional options for friendly APIs](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis)
+- [Google Go Style](https://google.github.io/styleguide/go/index)
