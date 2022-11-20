@@ -64,7 +64,7 @@ No need to write a new service if what we need is just common pkg libs.
 
 ### Stop using global var
 
-If I see someone using global var, I swear I shoot twice in the face.
+If I see someone using global var, I swear I will shoot them twice in the face.
 
 Why?
 
@@ -124,7 +124,7 @@ Because I always need deal with error.
 
 Example:
 
-```golang
+```go
 eg, egCtx := errgroup.WithContext(ctx)
 
 eg.Go(func() error {
@@ -249,7 +249,7 @@ If you want to make sure mock func is called with correct times, use the later.
 
 Example with `matryer/moq`:
 
-```golang
+```go
 // Only gen mock if source code file is newer than mock file
 // https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen
 //go:generate sh -c "test service_mock_generated.go -nt $GOFILE && exit 0; moq -rm -out service_mock_generated.go . Service"
@@ -259,12 +259,31 @@ Example with `matryer/moq`:
 
 Don't cast proto enum:
 
-```golang
+```go
 // Don't
 a := cast.ToInt32(servicev1.ReasonCode_ABC)
 
 // Do
 a := int32(servicev1.ReasonCode_ABC)
+```
+
+### Use [stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer) if you want your type enum can be print as string
+
+```go
+type Drink int
+
+const (
+	Beer Drink = iota
+	Water
+	OrangeJuice
+)
+```
+
+```sh
+go install golang.org/x/tools/cmd/stringer@latest
+
+# Run inside directory which contains Drink
+stringer -type=Drink
 ```
 
 ### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt).
