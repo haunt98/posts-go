@@ -287,6 +287,11 @@ go install golang.org/x/tools/cmd/stringer@latest
 stringer -type=Drink
 ```
 
+### Don't waste your time rewrite rate limiter if your use case is simple, use [rate](https://pkg.go.dev/golang.org/x/time/rate) or [go-redis/redis_rate](https://github.com/go-redis/redis_rate)
+
+rate if you want rate limiter locally in your single instance of service.
+redis_rate if you want rate limiter distributed across all your instances of service.
+
 ### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt).
 
 `gofumpt` provides more rules when format Go codes.
