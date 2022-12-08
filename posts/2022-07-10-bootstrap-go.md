@@ -206,13 +206,9 @@ Don't use `gin.Context` when pass context from handler layer to service layer, u
 It is fast!
 
 - Don't overuse `func (*Logger) With`. Because if log line is too long, there is a possibility that we can lost it.
-
 - Use `MarshalLogObject` when we need to hide some field of object when log (field is long or has sensitive value)
-
 - Don't use `Panic`. Use `Fatal` for errors when start service to check dependencies. If you really need panic level, use `DPanic`.
-
 - If doubt, use `zap.Any`.
-
 - Use `contextID` or `traceID` in every log lines for easily debug.
 
 ### To read config, use [spf13/viper](https://github.com/spf13/viper)
@@ -224,6 +220,9 @@ Why?
 
 - Hard to mock and test
 - Put all config in single place for easily tracking
+
+Also, be careful if config value is empty.
+You should decide to continue or stop the service if there is no config.
 
 ### Don't overuse ORM libs, no need to handle another layer above SQL.
 
