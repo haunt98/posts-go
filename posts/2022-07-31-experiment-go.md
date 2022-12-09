@@ -60,10 +60,11 @@ Why?
 [See for yourself](https://github.com/grpc/grpc-go/issues?q=is%3Aissue+compatibility+is%3Aclosed).
 Also read [A new Go API for Protocol Buffers](https://go.dev/blog/protobuf-apiv2) to know why `v1.20.0` is `v2`.
 
-Currently there are 2:
+Currently there are some:
 
 - [bufbuild/connect-go](https://github.com/bufbuild/connect-go). Comming from buf, trust worthy but need time to make it match feature parity with grpc-go.
 - [twitchtv/twirp](https://github.com/twitchtv/twirp)
+- [storj/drpc](https://github.com/storj/drpc)
 
 # Thanks
 
