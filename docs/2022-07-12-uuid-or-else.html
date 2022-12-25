@@ -1,12 +1,75 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.css><style>.markdown-body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}@media(max-width:767px){.markdown-body{padding:15px}}</style><body class=markdown-body><a href=index>Index</a><h1><a id=user-content-uuid-or-else class=anchor aria-hidden=true href=#uuid-or-else><span aria-hidden=true class="octicon octicon-link"></span></a>UUID or else</h1><p>There are many use cases where we need to use a unique ID.
-In my experience, I only encouter 2 cases:<ul><li>ID to trace request from client to server, from service to service (microservice architecture or nanoservice I don't know).<li>Primary key for database.</ul><p>In my Go universe, there are some libs to help us with this:<ul><li><a href=https://github.com/google/uuid>google/uuid</a><li><a href=https://github.com/rs/xid>rs/xid</a><li><a href=https://github.com/segmentio/ksuid>segmentio/ksuid</a><li><a href=https://github.com/oklog/ulid>oklog/ulid</a></ul><h2><a id=user-content-first-use-case-is-trace-id-or-context-aware-id class=anchor aria-hidden=true href=#first-use-case-is-trace-id-or-context-aware-id><span aria-hidden=true class="octicon octicon-link"></span></a>First use case is trace ID, or context aware ID</h2><p>The ID is used only for trace and log.
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css"
+    />
+  </head>
+  <style>
+    /* https://github.com/sindresorhus/github-markdown-css */
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <a href="index">Index</a>
+    <h1><a id="user-content-uuid-or-else" class="anchor" aria-hidden="true" href="#uuid-or-else"><span aria-hidden="true" class="octicon octicon-link"></span></a>UUID or else</h1>
+<p>There are many use cases where we need to use a unique ID.
+In my experience, I only encouter 2 cases:</p>
+<ul>
+<li>ID to trace request from client to server, from service to service (microservice architecture or nanoservice I don't know).</li>
+<li>Primary key for database.</li>
+</ul>
+<p>In my Go universe, there are some libs to help us with this:</p>
+<ul>
+<li><a href="https://github.com/google/uuid">google/uuid</a></li>
+<li><a href="https://github.com/rs/xid">rs/xid</a></li>
+<li><a href="https://github.com/segmentio/ksuid">segmentio/ksuid</a></li>
+<li><a href="https://github.com/oklog/ulid">oklog/ulid</a></li>
+</ul>
+<h2><a id="user-content-first-use-case-is-trace-id-or-context-aware-id" class="anchor" aria-hidden="true" href="#first-use-case-is-trace-id-or-context-aware-id"><span aria-hidden="true" class="octicon octicon-link"></span></a>First use case is trace ID, or context aware ID</h2>
+<p>The ID is used only for trace and log.
 If same ID is generated twice (because maybe the possibilty is too small but not 0), honestly I don't care.
-When I use that ID to search log , if it pops more than things I care for, it is still no harm to me.<p>My choice for this use case is <strong>rs/xid</strong>.
-Because it is small (not span too much on log line) and copy friendly.<h2><a id=user-content-second-use-case-is-primary-key-also-hard-choice class=anchor aria-hidden=true href=#second-use-case-is-primary-key-also-hard-choice><span aria-hidden=true class="octicon octicon-link"></span></a>Second use case is primary key, also hard choice</h2><p>Why I don't use auto increment key for primary key?
+When I use that ID to search log , if it pops more than things I care for, it is still no harm to me.</p>
+<p>My choice for this use case is <strong>rs/xid</strong>.
+Because it is small (not span too much on log line) and copy friendly.</p>
+<h2><a id="user-content-second-use-case-is-primary-key-also-hard-choice" class="anchor" aria-hidden="true" href="#second-use-case-is-primary-key-also-hard-choice"><span aria-hidden="true" class="octicon octicon-link"></span></a>Second use case is primary key, also hard choice</h2>
+<p>Why I don't use auto increment key for primary key?
 The answer is simple, I don't want to write database specific SQL.
 SQLite has some different syntax from MySQL, and PostgreSQL and so on.
-Every logic I can move to application layer from database layer, I will.<p>In the past and present, I use <strong>google/uuid</strong>, specificially I use UUID v4.
+Every logic I can move to application layer from database layer, I will.</p>
+<p>In the past and present, I use <strong>google/uuid</strong>, specificially I use UUID v4.
 In the future I will look to use <strong>segmentio/ksuid</strong> and <strong>oklog/ulid</strong> (trial and error of course).
 Both are sortable, but <strong>google/uuid</strong> is not.
-The reason I'm afraid because the database is sensitive subject, and I need more testing and battle test proof to trust those libs.<h2><a id=user-content-what-else class=anchor aria-hidden=true href=#what-else><span aria-hidden=true class="octicon octicon-link"></span></a>What else?</h2><p>I think about adding prefix to ID to identify which resource that ID represents.<h2><a id=user-content-thanks class=anchor aria-hidden=true href=#thanks><span aria-hidden=true class="octicon octicon-link"></span></a>Thanks</h2><ul><li><a href=https://www.cybertec-postgresql.com/en/uuid-serial-or-identity-columns-for-postgresql-auto-generated-primary-keys/ rel=nofollow>UUID, SERIAL OR IDENTITY COLUMNS FOR POSTGRESQL AUTO-GENERATED PRIMARY KEYS?</a><li><a href=https://brandur.org/nanoglyphs/026-ids rel=nofollow>Identity Crisis: Sequence v. UUID as Primary Key</a><li><a href=https://blog.kowalczyk.info/article/JyRZ/generating-good-unique-ids-in-go.html rel=nofollow>Generating good unique ids in Go</a><li><a href=https://encore.dev/blog/go-1.18-generic-identifiers rel=nofollow>How we used Go 1.18 when designing our Identifiers</a><li><a href=https://blog.daveallie.com/ulid-primary-keys rel=nofollow>ULIDs and Primary Keys</a><li><a href=https://0pointer.net/blog/projects/ids.html rel=nofollow>On IDs</a></ul><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
-<a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
+The reason I'm afraid because the database is sensitive subject, and I need more testing and battle test proof to trust those libs.</p>
+<h2><a id="user-content-what-else" class="anchor" aria-hidden="true" href="#what-else"><span aria-hidden="true" class="octicon octicon-link"></span></a>What else?</h2>
+<p>I think about adding prefix to ID to identify which resource that ID represents.</p>
+<h2><a id="user-content-thanks" class="anchor" aria-hidden="true" href="#thanks"><span aria-hidden="true" class="octicon octicon-link"></span></a>Thanks</h2>
+<ul>
+<li><a href="https://www.cybertec-postgresql.com/en/uuid-serial-or-identity-columns-for-postgresql-auto-generated-primary-keys/" rel="nofollow">UUID, SERIAL OR IDENTITY COLUMNS FOR POSTGRESQL AUTO-GENERATED PRIMARY KEYS?</a></li>
+<li><a href="https://brandur.org/nanoglyphs/026-ids" rel="nofollow">Identity Crisis: Sequence v. UUID as Primary Key</a></li>
+<li><a href="https://blog.kowalczyk.info/article/JyRZ/generating-good-unique-ids-in-go.html" rel="nofollow">Generating good unique ids in Go</a></li>
+<li><a href="https://encore.dev/blog/go-1.18-generic-identifiers" rel="nofollow">How we used Go 1.18 when designing our Identifiers</a></li>
+<li><a href="https://blog.daveallie.com/ulid-primary-keys" rel="nofollow">ULIDs and Primary Keys</a></li>
+<li><a href="https://0pointer.net/blog/projects/ids.html" rel="nofollow">On IDs</a></li>
+</ul>
+
+    <a href="mailto:hauvipapro+posts@gmail.com"
+      >Feel free to ask me via email</a
+    >
+    <a rel="me" href="https://hachyderm.io/@haunguyen">Mastodon</a>
+  </body>
+</html>

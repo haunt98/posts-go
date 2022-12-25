@@ -16,9 +16,6 @@ const (
 	postFilesPath    = "posts"
 	templatePostPath = "templates/post.html"
 
-	templateCSSPath = "templates/styles.css"
-	cssFilename     = "styles.css"
-
 	generatedPath = "docs"
 
 	extHTML = ".html"
@@ -110,16 +107,5 @@ func main() {
 		}
 
 		htmlFile.Close()
-	}
-
-	// Copy css file from templates to generated
-	templateCSSBytes, err := os.ReadFile(templateCSSPath)
-	if err != nil {
-		log.Fatalln("Failed to open file", templateCSSPath, err)
-	}
-
-	generatedCSSPath := filepath.Join(generatedPath, cssFilename)
-	if err := os.WriteFile(generatedCSSPath, templateCSSBytes, 0o600); err != nil {
-		log.Fatalln("Failed to write file", generatedCSSPath, err)
 	}
 }

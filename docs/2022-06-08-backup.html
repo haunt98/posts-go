@@ -1,36 +1,114 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.css><style>.markdown-body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}@media(max-width:767px){.markdown-body{padding:15px}}</style><body class=markdown-body><a href=index>Index</a><h1><a id=user-content-backup-my-way class=anchor aria-hidden=true href=#backup-my-way><span aria-hidden=true class="octicon octicon-link"></span></a>Backup my way</h1><p>First thing first, I want to list my own devices, which I have through the years:<ul><li><del>Laptop Samsung NP300E4Z-S06VN (Old laptop which I give to my mom)</del><li><del><a href=https://www.dell.com/support/home/en-vn/product-support/product/inspiron-15-3567-laptop/drivers rel=nofollow>Laptop Dell Inspiron 15 3567</a> (My mom bought it for me when I go to college, I give it to my mom afterward)</del><li><del><a href=https://www.acer.com/ac/en/US/content/support-product/8841 rel=nofollow>Laptop Acer Nitro AN515-45</a> (Gaming laptop which I buy for gaming, I give it to my sister)</del><li>MacBook Pro M1 2020 (My company laptop)<li><del>Phone <a href=https://forum.xda-developers.com/c/lg-g3.3147/ rel=nofollow>LG G3</a> (Bought long time ago, now is a brick)</del><li><del>Phone <a href=https://forum.xda-developers.com/c/xiaomi-redmi-6a.7881/ rel=nofollow>Xiaomi Redmi 6A</a> (I give it to my sister too)</del><li>Phone <a href=https://forum.xda-developers.com/c/xiaomi-poco-x3-nfc.11523/ rel=nofollow>Xiaomi Poco X3 NFC</a> (Primary phone which I use daily)</ul><p>App/Service I use daily:<ul><li><a href=https://bitwarden.com/ rel=nofollow>Bitwarden</a><li><a href=https://getaegis.app/ rel=nofollow>Aegis Authenticator</a><li><a href=https://rclone.org/ rel=nofollow>Rclone</a><li><a href=https://restic.net/ rel=nofollow>restic</a><li><a href=https://tailscale.com/ rel=nofollow>Tailscale</a><li>GitHub / GitLab<li>Google Keep / Notion<li>Google Drive (I use 200GB plan)</ul><p>The purpose is that I want my data to be safe, secure, and can be easily recovered if I lost some devices;
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css"
+    />
+  </head>
+  <style>
+    /* https://github.com/sindresorhus/github-markdown-css */
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <a href="index">Index</a>
+    <h1><a id="user-content-backup-my-way" class="anchor" aria-hidden="true" href="#backup-my-way"><span aria-hidden="true" class="octicon octicon-link"></span></a>Backup my way</h1>
+<p>First thing first, I want to list my own devices, which I have through the years:</p>
+<ul>
+<li><del>Laptop Samsung NP300E4Z-S06VN (Old laptop which I give to my mom)</del></li>
+<li><del><a href="https://www.dell.com/support/home/en-vn/product-support/product/inspiron-15-3567-laptop/drivers" rel="nofollow">Laptop Dell Inspiron 15 3567</a> (My mom bought it for me when I go to college, I give it to my mom afterward)</del></li>
+<li><del><a href="https://www.acer.com/ac/en/US/content/support-product/8841" rel="nofollow">Laptop Acer Nitro AN515-45</a> (Gaming laptop which I buy for gaming, I give it to my sister)</del></li>
+<li>MacBook Pro M1 2020 (My company laptop)</li>
+<li><del>Phone <a href="https://forum.xda-developers.com/c/lg-g3.3147/" rel="nofollow">LG G3</a> (Bought long time ago, now is a brick)</del></li>
+<li><del>Phone <a href="https://forum.xda-developers.com/c/xiaomi-redmi-6a.7881/" rel="nofollow">Xiaomi Redmi 6A</a> (I give it to my sister too)</del></li>
+<li>Phone <a href="https://forum.xda-developers.com/c/xiaomi-poco-x3-nfc.11523/" rel="nofollow">Xiaomi Poco X3 NFC</a> (Primary phone which I use daily)</li>
+</ul>
+<p>App/Service I use daily:</p>
+<ul>
+<li><a href="https://bitwarden.com/" rel="nofollow">Bitwarden</a></li>
+<li><a href="https://getaegis.app/" rel="nofollow">Aegis Authenticator</a></li>
+<li><a href="https://rclone.org/" rel="nofollow">Rclone</a></li>
+<li><a href="https://restic.net/" rel="nofollow">restic</a></li>
+<li><a href="https://tailscale.com/" rel="nofollow">Tailscale</a></li>
+<li>GitHub / GitLab</li>
+<li>Google Keep / Notion</li>
+<li>Google Drive (I use 200GB plan)</li>
+</ul>
+<p>The purpose is that I want my data to be safe, secure, and can be easily recovered if I lost some devices;
 or in the worst situation, I lost all.
-Because you know, it is hard to guess what is waiting for us in the future.<p>There are 2 sections which I want to share, the first is <strong>How to backup</strong>, the second is <strong>Recover strategy</strong>.<h2><a id=user-content-how-to-backup class=anchor aria-hidden=true href=#how-to-backup><span aria-hidden=true class="octicon octicon-link"></span></a>How to backup</h2><p>Before I talk about backup, I want to talk about data.
-In specifically, which data should I backup?<p>I use Arch Linux and macOS, primarily work in the terminal so I have too many dotfiles, for example, <code>~/.config/nvim/init.lua</code>.
-Each time I reinstall Arch Linux (I like it a lot), I need to reconfigure all the settings, and it is time-consuming.<p>So for the DE and UI settings, I keep it as default as possible, unless it's getting in my way, I leave the default setting there and forget about it.
-The others are dotfiles, which I write my own <a href=https://github.com/haunt98/dotfiles>dotfiles tool</a> to backup and reconfigure easily and quickly.
+Because you know, it is hard to guess what is waiting for us in the future.</p>
+<p>There are 2 sections which I want to share, the first is <strong>How to backup</strong>, the second is <strong>Recover strategy</strong>.</p>
+<h2><a id="user-content-how-to-backup" class="anchor" aria-hidden="true" href="#how-to-backup"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to backup</h2>
+<p>Before I talk about backup, I want to talk about data.
+In specifically, which data should I backup?</p>
+<p>I use Arch Linux and macOS, primarily work in the terminal so I have too many dotfiles, for example, <code>~/.config/nvim/init.lua</code>.
+Each time I reinstall Arch Linux (I like it a lot), I need to reconfigure all the settings, and it is time-consuming.</p>
+<p>So for the DE and UI settings, I keep it as default as possible, unless it's getting in my way, I leave the default setting there and forget about it.
+The others are dotfiles, which I write my own <a href="https://github.com/haunt98/dotfiles">dotfiles tool</a> to backup and reconfigure easily and quickly.
 Also, I know that installing Arch Linux is not easy, despite I install it too many times (Like thousand times since I was in high school).
-Not because it is hard, but as life goes on, the <a href=https://wiki.archlinux.org/title/installation_guide rel=nofollow>official install guide</a> keeps getting new update and covering too many cases for my own personal use, so I write my own <a href=https://github.com/haunt98/til/blob/main/install-archlinux.md>guide</a> to quickly capture what I need to do.
+Not because it is hard, but as life goes on, the <a href="https://wiki.archlinux.org/title/installation_guide" rel="nofollow">official install guide</a> keeps getting new update and covering too many cases for my own personal use, so I write my own <a href="https://github.com/haunt98/til/blob/main/install-archlinux.md">guide</a> to quickly capture what I need to do.
 I back up all my dotfiles in GitHub and GitLab as I trust them both.
-Also as I travel the Internet, I discover <a href=https://codeberg.org/ rel=nofollow>Codeberg</a> and <a href=https://gitea.treehouse.systems/ rel=nofollow>Treehouse</a> and use them as another backup for git repo.<p>So that is my dotfiles, for my regular data, like Wallpaper or Books, Images, I use Google Drive (Actually I pay for it).
+Also as I travel the Internet, I discover <a href="https://codeberg.org/" rel="nofollow">Codeberg</a> and <a href="https://gitea.treehouse.systems/" rel="nofollow">Treehouse</a> and use them as another backup for git repo.</p>
+<p>So that is my dotfiles, for my regular data, like Wallpaper or Books, Images, I use Google Drive (Actually I pay for it).
 But the step: open the webpage, click the upload button and choose files seems boring and time-consuming.
 So I use Rclone, it supports Google Drive, One Drive and many providers but I only use Google Drive for now.
-The commands are simple:<div class="highlight highlight-source-shell"><pre><span class=pl-c><span class=pl-c>#</span> Sync from local to remote</span>
+The commands are simple:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Sync from local to remote</span>
 rclone sync MyBooks remote:MyBooks -P --exclude .DS_Store
 
-<span class=pl-c><span class=pl-c>#</span> Sync from remote to local</span>
-rclone sync remote:MyBooks MyBooks -P --exclude .DS_Store</pre></div><p>Before you use Rclone to sync to Google Drive, you should read <a href=https://rclone.org/drive/ rel=nofollow>Google Drive rclone configuration</a> first.<p>For private data, I use restic which can be used with Rclone:<div class="highlight highlight-source-shell"><pre><span class=pl-c><span class=pl-c>#</span> Init</span>
+<span class="pl-c"><span class="pl-c">#</span> Sync from remote to local</span>
+rclone sync remote:MyBooks MyBooks -P --exclude .DS_Store</pre></div>
+<p>Before you use Rclone to sync to Google Drive, you should read <a href="https://rclone.org/drive/" rel="nofollow">Google Drive rclone configuration</a> first.</p>
+<p>For private data, I use restic which can be used with Rclone:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Init</span>
 restic -r rclone:remote:PrivateData init
 
-<span class=pl-c><span class=pl-c>#</span> Backup</span>
+<span class="pl-c"><span class="pl-c">#</span> Backup</span>
 restic -r rclone:remote:PrivateData backup PrivateData
 
-<span class=pl-c><span class=pl-c>#</span> Cleanup old backups</span>
+<span class="pl-c"><span class="pl-c">#</span> Cleanup old backups</span>
 restic -r rclone:remote:PrivateData forget --keep-last 1 --prune
 
-<span class=pl-c><span class=pl-c>#</span> Restore</span>
-restic -r rclone:remote:PrivateData restore latest --target <span class=pl-k>~</span></pre></div><p>The next data is my passwords and my OTPs.
+<span class="pl-c"><span class="pl-c">#</span> Restore</span>
+restic -r rclone:remote:PrivateData restore latest --target <span class="pl-k">~</span></pre></div>
+<p>The next data is my passwords and my OTPs.
 These are the things which I'm scare to lose the most.
-First thing first, I enable 2-Step Verification for all of my important accounts, should use both OTP and phone method.<p>I use Bitwarden for passwords (That is a long story, coming from Google Password manager to Firefox Lockwise and then settle down with Bitwarden) and Aegis for OTPs.
-The reason I choose Aegis, not Authy (I use Authy for so long but Aegis is definitely better) is because Aegis allows me to extract all the OTPs to a single file (Can be encrypted), which I use to transfer or backup easily.<p>As long as Bitwarden provides free passwords stored, I use all of its apps, extensions so that I can easily sync passwords between laptops and phones.
-The thing I need to remember is the master password of Bitwarden in my head.<p>With Aegis, I export the data, then sync it to Google Drive, also store it locally in my phone.<p>The main problem here is the OTP, I can not store all of my OTPs in the cloud completely.
-Because if I want to access my OTPs in the cloud, I should log in, and then input my OTP, this is a circle, my friends.<h2><a id=user-content-recovery-strategy class=anchor aria-hidden=true href=#recovery-strategy><span aria-hidden=true class="octicon octicon-link"></span></a>Recovery strategy</h2><p>There are many strategies that I process to react as if something strange is happening to my devices.<p>If I lost my laptops, single laptop or all, do not panic as long as I have my phones.
-The OTPs are in there, the passwords are in Bitwarden cloud, other data is in Google Drive so nothing is lost here.<p>If I lost my phone, but not my laptops, I use the OTPs which are stored locally in my laptops.<p>In the worst situation, I lost everything, my laptops, my phone.
+First thing first, I enable 2-Step Verification for all of my important accounts, should use both OTP and phone method.</p>
+<p>I use Bitwarden for passwords (That is a long story, coming from Google Password manager to Firefox Lockwise and then settle down with Bitwarden) and Aegis for OTPs.
+The reason I choose Aegis, not Authy (I use Authy for so long but Aegis is definitely better) is because Aegis allows me to extract all the OTPs to a single file (Can be encrypted), which I use to transfer or backup easily.</p>
+<p>As long as Bitwarden provides free passwords stored, I use all of its apps, extensions so that I can easily sync passwords between laptops and phones.
+The thing I need to remember is the master password of Bitwarden in my head.</p>
+<p>With Aegis, I export the data, then sync it to Google Drive, also store it locally in my phone.</p>
+<p>The main problem here is the OTP, I can not store all of my OTPs in the cloud completely.
+Because if I want to access my OTPs in the cloud, I should log in, and then input my OTP, this is a circle, my friends.</p>
+<h2><a id="user-content-recovery-strategy" class="anchor" aria-hidden="true" href="#recovery-strategy"><span aria-hidden="true" class="octicon octicon-link"></span></a>Recovery strategy</h2>
+<p>There are many strategies that I process to react as if something strange is happening to my devices.</p>
+<p>If I lost my laptops, single laptop or all, do not panic as long as I have my phones.
+The OTPs are in there, the passwords are in Bitwarden cloud, other data is in Google Drive so nothing is lost here.</p>
+<p>If I lost my phone, but not my laptops, I use the OTPs which are stored locally in my laptops.</p>
+<p>In the worst situation, I lost everything, my laptops, my phone.
 The first step is to recover my SIM, then log in to Google account using the password and SMS OTP.
-After that, log in to Bitwarden account using the master password and OTP from Gmail, which I open previously.<h2><a id=user-content-the-end class=anchor aria-hidden=true href=#the-end><span aria-hidden=true class="octicon octicon-link"></span></a>The end</h2><p>This guide will be updated regularly I promise.</p><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
-<a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
+After that, log in to Bitwarden account using the master password and OTP from Gmail, which I open previously.</p>
+<h2><a id="user-content-the-end" class="anchor" aria-hidden="true" href="#the-end"><span aria-hidden="true" class="octicon octicon-link"></span></a>The end</h2>
+<p>This guide will be updated regularly I promise.</p>
+
+    <a href="mailto:hauvipapro+posts@gmail.com"
+      >Feel free to ask me via email</a
+    >
+    <a rel="me" href="https://hachyderm.io/@haunguyen">Mastodon</a>
+  </body>
+</html>
