@@ -19,9 +19,6 @@ const (
 	generatedPath = "docs"
 
 	extHTML = ".html"
-
-	mimeTypeHTML = "text/html"
-	mimeTypeCSS  = "text/css"
 )
 
 type templatePostData struct {
