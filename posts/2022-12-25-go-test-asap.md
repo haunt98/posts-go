@@ -18,10 +18,10 @@ If you don't think about edge case before, unit test won't help you.
 
 ## First, rewrite the impossible (to test) out
 
-When I learn to programming, I encounter very interesting idea, which become mainly my mindset when I dev later.
-I don't recall it clearly, kinda like: "Don't just fix bugs, rewrite so that kind of bugs will not appear later".
+When I learn programming, I encounter very interesting idea, which become mainly my mindset when I dev later.
+I don't recall it clearly, kinda like: "Don't just fix bugs, rewrite it so that kind of bugs will not appear again".
 So in our context, there is some thing we hardly or can not write test in Go.
-My solution is don't use that thing.
+My suggestion is don't use that thing.
 
 In my experience, I can list a few things here:
 
