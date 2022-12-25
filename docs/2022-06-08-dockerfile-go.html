@@ -1,36 +1,44 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..800,0..1,0..1&display=swap" rel=stylesheet><link href=https://haunt98.github.io/iosevka_webfont/iosevka-term-ss08/iosevka-term-ss08.css rel=stylesheet><link rel=stylesheet href=styles.css><a href=index>Index</a><h1>Dockerfile for Go</h1><p>Each time I start a new Go project, I repeat many steps.<br>Like set up <code>.gitignore</code>, CI configs, Dockerfile, ...<p>So I decide to have a baseline Dockerfile like this:<pre><code class=language-Dockerfile>FROM golang:1.19-bullseye as builder
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.css><style>.markdown-body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}@media(max-width:767px){.markdown-body{padding:15px}}</style><body class=markdown-body><a href=index>Index</a><h1><a id=user-content-dockerfile-for-go class=anchor aria-hidden=true href=#dockerfile-for-go><span aria-hidden=true class="octicon octicon-link"></span></a>Dockerfile for Go</h1><p>Each time I start a new Go project, I repeat many steps.
+Like set up <code>.gitignore</code>, CI configs, Dockerfile, ...<p>So I decide to have a baseline Dockerfile like this:<div class="highlight highlight-source-dockerfile"><pre><span class=pl-k>FROM</span> golang:1.19-bullseye as builder
 
-RUN go install golang.org/dl/go1.19@latest \
+<span class=pl-k>RUN</span> go install golang.org/dl/go1.19@latest \
     &amp;&amp; go1.19 download
 
-WORKDIR /build
+<span class=pl-k>WORKDIR</span> /build
 
-COPY go.mod .
-COPY go.sum .
-COPY vendor .
-COPY . .
+<span class=pl-k>COPY</span> go.mod .
+<span class=pl-k>COPY</span> go.sum .
+<span class=pl-k>COPY</span> vendor .
+<span class=pl-k>COPY</span> . .
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath .
+<span class=pl-k>RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath .
 
-FROM gcr.io/distroless/base-debian11
+<span class=pl-k>FROM</span> gcr.io/distroless/base-debian11
 
-COPY --from=builder /build/app /app
+<span class=pl-k>COPY</span> --from=builder /build/app /app
 
-ENTRYPOINT [&quot;/app&quot;]
-</code></pre><p>I use <a href=https://docs.docker.com/develop/develop-images/multistage-build/>multi-stage build</a> to keep my image size small.<br>First stage is <a href=https://hub.docker.com/_/golang>Go official image</a>,<br>second stage is <a href=https://github.com/GoogleContainerTools/distroless>Distroless</a>.<p>Before Distroless, I use <a href=https://hub.docker.com/_/alpine>Alpine official image</a>,<br>There is a whole discussion on the Internet to choose which is the best base image for Go.<br>After reading some blogs, I discover Distroless as a small and secure base image.<br>So I stick with it for a while.<p>Also, remember to match Distroless Debian version with Go official image Debian version.<pre><code class=language-Dockerfile>FROM golang:1.19-bullseye as builder
-</code></pre><p>This is Go image I use as a build stage.<br>This can be official Go image or custom image is required in some companies.<pre><code class=language-Dockerfile>RUN go install golang.org/dl/go1.19@latest \
-    &amp;&amp; go1.19 download
-</code></pre><p>This is optional.<br>In my case, my company is slow to update Go image so I use this trick to install latest Go version.<pre><code class=language-Dockerfile>WORKDIR /build
+<span class=pl-k>ENTRYPOINT</span> [<span class=pl-s>"/app"</span>]</pre></div><p>I use <a href=https://docs.docker.com/develop/develop-images/multistage-build/ rel=nofollow>multi-stage build</a> to keep my image size small.
+First stage is <a href=https://hub.docker.com/_/golang rel=nofollow>Go official image</a>,
+second stage is <a href=https://github.com/GoogleContainerTools/distroless>Distroless</a>.<p>Before Distroless, I use <a href=https://hub.docker.com/_/alpine rel=nofollow>Alpine official image</a>,
+There is a whole discussion on the Internet to choose which is the best base image for Go.
+After reading some blogs, I discover Distroless as a small and secure base image.
+So I stick with it for a while.<p>Also, remember to match Distroless Debian version with Go official image Debian version.<div class="highlight highlight-source-dockerfile"><pre><span class=pl-k>FROM</span> golang:1.19-bullseye as builder</pre></div><p>This is Go image I use as a build stage.
+This can be official Go image or custom image is required in some companies.<div class="highlight highlight-source-dockerfile"><pre><span class=pl-k>RUN</span> go install golang.org/dl/go1.19@latest \
+    &amp;&amp; go1.19 download</pre></div><p>This is optional.
+In my case, my company is slow to update Go image so I use this trick to install latest Go version.<div class="highlight highlight-source-dockerfile"><pre><span class=pl-k>WORKDIR</span> /build
 
-COPY go.mod .
-COPY go.sum .
-COPY vendor .
-COPY . .
-</code></pre><p>I use <code>/build</code> to emphasize that I am building something in that directory.<p>The 4 <code>COPY</code> lines are familiar if you use Go enough.<br>First is <code>go.mod</code> and <code>go.sum</code> because it defines Go modules.<br>The second is <code>vendor</code>, this is optional but I use it because I don't want each time I build Dockerfile, I need to redownload Go modules.<pre><code class=language-Dockerfile>RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath .
-</code></pre><p>This is where I build Go program.<p><code>CGO_ENABLED=0</code> because I don't want to mess with C libraries.<br><code>GOOS=linux GOARCH=amd64</code> is easy to explain, Linux with x86-64.<br><code>GOAMD64=v3</code> is new since <a href=https://go.dev/doc/go1.18#amd64>Go 1.18</a>,<br>I use v3 because I read about AMD64 version in <a href=https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst>Arch Linux rfcs</a>. TLDR's newer computers are already x86-64-v3.<p><code>-tags timetzdata</code> to embed timezone database incase base image does not have.<br><code>-trimpath</code> to support reproduce build.<pre><code class=language-Dockerfile>FROM gcr.io/distroless/base-debian11
+<span class=pl-k>COPY</span> go.mod .
+<span class=pl-k>COPY</span> go.sum .
+<span class=pl-k>COPY</span> vendor .
+<span class=pl-k>COPY</span> . .</pre></div><p>I use <code>/build</code> to emphasize that I am building something in that directory.<p>The 4 <code>COPY</code> lines are familiar if you use Go enough.
+First is <code>go.mod</code> and <code>go.sum</code> because it defines Go modules.
+The second is <code>vendor</code>, this is optional but I use it because I don't want each time I build Dockerfile, I need to redownload Go modules.<div class="highlight highlight-source-dockerfile"><pre><span class=pl-k>RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath .</pre></div><p>This is where I build Go program.<p><code>CGO_ENABLED=0</code> because I don't want to mess with C libraries.
+<code>GOOS=linux GOARCH=amd64</code> is easy to explain, Linux with x86-64.
+<code>GOAMD64=v3</code> is new since <a href=https://go.dev/doc/go1.18#amd64 rel=nofollow>Go 1.18</a>,
+I use v3 because I read about AMD64 version in <a href=https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst rel=nofollow>Arch Linux rfcs</a>. TLDR's newer computers are already x86-64-v3.<p><code>-tags timetzdata</code> to embed timezone database incase base image does not have.
+<code>-trimpath</code> to support reproduce build.<div class="highlight highlight-source-dockerfile"><pre><span class=pl-k>FROM</span> gcr.io/distroless/base-debian11
 
-COPY --from=builder /build/app /app
+<span class=pl-k>COPY</span> --from=builder /build/app /app
 
-ENTRYPOINT [&quot;/app&quot;]
-</code></pre><p>Finally, I copy <code>app</code> to Distroless base image.</p><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
+<span class=pl-k>ENTRYPOINT</span> [<span class=pl-s>"/app"</span>]</pre></div><p>Finally, I copy <code>app</code> to Distroless base image.</p><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
 <a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
