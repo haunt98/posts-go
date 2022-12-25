@@ -78,7 +78,7 @@ func (s *ServiceSuite) TestUpload() {
         })
     }
 }
-</code></pre><p>Looks good right?<br>Be careful with this.<br>It can go from 0 to 100 ugly real quick.<p>What if req is a struct with many fields?<br>So in each test case you need to set up req.<br>They are almose the same, but with some error case you must alter req.<br>It's easy to be wrong here (typing maybe ?).<pre><code class=language-go>tests := []struct{
+</code></pre><p>Looks good right?<br>Be careful with this.<br>It can go from 0 to 100 ugly real quick.<p>What if req is a struct with many fields?<br>So in each test case you need to set up req.<br>They are almost the same, but with some error case you must alter req.<br>It's easy to be init with wrong value here (typing maybe ?).<br>Also all req looks similiar, kinda duplicated.<pre><code class=language-go>tests := []struct{
         name string
         req Request
         verifyErr error
@@ -180,5 +180,5 @@ func (s *ServiceSuite) TestUpload() {
 
     // ...
 }
-</code></pre><p>So if request change fields or more dependencies, I need to update success case, and maybe add error case if need.<p>Same idea but still with table, you can find here <a href=https://arslan.io/2022/12/04/functional-table-driven-tests-in-go/>Functional table-driven tests in Go - Fatih Arslan</a></p><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
+</code></pre><p>So if request change fields or more dependencies, I need to update success case, and maybe add corresponding error case if need.<p>Same idea but still with table, you can find here <a href=https://arslan.io/2022/12/04/functional-table-driven-tests-in-go/>Functional table-driven tests in Go - Fatih Arslan</a>.</p><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
 <a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
