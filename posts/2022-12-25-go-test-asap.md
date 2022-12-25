@@ -262,6 +262,9 @@ func (s *ServiceSuite) TestUpload() {
 }
 ```
 
+If you think this is not quick enough, just **ignore** the response.
+You only need to check error or not if you want code coverage only.
+
 So if request change fields or more dependencies, I need to update success case, and maybe add corresponding error case if need.
 
 Same idea but still with table, you can find here [Functional table-driven tests in Go - Fatih Arslan](https://arslan.io/2022/12/04/functional-table-driven-tests-in-go/).
