@@ -1,3 +1,19 @@
+/* https://github.com/sindresorhus/github-markdown-css */
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
+}
+
+/* Custom style */
 body {
   font-family: "Recursive", sans-serif;
   font-variation-settings: "MONO" 0, "CASL" 1;
@@ -12,27 +28,4 @@ code {
   font-family: "Iosevka Term SS08 Web";
   display: inline-block;
   background: #f6f8fa;
-}
-
-a {
-  color: #0969da;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
-
-  body {
-    color: #c9d1d9;
-    background: #0d1117;
-  }
-
-  code {
-    background: #161b22;
-  }
-
-  a {
-    color: #58a6ff;
-  }
 }

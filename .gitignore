@@ -9,3 +9,6 @@
 
 # VSCode
 .vscode
+
+# GitHub
+.github_access_token
