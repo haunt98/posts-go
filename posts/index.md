@@ -12,4 +12,4 @@ This is where I dump my thoughts.
 - [gitignore](2022-08-10-gitignore)
 - [Reload config](2022-10-26-reload-config)
 - [Install Arch Linux](2022-12-25-archlinux)
-- [Speed up writing Go test ASAP](2022-12-25-archlinux)
+- [Speed up writing Go test ASAP](2022-12-25-go-test-asap)
