@@ -23,11 +23,11 @@ I don't recall it clearly, kinda like: "Don't just fix bugs, rewrite it so that 
 So in our context, there is some thing we hardly or can not write test in Go.
 My suggestion is don't use that thing.
 
-In my experience, I can list a few things here:
+In my experience, I can list a few here:
 
 - Read config each time call func (`viper.Get...`). You can and you should init all config when project starts.
 - Not use Dependency Injection (DI). There are too many posts in Internet tell you how to do DI properly.
-- Use global var (Except global var `Err...`). You should move all global var inside your struct.
+- Use global var (Except global var `Err...`). You should move all global var to fields inside some struct.
 
 ## Let the fun (writing test) begin
 
@@ -35,8 +35,8 @@ If you code Go long enough, you know table driven tests and how is that so usefu
 You set up test data, then you test.
 Somewhere in the future, you change the func, then you need to update test data, then you good!
 
-In simple case, your func only have 2 or 3 inputs table drive tests still looking good.
-But real world is ugly (maybe not, idk I'm just too young in this industry :). Your func can have 5 or 10 inputs, also your func call many third party services.
+In simple case, your func only have 2 or 3 inputs so table drive tests is still looking good.
+But real world is ugly (maybe not, idk I'm just too young in this industry). Your func can have 5 or 10 inputs, also your func call many third party services.
 
 Imagine having below func to upload image:
 
