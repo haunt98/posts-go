@@ -49,9 +49,8 @@ type service struct {
     verifyService VerifyService
 }
 
-
 func (s *service) Upload(ctx context.Context, req Request) error {
-    // I simplify by omitting the response, only care error fow now
+    // I simplify by omitting the response, only care error for now
     if err := s.verifyService.Verify(req); err != nil {
         return err
     }
@@ -95,7 +94,6 @@ func (s *ServiceSuite) SetupTest() {
     // Init mock
     // Init service
 }
-
 
 func (s *ServiceSuite) TestUpload() {
     tests := []struct{
