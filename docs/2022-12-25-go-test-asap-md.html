@@ -1,0 +1,184 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..800,0..1,0..1&display=swap" rel=stylesheet><link href=https://haunt98.github.io/iosevka_webfont/iosevka-term-ss08/iosevka-term-ss08.css rel=stylesheet><link rel=stylesheet href=styles.css><a href=index>Index</a><h1>Speed up writing Go test ASAP</h1><p>Imagine your project currently have 0% unit test code coverage.<br>And your boss keep pushing it to 80% or even 90%?<br>What do you do?<br>Give up?<p>What if I tell you there is a way?<br>Not entirely cheating but ... you know, there is always trade off.<p>If your purpose is to test carefully all path, check if all return is correctly.<br>Sadly this post is not for you, I guess.<br>If you only want good number on test coverage, with minimum effort as possible, I hope this will show you some idea you can use :)<p>In my opinion, unit test is not that important (like must must have).<br>It's just make sure your code is running excatly as you intent it to be.<br>If you don't think about edge case before, unit test won't help you.<h2>First, rewrite the impossible (to test) out</h2><p>When I learn to programming, I encounter very interesting idea, which become mainly my mindset when I dev later.<br>I don't recall it clearly, kinda like: "Don't just fix bugs, rewrite so that kind of bugs will not appear later".<br>So in our context, there is some thing we hardly or can not write test in Go.<br>My solution is don't use that thing.<p>In my experience, I can list a few things here:<ul><li>Read config each time call func (<code>viper.Get...</code>). You can and you should init all config when project starts.<li>Not use Dependency Injection (DI). There are too many posts in Internet tell you how to do DI properly.<li>Use global var (Except global var <code>Err...</code>). You should move all global var inside your struct.</ul><h2>Let the fun (writing test) begin</h2><p>If you code Go long enough, you know table driven tests and how is that so useful.<br>You set up test data, then you test.<br>Somewhere in the future, you change the func, then you need to update test data, then you good!<p>In simple case, your func only have 2 or 3 inputs table drive tests still looking good.<br>But real world is ugly (maybe not, idk I'm just too young in this industry :). Your func can have 5 or 10 inputs, also your func call many third party services.<p>Imagine having below func to upload image:<pre><code class=language-go>type service struct {
+    db DB
+    redis Redis
+    minio MinIO
+    logService LogService
+    verifyService VerifyService
+}
+
+
+func (s *service) Upload(ctx context.Context, req Request) error {
+    // I simplify by omit the response, only care error fow now
+    if err := s.verifyService.Verify(req); err != nil {
+        return err
+    }
+
+    if err := s.minio.Put(req); err != nil {
+        return err
+    }
+
+    if err := s.redis.Set(req); err != nil {
+        return err
+    }
+
+    if err := s.db.Save(req); err != nil {
+        return err
+    }
+
+    if err := s.logService.Save(req); err != nil {
+        return err
+    }
+
+    return nil
+}
+</code></pre><p>With table driven test and thanks to <a href=https://github.com/stretchr/testify>stretchr/testify</a>, I usually write like this:<pre><code class=language-go>type ServiceSuite struct {
+    suite.Suite
+
+    db DBMock
+    redis RedisMock
+    minio MinIOMock
+    logService LogServiceMock
+    verifyService VerifyServiceMock
+
+    s service
+}
+
+func (s *ServiceSuite) SetupTest() {
+    // Init mock
+    // Init service
+}
+
+
+func (s *ServiceSuite) TestUpload() {
+    tests := []struct{
+        name string
+        req Request
+        verifyErr error
+        minioErr error
+        redisErr error
+        dbErr error
+        logErr error
+        wantErr error
+    }{
+        {
+            // Init test case
+        }
+    }
+
+    for _, tc := range tests {
+        s.Run(tc.name, func(){
+            // Mock all error depends on test case
+            if tc.verifyErr != nil {
+                s.verifyService.MockVerify().Return(tc.verifyErr)
+            }
+            // ...
+
+            gotErr := s.service.Upload(tc.req)
+            s.Equal(wantErr, gotErr)
+        })
+    }
+}
+</code></pre><p>Looks good right?<br>Be careful with this.<br>It can go from 0 to 100 ugly real quick.<p>What if req is a struct with many fields?<br>So in each test case you need to set up req.<br>They are almose the same, but with some error case you must alter req.<br>It's easy to be wrong here (typing maybe ?).<pre><code class=language-go>tests := []struct{
+        name string
+        req Request
+        verifyErr error
+        minioErr error
+        redisErr error
+        dbErr error
+        logErr error
+        wantErr error
+    }{
+        {
+            req: Request {
+                a: &quot;a&quot;,
+                b: {
+                    c: &quot;c&quot;,
+                    d: {
+                        &quot;e&quot;: e
+                    }
+                }
+            }
+            // Other fieles
+        },
+         {
+            req: Request {
+                a: &quot;a&quot;,
+                b: {
+                    c: &quot;c&quot;,
+                    d: {
+                        &quot;e&quot;: e
+                    }
+                }
+            }
+            // Other fieles
+        },
+         {
+            req: Request {
+                a: &quot;a&quot;,
+                b: {
+                    c: &quot;c&quot;,
+                    d: {
+                        &quot;e&quot;: e
+                    }
+                }
+            }
+            // Other fieles
+        }
+    }
+</code></pre><p>What if dependencies of service keep growing?<br>More mock error to test data of course.<pre><code class=language-go>    tests := []struct{
+        name string
+        req Request
+        verifyErr error
+        minioErr error
+        redisErr error
+        dbErr error
+        logErr error
+        wantErr error
+        // Murr error
+        aErr error
+        bErr error
+        cErr error
+        // ...
+    }{
+        {
+            // Init test case
+        }
+    }
+</code></pre><p>The test file keep growing longer and longer until I feel sick about it.<p>See <a href=https://github.com/tektoncd/pipeline/blob/main/pkg/pod/pod_test.go>tektoncd/pipeline unit test</a> to get a feeling about this.<br>When I see it, <code>TestPodBuild</code> has almost 2000 lines.<p>The solution I propose here is simple (absolutely not perfect, but good with my usecase) thanks to <strong>stretchr/testify</strong>.<br>I init all <strong>default</strong> action on <strong>success</strong> case.<br>Then I <strong>alter</strong> request or mock error for unit test to hit on other case.<br>Remember if unit test is hit, code coverate is surely increaesed, and that my <strong>goal</strong>.<pre><code class=language-go>// Init ServiceSuite as above
+
+func (s *ServiceSuite) TestUpload() {
+    // Init success request
+    req := Request{
+        // ...
+    }
+
+    // Init success action
+    s.verifyService.MockVerify().Return(nil)
+    // ...
+
+    gotErr := s.service.Upload(tc.req)
+    s.NoError(gotErr)
+
+    s.Run(&quot;failed&quot;, func(){
+        // Alter failed request from default
+        req := Request{
+            // ...
+        }
+
+        gotErr := s.service.Upload(tc.req)
+        s.Error(gotErr)
+    })
+
+    s.Run(&quot;another failed&quot;, func(){
+        // Alter verify return
+        s.verifyService.MockVerify().Return(someErr)
+
+
+        gotErr := s.service.Upload(tc.req)
+        s.Error(gotErr)
+    })
+
+    // ...
+}
+</code></pre><p>So if request change fields or more dependencies, I need to update success case, and maybe add error case if need.<p>Same idea but still with table, you can find here <a href=https://arslan.io/2022/12/04/functional-table-driven-tests-in-go/>Functional table-driven tests in Go - Fatih Arslan</a></p><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
+<a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
