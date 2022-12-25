@@ -1,102 +1,278 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.css><style>.markdown-body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}@media(max-width:767px){.markdown-body{padding:15px}}</style><body class=markdown-body><a href=index>Index</a><h1><a id=user-content-install-arch-linux class=anchor aria-hidden=true href=#install-arch-linux><span aria-hidden=true class="octicon octicon-link"></span></a>Install Arch Linux</h1><p>Install Arch Linux is thing I always want to do for my laptop/PC since I had my laptop in ninth grade.<p>This is not a guide for everyone, this is just save for myself in a future and for anyone who want to walk in my shoes.<h2><a id=user-content-installation-guide class=anchor aria-hidden=true href=#installation-guide><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/index.php/Installation_guide rel=nofollow>Installation guide</a></h2><h3><a id=user-content-pre-installation class=anchor aria-hidden=true href=#pre-installation><span aria-hidden=true class="octicon octicon-link"></span></a>Pre-installation</h3><p>Check disks carefully:<div class="highlight highlight-source-shell"><pre>lsblk</pre></div><p><a href=https://wiki.archlinux.org/index.php/USB_flash_installation_medium rel=nofollow>USB flash installation medium</a><h4><a id=user-content-verify-the-boot-mode class=anchor aria-hidden=true href=#verify-the-boot-mode><span aria-hidden=true class="octicon octicon-link"></span></a>Verify the boot mode</h4><p>Check UEFI mode:<div class="highlight highlight-source-shell"><pre>ls /sys/firmware/efi/efivars</pre></div><h4><a id=user-content-connect-to-the-internet class=anchor aria-hidden=true href=#connect-to-the-internet><span aria-hidden=true class="octicon octicon-link"></span></a>Connect to the internet</h4><p>For wifi, use <a href=https://wiki.archlinux.org/index.php/Iwd rel=nofollow>iwd</a>.<h4><a id=user-content-partition-the-disks class=anchor aria-hidden=true href=#partition-the-disks><span aria-hidden=true class="octicon octicon-link"></span></a>Partition the disks</h4><p><a href=https://wiki.archlinux.org/index.php/GPT_fdisk rel=nofollow>GPT fdisk</a>:<div class="highlight highlight-source-shell"><pre>cgdisk /dev/sdx</pre></div><p><a href=https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme rel=nofollow>Partition scheme</a><p>UEFI/GPT layout:<table><thead><tr><th>Mount point<th>Partition<th>Partition type<th>Suggested size<tbody><tr><td><code>/mnt/efi</code><td><code>/dev/efi_system_partition</code><td>EFI System Partition<td>512 MiB<tr><td><code>/mnt/boot</code><td><code>/dev/extended_boot_loader_partition</code><td>Extended Boot Loader Partition<td>1 GiB<tr><td><code>/mnt</code><td><code>/dev/root_partition</code><td>Root Partition<td></table><p>BIOS/GPT layout:<table><thead><tr><th>Mount point<th>Partition<th>Partition type<th>Suggested size<tbody><tr><td><td><td>BIOS boot partition<td>1 MiB<tr><td><code>/mnt</code><td><code>/dev/root_partition</code><td>Root Partition<td></table><p>LVM:<div class="highlight highlight-source-shell"><pre><span class=pl-c><span class=pl-c>#</span> Create physical volumes</span>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css"
+    />
+  </head>
+  <style>
+    /* https://github.com/sindresorhus/github-markdown-css */
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <a href="index">Index</a>
+    <h1><a id="user-content-install-arch-linux" class="anchor" aria-hidden="true" href="#install-arch-linux"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install Arch Linux</h1>
+<p>Install Arch Linux is thing I always want to do for my laptop/PC since I had my laptop in ninth grade.</p>
+<p>This is not a guide for everyone, this is just save for myself in a future and for anyone who want to walk in my shoes.</p>
+<h2><a id="user-content-installation-guide" class="anchor" aria-hidden="true" href="#installation-guide"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/index.php/Installation_guide" rel="nofollow">Installation guide</a></h2>
+<h3><a id="user-content-pre-installation" class="anchor" aria-hidden="true" href="#pre-installation"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pre-installation</h3>
+<p>Check disks carefully:</p>
+<div class="highlight highlight-source-shell"><pre>lsblk</pre></div>
+<p><a href="https://wiki.archlinux.org/index.php/USB_flash_installation_medium" rel="nofollow">USB flash installation medium</a></p>
+<h4><a id="user-content-verify-the-boot-mode" class="anchor" aria-hidden="true" href="#verify-the-boot-mode"><span aria-hidden="true" class="octicon octicon-link"></span></a>Verify the boot mode</h4>
+<p>Check UEFI mode:</p>
+<div class="highlight highlight-source-shell"><pre>ls /sys/firmware/efi/efivars</pre></div>
+<h4><a id="user-content-connect-to-the-internet" class="anchor" aria-hidden="true" href="#connect-to-the-internet"><span aria-hidden="true" class="octicon octicon-link"></span></a>Connect to the internet</h4>
+<p>For wifi, use <a href="https://wiki.archlinux.org/index.php/Iwd" rel="nofollow">iwd</a>.</p>
+<h4><a id="user-content-partition-the-disks" class="anchor" aria-hidden="true" href="#partition-the-disks"><span aria-hidden="true" class="octicon octicon-link"></span></a>Partition the disks</h4>
+<p><a href="https://wiki.archlinux.org/index.php/GPT_fdisk" rel="nofollow">GPT fdisk</a>:</p>
+<div class="highlight highlight-source-shell"><pre>cgdisk /dev/sdx</pre></div>
+<p><a href="https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme" rel="nofollow">Partition scheme</a></p>
+<p>UEFI/GPT layout:</p>
+<table>
+<thead>
+<tr>
+<th>Mount point</th>
+<th>Partition</th>
+<th>Partition type</th>
+<th>Suggested size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/mnt/efi</code></td>
+<td><code>/dev/efi_system_partition</code></td>
+<td>EFI System Partition</td>
+<td>512 MiB</td>
+</tr>
+<tr>
+<td><code>/mnt/boot</code></td>
+<td><code>/dev/extended_boot_loader_partition</code></td>
+<td>Extended Boot Loader Partition</td>
+<td>1 GiB</td>
+</tr>
+<tr>
+<td><code>/mnt</code></td>
+<td><code>/dev/root_partition</code></td>
+<td>Root Partition</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>BIOS/GPT layout:</p>
+<table>
+<thead>
+<tr>
+<th>Mount point</th>
+<th>Partition</th>
+<th>Partition type</th>
+<th>Suggested size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td>BIOS boot partition</td>
+<td>1 MiB</td>
+</tr>
+<tr>
+<td><code>/mnt</code></td>
+<td><code>/dev/root_partition</code></td>
+<td>Root Partition</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>LVM:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Create physical volumes</span>
 pvcreate /dev/sdaX
 
-<span class=pl-c><span class=pl-c>#</span> Create volume groups</span>
+<span class="pl-c"><span class="pl-c">#</span> Create volume groups</span>
 vgcreate RootGroup /dev/sdaX /dev/sdaY
 
-<span class=pl-c><span class=pl-c>#</span> Create logical volumes</span>
-lvcreate -l +100%FREE RootGroup -n rootvol</pre></div><p>Format:<div class="highlight highlight-source-shell"><pre><span class=pl-c><span class=pl-c>#</span> efi</span>
+<span class="pl-c"><span class="pl-c">#</span> Create logical volumes</span>
+lvcreate -l +100%FREE RootGroup -n rootvol</pre></div>
+<p>Format:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> efi</span>
 mkfs.fat -F32 /dev/efi_system_partition
 
-<span class=pl-c><span class=pl-c>#</span> boot</span>
+<span class="pl-c"><span class="pl-c">#</span> boot</span>
 mkfs.fat -F32 /dev/extended_boot_loader_partition
 
-<span class=pl-c><span class=pl-c>#</span> root</span>
+<span class="pl-c"><span class="pl-c">#</span> root</span>
 mkfs.ext4 -L ROOT /dev/root_partition
 
-<span class=pl-c><span class=pl-c>#</span> root with btrfs</span>
+<span class="pl-c"><span class="pl-c">#</span> root with btrfs</span>
 mkfs.btrfs -L ROOT /dev/root_partition
 
-<span class=pl-c><span class=pl-c>#</span> root on lvm</span>
-mkfs.ext4 /dev/RootGroup/rootvol</pre></div><p>Mount:<div class="highlight highlight-source-shell"><pre><span class=pl-c><span class=pl-c>#</span> root</span>
+<span class="pl-c"><span class="pl-c">#</span> root on lvm</span>
+mkfs.ext4 /dev/RootGroup/rootvol</pre></div>
+<p>Mount:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> root</span>
 mount /dev/root_partition /mnt
 
-<span class=pl-c><span class=pl-c>#</span> root with btrfs</span>
+<span class="pl-c"><span class="pl-c">#</span> root with btrfs</span>
 mount -o compress=zstd /dev/root_partition /mnt
 
-<span class=pl-c><span class=pl-c>#</span> root on lvm</span>
+<span class="pl-c"><span class="pl-c">#</span> root on lvm</span>
 mount /dev/RootGroup/rootvol /mnt
 
-<span class=pl-c><span class=pl-c>#</span> efi</span>
+<span class="pl-c"><span class="pl-c">#</span> efi</span>
 mount --mkdir /dev/efi_system_partition /mnt/efi
 
-<span class=pl-c><span class=pl-c>#</span> boot</span>
-mount --mkdir /dev/extended_boot_loader_partition /mnt/boot</pre></div><h3><a id=user-content-installation class=anchor aria-hidden=true href=#installation><span aria-hidden=true class="octicon octicon-link"></span></a>Installation</h3><div class="highlight highlight-source-shell"><pre>pacstrap -K /mnt base linux linux-firmware
+<span class="pl-c"><span class="pl-c">#</span> boot</span>
+mount --mkdir /dev/extended_boot_loader_partition /mnt/boot</pre></div>
+<h3><a id="user-content-installation" class="anchor" aria-hidden="true" href="#installation"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h3>
+<div class="highlight highlight-source-shell"><pre>pacstrap -K /mnt base linux linux-firmware
 
-<span class=pl-c><span class=pl-c>#</span> AMD</span>
+<span class="pl-c"><span class="pl-c">#</span> AMD</span>
 pacstrap -K /mnt amd-ucode
 
-<span class=pl-c><span class=pl-c>#</span> Intel</span>
+<span class="pl-c"><span class="pl-c">#</span> Intel</span>
 pacstrap -K /mnt intel-ucode
 
-<span class=pl-c><span class=pl-c>#</span> Btrfs</span>
+<span class="pl-c"><span class="pl-c">#</span> Btrfs</span>
 pacstrap -K /mnt btrfs-progs
 
-<span class=pl-c><span class=pl-c>#</span> LVM</span>
+<span class="pl-c"><span class="pl-c">#</span> LVM</span>
 pacstrap -K /mnt lvm2
 
-<span class=pl-c><span class=pl-c>#</span> Text editor</span>
-pacstrap -K /mnt neovim</pre></div><h3><a id=user-content-configure class=anchor aria-hidden=true href=#configure><span aria-hidden=true class="octicon octicon-link"></span></a>Configure</h3><h4><a id=user-content-fstab class=anchor aria-hidden=true href=#fstab><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/index.php/Fstab rel=nofollow>fstab</a></h4><div class="highlight highlight-source-shell"><pre>genfstab -U /mnt <span class=pl-k>&gt;&gt;</span> /mnt/etc/fstab</pre></div><h4><a id=user-content-chroot class=anchor aria-hidden=true href=#chroot><span aria-hidden=true class="octicon octicon-link"></span></a>Chroot</h4><div class="highlight highlight-source-shell"><pre>arch-chroot /mnt</pre></div><h4><a id=user-content-time-zone class=anchor aria-hidden=true href=#time-zone><span aria-hidden=true class="octicon octicon-link"></span></a>Time zone</h4><div class="highlight highlight-source-shell"><pre>ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+<span class="pl-c"><span class="pl-c">#</span> Text editor</span>
+pacstrap -K /mnt neovim</pre></div>
+<h3><a id="user-content-configure" class="anchor" aria-hidden="true" href="#configure"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configure</h3>
+<h4><a id="user-content-fstab" class="anchor" aria-hidden="true" href="#fstab"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/index.php/Fstab" rel="nofollow">fstab</a></h4>
+<div class="highlight highlight-source-shell"><pre>genfstab -U /mnt <span class="pl-k">&gt;&gt;</span> /mnt/etc/fstab</pre></div>
+<h4><a id="user-content-chroot" class="anchor" aria-hidden="true" href="#chroot"><span aria-hidden="true" class="octicon octicon-link"></span></a>Chroot</h4>
+<div class="highlight highlight-source-shell"><pre>arch-chroot /mnt</pre></div>
+<h4><a id="user-content-time-zone" class="anchor" aria-hidden="true" href="#time-zone"><span aria-hidden="true" class="octicon octicon-link"></span></a>Time zone</h4>
+<div class="highlight highlight-source-shell"><pre>ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 
-hwclock --systohc</pre></div><h4><a id=user-content-localization class=anchor aria-hidden=true href=#localization><span aria-hidden=true class="octicon octicon-link"></span></a>Localization:</h4><p>Edit <code>/etc/locale.gen</code>:<div class="highlight highlight-text-adblock"><pre><span class=pl-c># Uncomment en_US.UTF-8 UTF-8</span></pre></div><p>Generate locales:<div class="highlight highlight-source-shell"><pre>locale-gen</pre></div><p>Edit <code>/etc/locale.conf</code>:<div class="highlight highlight-text-adblock"><pre>LANG=en_US.UTF-8</pre></div><h4><a id=user-content-network-configuration class=anchor aria-hidden=true href=#network-configuration><span aria-hidden=true class="octicon octicon-link"></span></a>Network configuration</h4><p>Edit <code>/etc/hostname</code>:<div class="highlight highlight-text-adblock"><pre>myhostname</pre></div><h4><a id=user-content-initramfs class=anchor aria-hidden=true href=#initramfs><span aria-hidden=true class="octicon octicon-link"></span></a>Initramfs</h4><p>Edit <code>/etc/mkinitcpio.conf</code>:<div class="highlight highlight-text-adblock"><pre><span class=pl-c># LVM</span>
-<span class=pl-c># https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks</span>
+hwclock --systohc</pre></div>
+<h4><a id="user-content-localization" class="anchor" aria-hidden="true" href="#localization"><span aria-hidden="true" class="octicon octicon-link"></span></a>Localization:</h4>
+<p>Edit <code>/etc/locale.gen</code>:</p>
+<div class="highlight highlight-text-adblock"><pre><span class="pl-c"># Uncomment en_US.UTF-8 UTF-8</span></pre></div>
+<p>Generate locales:</p>
+<div class="highlight highlight-source-shell"><pre>locale-gen</pre></div>
+<p>Edit <code>/etc/locale.conf</code>:</p>
+<div class="highlight highlight-text-adblock"><pre>LANG=en_US.UTF-8</pre></div>
+<h4><a id="user-content-network-configuration" class="anchor" aria-hidden="true" href="#network-configuration"><span aria-hidden="true" class="octicon octicon-link"></span></a>Network configuration</h4>
+<p>Edit <code>/etc/hostname</code>:</p>
+<div class="highlight highlight-text-adblock"><pre>myhostname</pre></div>
+<h4><a id="user-content-initramfs" class="anchor" aria-hidden="true" href="#initramfs"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initramfs</h4>
+<p>Edit <code>/etc/mkinitcpio.conf</code>:</p>
+<div class="highlight highlight-text-adblock"><pre><span class="pl-c"># LVM</span>
+<span class="pl-c"># https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks</span>
 HOOKS=(base udev ... block lvm2 filesystems)
 
-<span class=pl-c># https://wiki.archlinux.org/title/mkinitcpio#Common_hooks</span>
-<span class=pl-c># Replace udev with systemd</span></pre></div><div class="highlight highlight-source-shell"><pre>mkinitcpio -P</pre></div><h4><a id=user-content-root-password class=anchor aria-hidden=true href=#root-password><span aria-hidden=true class="octicon octicon-link"></span></a>Root password</h4><div class="highlight highlight-source-shell"><pre>passwd</pre></div><h4><a id=user-content-addition class=anchor aria-hidden=true href=#addition><span aria-hidden=true class="octicon octicon-link"></span></a>Addition</h4><div class="highlight highlight-source-shell"><pre><span class=pl-c><span class=pl-c>#</span> NetworkManager</span>
+<span class="pl-c"># https://wiki.archlinux.org/title/mkinitcpio#Common_hooks</span>
+<span class="pl-c"># Replace udev with systemd</span></pre></div>
+<div class="highlight highlight-source-shell"><pre>mkinitcpio -P</pre></div>
+<h4><a id="user-content-root-password" class="anchor" aria-hidden="true" href="#root-password"><span aria-hidden="true" class="octicon octicon-link"></span></a>Root password</h4>
+<div class="highlight highlight-source-shell"><pre>passwd</pre></div>
+<h4><a id="user-content-addition" class="anchor" aria-hidden="true" href="#addition"><span aria-hidden="true" class="octicon octicon-link"></span></a>Addition</h4>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> NetworkManager</span>
 pacman -Syu networkmanager
-systemctl <span class=pl-c1>enable</span> NetworkManager.service
+systemctl <span class="pl-c1">enable</span> NetworkManager.service
 
-<span class=pl-c><span class=pl-c>#</span> Bluetooth</span>
+<span class="pl-c"><span class="pl-c">#</span> Bluetooth</span>
 pacman -Syu bluez
-systemctl <span class=pl-c1>enable</span> bluetooth.service
+systemctl <span class="pl-c1">enable</span> bluetooth.service
 
-<span class=pl-c><span class=pl-c>#</span> Clock</span>
-timedatectl set-ntp <span class=pl-c1>true</span></pre></div><h4><a id=user-content-boot-loader class=anchor aria-hidden=true href=#boot-loader><span aria-hidden=true class="octicon octicon-link"></span></a>Boot loader</h4><p><a href=Applications/System/systemd-boot.md>systemd-boot</a><p><a href=https://wiki.archlinux.org/index.php/GRUB rel=nofollow>GRUB</a><h2><a id=user-content-general-recommendations class=anchor aria-hidden=true href=#general-recommendations><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/index.php/General_recommendations rel=nofollow>General recommendations</a></h2><p>Always remember to check <strong>dependencies</strong> when install packages.<h3><a id=user-content-system-administration class=anchor aria-hidden=true href=#system-administration><span aria-hidden=true class="octicon octicon-link"></span></a>System administration</h3><p><a href=https://wiki.archlinux.org/index.php/sudo rel=nofollow>Sudo</a>:<div class="highlight highlight-source-shell"><pre>pacman -Syu sudo
+<span class="pl-c"><span class="pl-c">#</span> Clock</span>
+timedatectl set-ntp <span class="pl-c1">true</span></pre></div>
+<h4><a id="user-content-boot-loader" class="anchor" aria-hidden="true" href="#boot-loader"><span aria-hidden="true" class="octicon octicon-link"></span></a>Boot loader</h4>
+<p><a href="Applications/System/systemd-boot.md">systemd-boot</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/GRUB" rel="nofollow">GRUB</a></p>
+<h2><a id="user-content-general-recommendations" class="anchor" aria-hidden="true" href="#general-recommendations"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/index.php/General_recommendations" rel="nofollow">General recommendations</a></h2>
+<p>Always remember to check <strong>dependencies</strong> when install packages.</p>
+<h3><a id="user-content-system-administration" class="anchor" aria-hidden="true" href="#system-administration"><span aria-hidden="true" class="octicon octicon-link"></span></a>System administration</h3>
+<p><a href="https://wiki.archlinux.org/index.php/sudo" rel="nofollow">Sudo</a>:</p>
+<div class="highlight highlight-source-shell"><pre>pacman -Syu sudo
 
 EDITOR=nvim visudo
-<span class=pl-c><span class=pl-c>#</span> Uncomment group wheel</span>
+<span class="pl-c"><span class="pl-c">#</span> Uncomment group wheel</span>
 
-<span class=pl-c><span class=pl-c>#</span> Add user if don't want to use systemd-homed</span>
-useradd -m -G wheel -c <span class=pl-s><span class=pl-pds>"</span>The Joker<span class=pl-pds>"</span></span> joker
+<span class="pl-c"><span class="pl-c">#</span> Add user if don't want to use systemd-homed</span>
+useradd -m -G wheel -c <span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> joker
 
-<span class=pl-c><span class=pl-c>#</span> Or using zsh</span>
-useradd -m -G wheel -s /usr/bin/zsh -c <span class=pl-s><span class=pl-pds>"</span>The Joker<span class=pl-pds>"</span></span> joker
+<span class="pl-c"><span class="pl-c">#</span> Or using zsh</span>
+useradd -m -G wheel -s /usr/bin/zsh -c <span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> joker
 
-<span class=pl-c><span class=pl-c>#</span> Set password</span>
-passwd joker</pre></div><p><a href=https://wiki.archlinux.org/index.php/Systemd-homed rel=nofollow>systemd-homed (WIP)</a>:<div class="highlight highlight-source-shell"><pre>systemctl <span class=pl-c1>enable</span> systemd-homed.service
+<span class="pl-c"><span class="pl-c">#</span> Set password</span>
+passwd joker</pre></div>
+<p><a href="https://wiki.archlinux.org/index.php/Systemd-homed" rel="nofollow">systemd-homed (WIP)</a>:</p>
+<div class="highlight highlight-source-shell"><pre>systemctl <span class="pl-c1">enable</span> systemd-homed.service
 
-homectl create joker --real-name=<span class=pl-s><span class=pl-pds>"</span>The Joker<span class=pl-pds>"</span></span> --member-of=wheel
+homectl create joker --real-name=<span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> --member-of=wheel
 
-<span class=pl-c><span class=pl-c>#</span> Using zsh</span>
-homectl update joker --shell=/usr/bin/zsh</pre></div><p><strong>Note</strong>:
+<span class="pl-c"><span class="pl-c">#</span> Using zsh</span>
+homectl update joker --shell=/usr/bin/zsh</pre></div>
+<p><strong>Note</strong>:
 Can not run <code>homectl</code> when install Arch Linux.
-Should run on the first boot.<h3><a id=user-content-desktop-environment class=anchor aria-hidden=true href=#desktop-environment><span aria-hidden=true class="octicon octicon-link"></span></a>Desktop Environment</h3><p>Install <a href=https://wiki.archlinux.org/index.php/Xorg rel=nofollow>Xorg</a>:<div class="highlight highlight-source-shell"><pre>pacman -Syu xorg-server</pre></div><h4><a id=user-content-gnome class=anchor aria-hidden=true href=#gnome><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/index.php/GNOME rel=nofollow>GNOME</a></h4><div class="highlight highlight-source-shell"><pre>pacman -Syu gnome-shell \
+Should run on the first boot.</p>
+<h3><a id="user-content-desktop-environment" class="anchor" aria-hidden="true" href="#desktop-environment"><span aria-hidden="true" class="octicon octicon-link"></span></a>Desktop Environment</h3>
+<p>Install <a href="https://wiki.archlinux.org/index.php/Xorg" rel="nofollow">Xorg</a>:</p>
+<div class="highlight highlight-source-shell"><pre>pacman -Syu xorg-server</pre></div>
+<h4><a id="user-content-gnome" class="anchor" aria-hidden="true" href="#gnome"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/index.php/GNOME" rel="nofollow">GNOME</a></h4>
+<div class="highlight highlight-source-shell"><pre>pacman -Syu gnome-shell \
 	gnome-control-center gnome-system-monitor \
 	gnome-tweaks gnome-backgrounds gnome-screenshot gnome-keyring gnome-logs \
 	gnome-console gnome-text-editor \
 	nautilus xdg-user-dirs-gtk file-roller evince eog
 
-<span class=pl-c><span class=pl-c>#</span> Login manager</span>
+<span class="pl-c"><span class="pl-c">#</span> Login manager</span>
 pacman -Syu gdm
-systemctl <span class=pl-c1>enable</span> gdm.service</pre></div><h4><a id=user-content-kde-wip class=anchor aria-hidden=true href=#kde-wip><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/title/KDE rel=nofollow>KDE (WIP)</a></h4><div class="highlight highlight-source-shell"><pre>pacman -Syu plasma-meta \
+systemctl <span class="pl-c1">enable</span> gdm.service</pre></div>
+<h4><a id="user-content-kde-wip" class="anchor" aria-hidden="true" href="#kde-wip"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/title/KDE" rel="nofollow">KDE (WIP)</a></h4>
+<div class="highlight highlight-source-shell"><pre>pacman -Syu plasma-meta \
 	kde-system-meta
 
-<span class=pl-c><span class=pl-c>#</span> Login manager</span>
+<span class="pl-c"><span class="pl-c">#</span> Login manager</span>
 pacman -Syu sddm
-systemctl <span class=pl-c1>enable</span> sddm.service</pre></div><h2><a id=user-content-list-of-applications class=anchor aria-hidden=true href=#list-of-applications><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/index.php/List_of_applications rel=nofollow>List of applications</a></h2><h3><a id=user-content-pacman class=anchor aria-hidden=true href=#pacman><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/index.php/pacman rel=nofollow>pacman</a></h3><p>Uncomment in <code>/etc/pacman.conf</code>:<div class="highlight highlight-text-adblock"><pre><span class=pl-c># Misc options</span>
+systemctl <span class="pl-c1">enable</span> sddm.service</pre></div>
+<h2><a id="user-content-list-of-applications" class="anchor" aria-hidden="true" href="#list-of-applications"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/index.php/List_of_applications" rel="nofollow">List of applications</a></h2>
+<h3><a id="user-content-pacman" class="anchor" aria-hidden="true" href="#pacman"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/index.php/pacman" rel="nofollow">pacman</a></h3>
+<p>Uncomment in <code>/etc/pacman.conf</code>:</p>
+<div class="highlight highlight-text-adblock"><pre><span class="pl-c"># Misc options</span>
 Color
-ParallelDownloads</pre></div><h3><a id=user-content-pipewire-wip class=anchor aria-hidden=true href=#pipewire-wip><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/title/PipeWire rel=nofollow>Pipewire (WIP)</a></h3><div class="highlight highlight-source-shell"><pre>pacman -Syu pipewire wireplumber \
+ParallelDownloads</pre></div>
+<h3><a id="user-content-pipewire-wip" class="anchor" aria-hidden="true" href="#pipewire-wip"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/title/PipeWire" rel="nofollow">Pipewire (WIP)</a></h3>
+<div class="highlight highlight-source-shell"><pre>pacman -Syu pipewire wireplumber \
 	pipewire-alsa pipewire-pulse \
-	gst-plugin-pipewire pipewire-v4l2</pre></div><h3><a id=user-content-flatpak-wip class=anchor aria-hidden=true href=#flatpak-wip><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/title/Flatpak rel=nofollow>Flatpak (WIP)</a></h3><div class="highlight highlight-source-shell"><pre>pacman -Syu flatpak</pre></div><h2><a id=user-content-improving-performance class=anchor aria-hidden=true href=#improving-performance><span aria-hidden=true class="octicon octicon-link"></span></a><a href=https://wiki.archlinux.org/index.php/improving_performance rel=nofollow>Improving performance</a></h2><p><a href=https://wiki.archlinux.org/index.php/swap#Swap_file rel=nofollow>https://wiki.archlinux.org/index.php/swap#Swap_file</a><p><a href=https://wiki.archlinux.org/index.php/swap#Swappiness rel=nofollow>https://wiki.archlinux.org/index.php/swap#Swappiness</a><p><a href=https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit rel=nofollow>https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit</a><p><a href=https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps rel=nofollow>https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps</a><p><a href=https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM rel=nofollow>https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM</a><p><a href=https://wiki.archlinux.org/index.php/Silent_boot rel=nofollow>https://wiki.archlinux.org/index.php/Silent_boot</a><p><a href=https://wiki.archlinux.org/title/Improving_performance#Watchdogs rel=nofollow>https://wiki.archlinux.org/title/Improving_performance#Watchdogs</a><p><a href=https://wiki.archlinux.org/title/PRIME rel=nofollow>https://wiki.archlinux.org/title/PRIME</a><h2><a id=user-content-in-the-end class=anchor aria-hidden=true href=#in-the-end><span aria-hidden=true class="octicon octicon-link"></span></a>In the end</h2><p>This guide is updated regularly I promise.</p><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
-<a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
+	gst-plugin-pipewire pipewire-v4l2</pre></div>
+<h3><a id="user-content-flatpak-wip" class="anchor" aria-hidden="true" href="#flatpak-wip"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/title/Flatpak" rel="nofollow">Flatpak (WIP)</a></h3>
+<div class="highlight highlight-source-shell"><pre>pacman -Syu flatpak</pre></div>
+<h2><a id="user-content-improving-performance" class="anchor" aria-hidden="true" href="#improving-performance"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://wiki.archlinux.org/index.php/improving_performance" rel="nofollow">Improving performance</a></h2>
+<p><a href="https://wiki.archlinux.org/index.php/swap#Swap_file" rel="nofollow">https://wiki.archlinux.org/index.php/swap#Swap_file</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/swap#Swappiness" rel="nofollow">https://wiki.archlinux.org/index.php/swap#Swappiness</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit" rel="nofollow">https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps" rel="nofollow">https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM" rel="nofollow">https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Silent_boot" rel="nofollow">https://wiki.archlinux.org/index.php/Silent_boot</a></p>
+<p><a href="https://wiki.archlinux.org/title/Improving_performance#Watchdogs" rel="nofollow">https://wiki.archlinux.org/title/Improving_performance#Watchdogs</a></p>
+<p><a href="https://wiki.archlinux.org/title/PRIME" rel="nofollow">https://wiki.archlinux.org/title/PRIME</a></p>
+<h2><a id="user-content-in-the-end" class="anchor" aria-hidden="true" href="#in-the-end"><span aria-hidden="true" class="octicon octicon-link"></span></a>In the end</h2>
+<p>This guide is updated regularly I promise.</p>
+
+    <a href="mailto:hauvipapro+posts@gmail.com"
+      >Feel free to ask me via email</a
+    >
+    <a rel="me" href="https://hachyderm.io/@haunguyen">Mastodon</a>
+  </body>
+</html>

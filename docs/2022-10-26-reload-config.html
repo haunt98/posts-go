@@ -1,47 +1,101 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.css><style>.markdown-body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}@media(max-width:767px){.markdown-body{padding:15px}}</style><body class=markdown-body><a href=index>Index</a><h1><a id=user-content-reload-config class=anchor aria-hidden=true href=#reload-config><span aria-hidden=true class="octicon octicon-link"></span></a>Reload config</h1><p>This serves as design draft of reload config system<div class="highlight highlight-source-wsd"><pre><span class=pl-k>@startuml</span> Reload config
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css"
+    />
+  </head>
+  <style>
+    /* https://github.com/sindresorhus/github-markdown-css */
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
 
-<span class=pl-k>skinparam</span> <span class=pl-k>defaultFontName</span> <span class=pl-s>Iosevka Term SS08</span>
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <a href="index">Index</a>
+    <h1><a id="user-content-reload-config" class="anchor" aria-hidden="true" href="#reload-config"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reload config</h1>
+<p>This serves as design draft of reload config system</p>
+<div class="highlight highlight-source-wsd"><pre><span class="pl-k">@startuml</span> Reload config
 
-<span class=pl-k>participant</span> <span class=pl-c1>admin</span>
-<span class=pl-k>participant</span> <span class=pl-c1>other_service</span>
-<span class=pl-k>participant</span> <span class=pl-c1>config_service</span>
-<span class=pl-k>participant</span> <span class=pl-c1>storage</span>
+<span class="pl-k">skinparam</span> <span class="pl-k">defaultFontName</span> <span class="pl-s">Iosevka Term SS08</span>
 
-<span class=pl-k>==</span> <span class=pl-s>Admin handle</span> <span class=pl-k>==</span>
+<span class="pl-k">participant</span> <span class="pl-c1">admin</span>
+<span class="pl-k">participant</span> <span class="pl-c1">other_service</span>
+<span class="pl-k">participant</span> <span class="pl-c1">config_service</span>
+<span class="pl-k">participant</span> <span class="pl-c1">storage</span>
 
-<span class=pl-c1>admin</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>config_service</span>: set/update/delete config
+<span class="pl-k">==</span> <span class="pl-s">Admin handle</span> <span class="pl-k">==</span>
 
-<span class=pl-c1>config_service</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>storage</span>: set/update/delete config
+<span class="pl-c1">admin</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">config_service</span>: set/update/delete config
 
-<span class=pl-k>==</span> <span class=pl-s>Other service handle</span> <span class=pl-k>==</span>
+<span class="pl-c1">config_service</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">storage</span>: set/update/delete config
 
-<span class=pl-c1>other_service</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>other_service</span>: init service
+<span class="pl-k">==</span> <span class="pl-s">Other service handle</span> <span class="pl-k">==</span>
 
-<span class=pl-k>activate</span> <span class=pl-c1>other_service</span>
+<span class="pl-c1">other_service</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">other_service</span>: init service
 
-<span class=pl-c1>other_service</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>storage</span>: make connection
+<span class="pl-k">activate</span> <span class="pl-c1">other_service</span>
 
-<span class=pl-k>loop</span>
+<span class="pl-c1">other_service</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">storage</span>: make connection
 
-    <span class=pl-c1>other_service</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>storage</span>: listen on config change
+<span class="pl-k">loop</span>
 
-    <span class=pl-c1>other_service</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>other_service</span>: save config to memory
+    <span class="pl-c1">other_service</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">storage</span>: listen on config change
 
-<span class=pl-k>end</span>
+    <span class="pl-c1">other_service</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">other_service</span>: save config to memory
 
-<span class=pl-k>deactivate</span> <span class=pl-c1>other_service</span>
+<span class="pl-k">end</span>
 
-<span class=pl-c1>other_service</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>other_service</span>: do business
+<span class="pl-k">deactivate</span> <span class="pl-c1">other_service</span>
 
-<span class=pl-k>activate</span> <span class=pl-c1>other_service</span>
+<span class="pl-c1">other_service</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">other_service</span>: do business
 
-<span class=pl-c1>other_service</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>other_service</span>: get config
+<span class="pl-k">activate</span> <span class="pl-c1">other_service</span>
 
-<span class=pl-c1>other_service</span> <span class=pl-k>-&gt;</span> <span class=pl-c1>other_service</span>: do other business
+<span class="pl-c1">other_service</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">other_service</span>: get config
 
-<span class=pl-k>deactivate</span> <span class=pl-c1>other_service</span>
+<span class="pl-c1">other_service</span> <span class="pl-k">-&gt;</span> <span class="pl-c1">other_service</span>: do other business
 
-<span class=pl-k>@enduml</span></pre></div><p>Config storage can be any key value storage or database like etcd, Consul, mySQL, ...<p>If storage is key value storage, maybe there is API to listen on config change.
-Otherwise we should create a loop to get all config from storage for some interval, for example each 5 minute.<p>Each <code>other_service</code> need to get config from its memory, not hit <code>storage</code>.
-So there is some delay between upstream config (config in <code>storage</code>) and downstream config (config in <code>other_service</code>), but maybe we can forgive that delay (???).<p>Pros:<ul><li><p>Config can be dynamic, service does not need to restart to apply new config.<li><p>Each service only keep 1 connection to <code>storage</code> to listen to config change, not hit <code>storage</code> for each request.</ul><p>Cons:<ul><li>Each service has 1 more dependency, aka <code>storage</code>.<li>Need to handle fallback config, incase <code>storage</code> failure.<li>Delay between upstream/downstream config</ul><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
-<a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
+<span class="pl-k">deactivate</span> <span class="pl-c1">other_service</span>
+
+<span class="pl-k">@enduml</span></pre></div>
+<p>Config storage can be any key value storage or database like etcd, Consul, mySQL, ...</p>
+<p>If storage is key value storage, maybe there is API to listen on config change.
+Otherwise we should create a loop to get all config from storage for some interval, for example each 5 minute.</p>
+<p>Each <code>other_service</code> need to get config from its memory, not hit <code>storage</code>.
+So there is some delay between upstream config (config in <code>storage</code>) and downstream config (config in <code>other_service</code>), but maybe we can forgive that delay (???).</p>
+<p>Pros:</p>
+<ul>
+<li>
+<p>Config can be dynamic, service does not need to restart to apply new config.</p>
+</li>
+<li>
+<p>Each service only keep 1 connection to <code>storage</code> to listen to config change, not hit <code>storage</code> for each request.</p>
+</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Each service has 1 more dependency, aka <code>storage</code>.</li>
+<li>Need to handle fallback config, incase <code>storage</code> failure.</li>
+<li>Delay between upstream/downstream config</li>
+</ul>
+
+    <a href="mailto:hauvipapro+posts@gmail.com"
+      >Feel free to ask me via email</a
+    >
+    <a rel="me" href="https://hachyderm.io/@haunguyen">Mastodon</a>
+  </body>
+</html>

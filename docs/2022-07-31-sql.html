@@ -1,27 +1,102 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.css><style>.markdown-body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}@media(max-width:767px){.markdown-body{padding:15px}}</style><body class=markdown-body><a href=index>Index</a><h1><a id=user-content-sql class=anchor aria-hidden=true href=#sql><span aria-hidden=true class="octicon octicon-link"></span></a>SQL</h1><p>Previously in my fresher software developer time, I rarely write SQL, I always use ORM to wrap SQL.
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css"
+    />
+  </head>
+  <style>
+    /* https://github.com/sindresorhus/github-markdown-css */
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <a href="index">Index</a>
+    <h1><a id="user-content-sql" class="anchor" aria-hidden="true" href="#sql"><span aria-hidden="true" class="octicon octicon-link"></span></a>SQL</h1>
+<p>Previously in my fresher software developer time, I rarely write SQL, I always use ORM to wrap SQL.
 But time past and too much abstraction bites me.
 So I decide to only write SQL from now as much as possible, no more ORM for me.
-But if there is any cool ORM for Go, I guess I try.<p>This guide is not kind of guide which cover all cases.
-Just my little tricks when I work with SQL.<h2><a id=user-content-stay-away-from-database-unique-id class=anchor aria-hidden=true href=#stay-away-from-database-unique-id><span aria-hidden=true class="octicon octicon-link"></span></a>Stay away from database unique id</h2><p>Use UUID instead.
-If you can, and you should, choose UUID type which can be sortable.<h2><a id=user-content-stay-away-from-database-timestamp class=anchor aria-hidden=true href=#stay-away-from-database-timestamp><span aria-hidden=true class="octicon octicon-link"></span></a>Stay away from database timestamp</h2><p>Stay away from all kind of database timestamp (MySQL timestmap, SQLite timestamp, ...)
-Just use int64 then pass the timestamp in service layer not database layer.<p>Why? Because time and date and location are too much complex to handle.
+But if there is any cool ORM for Go, I guess I try.</p>
+<p>This guide is not kind of guide which cover all cases.
+Just my little tricks when I work with SQL.</p>
+<h2><a id="user-content-stay-away-from-database-unique-id" class="anchor" aria-hidden="true" href="#stay-away-from-database-unique-id"><span aria-hidden="true" class="octicon octicon-link"></span></a>Stay away from database unique id</h2>
+<p>Use UUID instead.
+If you can, and you should, choose UUID type which can be sortable.</p>
+<h2><a id="user-content-stay-away-from-database-timestamp" class="anchor" aria-hidden="true" href="#stay-away-from-database-timestamp"><span aria-hidden="true" class="octicon octicon-link"></span></a>Stay away from database timestamp</h2>
+<p>Stay away from all kind of database timestamp (MySQL timestmap, SQLite timestamp, ...)
+Just use int64 then pass the timestamp in service layer not database layer.</p>
+<p>Why? Because time and date and location are too much complex to handle.
 In my business, I use timestamp in milliseconds.
 Then I save timestamp as int64 value to database.
 Each time I get timestamp from database, I parse to time struct in Go with location or format I want.
-No more hassle!<p>It looks like this:<div class="highlight highlight-text-adblock"><pre>[Business] time, data -&gt; convert to unix timestamp milliseconds -&gt; [Database] int64</pre></div><h2><a id=user-content-use-index class=anchor aria-hidden=true href=#use-index><span aria-hidden=true class="octicon octicon-link"></span></a>Use index!!!</h2><p>You should use index for faster query, but not too much.
+No more hassle!</p>
+<p>It looks like this:</p>
+<div class="highlight highlight-text-adblock"><pre>[Business] time, data -&gt; convert to unix timestamp milliseconds -&gt; [Database] int64</pre></div>
+<h2><a id="user-content-use-index" class="anchor" aria-hidden="true" href="#use-index"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use index!!!</h2>
+<p>You should use index for faster query, but not too much.
 Don't create index for every fields in table.
-Choose wisely!<p>For example, create index in MySQL:<div class="highlight highlight-source-sql"><pre><span class=pl-k>CREATE</span> <span class=pl-k>INDEX</span> `<span class=pl-en>idx_timestamp</span>`
-    <span class=pl-k>ON</span> <span class=pl-s><span class=pl-pds>`</span>user_upload<span class=pl-pds>`</span></span> (<span class=pl-s><span class=pl-pds>`</span>timestamp<span class=pl-pds>`</span></span>);</pre></div><h2><a id=user-content-be-careful-with-null class=anchor aria-hidden=true href=#be-careful-with-null><span aria-hidden=true class="octicon octicon-link"></span></a>Be careful with NULL</h2><p>If compare with field which can be NULL, remember to check NULL for safety.<div class="highlight highlight-source-sql"><pre><span class=pl-c><span class=pl-c>--</span> field_something can be NULL</span>
+Choose wisely!</p>
+<p>For example, create index in MySQL:</p>
+<div class="highlight highlight-source-sql"><pre><span class="pl-k">CREATE</span> <span class="pl-k">INDEX</span> `<span class="pl-en">idx_timestamp</span>`
+    <span class="pl-k">ON</span> <span class="pl-s"><span class="pl-pds">`</span>user_upload<span class="pl-pds">`</span></span> (<span class="pl-s"><span class="pl-pds">`</span>timestamp<span class="pl-pds">`</span></span>);</pre></div>
+<h2><a id="user-content-be-careful-with-null" class="anchor" aria-hidden="true" href="#be-careful-with-null"><span aria-hidden="true" class="octicon octicon-link"></span></a>Be careful with NULL</h2>
+<p>If compare with field which can be NULL, remember to check NULL for safety.</p>
+<div class="highlight highlight-source-sql"><pre><span class="pl-c"><span class="pl-c">--</span> field_something can be NULL</span>
 
-<span class=pl-c><span class=pl-c>--</span> Bad</span>
-<span class=pl-k>SELECT</span> <span class=pl-k>*</span>
-<span class=pl-k>FROM</span> table
-<span class=pl-k>WHERE</span> field_something <span class=pl-k>!=</span> <span class=pl-c1>1</span>
+<span class="pl-c"><span class="pl-c">--</span> Bad</span>
+<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
+<span class="pl-k">FROM</span> table
+<span class="pl-k">WHERE</span> field_something <span class="pl-k">!=</span> <span class="pl-c1">1</span>
 
-<span class=pl-c><span class=pl-c>--</span> Good</span>
-<span class=pl-k>SELECT</span> <span class=pl-k>*</span>
-<span class=pl-k>FROM</span> table
-<span class=pl-k>WHERE</span> (field_something IS <span class=pl-k>NULL</span> <span class=pl-k>OR</span> field_something <span class=pl-k>!=</span> <span class=pl-c1>1</span>)</pre></div><p>Need clarify why this happpen? Idk :(<h2><a id=user-content-varchar-or-text class=anchor aria-hidden=true href=#varchar-or-text><span aria-hidden=true class="octicon octicon-link"></span></a>
-<code>VARCHAR</code> or <code>TEXT</code></h2><p>Prefer <code>VARCHAR</code> if you need to query and of course use index, and make sure size of value will never hit the limit.
-Prefer <code>TEXT</code> if you don't care, just want to store something.<h2><a id=user-content-be-super-careful-when-migrate-update-database-on-production-and-online class=anchor aria-hidden=true href=#be-super-careful-when-migrate-update-database-on-production-and-online><span aria-hidden=true class="octicon octicon-link"></span></a>Be super careful when migrate, update database on production and online!!!</h2><p>Plase read docs about online ddl operations before do anything online (keep database running the same time update it, for example create index, ...)<ul><li><a href=https://dev.mysql.com/doc/refman/5.7/en/innodb-online-ddl-operations.html rel=nofollow>For MySQL 5.7</a>, <a href=https://dev.mysql.com/doc/refman/5.7/en/innodb-online-ddl-limitations.html rel=nofollow>Limitations</a><li><a href=https://dev.mysql.com/doc/refman/8.0/en/innodb-online-ddl-operations.html rel=nofollow>For MySQL 8.0</a>, <a href=https://dev.mysql.com/doc/refman/8.0/en/innodb-online-ddl-limitations.html rel=nofollow>Limitations</a></ul><h2><a id=user-content-tools class=anchor aria-hidden=true href=#tools><span aria-hidden=true class="octicon octicon-link"></span></a>Tools</h2><ul><li>Use <a href=https://github.com/sqlfluff/sqlfluff>sqlfluff/sqlfluff</a> to check your SQL.<li>Use <a href=https://github.com/k1LoW/tbls>k1LoW/tbls</a> to grasp your database reality :)</ul><h2><a id=user-content-thanks class=anchor aria-hidden=true href=#thanks><span aria-hidden=true class="octicon octicon-link"></span></a>Thanks</h2><ul><li><a href=https://use-the-index-luke.com/ rel=nofollow>Use The Index, Luke</a><li><a href=https://www.foxhound.systems/blog/essential-elements-of-high-performance-sql-indexes/ rel=nofollow>Essential elements of high performance applications: SQL indexes</a><li><a href=https://architecturenotes.co/things-you-should-know-about-databases/ rel=nofollow>Things You Should Know About Databases</a></ul><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
-<a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
+<span class="pl-c"><span class="pl-c">--</span> Good</span>
+<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
+<span class="pl-k">FROM</span> table
+<span class="pl-k">WHERE</span> (field_something IS <span class="pl-k">NULL</span> <span class="pl-k">OR</span> field_something <span class="pl-k">!=</span> <span class="pl-c1">1</span>)</pre></div>
+<p>Need clarify why this happpen? Idk :(</p>
+<h2><a id="user-content-varchar-or-text" class="anchor" aria-hidden="true" href="#varchar-or-text"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+<code>VARCHAR</code> or <code>TEXT</code>
+</h2>
+<p>Prefer <code>VARCHAR</code> if you need to query and of course use index, and make sure size of value will never hit the limit.
+Prefer <code>TEXT</code> if you don't care, just want to store something.</p>
+<h2><a id="user-content-be-super-careful-when-migrate-update-database-on-production-and-online" class="anchor" aria-hidden="true" href="#be-super-careful-when-migrate-update-database-on-production-and-online"><span aria-hidden="true" class="octicon octicon-link"></span></a>Be super careful when migrate, update database on production and online!!!</h2>
+<p>Plase read docs about online ddl operations before do anything online (keep database running the same time update it, for example create index, ...)</p>
+<ul>
+<li>
+<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-online-ddl-operations.html" rel="nofollow">For MySQL 5.7</a>, <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-online-ddl-limitations.html" rel="nofollow">Limitations</a>
+</li>
+<li>
+<a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-online-ddl-operations.html" rel="nofollow">For MySQL 8.0</a>, <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-online-ddl-limitations.html" rel="nofollow">Limitations</a>
+</li>
+</ul>
+<h2><a id="user-content-tools" class="anchor" aria-hidden="true" href="#tools"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tools</h2>
+<ul>
+<li>Use <a href="https://github.com/sqlfluff/sqlfluff">sqlfluff/sqlfluff</a> to check your SQL.</li>
+<li>Use <a href="https://github.com/k1LoW/tbls">k1LoW/tbls</a> to grasp your database reality :)</li>
+</ul>
+<h2><a id="user-content-thanks" class="anchor" aria-hidden="true" href="#thanks"><span aria-hidden="true" class="octicon octicon-link"></span></a>Thanks</h2>
+<ul>
+<li><a href="https://use-the-index-luke.com/" rel="nofollow">Use The Index, Luke</a></li>
+<li><a href="https://www.foxhound.systems/blog/essential-elements-of-high-performance-sql-indexes/" rel="nofollow">Essential elements of high performance applications: SQL indexes</a></li>
+<li><a href="https://architecturenotes.co/things-you-should-know-about-databases/" rel="nofollow">Things You Should Know About Databases</a></li>
+</ul>
+
+    <a href="mailto:hauvipapro+posts@gmail.com"
+      >Feel free to ask me via email</a
+    >
+    <a rel="me" href="https://hachyderm.io/@haunguyen">Mastodon</a>
+  </body>
+</html>

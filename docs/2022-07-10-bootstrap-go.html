@@ -1,113 +1,279 @@
-<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.css><style>.markdown-body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}@media(max-width:767px){.markdown-body{padding:15px}}</style><body class=markdown-body><a href=index>Index</a><h1><a id=user-content-bootstrap-go class=anchor aria-hidden=true href=#bootstrap-go><span aria-hidden=true class="octicon octicon-link"></span></a>Bootstrap Go</h1><p>It is hard to write bootstrap tool to quickly create Go service.
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css"
+    />
+  </head>
+  <style>
+    /* https://github.com/sindresorhus/github-markdown-css */
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <a href="index">Index</a>
+    <h1><a id="user-content-bootstrap-go" class="anchor" aria-hidden="true" href="#bootstrap-go"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bootstrap Go</h1>
+<p>It is hard to write bootstrap tool to quickly create Go service.
 So I write this guide instead.
 This is a quick checklist for me every damn time I need to write a Go service from scratch.
-Also, this is my personal opinion, so feel free to comment.<h2><a id=user-content-structure class=anchor aria-hidden=true href=#structure><span aria-hidden=true class="octicon octicon-link"></span></a>Structure</h2><div class="highlight highlight-text-adblock"><pre>main.go
+Also, this is my personal opinion, so feel free to comment.</p>
+<h2><a id="user-content-structure" class="anchor" aria-hidden="true" href="#structure"><span aria-hidden="true" class="octicon octicon-link"></span></a>Structure</h2>
+<div class="highlight highlight-text-adblock"><pre>main.go
 internal
-<span class=pl-k>|</span> business
-<span class=pl-k>|</span> | http
-<span class=pl-k>|</span> | | handler.go
-<span class=pl-k>|</span> | | service.go
-<span class=pl-k>|</span> | | models.go
-<span class=pl-k>|</span> | grpc
-<span class=pl-k>|</span> | | handler.go
-<span class=pl-k>|</span> | | models.go
-<span class=pl-k>|</span> | consumer
-<span class=pl-k>|</span> | | handler.go
-<span class=pl-k>|</span> | | service.go
-<span class=pl-k>|</span> | | models.go
-<span class=pl-k>|</span> | service.go
-<span class=pl-k>|</span> | repository.go
-<span class=pl-k>|</span> | models.go</pre></div><p>All business codes are inside <code>internal</code>.
-Each business has a different directory <code>business</code>.<p>Inside each business, there are 2 handlers: <code>http</code>, <code>grpc</code>:<ul><li><code>http</code> is for public APIs (Android, iOS, ... are clients).<li><code>grpc</code> is for internal APIs (other services are clients).<li><code>consumer</code> is for consuming messages from queue (Kafka, RabbitMQ, ...).</ul><p>For each handler, there are usually 3 layers: <code>handler</code>, <code>service</code>, <code>repository</code>:<ul><li><code>handler</code> interacts directly with gRPC, REST or consumer using specific codes (cookies, ...) In case gRPC, there are frameworks outside handle for us so we can write business/logic codes here too. But remember, gRPC only.<li><code>service</code> is where we write business/logic codes, and only business/logic codes is written here.<li><code>repository</code> is where we write codes which interacts with database/cache like MySQL, Redis, ...<li><code>models</code> is where we put all request, response, data models.</ul><p>Location:<ul><li><code>handler</code> must exist inside <code>grpc</code>, <code>http</code>, <code>consumer</code>.<li><code>service</code>, <code>models</code> can exist directly inside of <code>business</code> if both <code>grpc</code>, <code>http</code>, <code>consumer</code> has same business/logic.<li><code>repository</code> should be placed directly inside of <code>business</code>.</ul><h2><a id=user-content-do-not-repeat class=anchor aria-hidden=true href=#do-not-repeat><span aria-hidden=true class="octicon octicon-link"></span></a>Do not repeat!</h2><p>If we have too many services, some of the logic will be overlapped.<p>For example, service A and service B both need to make POST call API to service C.
+<span class="pl-k">|</span> business
+<span class="pl-k">|</span> | http
+<span class="pl-k">|</span> | | handler.go
+<span class="pl-k">|</span> | | service.go
+<span class="pl-k">|</span> | | models.go
+<span class="pl-k">|</span> | grpc
+<span class="pl-k">|</span> | | handler.go
+<span class="pl-k">|</span> | | models.go
+<span class="pl-k">|</span> | consumer
+<span class="pl-k">|</span> | | handler.go
+<span class="pl-k">|</span> | | service.go
+<span class="pl-k">|</span> | | models.go
+<span class="pl-k">|</span> | service.go
+<span class="pl-k">|</span> | repository.go
+<span class="pl-k">|</span> | models.go</pre></div>
+<p>All business codes are inside <code>internal</code>.
+Each business has a different directory <code>business</code>.</p>
+<p>Inside each business, there are 2 handlers: <code>http</code>, <code>grpc</code>:</p>
+<ul>
+<li>
+<code>http</code> is for public APIs (Android, iOS, ... are clients).</li>
+<li>
+<code>grpc</code> is for internal APIs (other services are clients).</li>
+<li>
+<code>consumer</code> is for consuming messages from queue (Kafka, RabbitMQ, ...).</li>
+</ul>
+<p>For each handler, there are usually 3 layers: <code>handler</code>, <code>service</code>, <code>repository</code>:</p>
+<ul>
+<li>
+<code>handler</code> interacts directly with gRPC, REST or consumer using specific codes (cookies, ...) In case gRPC, there are frameworks outside handle for us so we can write business/logic codes here too. But remember, gRPC only.</li>
+<li>
+<code>service</code> is where we write business/logic codes, and only business/logic codes is written here.</li>
+<li>
+<code>repository</code> is where we write codes which interacts with database/cache like MySQL, Redis, ...</li>
+<li>
+<code>models</code> is where we put all request, response, data models.</li>
+</ul>
+<p>Location:</p>
+<ul>
+<li>
+<code>handler</code> must exist inside <code>grpc</code>, <code>http</code>, <code>consumer</code>.</li>
+<li>
+<code>service</code>, <code>models</code> can exist directly inside of <code>business</code> if both <code>grpc</code>, <code>http</code>, <code>consumer</code> has same business/logic.</li>
+<li>
+<code>repository</code> should be placed directly inside of <code>business</code>.</li>
+</ul>
+<h2><a id="user-content-do-not-repeat" class="anchor" aria-hidden="true" href="#do-not-repeat"><span aria-hidden="true" class="octicon octicon-link"></span></a>Do not repeat!</h2>
+<p>If we have too many services, some of the logic will be overlapped.</p>
+<p>For example, service A and service B both need to make POST call API to service C.
 If service A and service B both have libs to call service C to do that API, we need to move the libs to some common pkg libs.
-So in the future, service D which needs to call C will not need to copy libs to handle service C api but only need to import from common pkg libs.<p>Another bad practice is adapter service.
-No need to write a new service if what we need is just common pkg libs.<h2><a id=user-content-taste-on-style-guide class=anchor aria-hidden=true href=#taste-on-style-guide><span aria-hidden=true class="octicon octicon-link"></span></a>Taste on style guide</h2><h3><a id=user-content-stop-using-global-var class=anchor aria-hidden=true href=#stop-using-global-var><span aria-hidden=true class="octicon octicon-link"></span></a>Stop using global var</h3><p>If I see someone using global var, I swear I will shoot them twice in the face.<p>Why?<ul><li>Can not write unit test.<li>Is not thread safe.</ul><h3><a id=user-content-use-functional-options-but-dont-overuse-it class=anchor aria-hidden=true href=#use-functional-options-but-dont-overuse-it><span aria-hidden=true class="octicon octicon-link"></span></a>Use functional options, but don't overuse it!</h3><p>For simple struct with 1 or 2 fields, no need to use functional options.<p><a href=https://go.dev/play/p/0XnOLiHuoz3 rel=nofollow>Example</a>:<div class="highlight highlight-source-go"><pre><span class=pl-k>func</span> <span class=pl-en>main</span>() {
-	<span class=pl-s1>s</span> <span class=pl-c1>:=</span> <span class=pl-en>NewS</span>(<span class=pl-en>WithA</span>(<span class=pl-c1>1</span>), <span class=pl-en>WithB</span>(<span class=pl-s>"b"</span>))
-	<span class=pl-s1>fmt</span>.<span class=pl-en>Printf</span>(<span class=pl-s>"%+v<span class=pl-cce>\n</span>"</span>, <span class=pl-s1>s</span>)
+So in the future, service D which needs to call C will not need to copy libs to handle service C api but only need to import from common pkg libs.</p>
+<p>Another bad practice is adapter service.
+No need to write a new service if what we need is just common pkg libs.</p>
+<h2><a id="user-content-taste-on-style-guide" class="anchor" aria-hidden="true" href="#taste-on-style-guide"><span aria-hidden="true" class="octicon octicon-link"></span></a>Taste on style guide</h2>
+<h3><a id="user-content-stop-using-global-var" class="anchor" aria-hidden="true" href="#stop-using-global-var"><span aria-hidden="true" class="octicon octicon-link"></span></a>Stop using global var</h3>
+<p>If I see someone using global var, I swear I will shoot them twice in the face.</p>
+<p>Why?</p>
+<ul>
+<li>Can not write unit test.</li>
+<li>Is not thread safe.</li>
+</ul>
+<h3><a id="user-content-use-functional-options-but-dont-overuse-it" class="anchor" aria-hidden="true" href="#use-functional-options-but-dont-overuse-it"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use functional options, but don't overuse it!</h3>
+<p>For simple struct with 1 or 2 fields, no need to use functional options.</p>
+<p><a href="https://go.dev/play/p/0XnOLiHuoz3" rel="nofollow">Example</a>:</p>
+<div class="highlight highlight-source-go"><pre><span class="pl-k">func</span> <span class="pl-en">main</span>() {
+	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-en">NewS</span>(<span class="pl-en">WithA</span>(<span class="pl-c1">1</span>), <span class="pl-en">WithB</span>(<span class="pl-s">"b"</span>))
+	<span class="pl-s1">fmt</span>.<span class="pl-en">Printf</span>(<span class="pl-s">"%+v<span class="pl-cce">\n</span>"</span>, <span class="pl-s1">s</span>)
 }
 
-<span class=pl-k>type</span> <span class=pl-smi>S</span> <span class=pl-k>struct</span> {
-	<span class=pl-c1>fieldA</span> <span class=pl-smi>int</span>
-	<span class=pl-c1>fieldB</span> <span class=pl-smi>string</span>
+<span class="pl-k">type</span> <span class="pl-smi">S</span> <span class="pl-k">struct</span> {
+	<span class="pl-c1">fieldA</span> <span class="pl-smi">int</span>
+	<span class="pl-c1">fieldB</span> <span class="pl-smi">string</span>
 }
 
-<span class=pl-k>type</span> <span class=pl-smi>OptionS</span> <span class=pl-k>func</span>(<span class=pl-s1>s</span> <span class=pl-c1>*</span><span class=pl-smi>S</span>)
+<span class="pl-k">type</span> <span class="pl-smi">OptionS</span> <span class="pl-k">func</span>(<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">S</span>)
 
-<span class=pl-k>func</span> <span class=pl-en>WithA</span>(<span class=pl-s1>a</span> <span class=pl-smi>int</span>) <span class=pl-smi>OptionS</span> {
-	<span class=pl-k>return</span> <span class=pl-k>func</span>(<span class=pl-s1>s</span> <span class=pl-c1>*</span><span class=pl-smi>S</span>) {
-		<span class=pl-s1>s</span>.<span class=pl-c1>fieldA</span> <span class=pl-c1>=</span> <span class=pl-s1>a</span>
+<span class="pl-k">func</span> <span class="pl-en">WithA</span>(<span class="pl-s1">a</span> <span class="pl-smi">int</span>) <span class="pl-smi">OptionS</span> {
+	<span class="pl-k">return</span> <span class="pl-k">func</span>(<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">S</span>) {
+		<span class="pl-s1">s</span>.<span class="pl-c1">fieldA</span> <span class="pl-c1">=</span> <span class="pl-s1">a</span>
 	}
 }
 
-<span class=pl-k>func</span> <span class=pl-en>WithB</span>(<span class=pl-s1>b</span> <span class=pl-smi>string</span>) <span class=pl-smi>OptionS</span> {
-	<span class=pl-k>return</span> <span class=pl-k>func</span>(<span class=pl-s1>s</span> <span class=pl-c1>*</span><span class=pl-smi>S</span>) {
-		<span class=pl-s1>s</span>.<span class=pl-c1>fieldB</span> <span class=pl-c1>=</span> <span class=pl-s1>b</span>
+<span class="pl-k">func</span> <span class="pl-en">WithB</span>(<span class="pl-s1">b</span> <span class="pl-smi">string</span>) <span class="pl-smi">OptionS</span> {
+	<span class="pl-k">return</span> <span class="pl-k">func</span>(<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">S</span>) {
+		<span class="pl-s1">s</span>.<span class="pl-c1">fieldB</span> <span class="pl-c1">=</span> <span class="pl-s1">b</span>
 	}
 }
 
-<span class=pl-k>func</span> <span class=pl-en>NewS</span>(<span class=pl-s1>opts</span> <span class=pl-c1>...</span><span class=pl-smi>OptionS</span>) <span class=pl-c1>*</span><span class=pl-smi>S</span> {
-	<span class=pl-s1>s</span> <span class=pl-c1>:=</span> <span class=pl-c1>&amp;</span><span class=pl-smi>S</span>{}
-	<span class=pl-k>for</span> <span class=pl-s1>_</span>, <span class=pl-s1>opt</span> <span class=pl-c1>:=</span> <span class=pl-k>range</span> <span class=pl-s1>opts</span> {
-		<span class=pl-en>opt</span>(<span class=pl-s1>s</span>)
+<span class="pl-k">func</span> <span class="pl-en">NewS</span>(<span class="pl-s1">opts</span> <span class="pl-c1">...</span><span class="pl-smi">OptionS</span>) <span class="pl-c1">*</span><span class="pl-smi">S</span> {
+	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-c1">&amp;</span><span class="pl-smi">S</span>{}
+	<span class="pl-k">for</span> <span class="pl-s1">_</span>, <span class="pl-s1">opt</span> <span class="pl-c1">:=</span> <span class="pl-k">range</span> <span class="pl-s1">opts</span> {
+		<span class="pl-en">opt</span>(<span class="pl-s1">s</span>)
 	}
-	<span class=pl-k>return</span> <span class=pl-s1>s</span>
-}</pre></div><p>In above example, I construct <code>s</code> with <code>WithA</code> and <code>WithB</code> option.
-No need to pass direct field inside <code>s</code>.<h3><a id=user-content-use-errgroup-as-much-as-possible class=anchor aria-hidden=true href=#use-errgroup-as-much-as-possible><span aria-hidden=true class="octicon octicon-link"></span></a>Use <a href=https://pkg.go.dev/golang.org/x/sync/errgroup rel=nofollow>errgroup</a> as much as possible</h3><p>If business logic involves calling too many APIs, but they are not depend on each other.
-We can fire them parallel :)<p>Personally, I prefer <code>errgroup</code> to <code>WaitGroup</code> (<a href=https://pkg.go.dev/sync#WaitGroup rel=nofollow>https://pkg.go.dev/sync#WaitGroup</a>).
-Because I always need deal with error.<p>Example:<div class="highlight highlight-source-go"><pre><span class=pl-s1>eg</span>, <span class=pl-s1>egCtx</span> <span class=pl-c1>:=</span> <span class=pl-s1>errgroup</span>.<span class=pl-en>WithContext</span>(<span class=pl-s1>ctx</span>)
+	<span class="pl-k">return</span> <span class="pl-s1">s</span>
+}</pre></div>
+<p>In above example, I construct <code>s</code> with <code>WithA</code> and <code>WithB</code> option.
+No need to pass direct field inside <code>s</code>.</p>
+<h3><a id="user-content-use-errgroup-as-much-as-possible" class="anchor" aria-hidden="true" href="#use-errgroup-as-much-as-possible"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use <a href="https://pkg.go.dev/golang.org/x/sync/errgroup" rel="nofollow">errgroup</a> as much as possible</h3>
+<p>If business logic involves calling too many APIs, but they are not depend on each other.
+We can fire them parallel :)</p>
+<p>Personally, I prefer <code>errgroup</code> to <code>WaitGroup</code> (<a href="https://pkg.go.dev/sync#WaitGroup" rel="nofollow">https://pkg.go.dev/sync#WaitGroup</a>).
+Because I always need deal with error.</p>
+<p>Example:</p>
+<div class="highlight highlight-source-go"><pre><span class="pl-s1">eg</span>, <span class="pl-s1">egCtx</span> <span class="pl-c1">:=</span> <span class="pl-s1">errgroup</span>.<span class="pl-en">WithContext</span>(<span class="pl-s1">ctx</span>)
 
-<span class=pl-s1>eg</span>.<span class=pl-en>Go</span>(<span class=pl-k>func</span>() <span class=pl-smi>error</span> {
-	<span class=pl-c>// Do some thing</span>
-	<span class=pl-k>return</span> <span class=pl-c1>nil</span>
+<span class="pl-s1">eg</span>.<span class="pl-en">Go</span>(<span class="pl-k">func</span>() <span class="pl-smi">error</span> {
+	<span class="pl-c">// Do some thing</span>
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 })
 
-<span class=pl-s1>eg</span>.<span class=pl-en>Go</span>(<span class=pl-k>func</span>() <span class=pl-smi>error</span> {
-	<span class=pl-c>// Do other thing</span>
-	<span class=pl-k>return</span> <span class=pl-c1>nil</span>
+<span class="pl-s1">eg</span>.<span class="pl-en">Go</span>(<span class="pl-k">func</span>() <span class="pl-smi">error</span> {
+	<span class="pl-c">// Do other thing</span>
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 })
 
-<span class=pl-k>if</span> <span class=pl-s1>err</span> <span class=pl-c1>:=</span> <span class=pl-s1>eg</span>.<span class=pl-en>Wait</span>(); <span class=pl-s1>err</span> <span class=pl-c1>!=</span> <span class=pl-c1>nil</span> {
-	<span class=pl-c>// Handle error</span>
-}</pre></div><h3><a id=user-content-use-semaphore-when-need-to-implement-workerpool class=anchor aria-hidden=true href=#use-semaphore-when-need-to-implement-workerpool><span aria-hidden=true class="octicon octicon-link"></span></a>Use <a href=https://pkg.go.dev/golang.org/x/sync/semaphore rel=nofollow>semaphore</a> when need to implement WorkerPool</h3><p>Please don't use external libs for WorkerPool, I don't want to deal with dependency hell.<h2><a id=user-content-external-libs class=anchor aria-hidden=true href=#external-libs><span aria-hidden=true class="octicon octicon-link"></span></a>External libs</h2><h3><a id=user-content-no-need-vendor class=anchor aria-hidden=true href=#no-need-vendor><span aria-hidden=true class="octicon octicon-link"></span></a>No need <code>vendor</code></h3><p>Only need if you need something from <code>vendor</code>, to generate mock or something else.<h3><a id=user-content-use-buildgo-to-include-build-tools-in-gomod class=anchor aria-hidden=true href=#use-buildgo-to-include-build-tools-in-gomod><span aria-hidden=true class="octicon octicon-link"></span></a>Use <code>build.go</code> to include build tools in go.mod</h3><p>To easily control version of build tools.<p>For example <code>build.go</code>:<div class="highlight highlight-source-go"><pre><span class=pl-c>//go:build tools</span>
-<span class=pl-c>// +build tools</span>
+<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">eg</span>.<span class="pl-en">Wait</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+	<span class="pl-c">// Handle error</span>
+}</pre></div>
+<h3><a id="user-content-use-semaphore-when-need-to-implement-workerpool" class="anchor" aria-hidden="true" href="#use-semaphore-when-need-to-implement-workerpool"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use <a href="https://pkg.go.dev/golang.org/x/sync/semaphore" rel="nofollow">semaphore</a> when need to implement WorkerPool</h3>
+<p>Please don't use external libs for WorkerPool, I don't want to deal with dependency hell.</p>
+<h2><a id="user-content-external-libs" class="anchor" aria-hidden="true" href="#external-libs"><span aria-hidden="true" class="octicon octicon-link"></span></a>External libs</h2>
+<h3><a id="user-content-no-need-vendor" class="anchor" aria-hidden="true" href="#no-need-vendor"><span aria-hidden="true" class="octicon octicon-link"></span></a>No need <code>vendor</code>
+</h3>
+<p>Only need if you need something from <code>vendor</code>, to generate mock or something else.</p>
+<h3><a id="user-content-use-buildgo-to-include-build-tools-in-gomod" class="anchor" aria-hidden="true" href="#use-buildgo-to-include-build-tools-in-gomod"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use <code>build.go</code> to include build tools in go.mod</h3>
+<p>To easily control version of build tools.</p>
+<p>For example <code>build.go</code>:</p>
+<div class="highlight highlight-source-go"><pre><span class="pl-c">//go:build tools</span>
+<span class="pl-c">// +build tools</span>
 
-<span class=pl-k>package</span> main
+<span class="pl-k">package</span> main
 
-<span class=pl-k>import</span> (
-	_ <span class=pl-s>"github.com/golang/protobuf/protoc-gen-go"</span>
-)</pre></div><p>And then in <code>Makefile</code>:<div class="highlight highlight-source-makefile"><pre><span class=pl-en>build</span>:
-    go install github.com/golang/protobuf/protoc-gen-go</pre></div><p>We always get the version of build tools in <code>go.mod</code> each time we install it.
-Future contributors will not cry anymore.<h3><a id=user-content-dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service class=anchor aria-hidden=true href=#dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service><span aria-hidden=true class="octicon octicon-link"></span></a>Don't use cli libs (<a href=https://github.com/spf13/cobra>spf13/cobra</a>, <a href=https://github.com/urfave/cli>urfave/cli</a>) just for Go service</h3><p>What is the point to pass many params (<code>do-it</code>, <code>--abc</code>, <code>--xyz</code>) when what we only need is start service?<p>In my case, service starts with only config, and config should be read from file or environment like <a href=https://12factor.net/ rel=nofollow>The Twelve Factors</a> guide.<h3><a id=user-content-dont-use-grpc-ecosystemgrpc-gateway class=anchor aria-hidden=true href=#dont-use-grpc-ecosystemgrpc-gateway><span aria-hidden=true class="octicon octicon-link"></span></a>Don't use <a href=https://github.com/grpc-ecosystem/grpc-gateway>grpc-ecosystem/grpc-gateway</a></h3><p>Just don't.<p>Use <a href=https://github.com/protocolbuffers/protobuf-go>protocolbuffers/protobuf-go</a>, <a href=https://github.com/grpc/grpc-go>grpc/grpc-go</a> for gRPC.<p>Write 1 for both gRPC, REST sounds good, but in the end, it is not worth it.<h3><a id=user-content-dont-use-uberprototool-use-bufbuildbuf class=anchor aria-hidden=true href=#dont-use-uberprototool-use-bufbuildbuf><span aria-hidden=true class="octicon octicon-link"></span></a>Don't use <a href=https://github.com/uber/prototool>uber/prototool</a>, use <a href=https://github.com/bufbuild/buf>bufbuild/buf</a></h3><p>prototool is deprecated, and buf can generate, lint, format as good as prototool.<h3><a id=user-content-use-gin-gonicgin-for-rest class=anchor aria-hidden=true href=#use-gin-gonicgin-for-rest><span aria-hidden=true class="octicon octicon-link"></span></a>Use <a href=https://github.com/gin-gonic/gin>gin-gonic/gin</a> for REST.</h3><p>Don't use <code>gin.Context</code> when pass context from handler layer to service layer, use <code>gin.Context.Request.Context()</code> instead.<h3><a id=user-content-if-you-want-log-just-use-uber-gozap class=anchor aria-hidden=true href=#if-you-want-log-just-use-uber-gozap><span aria-hidden=true class="octicon octicon-link"></span></a>If you want log, just use <a href=https://github.com/uber-go/zap>uber-go/zap</a></h3><p>It is fast!<ul><li>Don't overuse <code>func (*Logger) With</code>. Because if log line is too long, there is a possibility that we can lost it.<li>Use <code>MarshalLogObject</code> when we need to hide some field of object when log (field is long or has sensitive value)<li>Don't use <code>Panic</code>. Use <code>Fatal</code> for errors when start service to check dependencies. If you really need panic level, use <code>DPanic</code>.<li>If doubt, use <code>zap.Any</code>.<li>Use <code>contextID</code> or <code>traceID</code> in every log lines for easily debug.</ul><h3><a id=user-content-to-read-config-use-spf13viper class=anchor aria-hidden=true href=#to-read-config-use-spf13viper><span aria-hidden=true class="octicon octicon-link"></span></a>To read config, use <a href=https://github.com/spf13/viper>spf13/viper</a></h3><p>Only init config in main or cmd layer.
-Do not use <code>viper.Get...</code> in business layer or inside business layer.<p>Why?<ul><li>Hard to mock and test<li>Put all config in single place for easily tracking</ul><p>Also, be careful if config value is empty.
-You should decide to continue or stop the service if there is no config.<h3><a id=user-content-dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql class=anchor aria-hidden=true href=#dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql><span aria-hidden=true class="octicon octicon-link"></span></a>Don't overuse ORM libs, no need to handle another layer above SQL.</h3><p>Each ORM libs has each different syntax.
+<span class="pl-k">import</span> (
+	_ <span class="pl-s">"github.com/golang/protobuf/protoc-gen-go"</span>
+)</pre></div>
+<p>And then in <code>Makefile</code>:</p>
+<div class="highlight highlight-source-makefile"><pre><span class="pl-en">build</span>:
+    go install github.com/golang/protobuf/protoc-gen-go</pre></div>
+<p>We always get the version of build tools in <code>go.mod</code> each time we install it.
+Future contributors will not cry anymore.</p>
+<h3><a id="user-content-dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service" class="anchor" aria-hidden="true" href="#dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service"><span aria-hidden="true" class="octicon octicon-link"></span></a>Don't use cli libs (<a href="https://github.com/spf13/cobra">spf13/cobra</a>, <a href="https://github.com/urfave/cli">urfave/cli</a>) just for Go service</h3>
+<p>What is the point to pass many params (<code>do-it</code>, <code>--abc</code>, <code>--xyz</code>) when what we only need is start service?</p>
+<p>In my case, service starts with only config, and config should be read from file or environment like <a href="https://12factor.net/" rel="nofollow">The Twelve Factors</a> guide.</p>
+<h3><a id="user-content-dont-use-grpc-ecosystemgrpc-gateway" class="anchor" aria-hidden="true" href="#dont-use-grpc-ecosystemgrpc-gateway"><span aria-hidden="true" class="octicon octicon-link"></span></a>Don't use <a href="https://github.com/grpc-ecosystem/grpc-gateway">grpc-ecosystem/grpc-gateway</a>
+</h3>
+<p>Just don't.</p>
+<p>Use <a href="https://github.com/protocolbuffers/protobuf-go">protocolbuffers/protobuf-go</a>, <a href="https://github.com/grpc/grpc-go">grpc/grpc-go</a> for gRPC.</p>
+<p>Write 1 for both gRPC, REST sounds good, but in the end, it is not worth it.</p>
+<h3><a id="user-content-dont-use-uberprototool-use-bufbuildbuf" class="anchor" aria-hidden="true" href="#dont-use-uberprototool-use-bufbuildbuf"><span aria-hidden="true" class="octicon octicon-link"></span></a>Don't use <a href="https://github.com/uber/prototool">uber/prototool</a>, use <a href="https://github.com/bufbuild/buf">bufbuild/buf</a>
+</h3>
+<p>prototool is deprecated, and buf can generate, lint, format as good as prototool.</p>
+<h3><a id="user-content-use-gin-gonicgin-for-rest" class="anchor" aria-hidden="true" href="#use-gin-gonicgin-for-rest"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a> for REST.</h3>
+<p>Don't use <code>gin.Context</code> when pass context from handler layer to service layer, use <code>gin.Context.Request.Context()</code> instead.</p>
+<h3><a id="user-content-if-you-want-log-just-use-uber-gozap" class="anchor" aria-hidden="true" href="#if-you-want-log-just-use-uber-gozap"><span aria-hidden="true" class="octicon octicon-link"></span></a>If you want log, just use <a href="https://github.com/uber-go/zap">uber-go/zap</a>
+</h3>
+<p>It is fast!</p>
+<ul>
+<li>Don't overuse <code>func (*Logger) With</code>. Because if log line is too long, there is a possibility that we can lost it.</li>
+<li>Use <code>MarshalLogObject</code> when we need to hide some field of object when log (field is long or has sensitive value)</li>
+<li>Don't use <code>Panic</code>. Use <code>Fatal</code> for errors when start service to check dependencies. If you really need panic level, use <code>DPanic</code>.</li>
+<li>If doubt, use <code>zap.Any</code>.</li>
+<li>Use <code>contextID</code> or <code>traceID</code> in every log lines for easily debug.</li>
+</ul>
+<h3><a id="user-content-to-read-config-use-spf13viper" class="anchor" aria-hidden="true" href="#to-read-config-use-spf13viper"><span aria-hidden="true" class="octicon octicon-link"></span></a>To read config, use <a href="https://github.com/spf13/viper">spf13/viper</a>
+</h3>
+<p>Only init config in main or cmd layer.
+Do not use <code>viper.Get...</code> in business layer or inside business layer.</p>
+<p>Why?</p>
+<ul>
+<li>Hard to mock and test</li>
+<li>Put all config in single place for easily tracking</li>
+</ul>
+<p>Also, be careful if config value is empty.
+You should decide to continue or stop the service if there is no config.</p>
+<h3><a id="user-content-dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql" class="anchor" aria-hidden="true" href="#dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql"><span aria-hidden="true" class="octicon octicon-link"></span></a>Don't overuse ORM libs, no need to handle another layer above SQL.</h3>
+<p>Each ORM libs has each different syntax.
 To learn and use those libs correctly is time consuming.
 So just stick to plain SQL.
-It is easier to debug when something is wrong.<p>But <code>database/sql</code> has its own limit.
+It is easier to debug when something is wrong.</p>
+<p>But <code>database/sql</code> has its own limit.
 For example, it is hard to get primary key after insert/update.
 So may be you want to use ORM for those cases.
-I hear that <a href=https://github.com/go-gorm/gorm>go-gorm/gorm</a>, <a href=https://github.com/ent/ent>ent/ent</a> is good.<h3><a id=user-content-if-you-want-test-just-use-stretchrtestify class=anchor aria-hidden=true href=#if-you-want-test-just-use-stretchrtestify><span aria-hidden=true class="octicon octicon-link"></span></a>If you want test, just use <a href=https://github.com/stretchr/testify>stretchr/testify</a>.</h3><p>It is easy to write a suite test, thanks to testify.
+I hear that <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a>, <a href="https://github.com/ent/ent">ent/ent</a> is good.</p>
+<h3><a id="user-content-if-you-want-test-just-use-stretchrtestify" class="anchor" aria-hidden="true" href="#if-you-want-test-just-use-stretchrtestify"><span aria-hidden="true" class="octicon octicon-link"></span></a>If you want test, just use <a href="https://github.com/stretchr/testify">stretchr/testify</a>.</h3>
+<p>It is easy to write a suite test, thanks to testify.
 Also, for mocking, there are many options out there.
-Pick 1 then sleep peacefully.<h3><a id=user-content-if-need-to-mock-choose-matryermoq-or-golangmock class=anchor aria-hidden=true href=#if-need-to-mock-choose-matryermoq-or-golangmock><span aria-hidden=true class="octicon octicon-link"></span></a>If need to mock, choose <a href=https://github.com/matryer/moq>matryer/moq</a> or <a href=https://github.com/golang/mock>golang/mock</a></h3><p>The first is easy to use but not powerful as the later.
-If you want to make sure mock func is called with correct times, use the later.<p>Example with <code>matryer/moq</code>:<div class="highlight highlight-source-go"><pre><span class=pl-c>// Only gen mock if source code file is newer than mock file</span>
-<span class=pl-c>// https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen</span>
-<span class=pl-c>//go:generate sh -c "test service_mock_generated.go -nt $GOFILE &amp;&amp; exit 0; moq -rm -out service_mock_generated.go . Service"</span></pre></div><h3><a id=user-content-be-careful-with-spf13cast class=anchor aria-hidden=true href=#be-careful-with-spf13cast><span aria-hidden=true class="octicon octicon-link"></span></a>Be careful with <a href=https://github.com/spf13/cast>spf13/cast</a></h3><p>Don't cast proto enum:<div class="highlight highlight-source-go"><pre><span class=pl-c>// Bad</span>
-<span class=pl-s1>a</span> <span class=pl-c1>:=</span> <span class=pl-s1>cast</span>.<span class=pl-en>ToInt32</span>(<span class=pl-s1>servicev1</span>.<span class=pl-c1>ReasonCode_ABC</span>)
+Pick 1 then sleep peacefully.</p>
+<h3><a id="user-content-if-need-to-mock-choose-matryermoq-or-golangmock" class="anchor" aria-hidden="true" href="#if-need-to-mock-choose-matryermoq-or-golangmock"><span aria-hidden="true" class="octicon octicon-link"></span></a>If need to mock, choose <a href="https://github.com/matryer/moq">matryer/moq</a> or <a href="https://github.com/golang/mock">golang/mock</a>
+</h3>
+<p>The first is easy to use but not powerful as the later.
+If you want to make sure mock func is called with correct times, use the later.</p>
+<p>Example with <code>matryer/moq</code>:</p>
+<div class="highlight highlight-source-go"><pre><span class="pl-c">// Only gen mock if source code file is newer than mock file</span>
+<span class="pl-c">// https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen</span>
+<span class="pl-c">//go:generate sh -c "test service_mock_generated.go -nt $GOFILE &amp;&amp; exit 0; moq -rm -out service_mock_generated.go . Service"</span></pre></div>
+<h3><a id="user-content-be-careful-with-spf13cast" class="anchor" aria-hidden="true" href="#be-careful-with-spf13cast"><span aria-hidden="true" class="octicon octicon-link"></span></a>Be careful with <a href="https://github.com/spf13/cast">spf13/cast</a>
+</h3>
+<p>Don't cast proto enum:</p>
+<div class="highlight highlight-source-go"><pre><span class="pl-c">// Bad</span>
+<span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-s1">cast</span>.<span class="pl-en">ToInt32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)
 
-<span class=pl-c>// Good</span>
-<span class=pl-s1>a</span> <span class=pl-c1>:=</span> <span class=pl-en>int32</span>(<span class=pl-s1>servicev1</span>.<span class=pl-c1>ReasonCode_ABC</span>)</pre></div><h3><a id=user-content-use-stringer-if-you-want-your-type-enum-can-be-print-as-string class=anchor aria-hidden=true href=#use-stringer-if-you-want-your-type-enum-can-be-print-as-string><span aria-hidden=true class="octicon octicon-link"></span></a>Use <a href=https://pkg.go.dev/golang.org/x/tools/cmd/stringer rel=nofollow>stringer</a> if you want your type enum can be print as string</h3><div class="highlight highlight-source-go"><pre><span class=pl-k>type</span> <span class=pl-smi>Drink</span> <span class=pl-smi>int</span>
+<span class="pl-c">// Good</span>
+<span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-en">int32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)</pre></div>
+<h3><a id="user-content-use-stringer-if-you-want-your-type-enum-can-be-print-as-string" class="anchor" aria-hidden="true" href="#use-stringer-if-you-want-your-type-enum-can-be-print-as-string"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use <a href="https://pkg.go.dev/golang.org/x/tools/cmd/stringer" rel="nofollow">stringer</a> if you want your type enum can be print as string</h3>
+<div class="highlight highlight-source-go"><pre><span class="pl-k">type</span> <span class="pl-smi">Drink</span> <span class="pl-smi">int</span>
 
-<span class=pl-k>const</span> (
-	<span class=pl-s1>Beer</span> <span class=pl-smi>Drink</span> <span class=pl-c1>=</span> <span class=pl-s1>iota</span>
-	<span class=pl-s1>Water</span>
-	<span class=pl-s1>OrangeJuice</span>
-)</pre></div><div class="highlight highlight-source-shell"><pre>go install golang.org/x/tools/cmd/stringer@latest
+<span class="pl-k">const</span> (
+	<span class="pl-s1">Beer</span> <span class="pl-smi">Drink</span> <span class="pl-c1">=</span> <span class="pl-s1">iota</span>
+	<span class="pl-s1">Water</span>
+	<span class="pl-s1">OrangeJuice</span>
+)</pre></div>
+<div class="highlight highlight-source-shell"><pre>go install golang.org/x/tools/cmd/stringer@latest
 
-<span class=pl-c><span class=pl-c>#</span> Run inside directory which contains Drink</span>
-stringer -type=Drink</pre></div><h3><a id=user-content-dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate class=anchor aria-hidden=true href=#dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate><span aria-hidden=true class="octicon octicon-link"></span></a>Don't waste your time rewrite rate limiter if your use case is simple, use <a href=https://pkg.go.dev/golang.org/x/time/rate rel=nofollow>rate</a> or <a href=https://github.com/go-redis/redis_rate>go-redis/redis_rate</a></h3><p>rate if you want rate limiter locally in your single instance of service.
-redis_rate if you want rate limiter distributed across all your instances of service.<h3><a id=user-content-replace-go-fmt-goimports-with-mvdangofumpt class=anchor aria-hidden=true href=#replace-go-fmt-goimports-with-mvdangofumpt><span aria-hidden=true class="octicon octicon-link"></span></a>Replace <code>go fmt</code>, <code>goimports</code> with <a href=https://github.com/mvdan/gofumpt>mvdan/gofumpt</a>.</h3><p><code>gofumpt</code> provides more rules when format Go codes.<h3><a id=user-content-use-golangcigolangci-lint class=anchor aria-hidden=true href=#use-golangcigolangci-lint><span aria-hidden=true class="octicon octicon-link"></span></a>Use <a href=https://github.com/golangci/golangci-lint>golangci/golangci-lint</a>.</h3><p>No need to say more.
-Lint or get the f out!<p>If you get <code>fieldalignment</code> error, use <a href=https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment rel=nofollow>fieldalignment</a> to fix them.<div class="highlight highlight-source-shell"><pre><span class=pl-c><span class=pl-c>#</span> Install</span>
+<span class="pl-c"><span class="pl-c">#</span> Run inside directory which contains Drink</span>
+stringer -type=Drink</pre></div>
+<h3><a id="user-content-dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate" class="anchor" aria-hidden="true" href="#dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate"><span aria-hidden="true" class="octicon octicon-link"></span></a>Don't waste your time rewrite rate limiter if your use case is simple, use <a href="https://pkg.go.dev/golang.org/x/time/rate" rel="nofollow">rate</a> or <a href="https://github.com/go-redis/redis_rate">go-redis/redis_rate</a>
+</h3>
+<p>rate if you want rate limiter locally in your single instance of service.
+redis_rate if you want rate limiter distributed across all your instances of service.</p>
+<h3><a id="user-content-replace-go-fmt-goimports-with-mvdangofumpt" class="anchor" aria-hidden="true" href="#replace-go-fmt-goimports-with-mvdangofumpt"><span aria-hidden="true" class="octicon octicon-link"></span></a>Replace <code>go fmt</code>, <code>goimports</code> with <a href="https://github.com/mvdan/gofumpt">mvdan/gofumpt</a>.</h3>
+<p><code>gofumpt</code> provides more rules when format Go codes.</p>
+<h3><a id="user-content-use-golangcigolangci-lint" class="anchor" aria-hidden="true" href="#use-golangcigolangci-lint"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use <a href="https://github.com/golangci/golangci-lint">golangci/golangci-lint</a>.</h3>
+<p>No need to say more.
+Lint or get the f out!</p>
+<p>If you get <code>fieldalignment</code> error, use <a href="https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment" rel="nofollow">fieldalignment</a> to fix them.</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Install</span>
 go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
 
-<span class=pl-c><span class=pl-c>#</span> Fix</span>
-fieldalignment -fix ./internal/business/<span class=pl-k>*</span>.go</pre></div><h2><a id=user-content-thanks class=anchor aria-hidden=true href=#thanks><span aria-hidden=true class="octicon octicon-link"></span></a>Thanks</h2><ul><li><a href=https://github.com/uber-go/guide/blob/master/style.md>Uber Go Style Guide</a><li><a href=https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis rel=nofollow>Functional options for friendly APIs</a><li><a href=https://google.github.io/styleguide/go/index rel=nofollow>Google Go Style</a></ul><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
-<a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
+<span class="pl-c"><span class="pl-c">#</span> Fix</span>
+fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre></div>
+<h2><a id="user-content-thanks" class="anchor" aria-hidden="true" href="#thanks"><span aria-hidden="true" class="octicon octicon-link"></span></a>Thanks</h2>
+<ul>
+<li><a href="https://github.com/uber-go/guide/blob/master/style.md">Uber Go Style Guide</a></li>
+<li><a href="https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis" rel="nofollow">Functional options for friendly APIs</a></li>
+<li><a href="https://google.github.io/styleguide/go/index" rel="nofollow">Google Go Style</a></li>
+</ul>
+
+    <a href="mailto:hauvipapro+posts@gmail.com"
+      >Feel free to ask me via email</a
+    >
+    <a rel="me" href="https://hachyderm.io/@haunguyen">Mastodon</a>
+  </body>
+</html>
