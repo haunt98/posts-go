@@ -1,0 +1,126 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..800,0..1,0..1&display=swap" rel=stylesheet><link href=https://haunt98.github.io/iosevka_webfont/iosevka-term-ss08/iosevka-term-ss08.css rel=stylesheet><link rel=stylesheet href=styles.css><a href=index>Index</a><h1>Install Arch Linux</h1><p>Install Arch Linux is thing I always want to do for my laptop/PC since I had my laptop in ninth grade.<p>This is not a guide for everyone, this is just save for myself in a future and for anyone who want to walk in my shoes.<h2><a href=https://wiki.archlinux.org/index.php/Installation_guide>Installation guide</a></h2><h3>Pre-installation</h3><p>Check disks carefully:<pre><code class=language-sh>lsblk
+</code></pre><p><a href=https://wiki.archlinux.org/index.php/USB_flash_installation_medium>USB flash installation medium</a><h4>Verify the boot mode</h4><p>Check UEFI mode:<pre><code class=language-sh>ls /sys/firmware/efi/efivars
+</code></pre><h4>Connect to the internet</h4><p>For wifi, use <a href=https://wiki.archlinux.org/index.php/Iwd>iwd</a>.<h4>Partition the disks</h4><p><a href=https://wiki.archlinux.org/index.php/GPT_fdisk>GPT fdisk</a>:<pre><code class=language-sh>cgdisk /dev/sdx
+</code></pre><p><a href=https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme>Partition scheme</a><p>UEFI/GPT layout:<table><thead><tr><th>Mount point<th>Partition<th>Partition type<th>Suggested size<tbody><tr><td><code>/mnt/efi</code><td><code>/dev/efi_system_partition</code><td>EFI System Partition<td>512 MiB<tr><td><code>/mnt/boot</code><td><code>/dev/extended_boot_loader_partition</code><td>Extended Boot Loader Partition<td>1 GiB<tr><td><code>/mnt</code><td><code>/dev/root_partition</code><td>Root Partition<td></table><p>BIOS/GPT layout:<table><thead><tr><th>Mount point<th>Partition<th>Partition type<th>Suggested size<tbody><tr><td><td><td>BIOS boot partition<td>1 MiB<tr><td><code>/mnt</code><td><code>/dev/root_partition</code><td>Root Partition<td></table><p>LVM:<pre><code class=language-sh># Create physical volumes
+pvcreate /dev/sdaX
+
+# Create volume groups
+vgcreate RootGroup /dev/sdaX /dev/sdaY
+
+# Create logical volumes
+lvcreate -l +100%FREE RootGroup -n rootvol
+</code></pre><p>Format:<pre><code class=language-sh># efi
+mkfs.fat -F32 /dev/efi_system_partition
+
+# boot
+mkfs.fat -F32 /dev/extended_boot_loader_partition
+
+# root
+mkfs.ext4 -L ROOT /dev/root_partition
+
+# root with btrfs
+mkfs.btrfs -L ROOT /dev/root_partition
+
+# root on lvm
+mkfs.ext4 /dev/RootGroup/rootvol
+</code></pre><p>Mount:<pre><code class=language-sh># root
+mount /dev/root_partition /mnt
+
+# root with btrfs
+mount -o compress=zstd /dev/root_partition /mnt
+
+# root on lvm
+mount /dev/RootGroup/rootvol /mnt
+
+# efi
+mount --mkdir /dev/efi_system_partition /mnt/efi
+
+# boot
+mount --mkdir /dev/extended_boot_loader_partition /mnt/boot
+</code></pre><h3>Installation</h3><pre><code class=language-sh>pacstrap -K /mnt base linux linux-firmware
+
+# AMD
+pacstrap -K /mnt amd-ucode
+
+# Intel
+pacstrap -K /mnt intel-ucode
+
+# Btrfs
+pacstrap -K /mnt btrfs-progs
+
+# LVM
+pacstrap -K /mnt lvm2
+
+# Text editor
+pacstrap -K /mnt neovim
+</code></pre><h3>Configure</h3><h4><a href=https://wiki.archlinux.org/index.php/Fstab>fstab</a></h4><pre><code class=language-sh>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre><h4>Chroot</h4><pre><code class=language-sh>arch-chroot /mnt
+</code></pre><h4>Time zone</h4><pre><code class=language-sh>ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+
+hwclock --systohc
+</code></pre><h4>Localization:</h4><p>Edit <code>/etc/locale.gen</code>:<pre><code class=language-txt># Uncomment en_US.UTF-8 UTF-8
+</code></pre><p>Generate locales:<pre><code class=language-sh>locale-gen
+</code></pre><p>Edit <code>/etc/locale.conf</code>:<pre><code class=language-txt>LANG=en_US.UTF-8
+</code></pre><h4>Network configuration</h4><p>Edit <code>/etc/hostname</code>:<pre><code class=language-txt>myhostname
+</code></pre><h4>Initramfs</h4><p>Edit <code>/etc/mkinitcpio.conf</code>:<pre><code class=language-txt># LVM
+# https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks
+HOOKS=(base udev ... block lvm2 filesystems)
+
+# https://wiki.archlinux.org/title/mkinitcpio#Common_hooks
+# Replace udev with systemd
+</code></pre><pre><code class=language-sh>mkinitcpio -P
+</code></pre><h4>Root password</h4><pre><code class=language-sh>passwd
+</code></pre><h4>Addition</h4><pre><code class=language-sh># NetworkManager
+pacman -Syu networkmanager
+systemctl enable NetworkManager.service
+
+# Bluetooth
+pacman -Syu bluez
+systemctl enable bluetooth.service
+
+# Clock
+timedatectl set-ntp true
+</code></pre><h4>Boot loader</h4><p><a href=Applications/System/systemd-boot.md>systemd-boot</a><p><a href=https://wiki.archlinux.org/index.php/GRUB>GRUB</a><h2><a href=https://wiki.archlinux.org/index.php/General_recommendations>General recommendations</a></h2><p>Always remember to check <strong>dependencies</strong> when install packages.<h3>System administration</h3><p><a href=https://wiki.archlinux.org/index.php/sudo>Sudo</a>:<pre><code class=language-sh>pacman -Syu sudo
+
+EDITOR=nvim visudo
+# Uncomment group wheel
+
+# Add user if don't want to use systemd-homed
+useradd -m -G wheel -c &quot;The Joker&quot; joker
+
+# Or using zsh
+useradd -m -G wheel -s /usr/bin/zsh -c &quot;The Joker&quot; joker
+
+# Set password
+passwd joker
+</code></pre><p><a href=https://wiki.archlinux.org/index.php/Systemd-homed>systemd-homed (WIP)</a>:<pre><code class=language-sh>systemctl enable systemd-homed.service
+
+homectl create joker --real-name=&quot;The Joker&quot; --member-of=wheel
+
+# Using zsh
+homectl update joker --shell=/usr/bin/zsh
+</code></pre><p><strong>Note</strong>:<br>Can not run <code>homectl</code> when install Arch Linux.<br>Should run on the first boot.<h3>Desktop Environment</h3><p>Install <a href=https://wiki.archlinux.org/index.php/Xorg>Xorg</a>:<pre><code class=language-sh>pacman -Syu xorg-server
+</code></pre><h4><a href=https://wiki.archlinux.org/index.php/GNOME>GNOME</a></h4><pre><code class=language-sh>pacman -Syu gnome-shell \
+	gnome-control-center gnome-system-monitor \
+	gnome-tweaks gnome-backgrounds gnome-screenshot gnome-keyring gnome-logs \
+	gnome-console gnome-text-editor \
+	nautilus xdg-user-dirs-gtk file-roller evince eog
+
+# Login manager
+pacman -Syu gdm
+systemctl enable gdm.service
+</code></pre><h4><a href=https://wiki.archlinux.org/title/KDE>KDE (WIP)</a></h4><pre><code class=language-sh>pacman -Syu plasma-meta \
+	kde-system-meta
+
+# Login manager
+pacman -Syu sddm
+systemctl enable sddm.service
+</code></pre><h2><a href=https://wiki.archlinux.org/index.php/List_of_applications>List of applications</a></h2><h3><a href=https://wiki.archlinux.org/index.php/pacman>pacman</a></h3><p>Uncomment in <code>/etc/pacman.conf</code>:<pre><code class=language-txt># Misc options
+Color
+ParallelDownloads
+</code></pre><h3><a href=https://wiki.archlinux.org/title/PipeWire>Pipewire (WIP)</a></h3><pre><code class=language-sh>pacman -Syu pipewire wireplumber \
+	pipewire-alsa pipewire-pulse \
+	gst-plugin-pipewire pipewire-v4l2
+</code></pre><h3><a href=https://wiki.archlinux.org/title/Flatpak>Flatpak (WIP)</a></h3><pre><code class=language-sh>pacman -Syu flatpak
+</code></pre><h2><a href=https://wiki.archlinux.org/index.php/improving_performance>Improving performance</a></h2><p><a href=https://wiki.archlinux.org/index.php/swap#Swap_file>https://wiki.archlinux.org/index.php/swap#Swap_file</a><p><a href=https://wiki.archlinux.org/index.php/swap#Swappiness>https://wiki.archlinux.org/index.php/swap#Swappiness</a><p><a href=https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit>https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit</a><p><a href=https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps>https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps</a><p><a href=https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM>https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM</a><p><a href=https://wiki.archlinux.org/index.php/Silent_boot>https://wiki.archlinux.org/index.php/Silent_boot</a><p><a href=https://wiki.archlinux.org/title/Improving_performance#Watchdogs>https://wiki.archlinux.org/title/Improving_performance#Watchdogs</a><p><a href=https://wiki.archlinux.org/title/PRIME>https://wiki.archlinux.org/title/PRIME</a><h2>In the end</h2><p>This guide is updated regularly I promise.</p><a href=mailto:hauvipapro+posts@gmail.com>Feel free to ask me via email</a>
+<a rel=me href=https://hachyderm.io/@haunguyen>Mastodon</a>
