@@ -134,8 +134,9 @@ It can go from 0 to 100 ugly real quick.
 
 What if req is a struct with many fields?
 So in each test case you need to set up req.
-They are almose the same, but with some error case you must alter req.
-It's easy to be wrong here (typing maybe ?).
+They are almost the same, but with some error case you must alter req.
+It's easy to be init with wrong value here (typing maybe ?).
+Also all req looks similiar, kinda duplicated.
 
 ```go
 tests := []struct{
@@ -261,6 +262,6 @@ func (s *ServiceSuite) TestUpload() {
 }
 ```
 
-So if request change fields or more dependencies, I need to update success case, and maybe add error case if need.
+So if request change fields or more dependencies, I need to update success case, and maybe add corresponding error case if need.
 
-Same idea but still with table, you can find here [Functional table-driven tests in Go - Fatih Arslan](https://arslan.io/2022/12/04/functional-table-driven-tests-in-go/)
+Same idea but still with table, you can find here [Functional table-driven tests in Go - Fatih Arslan](https://arslan.io/2022/12/04/functional-table-driven-tests-in-go/).
