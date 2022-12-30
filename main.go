@@ -24,7 +24,8 @@ const (
 )
 
 type templatePostData struct {
-	Body string
+	Index string
+	Body  string
 }
 
 func main() {
@@ -105,8 +106,15 @@ func main() {
 			}
 			defer htmlFile.Close()
 
+			// Ignore index in index file
+			indexHTML := `<div><a href="index">Index</a></div>`
+			if strings.Contains(postFilename, "index") {
+				indexHTML = ""
+			}
+
 			if err := templatePost.Execute(htmlFile, templatePostData{
-				Body: ghMarkdown,
+				Index: indexHTML,
+				Body:  ghMarkdown,
 			}); err != nil {
 				return fmt.Errorf("template: failed to execute: %w", err)
 			}
