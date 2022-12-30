@@ -43,38 +43,88 @@
     <div>
       <a href="index">Index</a>
     </div>
-    <h1><a id="user-content-speed-up-writing-go-test-asap" class="anchor" aria-hidden="true" href="#speed-up-writing-go-test-asap"><span aria-hidden="true" class="octicon octicon-link"></span></a>Speed up writing Go test ASAP</h1>
-<p>Imagine your project currently have 0% unit test code coverage.
-And your boss keep pushing it to 80% or even 90%?
-What do you do?
-Give up?</p>
-<p>What if I tell you there is a way?
-Not entirely cheating but ... you know, there is always trade off.</p>
-<p>If your purpose is to test carefully all path, check if all return is correctly.
-Sadly this post is not for you, I guess.
-If you only want good number on test coverage, with minimum effort as possible, I hope this will show you some idea you can use :)</p>
-<p>In my opinion, unit test is not that important (like must must have).
-It's just make sure your code is running excatly as you intent it to be.
-If you don't think about edge case before, unit test won't help you.</p>
-<h2><a id="user-content-first-rewrite-the-impossible-to-test-out" class="anchor" aria-hidden="true" href="#first-rewrite-the-impossible-to-test-out"><span aria-hidden="true" class="octicon octicon-link"></span></a>First, rewrite the impossible (to test) out</h2>
-<p>When I learn programming, I encounter very interesting idea, which become mainly my mindset when I dev later.
-I don't recall it clearly, kinda like: "Don't just fix bugs, rewrite it so that kind of bugs will not appear again".
-So in our context, there is some thing we hardly or can not write test in Go.
-My suggestion is don't use that thing.</p>
-<p>In my experience, I can list a few here:</p>
-<ul>
-<li>Read config each time call func (<code>viper.Get...</code>). You can and you should init all config when project starts.</li>
-<li>Not use Dependency Injection (DI). There are too many posts in Internet tell you how to do DI properly.</li>
-<li>Use global var (Except global var <code>Err...</code>). You should move all global var to fields inside some struct.</li>
-</ul>
-<h2><a id="user-content-let-the-fun-writing-test-begin" class="anchor" aria-hidden="true" href="#let-the-fun-writing-test-begin"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let the fun (writing test) begin</h2>
-<p>If you code Go long enough, you know table driven tests and how is that so useful.
-You set up test data, then you test.
-Somewhere in the future, you change the func, then you need to update test data, then you good!</p>
-<p>In simple case, your func only have 2 or 3 inputs so table drive tests is still looking good.
-But real world is ugly (maybe not, idk I'm just too young in this industry). Your func can have 5 or 10 inputs, also your func call many third party services.</p>
-<p>Imagine having below func to upload image:</p>
-<div class="highlight highlight-source-go"><pre><span class="pl-k">type</span> <span class="pl-smi">service</span> <span class="pl-k">struct</span> {
+    <h1>
+      <a
+        id="user-content-speed-up-writing-go-test-asap"
+        class="anchor"
+        aria-hidden="true"
+        href="#speed-up-writing-go-test-asap"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Speed up writing Go test ASAP
+    </h1>
+    <p>
+      Imagine your project currently have 0% unit test code coverage. And your
+      boss keep pushing it to 80% or even 90%? What do you do? Give up?
+    </p>
+    <p>
+      What if I tell you there is a way? Not entirely cheating but ... you know,
+      there is always trade off.
+    </p>
+    <p>
+      If your purpose is to test carefully all path, check if all return is
+      correctly. Sadly this post is not for you, I guess. If you only want good
+      number on test coverage, with minimum effort as possible, I hope this will
+      show you some idea you can use :)
+    </p>
+    <p>
+      In my opinion, unit test is not that important (like must must have). It's
+      just make sure your code is running excatly as you intent it to be. If you
+      don't think about edge case before, unit test won't help you.
+    </p>
+    <h2>
+      <a
+        id="user-content-first-rewrite-the-impossible-to-test-out"
+        class="anchor"
+        aria-hidden="true"
+        href="#first-rewrite-the-impossible-to-test-out"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >First, rewrite the impossible (to test) out
+    </h2>
+    <p>
+      When I learn programming, I encounter very interesting idea, which become
+      mainly my mindset when I dev later. I don't recall it clearly, kinda like:
+      "Don't just fix bugs, rewrite it so that kind of bugs will not appear
+      again". So in our context, there is some thing we hardly or can not write
+      test in Go. My suggestion is don't use that thing.
+    </p>
+    <p>In my experience, I can list a few here:</p>
+    <ul>
+      <li>
+        Read config each time call func (<code>viper.Get...</code>). You can and
+        you should init all config when project starts.
+      </li>
+      <li>
+        Not use Dependency Injection (DI). There are too many posts in Internet
+        tell you how to do DI properly.
+      </li>
+      <li>
+        Use global var (Except global var <code>Err...</code>). You should move
+        all global var to fields inside some struct.
+      </li>
+    </ul>
+    <h2>
+      <a
+        id="user-content-let-the-fun-writing-test-begin"
+        class="anchor"
+        aria-hidden="true"
+        href="#let-the-fun-writing-test-begin"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Let the fun (writing test) begin
+    </h2>
+    <p>
+      If you code Go long enough, you know table driven tests and how is that so
+      useful. You set up test data, then you test. Somewhere in the future, you
+      change the func, then you need to update test data, then you good!
+    </p>
+    <p>
+      In simple case, your func only have 2 or 3 inputs so table drive tests is
+      still looking good. But real world is ugly (maybe not, idk I'm just too
+      young in this industry). Your func can have 5 or 10 inputs, also your func
+      call many third party services.
+    </p>
+    <p>Imagine having below func to upload image:</p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">type</span> <span class="pl-smi">service</span> <span class="pl-k">struct</span> {
     <span class="pl-c1">db</span> <span class="pl-smi">DB</span>
     <span class="pl-c1">redis</span> <span class="pl-smi">Redis</span>
     <span class="pl-c1">minio</span> <span class="pl-smi">MinIO</span>
@@ -105,9 +155,15 @@ But real world is ugly (maybe not, idk I'm just too young in this industry). You
     }
 
     <span class="pl-k">return</span> <span class="pl-c1">nil</span>
-}</pre></div>
-<p>With table driven test and thanks to <a href="https://github.com/stretchr/testify">stretchr/testify</a>, I usually write like this:</p>
-<div class="highlight highlight-source-go"><pre><span class="pl-k">type</span> <span class="pl-smi">ServiceSuite</span> <span class="pl-k">struct</span> {
+}</pre>
+    </div>
+    <p>
+      With table driven test and thanks to
+      <a href="https://github.com/stretchr/testify">stretchr/testify</a>, I
+      usually write like this:
+    </p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">type</span> <span class="pl-smi">ServiceSuite</span> <span class="pl-k">struct</span> {
     suite.<span class="pl-smi">Suite</span>
 
     <span class="pl-c1">db</span> <span class="pl-smi">DBMock</span>
@@ -152,16 +208,20 @@ But real world is ugly (maybe not, idk I'm just too young in this industry). You
             <span class="pl-s1">s</span>.<span class="pl-en">Equal</span>(<span class="pl-s1">wantErr</span>, <span class="pl-s1">gotErr</span>)
         })
     }
-}</pre></div>
-<p>Looks good right?
-Be careful with this.
-It can go from 0 to 100 ugly real quick.</p>
-<p>What if req is a struct with many fields?
-So in each test case you need to set up req.
-They are almost the same, but with some error case you must alter req.
-It's easy to be init with wrong value here (typing maybe ?).
-Also all req looks similiar, kinda duplicated.</p>
-<div class="highlight highlight-source-go"><pre><span class="pl-s1">tests</span> <span class="pl-c1">:=</span> []<span class="pl-k">struct</span>{
+}</pre>
+    </div>
+    <p>
+      Looks good right? Be careful with this. It can go from 0 to 100 ugly real
+      quick.
+    </p>
+    <p>
+      What if req is a struct with many fields? So in each test case you need to
+      set up req. They are almost the same, but with some error case you must
+      alter req. It's easy to be init with wrong value here (typing maybe ?).
+      Also all req looks similiar, kinda duplicated.
+    </p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-s1">tests</span> <span class="pl-c1">:=</span> []<span class="pl-k">struct</span>{
         <span class="pl-c1">name</span> <span class="pl-smi">string</span>
         <span class="pl-c1">req</span> <span class="pl-smi">Request</span>
         <span class="pl-c1">verifyErr</span> <span class="pl-smi">error</span>
@@ -207,10 +267,14 @@ Also all req looks similiar, kinda duplicated.</p>
             }
             <span class="pl-c">// Other fieles</span>
         }
-    }</pre></div>
-<p>What if dependencies of service keep growing?
-More mock error to test data of course.</p>
-<div class="highlight highlight-source-go"><pre>    <span class="pl-s1">tests</span> <span class="pl-c1">:=</span> []<span class="pl-k">struct</span>{
+    }</pre>
+    </div>
+    <p>
+      What if dependencies of service keep growing? More mock error to test data
+      of course.
+    </p>
+    <div class="highlight highlight-source-go">
+      <pre>    <span class="pl-s1">tests</span> <span class="pl-c1">:=</span> []<span class="pl-k">struct</span>{
         <span class="pl-c1">name</span> <span class="pl-smi">string</span>
         <span class="pl-c1">req</span> <span class="pl-smi">Request</span>
         <span class="pl-c1">verifyErr</span> <span class="pl-smi">error</span>
@@ -228,15 +292,30 @@ More mock error to test data of course.</p>
         {
             <span class="pl-c">// Init test case</span>
         }
-    }</pre></div>
-<p>The test file keep growing longer and longer until I feel sick about it.</p>
-<p>See <a href="https://github.com/tektoncd/pipeline/blob/main/pkg/pod/pod_test.go">tektoncd/pipeline unit test</a> to get a feeling about this.
-When I see it, <code>TestPodBuild</code> has almost 2000 lines.</p>
-<p>The solution I propose here is simple (absolutely not perfect, but good with my usecase) thanks to <strong>stretchr/testify</strong>.
-I init all <strong>default</strong> action on <strong>success</strong> case.
-Then I <strong>alter</strong> request or mock error for unit test to hit on other case.
-Remember if unit test is hit, code coverate is surely increaesed, and that my <strong>goal</strong>.</p>
-<div class="highlight highlight-source-go"><pre><span class="pl-c">// Init ServiceSuite as above</span>
+    }</pre>
+    </div>
+    <p>
+      The test file keep growing longer and longer until I feel sick about it.
+    </p>
+    <p>
+      See
+      <a
+        href="https://github.com/tektoncd/pipeline/blob/main/pkg/pod/pod_test.go"
+        >tektoncd/pipeline unit test</a
+      >
+      to get a feeling about this. When I see it, <code>TestPodBuild</code> has
+      almost 2000 lines.
+    </p>
+    <p>
+      The solution I propose here is simple (absolutely not perfect, but good
+      with my usecase) thanks to <strong>stretchr/testify</strong>. I init all
+      <strong>default</strong> action on <strong>success</strong> case. Then I
+      <strong>alter</strong> request or mock error for unit test to hit on other
+      case. Remember if unit test is hit, code coverate is surely increaesed,
+      and that my <strong>goal</strong>.
+    </p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-c">// Init ServiceSuite as above</span>
 
 <span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">ServiceSuite</span>) <span class="pl-en">TestUpload</span>() {
     <span class="pl-c">// Init success request</span>
@@ -271,11 +350,25 @@ Remember if unit test is hit, code coverate is surely increaesed, and that my <s
     })
 
     <span class="pl-c">// ...</span>
-}</pre></div>
-<p>If you think this is not quick enough, just <strong>ignore</strong> the response.
-You only need to check error or not if you want code coverage only.</p>
-<p>So if request change fields or more dependencies, I need to update success case, and maybe add corresponding error case if need.</p>
-<p>Same idea but still with table, you can find here <a href="https://arslan.io/2022/12/04/functional-table-driven-tests-in-go/" rel="nofollow">Functional table-driven tests in Go - Fatih Arslan</a>.</p>
+}</pre>
+    </div>
+    <p>
+      If you think this is not quick enough, just <strong>ignore</strong> the
+      response. You only need to check error or not if you want code coverage
+      only.
+    </p>
+    <p>
+      So if request change fields or more dependencies, I need to update success
+      case, and maybe add corresponding error case if need.
+    </p>
+    <p>
+      Same idea but still with table, you can find here
+      <a
+        href="https://arslan.io/2022/12/04/functional-table-driven-tests-in-go/"
+        rel="nofollow"
+        >Functional table-driven tests in Go - Fatih Arslan</a
+      >.
+    </p>
 
     <div>
       Feel free to ask me via

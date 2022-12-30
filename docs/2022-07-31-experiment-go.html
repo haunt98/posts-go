@@ -43,12 +43,31 @@
     <div>
       <a href="index">Index</a>
     </div>
-    <h1><a id="user-content-experiment-go" class="anchor" aria-hidden="true" href="#experiment-go"><span aria-hidden="true" class="octicon octicon-link"></span></a>Experiment Go</h1>
-<p>There come a time when you need to experiment new things, new style, new approach.
-So this post serves as it is named.</p>
-<h1><a id="user-content-design-api-by-trimming-down-the-interfacestruct-or-whatever" class="anchor" aria-hidden="true" href="#design-api-by-trimming-down-the-interfacestruct-or-whatever"><span aria-hidden="true" class="octicon octicon-link"></span></a>Design API by trimming down the interface/struct or whatever</h1>
-<p>Instead of:</p>
-<div class="highlight highlight-source-go"><pre><span class="pl-k">type</span> <span class="pl-smi">Client</span> <span class="pl-k">interface</span> {
+    <h1>
+      <a
+        id="user-content-experiment-go"
+        class="anchor"
+        aria-hidden="true"
+        href="#experiment-go"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Experiment Go
+    </h1>
+    <p>
+      There come a time when you need to experiment new things, new style, new
+      approach. So this post serves as it is named.
+    </p>
+    <h1>
+      <a
+        id="user-content-design-api-by-trimming-down-the-interfacestruct-or-whatever"
+        class="anchor"
+        aria-hidden="true"
+        href="#design-api-by-trimming-down-the-interfacestruct-or-whatever"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Design API by trimming down the interface/struct or whatever
+    </h1>
+    <p>Instead of:</p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">type</span> <span class="pl-smi">Client</span> <span class="pl-k">interface</span> {
     <span class="pl-c1">GetUser</span>()
     <span class="pl-c1">AddUser</span>()
     <span class="pl-c1">GetAccount</span>()
@@ -57,9 +76,11 @@ So this post serves as it is named.</p>
 
 <span class="pl-c">// c is Client</span>
 <span class="pl-s1">c</span>.<span class="pl-en">GetUser</span>()
-<span class="pl-s1">c</span>.<span class="pl-en">RemoveAccount</span>()</pre></div>
-<p>Try:</p>
-<div class="highlight highlight-source-go"><pre><span class="pl-k">type</span> <span class="pl-smi">Client</span> <span class="pl-k">struct</span> {
+<span class="pl-s1">c</span>.<span class="pl-en">RemoveAccount</span>()</pre>
+    </div>
+    <p>Try:</p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">type</span> <span class="pl-smi">Client</span> <span class="pl-k">struct</span> {
     <span class="pl-c1">User</span> <span class="pl-smi">ClientUser</span>
     <span class="pl-c1">Account</span> <span class="pl-smi">ClientAccount</span>
 }
@@ -76,30 +97,75 @@ So this post serves as it is named.</p>
 
 <span class="pl-c">// c is Client</span>
 <span class="pl-s1">c</span>.<span class="pl-c1">User</span>.<span class="pl-en">Get</span>()
-<span class="pl-s1">c</span>.<span class="pl-c1">Account</span>.<span class="pl-en">Remove</span>()</pre></div>
-<p>The difference is <code>c.GetUser()</code> -&gt; <code>c.User.Get()</code>.</p>
-<p>For example we have client which connect to bank.
-There are many functions like <code>GetUser</code>, <code>GetTransaction</code>, <code>VerifyAccount</code>, ...
-So split big client to many children, each child handle single aspect, like user or transaction.</p>
-<p>My concert is we replace an interface with a struct which contains multiple interfaces aka children.
-I don't know if this is the right call.</p>
-<p>This pattern is used by <a href="https://github.com/google/go-github">google/go-github</a>.</p>
-<h2><a id="user-content-find-alternative-to-grpcgrpc-go" class="anchor" aria-hidden="true" href="#find-alternative-to-grpcgrpc-go"><span aria-hidden="true" class="octicon octicon-link"></span></a>Find alternative to <a href="https://github.com/grpc/grpc-go">grpc/grpc-go</a>
-</h2>
-<p>Why?
-<a href="https://github.com/grpc/grpc-go/issues?q=is%3Aissue+compatibility+is%3Aclosed">See for yourself</a>.
-Also read <a href="https://go.dev/blog/protobuf-apiv2" rel="nofollow">A new Go API for Protocol Buffers</a> to know why <code>v1.20.0</code> is <code>v2</code>.</p>
-<p>Currently there are some:</p>
-<ul>
-<li>
-<a href="https://github.com/bufbuild/connect-go">bufbuild/connect-go</a>. Comming from buf, trust worthy but need time to make it match feature parity with grpc-go.</li>
-<li><a href="https://github.com/twitchtv/twirp">twitchtv/twirp</a></li>
-<li><a href="https://github.com/storj/drpc">storj/drpc</a></li>
-</ul>
-<h1><a id="user-content-thanks" class="anchor" aria-hidden="true" href="#thanks"><span aria-hidden="true" class="octicon octicon-link"></span></a>Thanks</h1>
-<ul>
-<li><a href="https://blog.gopheracademy.com/advent-2019/api-clients-humans/" rel="nofollow">API Clients for Humans</a></li>
-</ul>
+<span class="pl-s1">c</span>.<span class="pl-c1">Account</span>.<span class="pl-en">Remove</span>()</pre>
+    </div>
+    <p>
+      The difference is <code>c.GetUser()</code> -&gt;
+      <code>c.User.Get()</code>.
+    </p>
+    <p>
+      For example we have client which connect to bank. There are many functions
+      like <code>GetUser</code>, <code>GetTransaction</code>,
+      <code>VerifyAccount</code>, ... So split big client to many children, each
+      child handle single aspect, like user or transaction.
+    </p>
+    <p>
+      My concert is we replace an interface with a struct which contains
+      multiple interfaces aka children. I don't know if this is the right call.
+    </p>
+    <p>
+      This pattern is used by
+      <a href="https://github.com/google/go-github">google/go-github</a>.
+    </p>
+    <h2>
+      <a
+        id="user-content-find-alternative-to-grpcgrpc-go"
+        class="anchor"
+        aria-hidden="true"
+        href="#find-alternative-to-grpcgrpc-go"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Find alternative to
+      <a href="https://github.com/grpc/grpc-go">grpc/grpc-go</a>
+    </h2>
+    <p>
+      Why?
+      <a
+        href="https://github.com/grpc/grpc-go/issues?q=is%3Aissue+compatibility+is%3Aclosed"
+        >See for yourself</a
+      >. Also read
+      <a href="https://go.dev/blog/protobuf-apiv2" rel="nofollow"
+        >A new Go API for Protocol Buffers</a
+      >
+      to know why <code>v1.20.0</code> is <code>v2</code>.
+    </p>
+    <p>Currently there are some:</p>
+    <ul>
+      <li>
+        <a href="https://github.com/bufbuild/connect-go">bufbuild/connect-go</a
+        >. Comming from buf, trust worthy but need time to make it match feature
+        parity with grpc-go.
+      </li>
+      <li><a href="https://github.com/twitchtv/twirp">twitchtv/twirp</a></li>
+      <li><a href="https://github.com/storj/drpc">storj/drpc</a></li>
+    </ul>
+    <h1>
+      <a
+        id="user-content-thanks"
+        class="anchor"
+        aria-hidden="true"
+        href="#thanks"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Thanks
+    </h1>
+    <ul>
+      <li>
+        <a
+          href="https://blog.gopheracademy.com/advent-2019/api-clients-humans/"
+          rel="nofollow"
+          >API Clients for Humans</a
+        >
+      </li>
+    </ul>
 
     <div>
       Feel free to ask me via
