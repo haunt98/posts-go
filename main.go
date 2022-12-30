@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/google/go-github/v48/github"
 	"golang.org/x/oauth2"
+	"golang.org/x/sync/errgroup"
 )
 
 const (
@@ -68,41 +70,56 @@ func main() {
 	ghHTTPClient := oauth2.NewClient(ctx, ghTokenSrc)
 	ghClient := github.NewClient(ghHTTPClient)
 
+	eg := new(errgroup.Group)
+
 	// Generate post files
 	for _, postFile := range postFiles {
 		if postFile.IsDir() {
 			continue
 		}
 
-		// Prepare post file
-		mdFilename := filepath.Join(postFilesPath, postFile.Name())
-		mdFileBytes, err := os.ReadFile(mdFilename)
-		if err != nil {
-			log.Fatalln("Failed to read file", mdFilename, err)
-		}
+		postFilename := postFile.Name()
 
-		ghMarkdown, _, err := ghClient.Markdown(ctx, string(mdFileBytes), &github.MarkdownOptions{
-			Mode: "markdown",
+		eg.Go(func() error {
+			// Prepare post file
+			mdFilename := filepath.Join(postFilesPath, postFilename)
+			mdFileBytes, err := os.ReadFile(mdFilename)
+			if err != nil {
+				return fmt.Errorf("os: failed to read file %s: %w", mdFilename, err)
+			}
+
+			ghMarkdown, _, err := ghClient.Markdown(ctx, string(mdFileBytes), &github.MarkdownOptions{
+				Mode: "markdown",
+			})
+			if err != nil {
+				return fmt.Errorf("github: failed to markdown: %w", err)
+			}
+
+			// Prepare html file
+			htmlFilename := strings.TrimSuffix(postFilename, filepath.Ext(postFilename)) + extHTML
+			htmlFilepath := filepath.Join(generatedPath, htmlFilename)
+
+			htmlFile, err := os.OpenFile(htmlFilepath, os.O_RDWR|os.O_CREATE, 0o600)
+			if err != nil {
+				return fmt.Errorf("os: failed to open file %s: %w", htmlFilepath, err)
+			}
+			defer htmlFile.Close()
+
+			if err := templatePost.Execute(htmlFile, templatePostData{
+				Body: ghMarkdown,
+			}); err != nil {
+				return fmt.Errorf("template: failed to execute: %w", err)
+			}
+
+			return nil
 		})
-		if err != nil {
-			log.Fatalln("Failed to GitHub markdown", err)
-		}
 
-		// Prepare html file
-		htmlFilename := strings.TrimSuffix(postFile.Name(), filepath.Ext(postFile.Name())) + extHTML
-		htmlFilepath := filepath.Join(generatedPath, htmlFilename)
+	}
 
-		htmlFile, err := os.OpenFile(htmlFilepath, os.O_RDWR|os.O_CREATE, 0o600)
-		if err != nil {
-			log.Fatalln("Failed to open file", htmlFilepath, err)
-		}
-
-		if err := templatePost.Execute(htmlFile, templatePostData{
-			Body: ghMarkdown,
-		}); err != nil {
-			log.Fatalln("Failed to execute html template", err)
-		}
-
-		htmlFile.Close()
+	// Wait for all HTTP fetches to complete.
+	if err := eg.Wait(); err != nil {
+		log.Fatalln("I am sorry :(", err)
+	} else {
+		log.Println("Build successfully. Are you happy now?")
 	}
 }
