@@ -43,26 +43,55 @@
     <div>
       <a href="index">Index</a>
     </div>
-    <h1><a id="user-content-migrate-to-buf-from-prototool" class="anchor" aria-hidden="true" href="#migrate-to-buf-from-prototool"><span aria-hidden="true" class="octicon octicon-link"></span></a>Migrate to <code>buf</code> from <code>prototool</code>
-</h1>
-<p>Why? Because <code>prototool</code> is outdated, and can not run on M1 mac.</p>
-<p>We need 3 files:</p>
-<ul>
-<li>
-<code>build.go</code>: need to install protoc-gen-* binaries with pin version in <code>go.mod</code>
-</li>
-<li><code>buf.yaml</code></li>
-<li><code>buf.gen.yaml</code></li>
-</ul>
-<p>FYI, the libs version I use:</p>
-<ul>
-<li><a href="https://github.com/golang/protobuf/releases/tag/v1.5.2">golang/protobuf v1.5.2</a></li>
-<li><a href="https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0">grpc-ecosystem/grpc-gateway v1.16.0</a></li>
-<li><a href="github.com/envoyproxy/protoc-gen-validate">envoyproxy/protoc-gen-validate</a></li>
-<li><a href="github.com/kei2100/protoc-gen-marshal-zap">kei2100/protoc-gen-marshal-zap</a></li>
-</ul>
-<p><code>build.go</code>:</p>
-<div class="highlight highlight-source-go"><pre><span class="pl-c">//go:build tools</span>
+    <h1>
+      <a
+        id="user-content-migrate-to-buf-from-prototool"
+        class="anchor"
+        aria-hidden="true"
+        href="#migrate-to-buf-from-prototool"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Migrate to <code>buf</code> from <code>prototool</code>
+    </h1>
+    <p>
+      Why? Because <code>prototool</code> is outdated, and can not run on M1
+      mac.
+    </p>
+    <p>We need 3 files:</p>
+    <ul>
+      <li>
+        <code>build.go</code>: need to install protoc-gen-* binaries with pin
+        version in <code>go.mod</code>
+      </li>
+      <li><code>buf.yaml</code></li>
+      <li><code>buf.gen.yaml</code></li>
+    </ul>
+    <p>FYI, the libs version I use:</p>
+    <ul>
+      <li>
+        <a href="https://github.com/golang/protobuf/releases/tag/v1.5.2"
+          >golang/protobuf v1.5.2</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0"
+          >grpc-ecosystem/grpc-gateway v1.16.0</a
+        >
+      </li>
+      <li>
+        <a href="github.com/envoyproxy/protoc-gen-validate"
+          >envoyproxy/protoc-gen-validate</a
+        >
+      </li>
+      <li>
+        <a href="github.com/kei2100/protoc-gen-marshal-zap"
+          >kei2100/protoc-gen-marshal-zap</a
+        >
+      </li>
+    </ul>
+    <p><code>build.go</code>:</p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-c">//go:build tools</span>
 <span class="pl-c">// +build tools</span>
 
 <span class="pl-k">import</span> (
@@ -71,9 +100,11 @@
   _ <span class="pl-s">"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"</span>
   _ <span class="pl-s">"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"</span>
   _ <span class="pl-s">"github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap"</span>
-)</pre></div>
-<p><code>buf.yaml</code></p>
-<div class="highlight highlight-source-yaml"><pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
+)</pre>
+    </div>
+    <p><code>buf.yaml</code></p>
+    <div class="highlight highlight-source-yaml">
+      <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
 <span class="pl-ent">deps</span>:
   - <span class="pl-s">buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c</span>
   - <span class="pl-s">buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7</span>
@@ -84,9 +115,11 @@
     - <span class="pl-s">FILE</span>
 <span class="pl-ent">lint</span>:
   <span class="pl-ent">use</span>:
-    - <span class="pl-s">DEFAULT</span></pre></div>
-<p><code>buf.gen.yaml</code>:</p>
-<div class="highlight highlight-source-yaml"><pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
+    - <span class="pl-s">DEFAULT</span></pre>
+    </div>
+    <p><code>buf.gen.yaml</code>:</p>
+    <div class="highlight highlight-source-yaml">
+      <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
 <span class="pl-ent">plugins</span>:
   - <span class="pl-ent">name</span>: <span class="pl-s">go</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
@@ -105,9 +138,11 @@
     <span class="pl-ent">opt</span>:
       - <span class="pl-s">lang=go</span>
   - <span class="pl-ent">name</span>: <span class="pl-s">marshal-zap</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span></pre></div>
-<p>Update <code>Makefile</code>:</p>
-<div class="highlight highlight-source-makefile"><pre><span class="pl-en">gen</span>:
+    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span></pre>
+    </div>
+    <p>Update <code>Makefile</code>:</p>
+    <div class="highlight highlight-source-makefile">
+      <pre><span class="pl-en">gen</span>:
   go install github.com/golang/protobuf/protoc-gen-go
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
@@ -116,32 +151,74 @@
   go install github.com/bufbuild/buf/cmd/buf@latest
   buf mod update
   buf format -w
-  buf generate</pre></div>
-<p>Run <code>make gen</code> to have fun of course.</p>
-<h2><a id="user-content-faq" class="anchor" aria-hidden="true" href="#faq"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2>
-<p>Remember <code>grpc-ecosystem/grpc-gateway</code>, <code>envoyproxy/protoc-gen-validate</code>, <code>kei2100/protoc-gen-marshal-zap</code> is optional, so feel free to delete if you don't use theme.</p>
-<p>If use <code>vendor</code>:</p>
-<ul>
-<li>Replace <code>buf generate</code> with <code>buf generate --exclude-path vendor</code>.</li>
-<li>Replace <code>buf format -w</code> with <code>buf format -w --exclude-path vendor</code>.</li>
-</ul>
-<p>If you use grpc-gateway:</p>
-<ul>
-<li>Replace <code>import "third_party/googleapis/google/api/annotations.proto";</code> with <code>import "google/api/annotations.proto";</code>
-</li>
-<li>Delete <code>security_definitions</code>, <code>security</code>, in <code>option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)</code>.</li>
-</ul>
-<p>The last step is delete <code>prototool.yaml</code>.</p>
-<p>If you are not migrate but start from scratch:</p>
-<ul>
-<li>Add <code>buf lint</code> to make sure your proto is good.</li>
-<li>Add <code>buf breaking --against "https://your-grpc-repo-goes-here.git"</code> to make sure each time you update proto, you don't break backward compatibility.</li>
-</ul>
-<h2><a id="user-content-thanks" class="anchor" aria-hidden="true" href="#thanks"><span aria-hidden="true" class="octicon octicon-link"></span></a>Thanks</h2>
-<ul>
-<li><a href="https://github.com/uber/prototool">uber/prototool</a></li>
-<li><a href="https://github.com/bufbuild/buf">bufbuild/buf</a></li>
-</ul>
+  buf generate</pre>
+    </div>
+    <p>Run <code>make gen</code> to have fun of course.</p>
+    <h2>
+      <a id="user-content-faq" class="anchor" aria-hidden="true" href="#faq"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >FAQ
+    </h2>
+    <p>
+      Remember <code>grpc-ecosystem/grpc-gateway</code>,
+      <code>envoyproxy/protoc-gen-validate</code>,
+      <code>kei2100/protoc-gen-marshal-zap</code> is optional, so feel free to
+      delete if you don't use theme.
+    </p>
+    <p>If use <code>vendor</code>:</p>
+    <ul>
+      <li>
+        Replace <code>buf generate</code> with
+        <code>buf generate --exclude-path vendor</code>.
+      </li>
+      <li>
+        Replace <code>buf format -w</code> with
+        <code>buf format -w --exclude-path vendor</code>.
+      </li>
+    </ul>
+    <p>If you use grpc-gateway:</p>
+    <ul>
+      <li>
+        Replace
+        <code
+          >import "third_party/googleapis/google/api/annotations.proto";</code
+        >
+        with <code>import "google/api/annotations.proto";</code>
+      </li>
+      <li>
+        Delete <code>security_definitions</code>, <code>security</code>, in
+        <code
+          >option
+          (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)</code
+        >.
+      </li>
+    </ul>
+    <p>The last step is delete <code>prototool.yaml</code>.</p>
+    <p>If you are not migrate but start from scratch:</p>
+    <ul>
+      <li>Add <code>buf lint</code> to make sure your proto is good.</li>
+      <li>
+        Add
+        <code
+          >buf breaking --against "https://your-grpc-repo-goes-here.git"</code
+        >
+        to make sure each time you update proto, you don't break backward
+        compatibility.
+      </li>
+    </ul>
+    <h2>
+      <a
+        id="user-content-thanks"
+        class="anchor"
+        aria-hidden="true"
+        href="#thanks"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Thanks
+    </h2>
+    <ul>
+      <li><a href="https://github.com/uber/prototool">uber/prototool</a></li>
+      <li><a href="https://github.com/bufbuild/buf">bufbuild/buf</a></li>
+    </ul>
 
     <div>
       Feel free to ask me via

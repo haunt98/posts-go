@@ -27,6 +27,7 @@ format:
 	go install mvdan.cc/gofumpt@latest
 	gofimports -w -company github.com/make-go-great .
 	gofumpt -w -extra .
+	yarn prettier --write .
 
 gen:
 	go run .
