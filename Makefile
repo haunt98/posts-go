@@ -1,6 +1,6 @@
-.PHONY: all test test-color coverage coverage-cli coverage-html lint format gen
+.PHONY: all test test-color coverage coverage-cli coverage-html lint format gen format-html
 
-all: test-color lint format gen
+all: test-color lint format gen format-html
 	go mod tidy
 
 test:
@@ -27,7 +27,9 @@ format:
 	go install mvdan.cc/gofumpt@latest
 	gofimports -w -company github.com/make-go-great .
 	gofumpt -w -extra .
-	yarn prettier --write .
 
 gen:
 	go run .
+
+format-html:
+	yarn prettier --write .
