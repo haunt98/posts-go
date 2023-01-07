@@ -471,15 +471,9 @@ systemctl <span class="pl-c1">enable</span> bluetooth.service</pre>
     </h5>
     <p>Install using XBOOTLDR:</p>
     <div class="highlight highlight-source-shell">
-      <pre>bootctl --esp-path=/efi --boot-path=/boot install</pre>
-    </div>
-    <p>Automatic update:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>systemctl <span class="pl-c1">enable</span> systemd-boot-update.service</pre>
-    </div>
-    <p>Manual update:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>bootctl --esp-path=/efi --boot-path=/boot update</pre>
+      <pre>bootctl --esp-path=/efi --boot-path=/boot install
+
+systemctl <span class="pl-c1">enable</span> systemd-boot-update.service</pre>
     </div>
     <p>
       <a

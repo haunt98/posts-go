@@ -259,18 +259,8 @@ Install using XBOOTLDR:
 
 ```sh
 bootctl --esp-path=/efi --boot-path=/boot install
-```
 
-Automatic update:
-
-```sh
 systemctl enable systemd-boot-update.service
-```
-
-Manual update:
-
-```sh
-bootctl --esp-path=/efi --boot-path=/boot update
 ```
 
 [Label partition](https://wiki.archlinux.org/index.php/persistent_block_device_naming#by-label)
