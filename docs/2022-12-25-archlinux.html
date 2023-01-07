@@ -382,17 +382,70 @@ HOOKS=(base udev ... block lvm2 filesystems)
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >Addition
     </h4>
+    <h5>
+      <a
+        id="user-content-networkmanager-wip"
+        class="anchor"
+        aria-hidden="true"
+        href="#networkmanager-wip"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a href="https://wiki.archlinux.org/title/NetworkManager" rel="nofollow"
+        >NetworkManager (WIP)</a
+      >
+    </h5>
     <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> NetworkManager</span>
-pacman -Syu networkmanager
+      <pre>pacman -Syu networkmanager dhcpcd iwd
 systemctl <span class="pl-c1">enable</span> NetworkManager.service
-
-<span class="pl-c"><span class="pl-c">#</span> Bluetooth</span>
-pacman -Syu bluez
-systemctl <span class="pl-c1">enable</span> bluetooth.service
-
-<span class="pl-c"><span class="pl-c">#</span> Clock</span>
-timedatectl set-ntp <span class="pl-c1">true</span></pre>
+systemctl <span class="pl-c1">enable</span> systemd-resolved.service</pre>
+    </div>
+    <p>Edit <code>/etc/NetworkManager/conf.d/dns.conf</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>[<span class="pl-ii">main</span>]
+dns=systemd-resolved</pre>
+    </div>
+    <p>Edit <code>/etc/NetworkManager/conf.d/dhcp-client.conf</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>[<span class="pl-ii">main</span>]
+dhcp=dhcpcd</pre>
+    </div>
+    <p>Edit <code>/etc/NetworkManager/conf.d/wifi_backend.conf</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>[<span class="pl-ii">device</span>]
+wifi.backend=iwd</pre>
+    </div>
+    <p>
+      See
+      <a href="https://wiki.archlinux.org/title/Dhcpcd" rel="nofollow"
+        >dhcpcd</a
+      >
+    </p>
+    <p>Append <code>/etc/dhcpcd.conf</code></p>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+noarp
+nohook resolv.conf</pre
+      >
+    </div>
+    <h5>
+      <a
+        id="user-content-bluetooth"
+        class="anchor"
+        aria-hidden="true"
+        href="#bluetooth"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Bluetooth
+    </h5>
+    <div class="highlight highlight-source-shell">
+      <pre>pacman -Syu bluez
+systemctl <span class="pl-c1">enable</span> bluetooth.service</pre>
+    </div>
+    <h5>
+      <a id="user-content-clock" class="anchor" aria-hidden="true" href="#clock"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Clock
+    </h5>
+    <div class="highlight highlight-source-shell">
+      <pre>timedatectl set-ntp <span class="pl-c1">true</span></pre>
     </div>
     <h4>
       <a
@@ -403,12 +456,71 @@ timedatectl set-ntp <span class="pl-c1">true</span></pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >Boot loader
     </h4>
-    <p><a href="Applications/System/systemd-boot.md">systemd-boot</a></p>
+    <h5>
+      <a
+        id="user-content-systemd-boot"
+        class="anchor"
+        aria-hidden="true"
+        href="#systemd-boot"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a
+        href="https://wiki.archlinux.org/index.php/Systemd-boot"
+        rel="nofollow"
+        >systemd-boot</a
+      >
+    </h5>
+    <p>Install using XBOOTLDR:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>bootctl --esp-path=/efi --boot-path=/boot install</pre>
+    </div>
+    <p>Automatic update:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>systemctl <span class="pl-c1">enable</span> systemd-boot-update.service</pre>
+    </div>
+    <p>Manual update:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>bootctl --esp-path=/efi --boot-path=/boot update</pre>
+    </div>
     <p>
-      <a href="https://wiki.archlinux.org/index.php/GRUB" rel="nofollow"
-        >GRUB</a
+      <a
+        href="https://wiki.archlinux.org/index.php/persistent_block_device_naming#by-label"
+        rel="nofollow"
+        >Label partition</a
       >
     </p>
+    <p>Edit <code>/efi/loader/loader.conf</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+default	archlinux.conf
+timeout 4
+editor no
+console-mode max</pre
+      >
+    </div>
+    <p>Edit <code>/boot/loader/entries/archlinux.conf</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>title Arch Linux
+linux /vmlinuz-linux
+
+<span class="pl-c"># Intel</span>
+initrd /intel-ucode.img
+
+<span class="pl-c"># AMD</span>
+initrd /amd-ucode.img
+
+initrd /initramfs-linux.img
+
+<span class="pl-c"># Kernel parameters</span>
+<span class="pl-c">#</span>
+<span class="pl-c"># Acer Nitro AN515-45</span>
+<span class="pl-c"># https://wiki.archlinux.org/title/backlight#Kernel_command-line_options</span>
+<span class="pl-c"># acpi_backlight=vendor</span>
+<span class="pl-c">#</span>
+<span class="pl-c"># NVIDIA</span>
+<span class="pl-c"># https://wiki.archlinux.org/title/NVIDIA#DRM_kernel_mode_setting</span>
+<span class="pl-c"># nvidia-drm.modeset=1</span>
+options root="LABEL=ROOT" rw</pre>
+    </div>
     <h2>
       <a
         id="user-content-general-recommendations"
@@ -520,8 +632,7 @@ systemctl <span class="pl-c1">enable</span> gdm.service</pre>
       >
     </h4>
     <div class="highlight highlight-source-shell">
-      <pre>pacman -Syu plasma-meta \
-	kde-system-meta
+      <pre>pacman -Syu plasma-meta kde-system-meta
 
 <span class="pl-c"><span class="pl-c">#</span> Login manager</span>
 pacman -Syu sddm

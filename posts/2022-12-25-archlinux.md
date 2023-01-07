@@ -200,24 +200,115 @@ passwd
 
 #### Addition
 
-```sh
-# NetworkManager
-pacman -Syu networkmanager
-systemctl enable NetworkManager.service
+##### [NetworkManager (WIP)](https://wiki.archlinux.org/title/NetworkManager)
 
-# Bluetooth
+```sh
+pacman -Syu networkmanager dhcpcd iwd
+systemctl enable NetworkManager.service
+systemctl enable systemd-resolved.service
+```
+
+Edit `/etc/NetworkManager/conf.d/dns.conf`:
+
+```txt
+[main]
+dns=systemd-resolved
+```
+
+Edit `/etc/NetworkManager/conf.d/dhcp-client.conf`:
+
+```txt
+[main]
+dhcp=dhcpcd
+```
+
+Edit `/etc/NetworkManager/conf.d/wifi_backend.conf`:
+
+```txt
+[device]
+wifi.backend=iwd
+```
+
+See [dhcpcd](https://wiki.archlinux.org/title/Dhcpcd)
+
+Append `/etc/dhcpcd.conf`
+
+```txt
+noarp
+nohook resolv.conf
+```
+
+##### Bluetooth
+
+```sh
 pacman -Syu bluez
 systemctl enable bluetooth.service
+```
 
-# Clock
+##### Clock
+
+```sh
 timedatectl set-ntp true
 ```
 
 #### Boot loader
 
-[systemd-boot](Applications/System/systemd-boot.md)
+##### [systemd-boot](https://wiki.archlinux.org/index.php/Systemd-boot)
 
-[GRUB](https://wiki.archlinux.org/index.php/GRUB)
+Install using XBOOTLDR:
+
+```sh
+bootctl --esp-path=/efi --boot-path=/boot install
+```
+
+Automatic update:
+
+```sh
+systemctl enable systemd-boot-update.service
+```
+
+Manual update:
+
+```sh
+bootctl --esp-path=/efi --boot-path=/boot update
+```
+
+[Label partition](https://wiki.archlinux.org/index.php/persistent_block_device_naming#by-label)
+
+Edit `/efi/loader/loader.conf`:
+
+```txt
+default	archlinux.conf
+timeout 4
+editor no
+console-mode max
+```
+
+Edit `/boot/loader/entries/archlinux.conf`:
+
+```txt
+title Arch Linux
+linux /vmlinuz-linux
+
+# Intel
+initrd /intel-ucode.img
+
+# AMD
+initrd /amd-ucode.img
+
+initrd /initramfs-linux.img
+
+# Kernel parameters
+#
+# Acer Nitro AN515-45
+# https://wiki.archlinux.org/title/backlight#Kernel_command-line_options
+# acpi_backlight=vendor
+#
+# NVIDIA
+# https://wiki.archlinux.org/title/NVIDIA#DRM_kernel_mode_setting
+# nvidia-drm.modeset=1
+options root="LABEL=ROOT" rw
+```
 
 ## [General recommendations](https://wiki.archlinux.org/index.php/General_recommendations)
 
@@ -283,8 +374,7 @@ systemctl enable gdm.service
 #### [KDE (WIP)](https://wiki.archlinux.org/title/KDE)
 
 ```sh
-pacman -Syu plasma-meta \
-	kde-system-meta
+pacman -Syu plasma-meta kde-system-meta
 
 # Login manager
 pacman -Syu sddm
