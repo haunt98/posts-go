@@ -371,16 +371,6 @@ pacman -Syu gdm
 systemctl enable gdm.service
 ```
 
-#### [KDE (WIP)](https://wiki.archlinux.org/title/KDE)
-
-```sh
-pacman -Syu plasma-meta kde-system-meta
-
-# Login manager
-pacman -Syu sddm
-systemctl enable sddm.service
-```
-
 ## [List of applications](https://wiki.archlinux.org/index.php/List_of_applications)
 
 ### [pacman](https://wiki.archlinux.org/index.php/pacman)
@@ -422,8 +412,6 @@ https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM
 https://wiki.archlinux.org/index.php/Silent_boot
 
 https://wiki.archlinux.org/title/Improving_performance#Watchdogs
-
-https://wiki.archlinux.org/title/PRIME
 
 ## In the end
 
