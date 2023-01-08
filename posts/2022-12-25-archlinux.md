@@ -381,6 +381,12 @@ pacman -Syu pipewire wireplumber \
 	gst-plugin-pipewire pipewire-v4l2
 ```
 
+See [Advanced Linux Sound Architecture](https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture)
+
+```sh
+pacman -Syu sof-firmware
+```
+
 ### [Flatpak (WIP)](https://wiki.archlinux.org/title/Flatpak)
 
 ```sh
