@@ -324,6 +324,21 @@ useradd -m -G wheel -s /usr/bin/zsh -c "The Joker" joker
 passwd joker
 ```
 
+[doas (WIP)](https://wiki.archlinux.org/title/Doas)
+
+```sh
+pacman -Syu opendoas
+
+chown -c root:root /etc/doas.conf
+chmod -c 0400 /etc/doas.conf
+```
+
+Edit `/etc/doas.conf` (must end with a newline):
+
+```txt
+permit persist :wheel
+```
+
 [systemd-homed (WIP)](https://wiki.archlinux.org/index.php/Systemd-homed):
 
 ```sh
