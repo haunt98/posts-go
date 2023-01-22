@@ -39,4 +39,5 @@ gen:
 	go run .
 
 format-html:
-	yarn prettier --write .
+	bun install prettier
+	bun prettier --write .
