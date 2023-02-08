@@ -58,7 +58,11 @@ This pattern is used by [google/go-github](https://github.com/google/go-github).
 
 Why?
 [See for yourself](https://github.com/grpc/grpc-go/issues?q=is%3Aissue+compatibility+is%3Aclosed).
-Also read [A new Go API for Protocol Buffers](https://go.dev/blog/protobuf-apiv2) to know why `v1.20.0` is `v2`.
+
+Also read:
+
+- [A new Go API for Protocol Buffers](https://go.dev/blog/protobuf-apiv2) to know why `v1.20.0` is `v2`.
+- [Go Protobuf Plugin Versioning](https://jbrandhorst.com/post/plugin-versioning/).
 
 Currently there are some:
 
