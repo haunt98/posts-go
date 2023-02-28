@@ -39,5 +39,5 @@ gen:
 	go run .
 
 format-html:
-	bun install prettier
+	bun install --no-save prettier
 	bun prettier --write .
