@@ -568,6 +568,25 @@ internal
     </div>
     <h3>
       <a
+        id="user-content-connect-mysql-with-go-sql-drivermysql"
+        class="anchor"
+        aria-hidden="true"
+        href="#connect-mysql-with-go-sql-drivermysql"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Connect MySQL with
+      <a href="https://github.com/go-sql-driver/mysql">go-sql-driver/mysql</a>
+    </h3>
+    <p>Remember to config:</p>
+    <ul>
+      <li><code>SetConnMaxLifetime</code></li>
+      <li><code>SetMaxOpenConns</code></li>
+      <li><code>SetMaxIdleConns</code></li>
+      <li><code>ParseTime</code> to true.</li>
+      <li><code>Loc</code> to <code>time.UTC</code>.</li>
+      <li><code>CheckConnLiveness</code> to true.</li>
+    </ul>
+    <h3>
+      <a
         id="user-content-if-you-want-test-just-use-stretchrtestify"
         class="anchor"
         aria-hidden="true"
@@ -733,6 +752,13 @@ fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
       <li>
         <a href="https://google.github.io/styleguide/go/index" rel="nofollow"
           >Google Go Style</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.blog/2020-05-20-three-bugs-in-the-go-mysql-driver/"
+          rel="nofollow"
+          >Three bugs in the Go MySQL Driver</a
         >
       </li>
     </ul>
