@@ -279,6 +279,17 @@ func (c *client) HSetWithExpire(ctx context.Context, key string, values []any, e
 }
 ```
 
+### Connect MySQL with [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)
+
+Remember to config:
+
+- `SetConnMaxLifetime`
+- `SetMaxOpenConns`
+- `SetMaxIdleConns`
+- `ParseTime` to true.
+- `Loc` to `time.UTC`.
+- `CheckConnLiveness` to true.
+
 ### If you want test, just use [stretchr/testify](https://github.com/stretchr/testify).
 
 It is easy to write a suite test, thanks to testify.
@@ -358,3 +369,4 @@ fieldalignment -fix ./internal/business/*.go
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
 - [Functional options for friendly APIs](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis)
 - [Google Go Style](https://google.github.io/styleguide/go/index)
+- [Three bugs in the Go MySQL Driver](https://github.blog/2020-05-20-three-bugs-in-the-go-mysql-driver/)
