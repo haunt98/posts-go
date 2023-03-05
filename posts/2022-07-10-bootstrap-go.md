@@ -147,6 +147,38 @@ if err := eg.Wait(); err != nil {
 
 Please don't use external libs for WorkerPool, I don't want to deal with dependency hell.
 
+### Use [sync.Pool](https://pkg.go.dev/sync#Pool) when need to reuse object, mainly for `bytes.Buffer`
+
+Example:
+
+```go
+var bufPool = sync.Pool{
+	New: func() any {
+		return new(bytes.Buffer)
+	},
+}
+
+func MarshalWithoutEscapeHTML(v any) ([]byte, error) {
+	b, ok := bufPool.Get().(*bytes.Buffer)
+	if !ok {
+		return nil, ErrBufPoolNotBytesBuffer
+	}
+
+	b.Reset()
+	defer bufPool.Put(b)
+
+	encoder := json.NewEncoder(b)
+	encoder.SetEscapeHTML(false)
+	if err := encoder.Encode(v); err != nil {
+		return nil, err
+	}
+
+	result := make([]byte, b.Len())
+	copy(result, b.Bytes())
+	return result, nil
+}
+```
+
 ## External libs
 
 ### No need `vendor`
@@ -201,6 +233,16 @@ prototool is deprecated, and buf can generate, lint, format as good as prototool
 ### Use [gin-gonic/gin](https://github.com/gin-gonic/gin) for REST.
 
 Don't use `gin.Context` when pass context from handler layer to service layer, use `gin.Context.Request.Context()` instead.
+
+Remember to free resources after parse multipart form:
+
+```go
+defer func() {
+    if err := c.Request.MultipartForm.RemoveAll(); err != nil {
+        fmt.Println(err)
+    }
+}()
+```
 
 ### If you want log, just use [uber-go/zap](https://github.com/uber-go/zap)
 
@@ -342,8 +384,8 @@ stringer -type=Drink
 
 ### Don't waste your time rewrite rate limiter if your use case is simple, use [rate](https://pkg.go.dev/golang.org/x/time/rate) or [go-redis/redis_rate](https://github.com/go-redis/redis_rate)
 
-rate if you want rate limiter locally in your single instance of service.
-redis_rate if you want rate limiter distributed across all your instances of service.
+**rate** if you want rate limiter locally in your single instance of service.
+**redis_rate** if you want rate limiter distributed across all your instances of service.
 
 ### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt).
 
@@ -370,3 +412,6 @@ fieldalignment -fix ./internal/business/*.go
 - [Functional options for friendly APIs](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis)
 - [Google Go Style](https://google.github.io/styleguide/go/index)
 - [Three bugs in the Go MySQL Driver](https://github.blog/2020-05-20-three-bugs-in-the-go-mysql-driver/)
+- [Fixing Memory Exhaustion Bugs in My Golang Web App](https://mtlynch.io/notes/picoshare-perf/)
+- [Prevent Logging Secrets in Go by Using Custom Types](https://www.commonfate.io/blog/prevent-logging-secrets-in-go-by-using-custom-types)
+- [Speed Up GoMock with Conditional Generation](https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen)
