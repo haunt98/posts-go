@@ -268,7 +268,9 @@ internal
         href="https://pkg.go.dev/sync#WaitGroup"
         rel="nofollow"
         >https://pkg.go.dev/sync#WaitGroup</a
-      >). Because I always need deal with error.
+      >). Because I always need deal with error. Be super careful with
+      <code>egCtx</code>, should use this instead of parent
+      <code>ctx</code> inside <code>eg.Go</code>.
     </p>
     <p>Example:</p>
     <div class="highlight highlight-source-go">
@@ -483,7 +485,7 @@ internal
     </ul>
     <p>
       Also, be careful if config value is empty. You should decide to continue
-      or stop the service if there is no config.
+      or stop the service if there is empty config.
     </p>
     <h3>
       <a
@@ -506,6 +508,64 @@ internal
       <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a>,
       <a href="https://github.com/ent/ent">ent/ent</a> is good.
     </p>
+    <h3>
+      <a
+        id="user-content-connect-redis-with-redisgo-redis"
+        class="anchor"
+        aria-hidden="true"
+        href="#connect-redis-with-redisgo-redis"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Connect Redis with
+      <a href="https://github.com/redis/go-redis">redis/go-redis</a>
+    </h3>
+    <p>
+      Use
+      <a
+        href="https://redis.uptrace.dev/guide/go-redis-pipelines.html"
+        rel="nofollow"
+        >Pipelines</a
+      >
+      for:
+    </p>
+    <ul>
+      <li>HSET and EXPIRE in 1 command.</li>
+      <li>Multiple GET in 1 command.</li>
+    </ul>
+    <p>
+      Prefer to use <code>Pipelined</code> instead of <code>Pipeline</code>.
+      Inside <code>Pipelined</code> return <code>redis.Cmder</code> for each
+      command.
+    </p>
+    <p>Example:</p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">func</span> (<span class="pl-s1">c</span> <span class="pl-c1">*</span><span class="pl-smi">client</span>) <span class="pl-en">HSetWithExpire</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>, <span class="pl-s1">key</span> <span class="pl-smi">string</span>, <span class="pl-s1">values</span> []<span class="pl-smi">any</span>, <span class="pl-s1">expired</span> time.<span class="pl-smi">Duration</span>) <span class="pl-smi">error</span> {
+	<span class="pl-s1">cmds</span> <span class="pl-c1">:=</span> <span class="pl-en">make</span>([]redis.<span class="pl-smi">Cmder</span>, <span class="pl-c1">2</span>)
+
+	<span class="pl-k">if</span> <span class="pl-s1">_</span>, <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">c</span>.<span class="pl-en">Pipelined</span>(<span class="pl-s1">ctx</span>, <span class="pl-k">func</span>(<span class="pl-s1">pipe</span> redis.<span class="pl-smi">Pipeliner</span>) <span class="pl-smi">error</span> {
+		<span class="pl-s1">cmds</span>[<span class="pl-c1">0</span>] <span class="pl-c1">=</span> <span class="pl-s1">pipe</span>.<span class="pl-en">HSet</span>(<span class="pl-s1">ctx</span>, <span class="pl-s1">key</span>, <span class="pl-s1">values</span><span class="pl-c1">...</span>)
+
+		<span class="pl-k">if</span> <span class="pl-s1">expired</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span> {
+			<span class="pl-s1">cmds</span>[<span class="pl-c1">1</span>] <span class="pl-c1">=</span> <span class="pl-s1">pipe</span>.<span class="pl-en">Expire</span>(<span class="pl-s1">ctx</span>, <span class="pl-s1">key</span>, <span class="pl-s1">expired</span>)
+		}
+
+		<span class="pl-k">return</span> <span class="pl-c1">nil</span>
+	}); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+		<span class="pl-k">return</span> <span class="pl-s1">err</span>
+	}
+
+	<span class="pl-k">for</span> <span class="pl-s1">_</span>, <span class="pl-s1">cmd</span> <span class="pl-c1">:=</span> <span class="pl-k">range</span> <span class="pl-s1">cmds</span> {
+		<span class="pl-k">if</span> <span class="pl-s1">cmd</span> <span class="pl-c1">==</span> <span class="pl-c1">nil</span> {
+			<span class="pl-k">continue</span>
+		}
+
+		<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">cmd</span>.<span class="pl-en">Err</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+			<span class="pl-k">return</span> <span class="pl-s1">err</span>
+		}
+	}
+
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
+}</pre>
+    </div>
     <h3>
       <a
         id="user-content-if-you-want-test-just-use-stretchrtestify"
