@@ -42,28 +42,35 @@
     }
   </style>
   <body class="markdown-body">
+    <div><a href="index">Index</a></div>
     <h1>
-      <a id="user-content-index" class="anchor" aria-hidden="true" href="#index"
+      <a
+        id="user-content-incident-come-and-go"
+        class="anchor"
+        aria-hidden="true"
+        href="#incident-come-and-go"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Index
+      >Incident come and go
     </h1>
-    <p>This is where I dump my thoughts.</p>
-    <ul>
-      <li><a href="2022-06-08-backup">Backup my way</a></li>
-      <li><a href="2022-06-08-dockerfile-go">Dockerfile for Go</a></li>
-      <li><a href="2022-07-10-bootstrap-go">Bootstrap Go</a></li>
-      <li><a href="2022-07-12-uuid-or-else">UUID or else</a></li>
-      <li><a href="2022-07-19-migrate-to-buf">Migrate to buf</a></li>
-      <li><a href="2022-07-31-sql">SQL</a></li>
-      <li><a href="2022-07-31-experiment-go">Experiment go</a></li>
-      <li><a href="2022-08-10-gitignore">gitignore</a></li>
-      <li><a href="2022-10-26-reload-config">Reload config</a></li>
-      <li><a href="2022-12-25-archlinux">Install Arch Linux</a></li>
-      <li>
-        <a href="2022-12-25-go-test-asap">Speed up writing Go test ASAP</a>
-      </li>
-      <li><a href="2023-03-05-incident">Incident come and go</a></li>
-    </ul>
+    <p>This is collect of all incidents I created in the past :(</p>
+    <h2>
+      <a
+        id="user-content-service-starts-with-empty-port"
+        class="anchor"
+        aria-hidden="true"
+        href="#service-starts-with-empty-port"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Service starts with empty port
+    </h2>
+    <p>Because all configs is read from file.</p>
+    <p>
+      But the port config is empty -&gt; So when service inits, it use that
+      empty port somehow.
+    </p>
+    <p>
+      <strong>Solution</strong>: For some configs, make sure to failed first if
+      it's empty.
+    </p>
 
     <div>
       Feel free to ask me via
