@@ -245,7 +245,7 @@ Use [Pipelines](https://redis.uptrace.dev/guide/go-redis-pipelines.html) for:
 - Multiple GET in 1 command.
 
 Prefer to use `Pipelined` instead of `Pipeline`.
-Inside `Pipelined` return `redis.Cmder` for each command.
+Inside `Pipelined`, please return `redis.Cmder` for each command.
 
 Example:
 
