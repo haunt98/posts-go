@@ -121,6 +121,7 @@ We can fire them parallel :)
 
 Personally, I prefer `errgroup` to `WaitGroup` (https://pkg.go.dev/sync#WaitGroup).
 Because I always need deal with error.
+Be super careful with `egCtx`, should use this instead of parent `ctx` inside `eg.Go`.
 
 Example:
 
@@ -222,7 +223,7 @@ Why?
 - Put all config in single place for easily tracking
 
 Also, be careful if config value is empty.
-You should decide to continue or stop the service if there is no config.
+You should decide to continue or stop the service if there is empty config.
 
 ### Don't overuse ORM libs, no need to handle another layer above SQL.
 
@@ -235,6 +236,48 @@ But `database/sql` has its own limit.
 For example, it is hard to get primary key after insert/update.
 So may be you want to use ORM for those cases.
 I hear that [go-gorm/gorm](https://github.com/go-gorm/gorm), [ent/ent](https://github.com/ent/ent) is good.
+
+### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis)
+
+Use [Pipelines](https://redis.uptrace.dev/guide/go-redis-pipelines.html) for:
+
+- HSET and EXPIRE in 1 command.
+- Multiple GET in 1 command.
+
+Prefer to use `Pipelined` instead of `Pipeline`.
+Inside `Pipelined` return `redis.Cmder` for each command.
+
+Example:
+
+```go
+func (c *client) HSetWithExpire(ctx context.Context, key string, values []any, expired time.Duration) error {
+	cmds := make([]redis.Cmder, 2)
+
+	if _, err := c.Pipelined(ctx, func(pipe redis.Pipeliner) error {
+		cmds[0] = pipe.HSet(ctx, key, values...)
+
+		if expired > 0 {
+			cmds[1] = pipe.Expire(ctx, key, expired)
+		}
+
+		return nil
+	}); err != nil {
+		return err
+	}
+
+	for _, cmd := range cmds {
+		if cmd == nil {
+			continue
+		}
+
+		if err := cmd.Err(); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+```
 
 ### If you want test, just use [stretchr/testify](https://github.com/stretchr/testify).
 
