@@ -406,6 +406,14 @@ go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignme
 fieldalignment -fix ./internal/business/*.go
 ```
 
+## Snippet/script
+
+Change import:
+
+```sh
+gofmt -w -r '"github.com/Sirupsen/logrus" -> "github.com/sirupsen/logrus"' *.go
+```
+
 ## Thanks
 
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
