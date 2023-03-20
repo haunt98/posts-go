@@ -79,8 +79,8 @@
         >
       </li>
       <li>
-        <a href="github.com/envoyproxy/protoc-gen-validate"
-          >envoyproxy/protoc-gen-validate</a
+        <a href="github.com/bufbuild/protoc-gen-validate"
+          >bufbuild/protoc-gen-validate</a
         >
       </li>
       <li>
@@ -95,7 +95,6 @@
 <span class="pl-c">// +build tools</span>
 
 <span class="pl-k">import</span> (
-  _ <span class="pl-s">"github.com/envoyproxy/protoc-gen-validate"</span>
   _ <span class="pl-s">"github.com/golang/protobuf/protoc-gen-go"</span>
   _ <span class="pl-s">"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"</span>
   _ <span class="pl-s">"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"</span>
@@ -106,10 +105,10 @@
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
 <span class="pl-ent">deps</span>:
+  - <span class="pl-s">buf.build/envoyproxy/protoc-gen-validate:6607b10f00ed4a3d98f906807131c44a</span>
+  - <span class="pl-s">buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418</span>
   - <span class="pl-s">buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c</span>
   - <span class="pl-s">buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7</span>
-  - <span class="pl-s">buf.build/haunt98/protoc-gen-validate:2686264610fc4ad4a9fcc932647e279d</span>
-  - <span class="pl-s">buf.build/haunt98/marshal-zap:2a593ca925134680a5820d3f13c1be5a</span>
 <span class="pl-ent">breaking</span>:
   <span class="pl-ent">use</span>:
     - <span class="pl-s">FILE</span>
@@ -125,6 +124,12 @@
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
     <span class="pl-ent">opt</span>:
       - <span class="pl-s">plugins=grpc</span>
+  - <span class="pl-ent">name</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v0.9.0</span>
+    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
+    <span class="pl-ent">opt</span>:
+      - <span class="pl-s">lang=go</span>
+  - <span class="pl-ent">name</span>: <span class="pl-s">marshal-zap</span>
+    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
   - <span class="pl-ent">name</span>: <span class="pl-s">grpc-gateway</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
     <span class="pl-ent">opt</span>:
@@ -132,37 +137,43 @@
   - <span class="pl-ent">name</span>: <span class="pl-s">swagger</span>
     <span class="pl-ent">out</span>: <span class="pl-s">.</span>
     <span class="pl-ent">opt</span>:
-      - <span class="pl-s">logtostderr=true</span>
-  - <span class="pl-ent">name</span>: <span class="pl-s">validate</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    <span class="pl-ent">opt</span>:
-      - <span class="pl-s">lang=go</span>
-  - <span class="pl-ent">name</span>: <span class="pl-s">marshal-zap</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span></pre>
+      - <span class="pl-s">logtostderr=true</span></pre>
     </div>
     <p>Update <code>Makefile</code>:</p>
     <div class="highlight highlight-source-makefile">
       <pre><span class="pl-en">gen</span>:
   go install github.com/golang/protobuf/protoc-gen-go
+  go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-  go install github.com/envoyproxy/protoc-gen-validate
-  go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap
   go install github.com/bufbuild/buf/cmd/buf@latest
   buf mod update
   buf format -w
   buf generate</pre>
     </div>
     <p>Run <code>make gen</code> to have fun of course.</p>
+    <p>
+      If using <code>bufbuild/protoc-gen-validate</code>,
+      <code>kei2100/protoc-gen-marshal-zap</code>, better make a raw copy of
+      proto file for other services to integrate:
+    </p>
+    <div class="highlight highlight-source-makefile">
+      <pre><span class="pl-en">raw</span>:
+	cp ./api.proto ./raw/
+	sed -i <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>s/import <span class="pl-cce">\"</span>marshal-zap\.proto<span class="pl-cce">\"</span>;//g<span class="pl-pds">"</span></span> ./raw/api.proto
+	sed -i <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>s/\[(marshal_zap\.mask) = true]//g<span class="pl-pds">"</span></span> ./raw/api.proto
+	sed -i <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>s/import <span class="pl-cce">\"</span>validate\/validate\.proto<span class="pl-cce">\"</span>;//g<span class="pl-pds">"</span></span> ./raw/api.proto
+	sed -i <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>s/\[(validate\.rules)\.string.min_len = 1\]//g<span class="pl-pds">"</span></span> ./raw/api.proto</pre>
+    </div>
     <h2>
       <a id="user-content-faq" class="anchor" aria-hidden="true" href="#faq"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >FAQ
     </h2>
     <p>
-      Remember <code>grpc-ecosystem/grpc-gateway</code>,
-      <code>envoyproxy/protoc-gen-validate</code>,
-      <code>kei2100/protoc-gen-marshal-zap</code> is optional, so feel free to
+      Remember <code>bufbuild/protoc-gen-validate</code>,
+      <code>kei2100/protoc-gen-marshal-zap</code>,
+      <code>grpc-ecosystem/grpc-gateway</code> is optional, so feel free to
       delete if you don't use theme.
     </p>
     <p>If use <code>vendor</code>:</p>
