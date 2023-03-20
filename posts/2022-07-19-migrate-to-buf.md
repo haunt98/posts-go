@@ -12,7 +12,7 @@ FYI, the libs version I use:
 
 - [golang/protobuf v1.5.2](https://github.com/golang/protobuf/releases/tag/v1.5.2)
 - [grpc-ecosystem/grpc-gateway v1.16.0](https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0)
-- [envoyproxy/protoc-gen-validate](github.com/envoyproxy/protoc-gen-validate)
+- [bufbuild/protoc-gen-validate](github.com/bufbuild/protoc-gen-validate)
 - [kei2100/protoc-gen-marshal-zap](github.com/kei2100/protoc-gen-marshal-zap)
 
 `build.go`:
@@ -22,7 +22,6 @@ FYI, the libs version I use:
 // +build tools
 
 import (
-  _ "github.com/envoyproxy/protoc-gen-validate"
   _ "github.com/golang/protobuf/protoc-gen-go"
   _ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"
   _ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"
@@ -35,10 +34,10 @@ import (
 ```yaml
 version: v1
 deps:
+  - buf.build/envoyproxy/protoc-gen-validate:6607b10f00ed4a3d98f906807131c44a
+  - buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418
   - buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c
   - buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7
-  - buf.build/haunt98/protoc-gen-validate:2686264610fc4ad4a9fcc932647e279d
-  - buf.build/haunt98/marshal-zap:2a593ca925134680a5820d3f13c1be5a
 breaking:
   use:
     - FILE
@@ -56,6 +55,12 @@ plugins:
     out: pkg
     opt:
       - plugins=grpc
+  - name: buf.build/bufbuild/validate-go:v0.9.0
+    out: pkg
+    opt:
+      - lang=go
+  - name: marshal-zap
+    out: pkg
   - name: grpc-gateway
     out: pkg
     opt:
@@ -64,12 +69,6 @@ plugins:
     out: .
     opt:
       - logtostderr=true
-  - name: validate
-    out: pkg
-    opt:
-      - lang=go
-  - name: marshal-zap
-    out: pkg
 ```
 
 Update `Makefile`:
@@ -77,10 +76,9 @@ Update `Makefile`:
 ```Makefile
 gen:
   go install github.com/golang/protobuf/protoc-gen-go
+  go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-  go install github.com/envoyproxy/protoc-gen-validate
-  go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap
   go install github.com/bufbuild/buf/cmd/buf@latest
   buf mod update
   buf format -w
@@ -89,9 +87,20 @@ gen:
 
 Run `make gen` to have fun of course.
 
+If using `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`, better make a raw copy of proto file for other services to integrate:
+
+```Makefile
+raw:
+	cp ./api.proto ./raw/
+	sed -i "" -e "s/import \"marshal-zap\.proto\";//g" ./raw/api.proto
+	sed -i "" -e "s/\[(marshal_zap\.mask) = true]//g" ./raw/api.proto
+	sed -i "" -e "s/import \"validate\/validate\.proto\";//g" ./raw/api.proto
+	sed -i "" -e "s/\[(validate\.rules)\.string.min_len = 1\]//g" ./raw/api.proto
+```
+
 ## FAQ
 
-Remember `grpc-ecosystem/grpc-gateway`, `envoyproxy/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap` is optional, so feel free to delete if you don't use theme.
+Remember `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`, `grpc-ecosystem/grpc-gateway` is optional, so feel free to delete if you don't use theme.
 
 If use `vendor`:
 
