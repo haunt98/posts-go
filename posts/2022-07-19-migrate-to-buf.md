@@ -91,11 +91,11 @@ If using `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`, bette
 
 ```Makefile
 raw:
-	cp ./api.proto ./raw/
-	sed -i "" -e "s/import \"marshal-zap\.proto\";//g" ./raw/api.proto
-	sed -i "" -e "s/\[(marshal_zap\.mask) = true]//g" ./raw/api.proto
-	sed -i "" -e "s/import \"validate\/validate\.proto\";//g" ./raw/api.proto
-	sed -i "" -e "s/\[(validate\.rules)\.string.min_len = 1\]//g" ./raw/api.proto
+    cp ./api.proto ./raw/
+    sed -i "" -e "s/import \"validate\/validate\.proto\";//g" ./raw/api.proto
+    sed -i "" -e "s/\[(validate\.rules)\.string.min_len = 1\]//g" ./raw/api.proto
+    sed -i "" -e "s/import \"marshal-zap\.proto\";//g" ./raw/api.proto
+    sed -i "" -e "s/\[(marshal_zap\.mask) = true]//g" ./raw/api.proto
 ```
 
 ## FAQ

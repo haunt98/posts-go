@@ -159,11 +159,11 @@
     </p>
     <div class="highlight highlight-source-makefile">
       <pre><span class="pl-en">raw</span>:
-	cp ./api.proto ./raw/
-	sed -i <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>s/import <span class="pl-cce">\"</span>marshal-zap\.proto<span class="pl-cce">\"</span>;//g<span class="pl-pds">"</span></span> ./raw/api.proto
-	sed -i <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>s/\[(marshal_zap\.mask) = true]//g<span class="pl-pds">"</span></span> ./raw/api.proto
-	sed -i <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>s/import <span class="pl-cce">\"</span>validate\/validate\.proto<span class="pl-cce">\"</span>;//g<span class="pl-pds">"</span></span> ./raw/api.proto
-	sed -i <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>s/\[(validate\.rules)\.string.min_len = 1\]//g<span class="pl-pds">"</span></span> ./raw/api.proto</pre>
+    cp ./api.proto ./raw/
+    sed -i "" -e "s/import \"validate\/validate\.proto\";//g" ./raw/api.proto
+    sed -i "" -e "s/\[(validate\.rules)\.string.min_len = 1\]//g" ./raw/api.proto
+    sed -i "" -e "s/import \"marshal-zap\.proto\";//g" ./raw/api.proto
+    sed -i "" -e "s/\[(marshal_zap\.mask) = true]//g" ./raw/api.proto</pre>
     </div>
     <h2>
       <a id="user-content-faq" class="anchor" aria-hidden="true" href="#faq"
