@@ -332,6 +332,10 @@ Remember to config:
 - `Loc` to `time.UTC`.
 - `CheckConnLiveness` to true.
 
+### Connect Kafka with [Shopify/sarama](https://github.com/Shopify/sarama)
+
+Don't use [confluentinc/confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go), it's required `CGO_ENABLED`.
+
 ### If you want test, just use [stretchr/testify](https://github.com/stretchr/testify).
 
 It is easy to write a suite test, thanks to testify.
