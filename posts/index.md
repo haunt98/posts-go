@@ -14,3 +14,4 @@ This is where I dump my thoughts.
 - [Install Arch Linux](2022-12-25-archlinux)
 - [Speed up writing Go test ASAP](2022-12-25-go-test-asap)
 - [Incident come and go](2023-03-05-incident)
+- [Fonts](2023-03-30-fonts)
