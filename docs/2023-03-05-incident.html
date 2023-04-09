@@ -71,6 +71,46 @@
       <strong>Solution</strong>: For some configs, make sure to failed first if
       it's empty.
     </p>
+    <h2>
+      <a
+        id="user-content-race-condition-of-series-of-apis"
+        class="anchor"
+        aria-hidden="true"
+        href="#race-condition-of-series-of-apis"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Race condition of series of APIs
+    </h2>
+    <p>For example I have 2 APIs:</p>
+    <ul>
+      <li>API upload: allow user to upload image</li>
+      <li>API submit: submit data to server</li>
+    </ul>
+    <p>
+      API upload is slow, it takes 10s to finish. API submit is fast, only takes
+      2s.
+    </p>
+    <p>
+      The problem is submit use data from upload too. When user calls API
+      upload, image is stored in cache. When user calls API submit, it use
+      whatever image is stored in cache.
+    </p>
+    <p>It's when the fun begins.</p>
+    <p>
+      Imagine user Trong already upload image. So he is ready to submit. But for
+      the same time, he re-call API upload to upload another image too.
+    </p>
+    <p>
+      So if API upload is finised first, which is kinda impossible (u know
+      upload file is not fast right?), everything right. But for most cases, API
+      submit is finished first. It means Trong's data is submitted with the old
+      image. Then API upload is finished, it will replace the old image with the
+      new one.So the old one, aka image in submitted data, is gone.
+    </p>
+    <p>Chaos right there!</p>
+    <p>
+      <strong>Solution</strong>: Use a lock, if user enter API upload, lock it
+      to prevent user call other APIs. Rememeber to unlock after finished
+    </p>
 
     <div>
       Feel free to ask me via
