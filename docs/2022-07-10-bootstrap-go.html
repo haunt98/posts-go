@@ -68,23 +68,26 @@
       >Structure
     </h2>
     <div class="highlight highlight-text-adblock">
-      <pre>main.go
+      <pre>
+main.go
 internal
-<span class="pl-k">|</span> business
-<span class="pl-k">|</span> | http
-<span class="pl-k">|</span> | | handler.go
-<span class="pl-k">|</span> | | service.go
-<span class="pl-k">|</span> | | models.go
-<span class="pl-k">|</span> | grpc
-<span class="pl-k">|</span> | | handler.go
-<span class="pl-k">|</span> | | models.go
-<span class="pl-k">|</span> | consumer
-<span class="pl-k">|</span> | | handler.go
-<span class="pl-k">|</span> | | service.go
-<span class="pl-k">|</span> | | models.go
-<span class="pl-k">|</span> | service.go
-<span class="pl-k">|</span> | repository.go
-<span class="pl-k">|</span> | models.go</pre>
+    business
+        http
+            handler.go
+            service.go
+            models.go
+
+        grpc
+            handler.go
+            models.go
+        consumer
+            handler.go
+            service.go
+            models.go
+        service.go
+        repository.go
+        models.go</pre
+      >
     </div>
     <p>
       All business codes are inside <code>internal</code>. Each business has a
