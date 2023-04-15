@@ -10,21 +10,22 @@ Also, this is my personal opinion, so feel free to comment.
 ```txt
 main.go
 internal
-| business
-| | http
-| | | handler.go
-| | | service.go
-| | | models.go
-| | grpc
-| | | handler.go
-| | | models.go
-| | consumer
-| | | handler.go
-| | | service.go
-| | | models.go
-| | service.go
-| | repository.go
-| | models.go
+    business
+        http
+            handler.go
+            service.go
+            models.go
+
+        grpc
+            handler.go
+            models.go
+        consumer
+            handler.go
+            service.go
+            models.go
+        service.go
+        repository.go
+        models.go
 ```
 
 All business codes are inside `internal`.
