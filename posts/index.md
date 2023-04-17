@@ -16,4 +16,5 @@ This is where I dump my thoughts.
 - [Incident come and go](2023-03-05-incident)
 - [Fonts](2023-03-30-fonts)
 - [Games 4 fun](2023-04-01-games)
-- [Naming](2023-04-17-naming)
+- [Naming things](2023-04-17-naming)
+- [Keeb](2023-04-17-keeb)
