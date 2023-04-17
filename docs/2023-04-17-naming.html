@@ -42,31 +42,44 @@
     }
   </style>
   <body class="markdown-body">
+    <div><a href="index">Index</a></div>
     <h1>
-      <a id="user-content-index" class="anchor" aria-hidden="true" href="#index"
+      <a
+        id="user-content-naming-things"
+        class="anchor"
+        aria-hidden="true"
+        href="#naming-things"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Index
+      >Naming things
     </h1>
-    <p>This is where I dump my thoughts.</p>
-    <ul>
-      <li><a href="2022-06-08-backup">Backup my way</a></li>
-      <li><a href="2022-06-08-dockerfile-go">Dockerfile for Go</a></li>
-      <li><a href="2022-07-10-bootstrap-go">Bootstrap Go</a></li>
-      <li><a href="2022-07-12-uuid-or-else">UUID or else</a></li>
-      <li><a href="2022-07-19-migrate-to-buf">Migrate to buf</a></li>
-      <li><a href="2022-07-31-sql">SQL</a></li>
-      <li><a href="2022-07-31-experiment-go">Experiment go</a></li>
-      <li><a href="2022-08-10-gitignore">gitignore</a></li>
-      <li><a href="2022-10-26-reload-config">Reload config</a></li>
-      <li><a href="2022-12-25-archlinux">Install Arch Linux</a></li>
-      <li>
-        <a href="2022-12-25-go-test-asap">Speed up writing Go test ASAP</a>
-      </li>
-      <li><a href="2023-03-05-incident">Incident come and go</a></li>
-      <li><a href="2023-03-30-fonts">Fonts</a></li>
-      <li><a href="2023-04-01-games">Games 4 fun</a></li>
-      <li><a href="2023-04-17-naming">Naming</a></li>
-    </ul>
+    <h2>
+      <a
+        id="user-content-filename-in-storage-s3-"
+        class="anchor"
+        aria-hidden="true"
+        href="#filename-in-storage-s3-"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Filename in storage (S3, ...)
+    </h2>
+    <p>Always have year, month, day in filename to easily sort it out.</p>
+    <p>
+      If file is uploaded by user, add <code>user_id</code> in filename, or some
+      other unique identifier depends on your business in which you require to
+      upload.
+    </p>
+    <p>
+      Personally, I always add timestamp and extra data in filename to avoid
+      duplicate.
+    </p>
+    <p>
+      Example filename:
+      <code>yyyy/mm/dd/{user_id}-{timestamp}-{extra}.ext</code>
+    </p>
+    <p>
+      Be careful with <code>/</code>, too much nested folder is no good for
+      backup (as they say, idk if true or not, but less folder mean less
+      complicated to me).
+    </p>
 
     <div>
       Feel free to ask me via
