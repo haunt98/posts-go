@@ -1,4 +1,4 @@
-.PHONY: all test test-color coverage coverage-cli coverage-html lint format gen format-html
+.PHONY: all test test-color coverage coverage-cli coverage-html lint format gen format-html srht
 
 all:
 	go mod tidy
@@ -41,3 +41,11 @@ gen:
 format-html:
 	bun install --no-save prettier
 	bun prettier --write .
+
+srht:
+	# https://srht.site/quickstart
+	go install git.sr.ht/~emersion/hut@latest
+	tar -C docs -cvz . > site.tar.gz
+	# Need to run hut init first
+	hut pages publish -d youngyoshie.srht.site site.tar.gz
+	rm -rf site.tar.gz
