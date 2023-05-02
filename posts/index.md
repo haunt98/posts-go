@@ -18,4 +18,4 @@ This is where I dump my thoughts.
 - [Games 4 fun](2023-04-01-games.html)
 - [Naming things](2023-04-17-naming.html)
 - [Keeb](2023-04-17-keeb.html)
-- [My neovim workflow](2023-05-03-neovim.md)
+- [My neovim workflow](2023-05-03-neovim.html)
