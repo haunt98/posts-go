@@ -7,6 +7,7 @@ all:
 	$(MAKE) format
 	$(MAKE) gen
 	$(MAKE) format-html
+	$(MAKE) srht
 
 test:
 	go test -race -failfast ./...

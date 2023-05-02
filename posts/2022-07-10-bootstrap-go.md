@@ -275,6 +275,9 @@ To learn and use those libs correctly is time consuming.
 So just stick to plain SQL.
 It is easier to debug when something is wrong.
 
+Also please use [prepared statement](https://go.dev/doc/database/prepared-statements) as much as possible.
+Idealy, we should init all prepared statement when we init database connection to cached it, not create it every time we need it.
+
 But `database/sql` has its own limit.
 For example, it is hard to get primary key after insert/update.
 So may be you want to use ORM for those cases.
@@ -332,6 +335,15 @@ Remember to config:
 - `ParseTime` to true.
 - `Loc` to `time.UTC`.
 - `CheckConnLiveness` to true.
+
+### Connect SQLite with [modernc.org/sqlite](https://gitlab.com/cznic/sqlite)
+
+Remember to config:
+
+- Write-Ahead Logging: `PRAGMA journal_mode=WAL`
+- Disable connections pool with `SetMaxOpenConns` sets to 1
+
+Don't use [mattn/go-sqlite3](https://github.com/mattn/go-sqlite3), it's required `CGO_ENABLED`.
 
 ### Connect Kafka with [Shopify/sarama](https://github.com/Shopify/sarama)
 
@@ -428,3 +440,4 @@ gofmt -w -r '"github.com/Sirupsen/logrus" -> "github.com/sirupsen/logrus"' *.go
 - [Fixing Memory Exhaustion Bugs in My Golang Web App](https://mtlynch.io/notes/picoshare-perf/)
 - [Prevent Logging Secrets in Go by Using Custom Types](https://www.commonfate.io/blog/prevent-logging-secrets-in-go-by-using-custom-types)
 - [Speed Up GoMock with Conditional Generation](https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen)
+- [Making SQLite faster in Go](https://turriate.com/articles/making-sqlite-faster-in-go)
