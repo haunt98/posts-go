@@ -552,6 +552,15 @@ internal
       debug when something is wrong.
     </p>
     <p>
+      Also please use
+      <a href="https://go.dev/doc/database/prepared-statements" rel="nofollow"
+        >prepared statement</a
+      >
+      as much as possible. Idealy, we should init all prepared statement when we
+      init database connection to cached it, not create it every time we need
+      it.
+    </p>
+    <p>
       But <code>database/sql</code> has its own limit. For example, it is hard
       to get primary key after insert/update. So may be you want to use ORM for
       those cases. I hear that
@@ -635,6 +644,30 @@ internal
       <li><code>Loc</code> to <code>time.UTC</code>.</li>
       <li><code>CheckConnLiveness</code> to true.</li>
     </ul>
+    <h3>
+      <a
+        id="user-content-connect-sqlite-with-moderncorgsqlite"
+        class="anchor"
+        aria-hidden="true"
+        href="#connect-sqlite-with-moderncorgsqlite"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Connect SQLite with
+      <a href="https://gitlab.com/cznic/sqlite" rel="nofollow"
+        >modernc.org/sqlite</a
+      >
+    </h3>
+    <p>Remember to config:</p>
+    <ul>
+      <li>Write-Ahead Logging: <code>PRAGMA journal_mode=WAL</code></li>
+      <li>
+        Disable connections pool with <code>SetMaxOpenConns</code> sets to 1
+      </li>
+    </ul>
+    <p>
+      Don't use
+      <a href="https://github.com/mattn/go-sqlite3">mattn/go-sqlite3</a>, it's
+      required <code>CGO_ENABLED</code>.
+    </p>
     <h3>
       <a
         id="user-content-connect-kafka-with-shopifysarama"
@@ -857,6 +890,13 @@ fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
           href="https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen"
           rel="nofollow"
           >Speed Up GoMock with Conditional Generation</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://turriate.com/articles/making-sqlite-faster-in-go"
+          rel="nofollow"
+          >Making SQLite faster in Go</a
         >
       </li>
     </ul>
