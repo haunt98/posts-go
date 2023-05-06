@@ -570,23 +570,6 @@ useradd -m -G wheel -s /usr/bin/zsh -c <span class="pl-s"><span class="pl-pds">"
 passwd joker</pre>
     </div>
     <p>
-      <a href="https://wiki.archlinux.org/title/Doas" rel="nofollow"
-        >doas (WIP)</a
-      >
-    </p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-pacman -Syu opendoas
-
-chown -c root:root /etc/doas.conf
-chmod -c 0400 /etc/doas.conf</pre
-      >
-    </div>
-    <p>Edit <code>/etc/doas.conf</code> (must end with a newline):</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>permit persist :wheel</pre>
-    </div>
-    <p>
       <a
         href="https://wiki.archlinux.org/index.php/Systemd-homed"
         rel="nofollow"
