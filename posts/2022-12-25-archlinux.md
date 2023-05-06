@@ -46,6 +46,9 @@ UEFI/GPT layout:
 | `/mnt/boot` | `/dev/extended_boot_loader_partition` | Extended Boot Loader Partition | 1 GiB          |
 | `/mnt`      | `/dev/root_partition`                 | Root Partition                 |                |
 
+Why not `/boot/efi`?
+See [Lennart Poettering comment](https://github.com/systemd/systemd/pull/3757#issuecomment-234290236).
+
 BIOS/GPT layout:
 
 | Mount point | Partition             | Partition type      | Suggested size |
