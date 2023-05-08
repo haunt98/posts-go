@@ -19,3 +19,4 @@ This is where I dump my thoughts.
 - [Naming things](2023-04-17-naming.html)
 - [Keeb](2023-04-17-keeb.html)
 - [My neovim workflow](2023-05-03-neovim.html)
+- [Things I like](2023-05-08-things-i-like.html)
