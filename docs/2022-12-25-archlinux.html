@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&family=Martian+Mono&family=Recursive&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&display=swap"
       rel="stylesheet"
     />
     <title>haunt98 posts</title>
@@ -32,13 +32,11 @@
 
     .markdown-body {
       font-family: "Inter", sans-serif;
-      <!-- font-family: "Recursive", sans-serif; -->
     }
 
     .markdown-body code,
     .markdown-body pre {
       font-family: "JetBrains Mono", monospace;
-      <!-- font-family: "Martian Mono", monospace; -->
     }
   </style>
   <body class="markdown-body">
@@ -615,9 +613,9 @@ homectl update joker --shell=/usr/bin/zsh</pre>
     <div class="highlight highlight-source-shell">
       <pre>pacman -Syu gnome-shell \
 	gnome-control-center gnome-system-monitor power-profiles-daemon \
-	gnome-tweaks gnome-backgrounds gnome-screenshot gnome-keyring gnome-logs gnome-firmware \
+	gnome-tweaks gnome-backgrounds gnome-firmware \
 	gnome-console gnome-text-editor \
-	nautilus xdg-user-dirs-gtk file-roller evince eog
+	nautilus xdg-user-dirs-gtk xdg-desktop-portal evince eog
 
 <span class="pl-c"><span class="pl-c">#</span> Login manager</span>
 pacman -Syu gdm
