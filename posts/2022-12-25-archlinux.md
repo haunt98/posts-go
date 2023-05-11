@@ -355,9 +355,9 @@ pacman -Syu xorg-server
 ```sh
 pacman -Syu gnome-shell \
 	gnome-control-center gnome-system-monitor power-profiles-daemon \
-	gnome-tweaks gnome-backgrounds gnome-screenshot gnome-keyring gnome-logs gnome-firmware \
+	gnome-tweaks gnome-backgrounds gnome-firmware \
 	gnome-console gnome-text-editor \
-	nautilus xdg-user-dirs-gtk file-roller evince eog
+	nautilus xdg-user-dirs-gtk xdg-desktop-portal evince eog
 
 # Login manager
 pacman -Syu gdm
