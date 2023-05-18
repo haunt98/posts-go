@@ -68,7 +68,7 @@
 <span class="pl-k">COPY</span> vendor .
 <span class="pl-k">COPY</span> . .
 
-<span class="pl-k">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath .
+<span class="pl-k">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags=<span class="pl-s">"-s -w"</span> .
 
 <span class="pl-k">FROM</span> gcr.io/distroless/base-debian11
 
@@ -136,7 +136,7 @@
       don't want each time I build Dockerfile, I need to redownload Go modules.
     </p>
     <div class="highlight highlight-source-dockerfile">
-      <pre><span class="pl-k">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath .</pre>
+      <pre><span class="pl-k">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags=<span class="pl-s">"-s -w"</span> .</pre>
     </div>
     <p>This is where I build Go program.</p>
     <p>
@@ -152,8 +152,9 @@
       >. TLDR's newer computers are already x86-64-v3.
     </p>
     <p>
-      <code>-tags timetzdata</code> to embed timezone database incase base image
-      does not have. <code>-trimpath</code> to support reproduce build.
+      <code>-tags timetzdata</code> to embed timezone database in case base
+      image does not have. <code>-trimpath</code> to support reproduce build.
+      <code>-ldflags="-s -w"</code> to strip debugging information.
     </p>
     <div class="highlight highlight-source-dockerfile">
       <pre><span class="pl-k">FROM</span> gcr.io/distroless/base-debian11
@@ -163,6 +164,23 @@
 <span class="pl-k">ENTRYPOINT</span> [<span class="pl-s">"/app"</span>]</pre>
     </div>
     <p>Finally, I copy <code>app</code> to Distroless base image.</p>
+    <p>Thanks</p>
+    <ul>
+      <li>
+        <a
+          href="https://boyter.org/posts/how-to-start-go-project-2023/"
+          rel="nofollow"
+          >How to start a Go project in 2023</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://words.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick/"
+          rel="nofollow"
+          >Shrink your Go binaries with this one weird trick</a
+        >
+      </li>
+    </ul>
 
     <div>
       Feel free to ask me via
