@@ -93,7 +93,7 @@ ENTRYPOINT ["/app"]
 
 Finally, I copy `app` to Distroless base image.
 
-Thanks
+## Thanks
 
 - [How to start a Go project in 2023](https://boyter.org/posts/how-to-start-go-project-2023/)
 - [Shrink your Go binaries with this one weird trick](https://words.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick/)
