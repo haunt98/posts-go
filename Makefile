@@ -40,8 +40,7 @@ gen:
 	go run .
 
 format-html:
-	bun install --no-save prettier
-	bun prettier --write .
+	bunx prettier --write .
 
 srht:
 	# https://srht.site/quickstart
