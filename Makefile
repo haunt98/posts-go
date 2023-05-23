@@ -40,7 +40,7 @@ gen:
 	go run .
 
 format-html:
-	bunx prettier --write .
+	bunx prettier --write ./posts ./templates ./docs
 
 srht:
 	# https://srht.site/quickstart
