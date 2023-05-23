@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <title>haunt98 posts</title>
+  </head>
+  <style>
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+
+    .markdown-body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .markdown-body code,
+    .markdown-body pre {
+      font-family: "JetBrains Mono", monospace;
+    }
+  </style>
+  <body class="markdown-body">
+    <div><a href="index.html">Index</a></div>
+    <h1>
+      <a
+        id="user-content-swagger-or-openapi"
+        class="anchor"
+        aria-hidden="true"
+        href="#swagger-or-openapi"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Swagger or OpenAPI
+    </h1>
+    <p>My company currently use Swagger 2 to document API.</p>
+    <p>
+      I want to work with OpenAPI 3 but too lazy to convert (for now of course).
+    </p>
+    <p>So step by step:</p>
+    <ul>
+      <li>Write API spec in <code>YAML</code>.</li>
+      <li>Convert to API spec in <code>JSON</code>.</li>
+      <li>Format spec files.</li>
+      <li>Render spec in local.</li>
+      <li>Push to company host for other teams to see.</li>
+    </ul>
+    <p>
+      Only step 1 is manual, aka I write my API spec completely with my hand (no
+      auto gen from code whatever). The others can be done with tools:
+    </p>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> Convert</span>
+go install github.com/mikefarah/yq/v4@latest
+yq -o=json <span class="pl-s"><span class="pl-pds">'</span>.<span class="pl-pds">'</span></span> ./docs/swagger.yaml <span class="pl-k">&gt;</span> ./docs/swagger.json
+
+<span class="pl-c"><span class="pl-c">#</span> Format</span>
+bunx prettier --write ./docs/swagger.yaml ./docs/swagger.json
+
+<span class="pl-c"><span class="pl-c">#</span> Render locally</span>
+bunx @redocly/cli preview-docs ./docs/swagger.json</pre>
+    </div>
+    <h2>
+      <a
+        id="user-content-thanks"
+        class="anchor"
+        aria-hidden="true"
+        href="#thanks"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Thanks
+    </h2>
+    <ul>
+      <li><a href="https://github.com/mikefarah/yq">mikefarah/yq</a></li>
+      <li><a href="https://github.com/oven-sh/bun">oven-sh/bun</a></li>
+      <li>
+        <a href="https://github.com/prettier/prettier">prettier/prettier</a>
+      </li>
+      <li>
+        <a href="https://github.com/Redocly/redocly-cli">Redocly/redocly-cli</a>
+      </li>
+    </ul>
+
+    <div>
+      Feel free to ask me via
+      <a href="mailto:hauvipapro+posts@gmail.com">email</a> or
+      <a rel="me" href="https://hachyderm.io/@haunguyen">Mastodon</a>. Source
+      code is available on
+      <a href="https://github.com/haunt98/posts-go">GitHub</a>
+    </div>
+  </body>
+</html>
