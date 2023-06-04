@@ -431,6 +431,12 @@ Change import:
 gofmt -w -r '"github.com/Sirupsen/logrus" -> "github.com/sirupsen/logrus"' *.go
 ```
 
+Cleanup if storage is full:
+
+```sh
+go clean -cache -testcache -modcache -fuzzcache -x
+```
+
 ## Thanks
 
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)

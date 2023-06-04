@@ -837,6 +837,10 @@ fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
     <div class="highlight highlight-source-shell">
       <pre>gofmt -w -r <span class="pl-s"><span class="pl-pds">'</span>"github.com/Sirupsen/logrus" -&gt; "github.com/sirupsen/logrus"<span class="pl-pds">'</span></span> <span class="pl-k">*</span>.go</pre>
     </div>
+    <p>Cleanup if storage is full:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>go clean -cache -testcache -modcache -fuzzcache -x</pre>
+    </div>
     <h2>
       <a
         id="user-content-thanks"
