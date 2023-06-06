@@ -9,11 +9,7 @@ All configs are in [my dotfiles](https://github.com/haunt98/dotfiles).
 
 ## Use [zellij-org/zellij](https://github.com/zellij-org/zellij) as alternative to tmux
 
-![Tab](https://zellij.dev/documentation/img/overview-status-tab-1.png)
-
-- `Ctrl + t` + `n` to new tab.
-
 ![](https://zellij.dev/documentation/img/overview-status-tab-2.png)
 
-- `Ctrl + p` + `n` to new panel vertically (right side).
-- `Ctrl + p` + `d` to new panel horizontally (down side).
+- `Ctrl + p` + `n` or `Alt + n` to new panel vertically (right side).
+- `Ctrl + p` + `d` or `Alt + d` to new panel horizontally (down side).
