@@ -21,3 +21,4 @@ This is where I dump my thoughts.
 - [My neovim workflow](2023-05-03-neovim.html)
 - [Things I like](2023-05-08-things-i-like.html)
 - [Swagger or OpenAPI](2023-05-23-swagger.html)
+- [Terminal workflow](2023-06-06-terminal-workflow.html)
