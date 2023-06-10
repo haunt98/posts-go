@@ -126,36 +126,6 @@ func main() {
 	doB(ctx)
 }
 
-func DisconnectContext(parent context.Context) context.Context {
-	if parent == nil {
-		return context.Background()
-	}
-
-	return disconnectedContext{
-		parent: parent,
-	}
-}
-
-type disconnectedContext struct {
-	parent context.Context
-}
-
-func (ctx disconnectedContext) Deadline() (deadline time.Time, ok bool) {
-	return
-}
-
-func (ctx disconnectedContext) Done() <-chan struct{} {
-	return nil
-}
-
-func (ctx disconnectedContext) Err() error {
-	return nil
-}
-
-func (ctx disconnectedContext) Value(key any) any {
-	return ctx.parent.Value(key)
-}
-
 func doA(ctx context.Context) {
 	ctx, ctxCancel := context.WithTimeout(ctx, 1*time.Second)
 	defer ctxCancel()
