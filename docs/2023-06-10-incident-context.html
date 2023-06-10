@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <title>haunt98 posts</title>
+  </head>
+  <style>
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+
+    .markdown-body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .markdown-body code,
+    .markdown-body pre {
+      font-family: "JetBrains Mono", monospace;
+    }
+  </style>
+  <body class="markdown-body">
+    <div><a href="index.html">Index</a></div>
+    <h1>
+      <a
+        id="user-content-another-day-another-incident-02"
+        class="anchor"
+        aria-hidden="true"
+        href="#another-day-another-incident-02"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Another day another incident #02
+    </h1>
+    <p>Today's incident is all about Go context.</p>
+    <p>TLDR: context got canceled, but it shouldn't.</p>
+    <h2>
+      <a
+        id="user-content-the-problem"
+        class="anchor"
+        aria-hidden="true"
+        href="#the-problem"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >The problem
+    </h2>
+    <p>Imagine a chain of APIs:</p>
+    <ul>
+      <li>Calling API A</li>
+      <li>Calling API B</li>
+    </ul>
+    <p>
+      Normally, if API A fails, API B should not be called. But what if API A is
+      <strong>optional</strong>, where either it successes or fails, API B
+      should be called anyway.
+    </p>
+    <p>My buggy code is like this:</p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-en">doA</span>(<span class="pl-s1">ctx</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+    <span class="pl-s1">log</span>.<span class="pl-en">Error</span>(<span class="pl-s1">err</span>)
+    <span class="pl-c">// Skip error</span>
+}
+
+<span class="pl-en">doB</span>(<span class="pl-s1">ctx</span>)</pre>
+    </div>
+    <p>
+      The problem is <code>doA</code> taking too long, so <code>ctx</code> is
+      canceled, and the parent of <code>ctx</code> is canceled too. So when
+      <code>doB</code> is called with <code>ctx</code>, it will be canceled too
+      (not what we want but sadly that what we got).
+    </p>
+    <p>
+      Example buggy code (<a
+        href="https://go.dev/play/p/p4S27Su16VH"
+        rel="nofollow"
+        >The Go Playground</a
+      >):
+    </p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">func</span> <span class="pl-en">main</span>() {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">cancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">context</span>.<span class="pl-en">Background</span>(), <span class="pl-c1">2</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-en">cancel</span>()
+
+	<span class="pl-en">doA</span>(<span class="pl-s1">ctx</span>)
+	<span class="pl-en">doB</span>(<span class="pl-s1">ctx</span>)
+}
+
+<span class="pl-k">func</span> <span class="pl-en">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
+
+	<span class="pl-k">select</span> {
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-en">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doA"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-en">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doA"</span>, <span class="pl-s1">ctx</span>.<span class="pl-en">Err</span>())
+	}
+}
+
+<span class="pl-k">func</span> <span class="pl-en">doB</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">3</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
+
+	<span class="pl-k">select</span> {
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-en">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doB"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-en">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doB"</span>, <span class="pl-s1">ctx</span>.<span class="pl-en">Err</span>())
+	}
+}</pre>
+    </div>
+    <p>The output is:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+doA context deadline exceeded
+doB context deadline exceeded</pre
+      >
+    </div>
+    <p>As you see both <code>doA</code> and <code>doB</code> are canceled.</p>
+    <h2>
+      <a
+        id="user-content-the-temporary-solution"
+        class="anchor"
+        aria-hidden="true"
+        href="#the-temporary-solution"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >The (temporary) solution
+    </h2>
+    <p>
+      Quick Google search leads me to
+      <a href="https://github.com/golang/go/issues/40221"
+        >context: add WithoutCancel #40221</a
+      >
+      and I quote:
+    </p>
+    <blockquote>
+      <p>
+        This is useful in multiple frequently recurring and important scenarios:
+      </p>
+      <ul>
+        <li>
+          Handling of rollback/cleanup operations in the context of an event
+          (e.g., HTTP request) that has to continue regardless of whether the
+          triggering event is canceled (e.g., due to timeout or the client going
+          away)
+        </li>
+        <li>
+          Handling of long-running operations triggered by an event (e.g., HTTP
+          request) that terminates before the termination of the long-running
+          operation
+        </li>
+      </ul>
+    </blockquote>
+    <p>
+      So beside waiting to upgrade to Go <code>1.21</code> to use
+      <code>context.WithoutCancel</code>, you can use this
+      <a href="https://pkg.go.dev/context@master#WithoutCancel" rel="nofollow"
+        >workaround code</a
+      >:
+    </p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">func</span> <span class="pl-en">DisconnectContext</span>(<span class="pl-s1">parent</span> context.<span class="pl-smi">Context</span>) context.<span class="pl-smi">Context</span> {
+	<span class="pl-k">if</span> <span class="pl-s1">parent</span> <span class="pl-c1">==</span> <span class="pl-c1">nil</span> {
+		<span class="pl-k">return</span> <span class="pl-s1">context</span>.<span class="pl-en">Background</span>()
+	}
+
+	<span class="pl-k">return</span> <span class="pl-smi">disconnectedContext</span>{
+		<span class="pl-c1">parent</span>: <span class="pl-s1">parent</span>,
+	}
+}
+
+<span class="pl-k">type</span> <span class="pl-smi">disconnectedContext</span> <span class="pl-k">struct</span> {
+	<span class="pl-c1">parent</span> context.<span class="pl-smi">Context</span>
+}
+
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Deadline</span>() (<span class="pl-s1">deadline</span> time.<span class="pl-smi">Time</span>, <span class="pl-s1">ok</span> <span class="pl-smi">bool</span>) {
+	<span class="pl-k">return</span>
+}
+
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Done</span>() <span class="pl-c1">&lt;-</span><span class="pl-k">chan</span> <span class="pl-k">struct</span>{} {
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
+}
+
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Err</span>() <span class="pl-smi">error</span> {
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
+}
+
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Value</span>(<span class="pl-s1">key</span> <span class="pl-smi">any</span>) <span class="pl-smi">any</span> {
+	<span class="pl-k">return</span> <span class="pl-s1">ctx</span>.<span class="pl-c1">parent</span>.<span class="pl-en">Value</span>(<span class="pl-s1">key</span>)
+}</pre>
+    </div>
+    <p>
+      So the buggy code becomes (<a
+        href="https://go.dev/play/p/oIU-WxEJ_F3"
+        rel="nofollow"
+        >The Go Playground</a
+      >):
+    </p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">func</span> <span class="pl-en">main</span>() {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">cancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">context</span>.<span class="pl-en">Background</span>(), <span class="pl-c1">2</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-en">cancel</span>()
+	<span class="pl-en">doA</span>(<span class="pl-s1">ctx</span>)
+	<span class="pl-en">doB</span>(<span class="pl-s1">ctx</span>)
+}
+
+<span class="pl-k">func</span> <span class="pl-en">DisconnectContext</span>(<span class="pl-s1">parent</span> context.<span class="pl-smi">Context</span>) context.<span class="pl-smi">Context</span> {
+	<span class="pl-k">if</span> <span class="pl-s1">parent</span> <span class="pl-c1">==</span> <span class="pl-c1">nil</span> {
+		<span class="pl-k">return</span> <span class="pl-s1">context</span>.<span class="pl-en">Background</span>()
+	}
+
+	<span class="pl-k">return</span> <span class="pl-smi">disconnectedContext</span>{
+		<span class="pl-c1">parent</span>: <span class="pl-s1">parent</span>,
+	}
+}
+
+<span class="pl-k">type</span> <span class="pl-smi">disconnectedContext</span> <span class="pl-k">struct</span> {
+	<span class="pl-c1">parent</span> context.<span class="pl-smi">Context</span>
+}
+
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Deadline</span>() (<span class="pl-s1">deadline</span> time.<span class="pl-smi">Time</span>, <span class="pl-s1">ok</span> <span class="pl-smi">bool</span>) {
+	<span class="pl-k">return</span>
+}
+
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Done</span>() <span class="pl-c1">&lt;-</span><span class="pl-k">chan</span> <span class="pl-k">struct</span>{} {
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
+}
+
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Err</span>() <span class="pl-smi">error</span> {
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
+}
+
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Value</span>(<span class="pl-s1">key</span> <span class="pl-smi">any</span>) <span class="pl-smi">any</span> {
+	<span class="pl-k">return</span> <span class="pl-s1">ctx</span>.<span class="pl-c1">parent</span>.<span class="pl-en">Value</span>(<span class="pl-s1">key</span>)
+}
+
+<span class="pl-k">func</span> <span class="pl-en">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
+
+	<span class="pl-k">select</span> {
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-en">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doA"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-en">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doA"</span>, <span class="pl-s1">ctx</span>.<span class="pl-en">Err</span>())
+	}
+}
+
+<span class="pl-k">func</span> <span class="pl-en">doB</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-en">DisconnectContext</span>(<span class="pl-s1">ctx</span>), <span class="pl-c1">3</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
+
+	<span class="pl-k">select</span> {
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-en">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doB"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-en">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doB"</span>, <span class="pl-s1">ctx</span>.<span class="pl-en">Err</span>())
+	}
+}</pre>
+    </div>
+    <p>The output is:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+doA context deadline exceeded
+doB</pre
+      >
+    </div>
+    <p>
+      As you see only <code>doA</code> is canceled, <code>doB</code> is done
+      perfectly. And that what we want in this case.
+    </p>
+
+    <div>
+      Feel free to ask me via
+      <a href="mailto:hauvipapro+posts@gmail.com">email</a> or
+      <a rel="me" href="https://hachyderm.io/@haunguyen">Mastodon</a>. Source
+      code is available on
+      <a href="https://github.com/haunt98/posts-go">GitHub</a>
+    </div>
+  </body>
+</html>
