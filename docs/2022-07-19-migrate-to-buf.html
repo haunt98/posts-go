@@ -66,11 +66,6 @@
     <p>FYI, the libs version I use:</p>
     <ul>
       <li>
-        <a href="https://github.com/golang/protobuf/releases/tag/v1.5.2"
-          >golang/protobuf v1.5.2</a
-        >
-      </li>
-      <li>
         <a
           href="https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0"
           >grpc-ecosystem/grpc-gateway v1.16.0</a
@@ -118,21 +113,21 @@
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
 <span class="pl-ent">plugins</span>:
-  - <span class="pl-ent">name</span>: <span class="pl-s">go</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/grpc/go:v1.2.0</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    <span class="pl-ent">opt</span>:
-      - <span class="pl-s">plugins=grpc</span>
-  - <span class="pl-ent">name</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v0.9.0</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.28.1</span>
+    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v0.9.0</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
     <span class="pl-ent">opt</span>:
       - <span class="pl-s">lang=go</span>
-  - <span class="pl-ent">name</span>: <span class="pl-s">marshal-zap</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">marshal-zap</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-  - <span class="pl-ent">name</span>: <span class="pl-s">grpc-gateway</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">grpc-gateway</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
     <span class="pl-ent">opt</span>:
       - <span class="pl-s">logtostderr=true</span>
-  - <span class="pl-ent">name</span>: <span class="pl-s">swagger</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">swagger</span>
     <span class="pl-ent">out</span>: <span class="pl-s">.</span>
     <span class="pl-ent">opt</span>:
       - <span class="pl-s">logtostderr=true</span></pre>
@@ -140,7 +135,6 @@
     <p>Update <code>Makefile</code>:</p>
     <div class="highlight highlight-source-makefile">
       <pre><span class="pl-en">gen</span>:
-  go install github.com/golang/protobuf/protoc-gen-go
   go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
@@ -157,6 +151,7 @@
     </p>
     <div class="highlight highlight-source-makefile">
       <pre><span class="pl-en">raw</span>:
+    mkdir -p ./raw
     cp ./api.proto ./raw/
     sed -i "" -e "s/import \"validate\/validate\.proto\";//g" ./raw/api.proto
     sed -i "" -e "s/\[(validate\.rules)\.string.min_len = 1\]//g" ./raw/api.proto

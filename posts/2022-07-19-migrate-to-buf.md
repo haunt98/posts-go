@@ -10,7 +10,6 @@ We need 3 files:
 
 FYI, the libs version I use:
 
-- [golang/protobuf v1.5.2](https://github.com/golang/protobuf/releases/tag/v1.5.2)
 - [grpc-ecosystem/grpc-gateway v1.16.0](https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0)
 - [bufbuild/protoc-gen-validate](github.com/bufbuild/protoc-gen-validate)
 - [kei2100/protoc-gen-marshal-zap](github.com/kei2100/protoc-gen-marshal-zap)
@@ -51,21 +50,21 @@ lint:
 ```yaml
 version: v1
 plugins:
-  - name: go
+  - plugin: buf.build/grpc/go:v1.2.0
     out: pkg
-    opt:
-      - plugins=grpc
-  - name: buf.build/bufbuild/validate-go:v0.9.0
+  - plugin: buf.build/protocolbuffers/go:v1.28.1
+    out: pkg
+  - plugin: buf.build/bufbuild/validate-go:v0.9.0
     out: pkg
     opt:
       - lang=go
-  - name: marshal-zap
+  - plugin: marshal-zap
     out: pkg
-  - name: grpc-gateway
+  - plugin: grpc-gateway
     out: pkg
     opt:
       - logtostderr=true
-  - name: swagger
+  - plugin: swagger
     out: .
     opt:
       - logtostderr=true
@@ -75,7 +74,6 @@ Update `Makefile`:
 
 ```Makefile
 gen:
-  go install github.com/golang/protobuf/protoc-gen-go
   go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
   go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
@@ -91,6 +89,7 @@ If using `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`, bette
 
 ```Makefile
 raw:
+    mkdir -p ./raw
     cp ./api.proto ./raw/
     sed -i "" -e "s/import \"validate\/validate\.proto\";//g" ./raw/api.proto
     sed -i "" -e "s/\[(validate\.rules)\.string.min_len = 1\]//g" ./raw/api.proto
