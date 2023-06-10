@@ -160,3 +160,8 @@ doB
 
 As you see only `doA` is canceled, `doB` is done perfectly.
 And that what we want in this case.
+
+## Thanks
+
+- [Using Context in Golang - Cancellation, Timeouts and Values (With Examples)](https://www.sohamkamani.com/golang/context-cancellation-and-values/)
+- [Go Context timeouts can be harmful](https://uptrace.dev/blog/golang-context-timeout.html)
