@@ -221,36 +221,6 @@ doB context deadline exceeded</pre
 	<span class="pl-en">doB</span>(<span class="pl-s1">ctx</span>)
 }
 
-<span class="pl-k">func</span> <span class="pl-en">DisconnectContext</span>(<span class="pl-s1">parent</span> context.<span class="pl-smi">Context</span>) context.<span class="pl-smi">Context</span> {
-	<span class="pl-k">if</span> <span class="pl-s1">parent</span> <span class="pl-c1">==</span> <span class="pl-c1">nil</span> {
-		<span class="pl-k">return</span> <span class="pl-s1">context</span>.<span class="pl-en">Background</span>()
-	}
-
-	<span class="pl-k">return</span> <span class="pl-smi">disconnectedContext</span>{
-		<span class="pl-c1">parent</span>: <span class="pl-s1">parent</span>,
-	}
-}
-
-<span class="pl-k">type</span> <span class="pl-smi">disconnectedContext</span> <span class="pl-k">struct</span> {
-	<span class="pl-c1">parent</span> context.<span class="pl-smi">Context</span>
-}
-
-<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Deadline</span>() (<span class="pl-s1">deadline</span> time.<span class="pl-smi">Time</span>, <span class="pl-s1">ok</span> <span class="pl-smi">bool</span>) {
-	<span class="pl-k">return</span>
-}
-
-<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Done</span>() <span class="pl-c1">&lt;-</span><span class="pl-k">chan</span> <span class="pl-k">struct</span>{} {
-	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
-}
-
-<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Err</span>() <span class="pl-smi">error</span> {
-	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
-}
-
-<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Value</span>(<span class="pl-s1">key</span> <span class="pl-smi">any</span>) <span class="pl-smi">any</span> {
-	<span class="pl-k">return</span> <span class="pl-s1">ctx</span>.<span class="pl-c1">parent</span>.<span class="pl-en">Value</span>(<span class="pl-s1">key</span>)
-}
-
 <span class="pl-k">func</span> <span class="pl-en">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
 	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
 	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
