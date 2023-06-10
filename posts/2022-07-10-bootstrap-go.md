@@ -325,6 +325,10 @@ func (c *client) HSetWithExpire(ctx context.Context, key string, values []any, e
 }
 ```
 
+Remember to config:
+
+- `ReadTimeout`, `WriteTimeout`
+
 ### Connect MySQL with [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)
 
 Remember to config:
@@ -335,6 +339,7 @@ Remember to config:
 - `ParseTime` to true.
 - `Loc` to `time.UTC`.
 - `CheckConnLiveness` to true.
+- `ReadTimeout`, `WriteTimeout`
 
 ### Connect SQLite with [modernc.org/sqlite](https://gitlab.com/cznic/sqlite)
 

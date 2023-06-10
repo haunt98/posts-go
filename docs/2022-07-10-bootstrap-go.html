@@ -623,6 +623,10 @@ internal
 	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 }</pre>
     </div>
+    <p>Remember to config:</p>
+    <ul>
+      <li><code>ReadTimeout</code>, <code>WriteTimeout</code></li>
+    </ul>
     <h3>
       <a
         id="user-content-connect-mysql-with-go-sql-drivermysql"
@@ -641,6 +645,7 @@ internal
       <li><code>ParseTime</code> to true.</li>
       <li><code>Loc</code> to <code>time.UTC</code>.</li>
       <li><code>CheckConnLiveness</code> to true.</li>
+      <li><code>ReadTimeout</code>, <code>WriteTimeout</code></li>
     </ul>
     <h3>
       <a
