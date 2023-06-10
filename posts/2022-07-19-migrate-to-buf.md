@@ -39,7 +39,7 @@ deps:
   - buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7
 breaking:
   use:
-    - FILE
+    - PACKAGE
 lint:
   use:
     - DEFAULT
