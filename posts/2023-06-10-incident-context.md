@@ -12,7 +12,7 @@ Imagine a chain of APIs:
 - Calling API B
 
 Normally, if API A fails, API B should not be called.
-But what if API A is **optional**, where either it successes or fails, API B should be called anyway.
+But what if API A is **optional**, whether it successes or fails, API B should be called anyway.
 
 My buggy code is like this:
 
