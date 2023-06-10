@@ -50,10 +50,121 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >My neovim workflow
     </h1>
+    <p>
+      All configs are in
+      <a href="https://github.com/haunt98/dotfiles">my dotfiles</a>.
+    </p>
+    <p>Use both <code>\</code> and <code>;</code> as leader key.</p>
     <p>Search multiple words:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>:/\vword1|word2|word3</pre>
+    <div class="highlight highlight-source-viml">
+      <pre>:/<span class="pl-cce">\v</span>word1|word2|word3</pre>
     </div>
+    <p>Replace word:</p>
+    <div class="highlight highlight-source-viml">
+      <pre>:<span class="pl-k">%</span><span class="pl-c1">s</span><span class="pl-sr">/word1/</span>word2/<span class="pl-c1">g</span></pre>
+    </div>
+    <p>Jump basic:</p>
+    <ul>
+      <li><code>gg</code>: first line</li>
+      <li><code>G</code>: last line</li>
+      <li><code>0</code>: first character of line</li>
+      <li><code>$</code>: last character of line</li>
+      <li><code>w</code>, <code>b</code>: word forward/backward</li>
+    </ul>
+    <p>Jump advance:</p>
+    <ul>
+      <li>
+        <code>CTRL-O</code>, <code>CTRL-I</code>: cursor position
+        backward/forward
+      </li>
+      <li>: jump forward cursor position</li>
+      <li><code>(</code>, <code>)</code>: sentence backward/forward</li>
+      <li><code>{</code>, <code>}</code>: paragraph backward/forward</li>
+      <li><code>H</code>: top of screen</li>
+      <li><code>M</code>: middle of screen</li>
+      <li><code>L</code>: bottom of screen</li>
+      <li>
+        <code>CTRL-]</code>, <code>CTRL-T</code>: jump to tag/jump back from tag
+        <ul>
+          <li>
+            Support jump to golang definition with
+            <a href="https://github.com/fatih/vim-go">fatih/vim-go</a>.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>Keymap for plugin (sync with dotfiles):</p>
+    <div class="highlight highlight-source-lua">
+      <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;f<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:FZF&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;rg<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:Rg&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;C-n&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:NvimTreeToggle&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:NvimTreeFindFile&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;z<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:ZenMode&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;tr<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:lua MiniTrailspace.trim()&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;F2&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoRename&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gf<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoFillStruct&lt;CR&gt;:w&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gat<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoAlternate&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gt<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoTest&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gr<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoReferrers&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gcv<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoCoverage&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gdd<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoDeclsDir&lt;CR&gt;<span class="pl-pds">"</span></span>)</pre>
+    </div>
+    <ul>
+      <li>
+        With
+        <a
+          href="https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-comment.md"
+          >echasnovski/mini.nvim mini-comment</a
+        >
+        <ul>
+          <li><code>gcc</code>: comment/uncomment current line</li>
+          <li><code>gc</code>: comment/uncomment selected lines</li>
+        </ul>
+      </li>
+      <li>
+        With
+        <a
+          href="https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md"
+          >echasnovski/mini.nvim mini-bracketed</a
+        >
+        <ul>
+          <li><code>[b</code>, <code>]b</code>: buffer backward/forward</li>
+          <li>
+            <code>[T</code>, <code>]T</code>, <code>[t</code>, <code>]t</code>:
+            tree-sitter backward/forward
+            <ul>
+              <li>
+                Support more languages with
+                <a href="https://github.com/nvim-treesitter/nvim-treesitter"
+                  >nvim-treesitter/nvim-treesitter</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2>
+      <a
+        id="user-content-reference"
+        class="anchor"
+        aria-hidden="true"
+        href="#reference"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Reference
+    </h2>
+    <ul>
+      <li>
+        <a href="https://neovim.io/doc/user/motion.html" rel="nofollow"
+          >neovim Motion</a
+        >
+      </li>
+      <li>
+        <a href="http://neovim.io/doc/user/tagsrch.html" rel="nofollow"
+          >neovim Tagsrch</a
+        >
+      </li>
+    </ul>
 
     <div>
       Feel free to ask me via
