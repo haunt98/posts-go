@@ -22,3 +22,4 @@ This is where I dump my thoughts.
 - [Things I like](2023-05-08-things-i-like.html)
 - [Swagger or OpenAPI](2023-05-23-swagger.html)
 - [Terminal workflow](2023-06-06-terminal-workflow.html)
+- [Incident #02](2023-06-10-incident-context.html)
