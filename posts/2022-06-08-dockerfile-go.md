@@ -74,14 +74,13 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags tim
 
 This is where I build Go program.
 
-`CGO_ENABLED=0` because I don't want to mess with C libraries.
-`GOOS=linux GOARCH=amd64` is easy to explain, Linux with x86-64.
-`GOAMD64=v3` is new since [Go 1.18](https://go.dev/doc/go1.18#amd64),
-I use v3 because I read about AMD64 version in [Arch Linux rfcs](https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst). TLDR's newer computers are already x86-64-v3.
-
-`-tags timetzdata` to embed timezone database in case base image does not have.
-`-trimpath` to support reproduce build.
-`-ldflags="-s -w"` to strip debugging information.
+- `CGO_ENABLED=0` because I don't want to mess with C libraries.
+- `GOOS=linux GOARCH=amd64` is easy to explain, Linux with x86-64.
+- `GOAMD64=v3` is new since [Go 1.18](https://go.dev/doc/go1.18#amd64),
+  I use v3 because I read about AMD64 version in [Arch Linux rfcs](https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst). TLDR's newer computers are already x86-64-v3.
+- `-tags timetzdata` to embed timezone database in case base image does not have.
+- `-trimpath` to support reproduce build.
+- `-ldflags="-s -w"` to strip debugging information.
 
 ```Dockerfile
 FROM gcr.io/distroless/base-debian11

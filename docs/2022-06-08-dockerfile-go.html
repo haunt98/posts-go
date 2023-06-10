@@ -139,23 +139,32 @@
       <pre><span class="pl-k">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags=<span class="pl-s">"-s -w"</span> .</pre>
     </div>
     <p>This is where I build Go program.</p>
-    <p>
-      <code>CGO_ENABLED=0</code> because I don't want to mess with C libraries.
-      <code>GOOS=linux GOARCH=amd64</code> is easy to explain, Linux with
-      x86-64. <code>GOAMD64=v3</code> is new since
-      <a href="https://go.dev/doc/go1.18#amd64" rel="nofollow">Go 1.18</a>, I
-      use v3 because I read about AMD64 version in
-      <a
-        href="https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst"
-        rel="nofollow"
-        >Arch Linux rfcs</a
-      >. TLDR's newer computers are already x86-64-v3.
-    </p>
-    <p>
-      <code>-tags timetzdata</code> to embed timezone database in case base
-      image does not have. <code>-trimpath</code> to support reproduce build.
-      <code>-ldflags="-s -w"</code> to strip debugging information.
-    </p>
+    <ul>
+      <li>
+        <code>CGO_ENABLED=0</code> because I don't want to mess with C
+        libraries.
+      </li>
+      <li>
+        <code>GOOS=linux GOARCH=amd64</code> is easy to explain, Linux with
+        x86-64.
+      </li>
+      <li>
+        <code>GOAMD64=v3</code> is new since
+        <a href="https://go.dev/doc/go1.18#amd64" rel="nofollow">Go 1.18</a>, I
+        use v3 because I read about AMD64 version in
+        <a
+          href="https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst"
+          rel="nofollow"
+          >Arch Linux rfcs</a
+        >. TLDR's newer computers are already x86-64-v3.
+      </li>
+      <li>
+        <code>-tags timetzdata</code> to embed timezone database in case base
+        image does not have.
+      </li>
+      <li><code>-trimpath</code> to support reproduce build.</li>
+      <li><code>-ldflags="-s -w"</code> to strip debugging information.</li>
+    </ul>
     <div class="highlight highlight-source-dockerfile">
       <pre><span class="pl-k">FROM</span> gcr.io/distroless/base-debian11
 
