@@ -63,7 +63,7 @@
       <li><code>buf.yaml</code></li>
       <li><code>buf.gen.yaml</code></li>
     </ul>
-    <p>FYI, the libs version I use:</p>
+    <p>FYI, I use:</p>
     <ul>
       <li>
         <a
@@ -113,11 +113,11 @@
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
 <span class="pl-ent">plugins</span>:
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/grpc/go:v1.2.0</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/grpc/go:v1.3.0</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.28.1</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.30.0</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v0.9.0</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.0.1</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
     <span class="pl-ent">opt</span>:
       - <span class="pl-s">lang=go</span>
@@ -208,6 +208,22 @@
         >
         to make sure each time you update proto, you don't break backward
         compatibility.
+      </li>
+    </ul>
+    <h1>
+      <a id="user-content-tips" class="anchor" aria-hidden="true" href="#tips"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Tips
+    </h1>
+    <p>Some experience I got after writing proto files for a living:</p>
+    <ul>
+      <li>
+        Ignore DRY (Do not Repeat Yourself) when handling proto, don't split
+        proto into many files. Trust me, it saves you from wasting time to debug
+        how to import Go after generated. Because proto import and Go import is
+        <a href="https://github.com/golang/protobuf/issues/895">2</a> different
+        things. If someone already have split proto files, you should use
+        <code>sed</code> to fix the damn things.
       </li>
     </ul>
     <h2>
