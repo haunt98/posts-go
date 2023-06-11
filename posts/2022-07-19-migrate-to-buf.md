@@ -8,7 +8,7 @@ We need 3 files:
 - `buf.yaml`
 - `buf.gen.yaml`
 
-FYI, the libs version I use:
+FYI, I use:
 
 - [grpc-ecosystem/grpc-gateway v1.16.0](https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0)
 - [bufbuild/protoc-gen-validate](github.com/bufbuild/protoc-gen-validate)
@@ -50,11 +50,11 @@ lint:
 ```yaml
 version: v1
 plugins:
-  - plugin: buf.build/grpc/go:v1.2.0
+  - plugin: buf.build/grpc/go:v1.3.0
     out: pkg
-  - plugin: buf.build/protocolbuffers/go:v1.28.1
+  - plugin: buf.build/protocolbuffers/go:v1.30.0
     out: pkg
-  - plugin: buf.build/bufbuild/validate-go:v0.9.0
+  - plugin: buf.build/bufbuild/validate-go:v1.0.1
     out: pkg
     opt:
       - lang=go
@@ -117,6 +117,15 @@ If you are not migrate but start from scratch:
 
 - Add `buf lint` to make sure your proto is good.
 - Add `buf breaking --against "https://your-grpc-repo-goes-here.git"` to make sure each time you update proto, you don't break backward compatibility.
+
+# Tips
+
+Some experience I got after writing proto files for a living:
+
+- Ignore DRY (Do not Repeat Yourself) when handling proto, don't split proto into many files.
+  Trust me, it saves you from wasting time to debug how to import Go after generated.
+  Because proto import and Go import is [2](https://github.com/golang/protobuf/issues/895) different things.
+  If someone already have split proto files, you should use `sed` to fix the damn things.
 
 ## Thanks
 
