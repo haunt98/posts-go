@@ -126,8 +126,23 @@
     </p>
     <p>For example, create index in MySQL:</p>
     <div class="highlight highlight-source-sql">
-      <pre><span class="pl-k">CREATE</span> <span class="pl-k">INDEX</span> `<span class="pl-en">idx_timestamp</span>`
-    <span class="pl-k">ON</span> <span class="pl-s"><span class="pl-pds">`</span>user_upload<span class="pl-pds">`</span></span> (<span class="pl-s"><span class="pl-pds">`</span>timestamp<span class="pl-pds">`</span></span>);</pre>
+      <pre><span class="pl-k">CREATE</span> <span class="pl-k">INDEX</span> <span class="pl-en">idx_user_id</span>
+    <span class="pl-k">ON</span> user_upload (user_id);</pre>
+    </div>
+    <p>
+      If create index inside <code>CREATE TABLE</code>,
+      <a href="https://stackoverflow.com/a/1401615" rel="nofollow"
+        >prefer <code>INDEX</code> to <code>KEY</code></a
+      >:
+    </p>
+    <div class="highlight highlight-source-sql">
+      <pre><span class="pl-k">CREATE</span> <span class="pl-k">TABLE</span> <span class="pl-en">user_upload</span>
+(
+    id      <span class="pl-k">int</span>(<span class="pl-c1">11</span>) <span class="pl-k">NOT NULL</span>,
+    user_id <span class="pl-k">int</span>(<span class="pl-c1">11</span>) <span class="pl-k">NULL</span> DEFAULT <span class="pl-k">NULL</span>,
+    <span class="pl-k">PRIMARY KEY</span> (id),
+    INDEX idx_user_id (user_id)
+);</pre>
     </div>
     <p>Use <code>EXPLAIN</code> to check if index is used or not:</p>
     <ul>
@@ -187,6 +202,15 @@
       Prefer <code>VARCHAR</code> if you need to query and of course use index,
       and make sure size of value will never hit the limit. Prefer
       <code>TEXT</code> if you don't care, just want to store something.
+    </p>
+    <h2>
+      <a id="user-content-limit" class="anchor" aria-hidden="true" href="#limit"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><code>LIMIT</code>
+    </h2>
+    <p>
+      Prefer <code>LIMIT 10 OFFSET 5</code> to <code>LIMIT 5, 10</code> to avoid
+      misunderstanding.
     </p>
     <h2>
       <a
