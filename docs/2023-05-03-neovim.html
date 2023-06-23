@@ -113,7 +113,8 @@
     <p>Keymap for plugin (sync with dotfiles):</p>
     <div class="highlight highlight-source-lua">
       <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;f<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:FZF&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;rg<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:Rg&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;rg<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:FZFRg&lt;CR&gt;<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;cm<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:FZFCommands&lt;CR&gt;<span class="pl-pds">"</span></span>)
 vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;C-n&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:NvimTreeToggle&lt;CR&gt;<span class="pl-pds">"</span></span>)
 vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:NvimTreeFindFile&lt;CR&gt;<span class="pl-pds">"</span></span>)
 vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;tr<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:lua MiniTrailspace.trim()&lt;CR&gt;<span class="pl-pds">"</span></span>)
@@ -128,44 +129,65 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
     <ul>
       <li>
         With
-        <a
-          href="https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-comment.md"
-          >echasnovski/mini.nvim mini-comment</a
-        >
+        <a href="https://github.com/nvim-tree/nvim-tree.lua"
+          >nvim-tree/nvim-tree.lua</a
+        >, inside nvim-tree:
         <ul>
-          <li><code>gcc</code>: comment/uncomment current line</li>
-          <li><code>gc</code>: comment/uncomment selected lines</li>
+          <li><code>d</code>: delete</li>
+          <li><code>r</code>: rename</li>
+          <li><code>x</code>: cut</li>
+          <li><code>c</code>: copy</li>
+          <li><code>p</code>: paste</li>
         </ul>
       </li>
       <li>
         With
-        <a
-          href="https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md"
-          >echasnovski/mini.nvim mini-bracketed</a
-        >
-        <ul>
-          <li><code>[b</code>, <code>]b</code>: buffer backward/forward</li>
-          <li>
-            <code>[T</code>, <code>]T</code>, <code>[t</code>, <code>]t</code>:
-            tree-sitter backward/forward
-            <ul>
-              <li>
-                Support more languages with
-                <a href="https://github.com/nvim-treesitter/nvim-treesitter"
-                  >nvim-treesitter/nvim-treesitter</a
-                >
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>
-        With
-        <a href="https://github.com/airblade/vim-gitgutter"
-          >airblade/vim-gitgutter</a
+        <a href="https://github.com/lewis6991/gitsigns.nvim"
+          >lewis6991/gitsigns.nvim</a
         >:
         <ul>
           <li><code>]c</code>, <code>[c</code>: next/previous git change</li>
+        </ul>
+      </li>
+      <li>
+        With
+        <a href="https://github.com/echasnovski/mini.nvim"
+          >echasnovski/mini.nvim</a
+        >
+        <ul>
+          <li>
+            With mini-bracketed
+            <ul>
+              <li><code>[b</code>, <code>]b</code>: buffer backward/forward</li>
+              <li>
+                <code>[T</code>, <code>]T</code>, <code>[t</code>,
+                <code>]t</code>: tree-sitter backward/forward
+                <ul>
+                  <li>
+                    Support more languages with
+                    <a href="https://github.com/nvim-treesitter/nvim-treesitter"
+                      >nvim-treesitter/nvim-treesitter</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            With mini-comment
+            <ul>
+              <li><code>gcc</code>: comment/uncomment current line</li>
+              <li><code>gc</code>: comment/uncomment selected lines</li>
+            </ul>
+          </li>
+          <li>
+            With mini-surround
+            <ul>
+              <li><code>sa</code>: add surround</li>
+              <li><code>sd</code>: delete surround</li>
+              <li><code>sr</code>: replace surround</li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
