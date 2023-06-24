@@ -24,3 +24,4 @@ This is where I dump my thoughts.
 - [Terminal workflow](2023-06-06-terminal-workflow.html)
 - [Incident #02](2023-06-10-incident-context.html)
 - [Khoan cắt bê tông 101](2023-06-24-khoan-cat-be-tong.html)
+- [Useful tools](2023-06-25-useful-tools.html)
