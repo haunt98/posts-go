@@ -360,7 +360,7 @@ It is easy to write a suite test, thanks to testify.
 Also, for mocking, there are many options out there.
 Pick 1 then sleep peacefully.
 
-### If need to mock, choose [matryer/moq](https://github.com/matryer/moq) or [golang/mock](https://github.com/golang/mock)
+### If need to mock, choose [matryer/moq](https://github.com/matryer/moq) or [uber/mock](https://github.com/uber/mock)
 
 The first is easy to use but not powerful as the later.
 If you want to make sure mock func is called with correct times, use the later.
