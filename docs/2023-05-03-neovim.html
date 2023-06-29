@@ -65,7 +65,11 @@
       All configs are in
       <a href="https://github.com/haunt98/dotfiles">my dotfiles</a>.
     </p>
-    <p>Use both <code>\</code> and <code>;</code> as leader key.</p>
+    <p>Use both <code>\</code> and <code>;</code> as leader key:</p>
+    <div class="highlight highlight-source-lua">
+      <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>q<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:q&lt;CR&gt;<span class="pl-pds">"</span></span>)</pre>
+    </div>
     <p>Search multiple words:</p>
     <div class="highlight highlight-source-viml">
       <pre>:/<span class="pl-cce">\v</span>word1|word2|word3</pre>
@@ -120,14 +124,7 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
 vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;cm<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:FZFCommands&lt;CR&gt;<span class="pl-pds">"</span></span>)
 vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;C-n&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:NvimTreeToggle&lt;CR&gt;<span class="pl-pds">"</span></span>)
 vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:NvimTreeFindFile&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;tr<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:lua MiniTrailspace.trim()&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;F2&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoRename&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gf<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoFillStruct&lt;CR&gt;:w&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gat<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoAlternate&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gt<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoTest&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gr<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoReferrers&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gcv<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoCoverage&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;gdd<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:GoDeclsDir&lt;CR&gt;<span class="pl-pds">"</span></span>)</pre>
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;tr<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:lua MiniTrailspace.trim()&lt;CR&gt;<span class="pl-pds">"</span></span>)</pre>
     </div>
     <ul>
       <li>
@@ -193,6 +190,18 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
               <li><code>sr</code>: replace surround</li>
             </ul>
           </li>
+        </ul>
+      </li>
+      <li>
+        With
+        <a href="https://github.com/neovim/nvim-lspconfig"
+          >neovim/nvim-lspconfig</a
+        >
+        <ul>
+          <li><code>gd</code>: go to definition</li>
+          <li><code>gr</code>: go to references</li>
+          <li><code>K</code>: hover</li>
+          <li><code>&lt;F2&gt;</code>: rename</li>
         </ul>
       </li>
     </ul>
