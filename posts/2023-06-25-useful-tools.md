@@ -111,10 +111,15 @@ Memory
 
 #### Go
 
+- https://github.com/golang/tools/tree/master/gopls
+- https://github.com/bufbuild/buf-language-server
 - https://github.com/mvdan/gofumpt
+- https://github.com/gotestyourself/gotestsum
+
+Memory
+
 - https://github.com/maruel/panicparse
 - https://github.com/go101/golds
-- https://github.com/gotestyourself/gotestsum
 - https://github.com/burrowers/garble
 
 ### UI
