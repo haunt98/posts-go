@@ -88,7 +88,6 @@
 <span class="pl-c">// +build tools</span>
 
 <span class="pl-k">import</span> (
-  _ <span class="pl-s">"github.com/golang/protobuf/protoc-gen-go"</span>
   _ <span class="pl-s">"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"</span>
   _ <span class="pl-s">"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"</span>
   _ <span class="pl-s">"github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap"</span>
@@ -115,9 +114,9 @@
 <span class="pl-ent">plugins</span>:
   - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/grpc/go:v1.3.0</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.30.0</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.31.0</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.0.1</span>
+  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.0.2</span>
     <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
     <span class="pl-ent">opt</span>:
       - <span class="pl-s">lang=go</span>
