@@ -21,7 +21,6 @@ FYI, I use:
 // +build tools
 
 import (
-  _ "github.com/golang/protobuf/protoc-gen-go"
   _ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"
   _ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"
   _ "github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap"
@@ -52,9 +51,9 @@ version: v1
 plugins:
   - plugin: buf.build/grpc/go:v1.3.0
     out: pkg
-  - plugin: buf.build/protocolbuffers/go:v1.30.0
+  - plugin: buf.build/protocolbuffers/go:v1.31.0
     out: pkg
-  - plugin: buf.build/bufbuild/validate-go:v1.0.1
+  - plugin: buf.build/bufbuild/validate-go:v1.0.2
     out: pkg
     opt:
       - lang=go
