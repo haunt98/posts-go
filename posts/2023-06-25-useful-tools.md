@@ -114,6 +114,8 @@ Memory
 - https://github.com/golang/tools/tree/master/gopls
 - https://github.com/bufbuild/buf-language-server
 - https://github.com/mvdan/gofumpt
+- https://github.com/golangci/golangci-lint
+- https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment
 - https://github.com/gotestyourself/gotestsum
 
 Memory
