@@ -265,6 +265,35 @@ restic -r rclone:remote:PrivateData restore latest --target <span class="pl-k">~
       cloud completely. Because if I want to access my OTPs in the cloud, I
       should log in, and then input my OTP, this is a circle, my friends.
     </p>
+    <h3>
+      <a
+        id="user-content-backup-work-related-data"
+        class="anchor"
+        aria-hidden="true"
+        href="#backup-work-related-data"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Backup work related data
+    </h3>
+    <p>APIs tools:</p>
+    <ul>
+      <li>
+        <a href="https://insomnia.rest/" rel="nofollow">Insomnia</a>
+        <ul>
+          <li>Use Import/Export then push data to git repo.</li>
+          <li>Don't pay (for now), use only offline mode.</li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://httpie.io/app" rel="nofollow">HTTPie</a>
+        <ul>
+          <li>Already sync online (for now).</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      Stay away from Postman, it's lag and you can accidentally upload private
+      data publicly.
+    </p>
     <h2>
       <a
         id="user-content-recovery-strategy"
@@ -321,6 +350,8 @@ restic -r rclone:remote:PrivateData restore latest --target <span class="pl-k">~
         [ ] Convert as many as GMail accounts as possible to SimpleLogin/Proton
         Mail.
       </li>
+      <li>[ ] Use Tailscale to selfhost Bitwarden server.</li>
+      <li>[ ] Stop rely on Google Keep</li>
     </ul>
     <h2>
       <a
