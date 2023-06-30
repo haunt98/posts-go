@@ -40,6 +40,7 @@ gen:
 	go run .
 
 format-html:
+	bun upgrade
 	bunx prettier --write ./posts ./templates ./docs
 
 srht:
