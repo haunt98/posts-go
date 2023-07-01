@@ -96,10 +96,22 @@ Memory
 - https://github.com/Schniz/fnm
 - https://github.com/sdkman/sdkman-cli
 - https://github.com/oven-sh/bun
+
+Format
+
 - https://github.com/prettier/prettier
 - https://github.com/mvdan/sh
 - https://github.com/JohnnyMorganz/StyLua
 - https://github.com/tamasfe/taplo
+
+Language server
+
+- https://github.com/golang/tools/tree/master/gopls
+- https://github.com/bufbuild/buf-language-server
+- https://github.com/luals/lua-language-server
+
+Misc
+
 - https://github.com/mikefarah/yq
 - https://github.com/stedolan/jq
 
@@ -115,8 +127,6 @@ Memory
 
 #### Go
 
-- https://github.com/golang/tools/tree/master/gopls
-- https://github.com/bufbuild/buf-language-server
 - https://github.com/mvdan/gofumpt
 - https://github.com/golangci/golangci-lint
 - https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment
