@@ -22,11 +22,11 @@ This just a raw list.
 - https://github.com/rclone/rclone
 - https://github.com/restic/restic
 - https://github.com/dbrgn/tealdeer
-- https://github.com/charmbracelet/glow
 - https://github.com/GothenburgBitFactory/taskwarrior
 - https://github.com/dundee/gdu
 - https://github.com/muesli/duf
-- https://github.com/extrawurst/gitui
+- https://github.com/charmbracelet/glow
+- https://github.com/sharkdp/vivid
 
 Memory
 
@@ -34,23 +34,27 @@ Memory
 - https://github.com/Wilfred/difftastic
 - https://dev.yorhel.nl/ncdu
 - https://github.com/wustho/epr
+- https://github.com/extrawurst/gitui
 
 For fun
 
-- https://github.com/htop-dev/htop
-- https://github.com/aristocratos/btop
 - https://github.com/asciinema/asciinema
   - https://github.com/asciinema/agg
 - https://github.com/o2sh/onefetch
-- https://github.com/dylanaraps/neofetch
-- https://github.com/dylanaraps/pfetch
 - https://github.com/Gobidev/pfetch-rs
-- https://github.com/Dr-Noob/cpufetch
-- https://gitlab.com/jallbrit/cbonsai
 - https://github.com/jarun/nnn
   - https://github.com/ImageMagick/ImageMagick
   - https://github.com/dirkvdb/ffmpegthumbnailer
 - https://github.com/Genymobile/scrcpy
+
+Fun memory
+
+- https://github.com/htop-dev/htop
+- https://github.com/aristocratos/btop
+- https://github.com/dylanaraps/neofetch
+- https://github.com/dylanaraps/pfetch
+- https://github.com/Dr-Noob/cpufetch
+- https://gitlab.com/jallbrit/cbonsai
 
 ### UI
 
@@ -96,18 +100,18 @@ Memory
 - https://github.com/mvdan/sh
 - https://github.com/JohnnyMorganz/StyLua
 - https://github.com/tamasfe/taplo
-- https://github.com/burntsushi/toml
-- https://github.com/bojand/ghz
 - https://github.com/mikefarah/yq
 - https://github.com/stedolan/jq
-- https://github.com/boyter/cs
 
 Memory
 
 - https://github.com/sigstore/gitsign
 - https://github.com/gitleaks/gitleaks
 - https://github.com/tailscale/golink
+- https://github.com/burntsushi/toml
+- https://github.com/bojand/ghz
 - https://github.com/sharkdp/hyperfine
+- https://github.com/boyter/cs
 
 #### Go
 
@@ -162,6 +166,8 @@ Don't install:
 - Sourcegraph
 - Docker Desktop
 - Any JetBrains IDE beside DataGrip
+
+## Misc
 
 ### macOS
 
