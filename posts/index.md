@@ -26,3 +26,4 @@ This is where I dump my thoughts.
 - [Khoan cắt bê tông 101](2023-06-24-khoan-cat-be-tong.html)
 - [Useful tools](2023-06-25-useful-tools.html)
 - [Pastebin](2023-07-01-pastebin.html)
+- [F(an) android](2023-07-02-fandroid.html)
