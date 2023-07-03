@@ -79,7 +79,6 @@ Memory
 - https://github.com/pedrommcarrasco/Brooklyn
 - https://github.com/ganeshrvel/openmtp
 - https://github.com/coteditor/CotEditor
-- https://zed.dev/
 
 Memory
 
@@ -88,6 +87,7 @@ Memory
 - https://github.com/objective-see/LuLu
 - https://github.com/ivoronin/TomatoBar
 - https://github.com/pqrs-org/Karabiner-Elements
+- https://zed.dev/
 
 ## Developement
 
