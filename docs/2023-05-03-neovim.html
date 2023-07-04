@@ -50,11 +50,6 @@
       All configs are in
       <a href="https://github.com/haunt98/dotfiles">my dotfiles</a>.
     </p>
-    <p>Use both <code>\</code> and <code>;</code> as leader key:</p>
-    <div class="highlight highlight-source-lua">
-      <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })</pre>
-    </div>
     <p>Search multiple words:</p>
     <div class="highlight highlight-source-viml">
       <pre>:/<span class="pl-cce">\v</span>word1|word2|word3</pre>
@@ -102,22 +97,43 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
         </ul>
       </li>
     </ul>
-    <p>Keymap for plugin (sync with dotfiles):</p>
+    <p>Use both <code>\</code> and <code>;</code> as leader key:</p>
     <div class="highlight highlight-source-lua">
-      <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;f<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:FZF&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;rg<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:FZFRg&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;cm<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:FZFCommands&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;C-n&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:NvimTreeToggle&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:NvimTreeFindFile&lt;CR&gt;<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;leader&gt;tr<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:lua MiniTrailspace.trim()&lt;CR&gt;<span class="pl-pds">"</span></span>)</pre>
+      <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;Leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;Leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>q<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:q&lt;CR&gt;<span class="pl-pds">"</span></span>)</pre>
     </div>
     <ul>
       <li>
-        With
-        <a href="https://github.com/nvim-tree/nvim-tree.lua"
-          >nvim-tree/nvim-tree.lua</a
-        >, inside nvim-tree:
+        <p><code>&lt;Leader&gt;</code> prefix: prefer global keymap</p>
+      </li>
+      <li>
+        <p>
+          <code>&lt;Space&gt;</code> prefix: prefer lsp keymap, for coding of
+          course :D
+        </p>
+      </li>
+      <li>
+        <p>
+          With
+          <a href="https://github.com/ibhagwan/fzf-lua">ibhagwan/fzf-lua</a>:
+        </p>
         <ul>
+          <li><code>&lt;Leader&gt;f</code>: find files</li>
+          <li><code>&lt;Leader&gt;rg</code>: grep files</li>
+          <li><code>&lt;Space&gt;s</code>: find lsp symbols</li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          With
+          <a href="https://github.com/nvim-tree/nvim-tree.lua"
+            >nvim-tree/nvim-tree.lua</a
+          >, inside nvim-tree:
+        </p>
+        <ul>
+          <li><code>&lt;C-n&gt;</code>: toggle</li>
+          <li><code>&lt;Leader&gt;n</code>: locate file</li>
           <li><code>a</code>: create</li>
           <li><code>d</code>: delete</li>
           <li><code>r</code>: rename</li>
@@ -128,19 +144,32 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
         </ul>
       </li>
       <li>
-        With
-        <a href="https://github.com/lewis6991/gitsigns.nvim"
-          >lewis6991/gitsigns.nvim</a
-        >:
+        <p>
+          With
+          <a href="https://github.com/hrsh7th/nvim-cmp">hrsh7th/nvim-cmp</a>:
+        </p>
+        <ul>
+          <li><code>&lt;C-Space&gt;</code>: trigger completion</li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          With
+          <a href="https://github.com/lewis6991/gitsigns.nvim"
+            >lewis6991/gitsigns.nvim</a
+          >:
+        </p>
         <ul>
           <li><code>]c</code>, <code>[c</code>: next/previous git change</li>
         </ul>
       </li>
       <li>
-        With
-        <a href="https://github.com/echasnovski/mini.nvim"
-          >echasnovski/mini.nvim</a
-        >
+        <p>
+          With
+          <a href="https://github.com/echasnovski/mini.nvim"
+            >echasnovski/mini.nvim</a
+          >
+        </p>
         <ul>
           <li>
             With mini-bracketed
@@ -175,20 +204,28 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
               <li><code>sr</code>: replace surround</li>
             </ul>
           </li>
+          <li>
+            With mini-trailspace
+            <ul>
+              <li><code>&lt;Leader&gt;tr</code>: trim trailing whitespace</li>
+            </ul>
+          </li>
         </ul>
       </li>
       <li>
-        With
-        <a href="https://github.com/neovim/nvim-lspconfig"
-          >neovim/nvim-lspconfig</a
-        >
+        <p>
+          With
+          <a href="https://github.com/neovim/nvim-lspconfig"
+            >neovim/nvim-lspconfig</a
+          >
+        </p>
         <ul>
-          <li><code>gd</code>: go to definition</li>
-          <li><code>gr</code>: go to references</li>
-          <li><code>K</code>: hover</li>
+          <li><code>&lt;Space&gt;gd</code>: go to definition</li>
+          <li><code>&lt;Space&gt;k</code>: hover</li>
           <li><code>&lt;F2&gt;</code>: rename</li>
-          <li><code>&lt;space&gt;f</code>: format</li>
-          <li><code>&lt;space&gt;ca</code>: code action</li>
+          <li><code>&lt;Space&gt;ca</code>: code action</li>
+          <li><code>&lt;Space&gt;gr</code>: go to references</li>
+          <li><code>&lt;Space&gt;f</code>: format</li>
         </ul>
       </li>
     </ul>
