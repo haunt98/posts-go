@@ -121,6 +121,7 @@ Memory
 - https://github.com/gitleaks/gitleaks
 - https://github.com/tailscale/golink
 - https://github.com/burntsushi/toml
+- https://github.com/koalaman/shellcheck
 - https://github.com/bojand/ghz
 - https://github.com/sharkdp/hyperfine
 - https://github.com/boyter/cs
