@@ -195,6 +195,31 @@ xcode-select --install
 
 Fix black screen when open game in fullscreen in external monitor with [kazysmaster/gnome-shell-extension-disable-unredirect](https://github.com/kazysmaster/gnome-shell-extension-disable-unredirect)
 
+### Firefox
+
+`about:config`:
+
+- Disable unused features:
+
+  - `extensions.pocket.enabled`: false
+  - `identity.fxaccounts.enabled`: false
+  - `reader.parse-on-load.enabled`: false
+
+- Good settings:
+
+  - `dom.event.clipboardevents.enabled`: false
+  - `dom.event.contextmenu.enabled`: false
+  - `media.videocontrols.picture-in-picture.video-toggle.always-show`: true
+  - `network.IDN_show_punycode`: true
+
+- Encrypted Client Hello (ECH):
+  - `network.dns.echconfig.enabled`: true
+  - `network.dns.use_https_rr_as_altsvc`: true
+
 ## Thanks
 
 - [My list of useful command line tools](https://boyter.org/posts/my-list-of-useful-command-line-tools/)
+- [Useful Customizations for Firefox](http://www.quippd.com/firefox/wiki/useful-customizations/)
+- [Encrypted Client Hello: the future of ESNI in Firefox](https://blog.mozilla.org/security/2021/01/07/encrypted-client-hello-the-future-of-esni-in-firefox/)
+- [Phishing with Unicode Domains](https://www.xudongz.com/blog/2017/idn-phishing/)
+- https://sizeof.cat/links/
