@@ -219,7 +219,7 @@ When I see it, `TestPodBuild` has almost 2000 lines.
 The solution I propose here is simple (absolutely not perfect, but good with my usecase) thanks to **stretchr/testify**.
 I init all **default** action on **success** case.
 Then I **alter** request or mock error for unit test to hit on other case.
-Remember if unit test is hit, code coverate is surely increaesed, and that my **goal**.
+Remember if unit test is hit, code coverage is surely increased, and that my **goal**.
 
 ```go
 // Init ServiceSuite as above
