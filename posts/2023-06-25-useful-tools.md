@@ -209,7 +209,6 @@ Fix black screen when open game in fullscreen in external monitor with [kazysmas
 - Good settings:
 
   - `dom.event.clipboardevents.enabled`: false
-  - `dom.event.contextmenu.enabled`: false
   - `media.videocontrols.picture-in-picture.video-toggle.always-show`: true
   - `network.IDN_show_punycode`: true
 
