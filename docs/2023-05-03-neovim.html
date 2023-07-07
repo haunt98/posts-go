@@ -100,7 +100,12 @@
     <p>Use both <code>\</code> and <code>;</code> as leader key:</p>
     <div class="highlight highlight-source-lua">
       <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;Leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;Leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;Leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })</pre>
+    </div>
+    <p>Misc keymap:</p>
+    <div class="highlight highlight-source-lua">
+      <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nzz<span class="pl-pds">"</span></span>)
+vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>N<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Nzz<span class="pl-pds">"</span></span>)
 vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>q<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:q&lt;CR&gt;<span class="pl-pds">"</span></span>)</pre>
     </div>
     <ul>
