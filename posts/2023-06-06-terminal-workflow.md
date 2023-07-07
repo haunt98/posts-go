@@ -14,6 +14,7 @@ All configs are in [my dotfiles](https://github.com/haunt98/dotfiles).
 - `ALT-P`: switch panel
 - `ALT-N`: new panel vertically (right side)
 - `ALT-D`: new panel horizontally (down side)
+- Hold `SHIFT` and click on links, text, ...
 
 ## Use [wez/wezterm](https://github.com/wez/wezterm)
 
