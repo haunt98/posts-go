@@ -48,6 +48,8 @@ For fun
   - https://github.com/ImageMagick/ImageMagick
   - https://github.com/dirkvdb/ffmpegthumbnailer
 - https://github.com/Genymobile/scrcpy
+- https://github.com/libjxl/libjxl
+- https://github.com/yt-dlp/yt-dlp
 
 Fun memory
 
@@ -57,6 +59,7 @@ Fun memory
 - https://github.com/dylanaraps/pfetch
 - https://github.com/Dr-Noob/cpufetch
 - https://gitlab.com/jallbrit/cbonsai
+- https://github.com/ytdl-org/youtube-dl
 
 ### UI
 
@@ -66,6 +69,7 @@ Fun memory
 - https://tailscale.com/
 - https://www.libreoffice.org/
 - https://github.com/johnfactotum/foliate
+- https://www.xnview.com/en/xnviewmp/
 
 Memory
 
