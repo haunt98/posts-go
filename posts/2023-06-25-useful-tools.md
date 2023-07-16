@@ -219,8 +219,12 @@ Fix black screen when open game in fullscreen in external monitor with [kazysmas
   - `network.IDN_show_punycode`: true
 
 - Encrypted Client Hello (ECH):
+
   - `network.dns.echconfig.enabled`: true
   - `network.dns.use_https_rr_as_altsvc`: true
+
+- Experiment
+  - `image.jxl.enabled`: true
 
 ## Thanks
 
