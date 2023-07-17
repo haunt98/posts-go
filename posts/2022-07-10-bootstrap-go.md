@@ -233,7 +233,10 @@ prototool is deprecated, and buf can generate, lint, format as good as prototool
 
 ### Use [gin-gonic/gin](https://github.com/gin-gonic/gin) for REST.
 
-Don't use `gin.Context` when pass context from handler layer to service layer, use `gin.Context.Request.Context()` instead.
+With `c *gin.Context`:
+
+- Don't use `c` when passing context, use `c.Request.Context()` instead.
+- Don't use `c.Request.URL.Path`, use `c.FullPath()` instead.
 
 Remember to free resources after parse multipart form:
 

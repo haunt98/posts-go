@@ -454,10 +454,17 @@ internal
       >Use <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a> for
       REST.
     </h3>
-    <p>
-      Don't use <code>gin.Context</code> when pass context from handler layer to
-      service layer, use <code>gin.Context.Request.Context()</code> instead.
-    </p>
+    <p>With <code>c *gin.Context</code>:</p>
+    <ul>
+      <li>
+        Don't use <code>c</code> when passing context, use
+        <code>c.Request.Context()</code> instead.
+      </li>
+      <li>
+        Don't use <code>c.Request.URL.Path</code>, use
+        <code>c.FullPath()</code> instead.
+      </li>
+    </ul>
     <p>Remember to free resources after parse multipart form:</p>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-k">defer</span> <span class="pl-k">func</span>() {
