@@ -60,6 +60,7 @@ Fun memory
 - https://github.com/Dr-Noob/cpufetch
 - https://gitlab.com/jallbrit/cbonsai
 - https://github.com/ytdl-org/youtube-dl
+- https://github.com/instaloader/instaloader
 
 ### UI
 
@@ -101,8 +102,9 @@ Memory
 ### Terminal
 
 - https://github.com/Schniz/fnm
-- https://github.com/sdkman/sdkman-cli
 - https://github.com/oven-sh/bun
+- https://github.com/pypa/pipx
+- https://github.com/sdkman/sdkman-cli
 
 Format
 
@@ -120,10 +122,11 @@ Language server
 Misc
 
 - https://github.com/mikefarah/yq
-- https://github.com/stedolan/jq
+- https://github.com/itchyny/gojq
 
 Memory
 
+- https://github.com/stedolan/jq
 - https://github.com/sigstore/gitsign
 - https://github.com/gitleaks/gitleaks
 - https://github.com/tailscale/golink
