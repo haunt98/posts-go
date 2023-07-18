@@ -41,7 +41,8 @@ gen:
 
 format-html:
 	bun upgrade
-	bunx prettier --write ./posts ./templates ./docs
+	bun install --global prettier
+	prettier --write ./posts ./templates ./docs
 
 srht:
 	# https://srht.site/quickstart
