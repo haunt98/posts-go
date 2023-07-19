@@ -50,6 +50,15 @@
       All configs are in
       <a href="https://github.com/haunt98/dotfiles">my dotfiles</a>.
     </p>
+    <h2>
+      <a
+        id="user-content-trick-or-treat"
+        class="anchor"
+        aria-hidden="true"
+        href="#trick-or-treat"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Trick or treat
+    </h2>
     <p>Search multiple words:</p>
     <div class="highlight highlight-source-viml">
       <pre>:/<span class="pl-cce">\v</span>word1|word2|word3</pre>
@@ -62,7 +71,20 @@
     <div class="highlight highlight-source-viml">
       <pre>:<span class="pl-c1">g</span><span class="pl-sr">/word/</span><span class="pl-c1">d</span></pre>
     </div>
-    <p>Jump basic:</p>
+    <p>Sort lines (after selecting lines):</p>
+    <div class="highlight highlight-source-viml">
+      <pre>:<span class="pl-c1">sort</span> <span class="pl-k">-</span><span class="pl-c1">u</span></pre>
+    </div>
+    <p>Reverse lines (after selcting lines):</p>
+    <div class="highlight highlight-source-viml">
+      <pre>:<span class="pl-k">!</span>tail <span class="pl-k">-</span><span class="pl-c1">r</span></pre>
+    </div>
+    <h2>
+      <a id="user-content-jumpo" class="anchor" aria-hidden="true" href="#jumpo"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Jumpo
+    </h2>
+    <p>Basic:</p>
     <ul>
       <li><code>gg</code>: first line</li>
       <li><code>G</code>: last line</li>
@@ -80,7 +102,7 @@
         character
       </li>
     </ul>
-    <p>Jump advance:</p>
+    <p>Advance:</p>
     <ul>
       <li>
         <code>CTRL-O</code>, <code>CTRL-I</code>: cursor position
@@ -101,6 +123,15 @@
         </ul>
       </li>
     </ul>
+    <h2>
+      <a
+        id="user-content-keymap"
+        class="anchor"
+        aria-hidden="true"
+        href="#keymap"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Keymap
+    </h2>
     <p>Use both <code>\</code> and <code>;</code> as leader key:</p>
     <div class="highlight highlight-source-lua">
       <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;Leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })
@@ -271,26 +302,43 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
     </h2>
     <ul>
       <li>
-        <a href="https://neovim.io/doc/user/motion.html" rel="nofollow"
-          >neovim Motion</a
-        >
+        neovim official docs:
+        <ul>
+          <li>
+            <a href="https://neovim.io/doc/user/motion.html" rel="nofollow"
+              >neovim Motion</a
+            >
+          </li>
+          <li>
+            <a href="http://neovim.io/doc/user/tagsrch.html" rel="nofollow"
+              >neovim Tagsrch</a
+            >
+          </li>
+          <li>
+            <a href="https://neovim.io/doc/user/lua-guide.html" rel="nofollow"
+              >neovim Lua-guide</a
+            >
+          </li>
+        </ul>
       </li>
       <li>
-        <a href="http://neovim.io/doc/user/tagsrch.html" rel="nofollow"
-          >neovim Tagsrch</a
-        >
-      </li>
-      <li>
-        <a href="https://neovim.io/doc/user/lua-guide.html" rel="nofollow"
-          >neovim Lua-guide</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://bluz71.github.io/2021/09/10/vim-tips-revisited.html"
-          rel="nofollow"
-          >Vim Tips (Revisited)</a
-        >
+        Hidden gem:
+        <ul>
+          <li>
+            <a
+              href="https://bluz71.github.io/2021/09/10/vim-tips-revisited.html"
+              rel="nofollow"
+              >Vim Tips (Revisited)</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://superuser.com/questions/189947/how-do-i-reverse-selected-lines-order-in-vim"
+              rel="nofollow"
+              >https://superuser.com/questions/189947/how-do-i-reverse-selected-lines-order-in-vim</a
+            >
+          </li>
+        </ul>
       </li>
     </ul>
 
