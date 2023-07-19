@@ -42,7 +42,6 @@ For fun
 
 - https://github.com/asciinema/asciinema
   - https://github.com/asciinema/agg
-- https://github.com/o2sh/onefetch
 - https://github.com/Gobidev/pfetch-rs
 - https://github.com/jarun/nnn
   - https://github.com/ImageMagick/ImageMagick
@@ -58,6 +57,7 @@ Fun memory
 - https://github.com/dylanaraps/neofetch
 - https://github.com/dylanaraps/pfetch
 - https://github.com/Dr-Noob/cpufetch
+- https://github.com/o2sh/onefetch
 - https://gitlab.com/jallbrit/cbonsai
 - https://github.com/ytdl-org/youtube-dl
 - https://github.com/instaloader/instaloader
