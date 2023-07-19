@@ -123,6 +123,7 @@ Misc
 
 - https://github.com/mikefarah/yq
 - https://github.com/itchyny/gojq
+- https://github.com/plantuml/plantuml
 
 Memory
 
