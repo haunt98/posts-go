@@ -568,6 +568,14 @@ internal
       <a href="https://github.com/redis/go-redis">redis/go-redis</a>
     </h3>
     <p>
+      Be careful when use
+      <a href="https://redis.io/commands/hgetall/" rel="nofollow">HGETALL</a>.
+      If key not found, empty data will be returned not nil error. See
+      <a href="https://github.com/redis/go-redis/issues/1668"
+        >redis/go-redis/issues/1668</a
+      >
+    </p>
+    <p>
       Use
       <a
         href="https://redis.uptrace.dev/guide/go-redis-pipelines.html"
