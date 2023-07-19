@@ -21,3 +21,4 @@ All configs are in [my dotfiles](https://github.com/haunt98/dotfiles).
 - `CTRL-SHIFT-F`/`CMD-F`: search mode
 - `CTRL-SHIFT-SPACE`: quick select mode
 - `CTRL-SHIFT-X`: copy mode
+- `CMD-SHIFT-[`/`CMD-SHIFT-]`: switch tabs
