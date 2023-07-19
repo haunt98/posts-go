@@ -288,6 +288,10 @@ I hear that [go-gorm/gorm](https://github.com/go-gorm/gorm), [ent/ent](https://g
 
 ### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis)
 
+Be careful when use [HGETALL](https://redis.io/commands/hgetall/).
+If key not found, empty data will be returned not nil error.
+See [redis/go-redis/issues/1668](https://github.com/redis/go-redis/issues/1668)
+
 Use [Pipelines](https://redis.uptrace.dev/guide/go-redis-pipelines.html) for:
 
 - HSET and EXPIRE in 1 command.
