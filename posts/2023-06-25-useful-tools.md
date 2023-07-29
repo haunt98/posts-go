@@ -191,6 +191,8 @@ Don't install:
 
 ## Misc
 
+Don't enable plugin `git` in ohmyzsh.
+
 ### macOS
 
 Hide Developer in Spotlight:
