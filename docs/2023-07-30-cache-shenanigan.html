@@ -46,6 +46,34 @@
         re-write to cache
       </li>
     </ul>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">other</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">service</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">cache</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">db</span>
+
+    <span class="pl-ent">other </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">get data</span>
+    <span class="pl-k">activate</span> <span class="pl-ent">service</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">get data</span>
+    <span class="pl-k">alt</span> <span class="pl-s">exist in cache</span>
+        <span class="pl-ent">service </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">other</span><span class="pl-k">:</span> <span class="pl-s">return data</span>
+    <span class="pl-k">else</span> <span class="pl-s">not exist in cache</span>
+        <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">db</span><span class="pl-k">:</span> <span class="pl-s">get data</span>
+        <span class="pl-k">alt</span> <span class="pl-s">exist data in db</span>
+            <span class="pl-ent">service </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">other</span><span class="pl-k">:</span> <span class="pl-s">return data</span>
+        <span class="pl-k">else</span> <span class="pl-s">not exist data in db</span>
+            <span class="pl-ent">service </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">other</span><span class="pl-k">:</span> <span class="pl-s">return error not found</span>
+        <span class="pl-k">end</span>
+    <span class="pl-k">end</span>
+    <span class="pl-k">deactivate</span> <span class="pl-ent">service</span>
+
+    <span class="pl-ent">other </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">set data</span>
+    <span class="pl-k">activate</span> <span class="pl-ent">service</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">db</span><span class="pl-k">:</span> <span class="pl-s">set data</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">set data</span>
+    <span class="pl-k">deactivate</span> <span class="pl-ent">service</span></pre>
+    </div>
     <p>It's good for general cases, for example with CRUD action.</p>
     <p>
       The bad things happen when cache and database are not consistent. For
