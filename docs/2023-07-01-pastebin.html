@@ -38,6 +38,35 @@
     <p>Just a place to throw away some text.</p>
     <h2>
       <a
+        id="user-content-gitignore"
+        class="anchor"
+        aria-hidden="true"
+        href="#gitignore"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><code>.gitignore</code>
+    </h2>
+    <div class="highlight highlight-text-adblock">
+      <pre><span class="pl-c"># macOS</span>
+.DS_Store
+
+<span class="pl-c"># Window</span>
+<span class="pl-k">*</span>.exe
+
+<span class="pl-c"># IntelliJ</span>
+.idea
+
+<span class="pl-c"># VSCode</span>
+.vscode
+
+<span class="pl-c"># Go</span>
+coverage.out
+vendor
+
+<span class="pl-c"># GoReleaser</span>
+dist</pre>
+    </div>
+    <h2>
+      <a
         id="user-content-github-actions"
         class="anchor"
         aria-hidden="true"
@@ -244,30 +273,37 @@
   <span class="pl-ent">use</span>: <span class="pl-s">github</span></pre>
     </div>
     <h2>
-      <a id="user-content-misc" class="anchor" aria-hidden="true" href="#misc"
+      <a
+        id="user-content-instaloader"
+        class="anchor"
+        aria-hidden="true"
+        href="#instaloader"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Misc
+      ><a href="https://github.com/instaloader/instaloader">Instaloader</a>
     </h2>
-    <p><code>.gitignore</code>:</p>
+    <p><code>args.txt</code>:</p>
     <div class="highlight highlight-text-adblock">
-      <pre><span class="pl-c"># macOS</span>
-.DS_Store
-
-<span class="pl-c"># Window</span>
-<span class="pl-k">*</span>.exe
-
-<span class="pl-c"># IntelliJ</span>
-.idea
-
-<span class="pl-c"># VSCode</span>
-.vscode
-
-<span class="pl-c"># Go</span>
-coverage.out
-vendor
-
-<span class="pl-c"># GoReleaser</span>
-dist</pre>
+      <pre>
+--no-video-thumbnails
+--no-captions
+--no-metadata-json
+--stories
+--fast-update
+--sanitize-paths
+--abort-on=302,400,429
+--no-iphone</pre
+      >
+    </div>
+    <p><code>login.txt</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+--login=your_insta_username
+--sessionfile=where/sessionfile/store</pre
+      >
+    </div>
+    <p>Run:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>instaloader +login.txt +args.txt +targets.txt</pre>
     </div>
 
     <div>
