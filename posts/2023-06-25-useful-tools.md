@@ -12,15 +12,20 @@ This just a raw list.
 - https://github.com/junegunn/fzf
   - https://github.com/junegunn/fzf-git.sh
 - https://github.com/folke/lazy.nvim
+
 - https://github.com/sharkdp/fd
 - https://github.com/sharkdp/bat
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/dandavison/delta
 - https://github.com/ogham/exa
 - https://github.com/zellij-org/zellij
+
 - https://github.com/adrianlopezroche/fdupes
+- https://github.com/WayneD/rsync
 - https://github.com/rclone/rclone
 - https://github.com/restic/restic
+- https://github.com/ayoisaiah/f2
+
 - https://github.com/dbrgn/tealdeer
 - https://github.com/GothenburgBitFactory/taskwarrior
 - https://github.com/dundee/gdu
