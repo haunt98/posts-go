@@ -27,3 +27,4 @@ This is where I dump my thoughts.
 - [Useful tools](2023-06-25-useful-tools.html)
 - [Pastebin](2023-07-01-pastebin.html)
 - [F(an) android](2023-07-02-fandroid.html)
+- [Cache shenanigan](2023-07-30-cache-shenanigan.html)
