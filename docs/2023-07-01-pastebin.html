@@ -306,6 +306,39 @@ dist</pre>
       <pre>instaloader +login.txt +args.txt +targets.txt</pre>
     </div>
     <h2>
+      <a id="user-content-rsync" class="anchor" aria-hidden="true" href="#rsync"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a href="https://github.com/WayneD/rsync">rsync</a>
+    </h2>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> Result is dst/src</span>
+rsync -avzP src dst
+
+<span class="pl-c"><span class="pl-c">#</span> Result is dst/* with * is from src</span>
+rsync -avzP src/ dst</pre>
+    </div>
+    <p>Commonly flags:</p>
+    <ul>
+      <li><code>-v</code>: verbose</li>
+      <li><code>-z</code>: compress</li>
+      <li>
+        <code>-P</code>: enable both <code>--partial</code>,
+        <code>--progress</code> to easily resume after interupt
+      </li>
+      <li><code>-n</code>: dry run</li>
+    </ul>
+    <p>Be careful flags (need dry run if not sure):</p>
+    <ul>
+      <li>
+        <code>-u</code>: skip if files in <strong>dst</strong> is already newer
+        than in <strong>src</strong>, if you want to sync both ways
+      </li>
+      <li>
+        <code>--delete</code>: delete files in <strong>dst</strong> if not exist
+        in <strong>src</strong>, useful to sync dst with src
+      </li>
+    </ul>
+    <h2>
       <a id="user-content-f2" class="anchor" aria-hidden="true" href="#f2"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a href="https://github.com/ayoisaiah/f2">F2</a>
