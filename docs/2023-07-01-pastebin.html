@@ -272,38 +272,53 @@ dist</pre>
   <span class="pl-ent">skip</span>: <span class="pl-c1">false</span>
   <span class="pl-ent">use</span>: <span class="pl-s">github</span></pre>
     </div>
-    <h2>
+    <h1>
       <a
-        id="user-content-instaloader"
+        id="user-content-git-clean-up"
         class="anchor"
         aria-hidden="true"
-        href="#instaloader"
+        href="#git-clean-up"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/instaloader/instaloader">Instaloader</a>
+      >Git clean up
+    </h1>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> Delete untracked</span>
+git clean -fdx
+
+git gc</pre>
+    </div>
+    <h2>
+      <a
+        id="user-content-delete-ds_store"
+        class="anchor"
+        aria-hidden="true"
+        href="#delete-ds_store"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Delete <code>.DS_Store</code>
     </h2>
-    <p><code>args.txt</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>
---no-video-thumbnails
---no-captions
---no-metadata-json
---stories
---fast-update
---sanitize-paths
---abort-on=302,400,429
---no-iphone</pre
-      >
+    <p>
+      With
+      <a href="https://stackoverflow.com/q/30483670" rel="nofollow">find</a>:
+    </p>
+    <div class="highlight highlight-source-shell">
+      <pre>find <span class="pl-c1">.</span> -name <span class="pl-s"><span class="pl-pds">"</span>.DS_Store<span class="pl-pds">"</span></span> -print -type f -delete</pre>
     </div>
-    <p><code>login.txt</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>
---login=your_insta_username
---sessionfile=where/sessionfile/store</pre
-      >
+    <p>With <a href="https://github.com/sharkdp/fd">fd</a>:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>fd -H <span class="pl-s"><span class="pl-pds">'</span>^\.DS_Store$<span class="pl-pds">'</span></span> -tf -X rm</pre>
     </div>
-    <p>Run:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>instaloader +login.txt +args.txt +targets.txt</pre>
+    <h2>
+      <a
+        id="user-content-fdupes"
+        class="anchor"
+        aria-hidden="true"
+        href="#fdupes"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a href="https://github.com/adrianlopezroche/fdupes">fdupes</a>
+    </h2>
+    <p>Remove duplicated files:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>fdupes -rdN <span class="pl-c1">.</span></pre>
     </div>
     <h2>
       <a id="user-content-rsync" class="anchor" aria-hidden="true" href="#rsync"
@@ -347,6 +362,39 @@ rsync -avzP src/ dst</pre>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> If want dry run, remove -x</span>
 f2 -r <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}.{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> -x</pre>
+    </div>
+    <h2>
+      <a
+        id="user-content-instaloader"
+        class="anchor"
+        aria-hidden="true"
+        href="#instaloader"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a href="https://github.com/instaloader/instaloader">Instaloader</a>
+    </h2>
+    <p><code>args.txt</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+--no-video-thumbnails
+--no-captions
+--no-metadata-json
+--stories
+--fast-update
+--sanitize-paths
+--abort-on=302,400,429
+--no-iphone</pre
+      >
+    </div>
+    <p><code>login.txt</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+--login=your_insta_username
+--sessionfile=where/sessionfile/store</pre
+      >
+    </div>
+    <p>Run:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>instaloader +login.txt +args.txt +targets.txt</pre>
     </div>
 
     <div>
