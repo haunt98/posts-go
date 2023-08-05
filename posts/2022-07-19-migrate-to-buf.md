@@ -4,7 +4,8 @@ Why? Because `prototool` is outdated, and can not run on M1 mac.
 
 We need 3 files:
 
-- `build.go`: need to install protoc-gen-\* binaries with pin version in `go.mod`
+- `build.go`: need to install protoc-gen-\* binaries with pin version in
+  `go.mod`
 - `buf.yaml`
 - `buf.gen.yaml`
 
@@ -84,7 +85,8 @@ gen:
 
 Run `make gen` to have fun of course.
 
-If using `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`, better make a raw copy of proto file for other services to integrate:
+If using `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`,
+better make a raw copy of proto file for other services to integrate:
 
 ```Makefile
 raw:
@@ -98,7 +100,9 @@ raw:
 
 ## FAQ
 
-Remember `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`, `grpc-ecosystem/grpc-gateway` is optional, so feel free to delete if you don't use theme.
+Remember `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`,
+`grpc-ecosystem/grpc-gateway` is optional, so feel free to delete if you don't
+use theme.
 
 If use `vendor`:
 
@@ -107,24 +111,29 @@ If use `vendor`:
 
 If you use grpc-gateway:
 
-- Replace `import "third_party/googleapis/google/api/annotations.proto";` with `import "google/api/annotations.proto";`
-- Delete `security_definitions`, `security`, in `option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)`.
+- Replace `import "third_party/googleapis/google/api/annotations.proto";` with
+  `import "google/api/annotations.proto";`
+- Delete `security_definitions`, `security`, in
+  `option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)`.
 
 The last step is delete `prototool.yaml`.
 
 If you are not migrate but start from scratch:
 
 - Add `buf lint` to make sure your proto is good.
-- Add `buf breaking --against "https://your-grpc-repo-goes-here.git"` to make sure each time you update proto, you don't break backward compatibility.
+- Add `buf breaking --against "https://your-grpc-repo-goes-here.git"` to make
+  sure each time you update proto, you don't break backward compatibility.
 
 # Tips
 
 Some experience I got after writing proto files for a living:
 
-- Ignore DRY (Do not Repeat Yourself) when handling proto, don't split proto into many files.
-  Trust me, it saves you from wasting time to debug how to import Go after generated.
-  Because proto import and Go import is [2](https://github.com/golang/protobuf/issues/895) different things.
-  If someone already have split proto files, you should use `sed` to fix the damn things.
+- Ignore DRY (Do not Repeat Yourself) when handling proto, don't split proto
+  into many files. Trust me, it saves you from wasting time to debug how to
+  import Go after generated. Because proto import and Go import is
+  [2](https://github.com/golang/protobuf/issues/895) different things. If
+  someone already have split proto files, you should use `sed` to fix the damn
+  things.
 
 ## Thanks
 

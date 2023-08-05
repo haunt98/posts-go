@@ -1,8 +1,10 @@
 # Install Arch Linux
 
-Install Arch Linux is thing I always want to do for my laptop/PC since I had my laptop in ninth grade.
+Install Arch Linux is thing I always want to do for my laptop/PC since I had my
+laptop in ninth grade.
 
-This is not a guide for everyone, this is just save for myself in a future and for anyone who want to walk in my shoes.
+This is not a guide for everyone, this is just save for myself in a future and
+for anyone who want to walk in my shoes.
 
 ## [Installation guide](https://wiki.archlinux.org/index.php/Installation_guide)
 
@@ -46,8 +48,8 @@ UEFI/GPT layout:
 | `/mnt/boot` | `/dev/extended_boot_loader_partition` | Extended Boot Loader Partition | 1 GiB          |
 | `/mnt`      | `/dev/root_partition`                 | Root Partition                 |                |
 
-Why not `/boot/efi`?
-See [Lennart Poettering comment](https://github.com/systemd/systemd/pull/3757#issuecomment-234290236).
+Why not `/boot/efi`? See
+[Lennart Poettering comment](https://github.com/systemd/systemd/pull/3757#issuecomment-234290236).
 
 BIOS/GPT layout:
 
@@ -338,9 +340,8 @@ homectl create joker --real-name="The Joker" --member-of=wheel
 homectl update joker --shell=/usr/bin/zsh
 ```
 
-**Note**:
-Can not run `homectl` when install Arch Linux.
-Should run on the first boot.
+**Note**: Can not run `homectl` when install Arch Linux. Should run on the first
+boot.
 
 ### Desktop Environment
 
@@ -384,7 +385,8 @@ pacman -Syu pipewire wireplumber \
 	gst-plugin-pipewire pipewire-v4l2
 ```
 
-See [Advanced Linux Sound Architecture](https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture)
+See
+[Advanced Linux Sound Architecture](https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture)
 
 ```sh
 pacman -Syu sof-firmware
