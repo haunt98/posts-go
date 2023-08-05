@@ -108,6 +108,7 @@ Memory
 
 - https://github.com/Schniz/fnm
 - https://github.com/oven-sh/bun
+- https://github.com/denoland/deno
 - https://github.com/pypa/pipx
 - https://github.com/sdkman/sdkman-cli
 
