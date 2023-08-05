@@ -40,7 +40,10 @@ gen:
 	go run .
 
 format-html:
-	deno fmt ./posts ./templates ./docs
+	bun upgrade
+	bun install --global prettier
+	prettier --write ./templates ./docs
+	deno fmt ./posts
 
 srht:
 	# https://srht.site/quickstart
