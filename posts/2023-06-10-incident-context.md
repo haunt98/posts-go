@@ -11,8 +11,8 @@ Imagine a chain of APIs:
 - Calling API A
 - Calling API B
 
-Normally, if API A fails, API B should not be called.
-But what if API A is **optional**, whether it successes or fails, API B should be called anyway.
+Normally, if API A fails, API B should not be called. But what if API A is
+**optional**, whether it successes or fails, API B should be called anyway.
 
 My buggy code is like this:
 
@@ -25,8 +25,9 @@ if err := doA(ctx); err != nil {
 doB(ctx)
 ```
 
-The problem is `doA` taking too long, so `ctx` is canceled, and the parent of `ctx` is canceled too.
-So when `doB` is called with `ctx`, it will be canceled too (not what we want but sadly that what we got).
+The problem is `doA` taking too long, so `ctx` is canceled, and the parent of
+`ctx` is canceled too. So when `doB` is called with `ctx`, it will be canceled
+too (not what we want but sadly that what we got).
 
 Example buggy code ([The Go Playground](https://go.dev/play/p/p4S27Su16VH)):
 
@@ -75,14 +76,21 @@ As you see both `doA` and `doB` are canceled.
 
 ## The (temporary) solution
 
-Quick Google search leads me to [context: add WithoutCancel #40221](https://github.com/golang/go/issues/40221) and I quote:
+Quick Google search leads me to
+[context: add WithoutCancel #40221](https://github.com/golang/go/issues/40221)
+and I quote:
 
 > This is useful in multiple frequently recurring and important scenarios:
 >
-> - Handling of rollback/cleanup operations in the context of an event (e.g., HTTP request) that has to continue regardless of whether the triggering event is canceled (e.g., due to timeout or the client going away)
-> - Handling of long-running operations triggered by an event (e.g., HTTP request) that terminates before the termination of the long-running operation
+> - Handling of rollback/cleanup operations in the context of an event (e.g.,
+  > HTTP request) that has to continue regardless of whether the triggering
+  > event is canceled (e.g., due to timeout or the client going away)
+> - Handling of long-running operations triggered by an event (e.g., HTTP
+  > request) that terminates before the termination of the long-running
+  > operation
 
-So beside waiting to upgrade to Go `1.21` to use `context.WithoutCancel`, you can use this [workaround code](https://pkg.go.dev/context@master#WithoutCancel):
+So beside waiting to upgrade to Go `1.21` to use `context.WithoutCancel`, you
+can use this [workaround code](https://pkg.go.dev/context@master#WithoutCancel):
 
 ```go
 func DisconnectContext(parent context.Context) context.Context {
@@ -116,7 +124,8 @@ func (ctx disconnectedContext) Value(key any) any {
 }
 ```
 
-So the buggy code becomes ([The Go Playground](https://go.dev/play/p/oIU-WxEJ_F3)):
+So the buggy code becomes
+([The Go Playground](https://go.dev/play/p/oIU-WxEJ_F3)):
 
 ```go
 func main() {
@@ -158,8 +167,8 @@ doA context deadline exceeded
 doB
 ```
 
-As you see only `doA` is canceled, `doB` is done perfectly.
-And that what we want in this case.
+As you see only `doA` is canceled, `doB` is done perfectly. And that what we
+want in this case.
 
 ## Thanks
 
