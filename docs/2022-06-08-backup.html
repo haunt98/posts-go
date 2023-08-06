@@ -42,7 +42,7 @@
     <ul>
       <li>
         <del
-          >Laptop Samsung NP300E4Z-S06VN (Old laptop which I give to my
+          >Laptop Samsung NP300E4Z-S06VN (old laptop which I give to my
           mom)</del
         >
       </li>
@@ -58,7 +58,7 @@
             rel="nofollow"
             >LVFS</a
           >
-          (My mom bought it for me when I go to college, I give it to my mom
+          (my mom bought it for me when I go to college, I give it to my mom
           afterward)</del
         >
       </li>
@@ -69,10 +69,10 @@
             rel="nofollow"
             >Laptop Acer Nitro AN515-45</a
           >
-          (Gaming laptop which I buy for gaming, I give it to my sister)</del
+          (gaming laptop which I buy for gaming, I give it to my sister)</del
         >
       </li>
-      <li>MacBook Pro M1 2020 (My company laptop)</li>
+      <li>MacBook Pro M1 2020 (my company laptop)</li>
       <li>
         <del
           >Phone
@@ -81,14 +81,14 @@
             rel="nofollow"
             >LG G3 D851 T-Mobile</a
           >
-          (Bought long time ago, now is a brick)</del
+          (bought long time ago, now is a brick)</del
         >
       </li>
       <li>
         <del
           >Phone
           <a
-            href="https://forum.xda-developers.com/c/xiaomi-redmi-6a.7881/"
+            href="https://www.gsmarena.com/xiaomi_redmi_6a-9217.php"
             rel="nofollow"
             >Xiaomi Redmi 6A</a
           >
@@ -98,11 +98,11 @@
       <li>
         Phone
         <a
-          href="https://forum.xda-developers.com/c/xiaomi-poco-x3-nfc.11523/"
+          href="https://www.gsmarena.com/xiaomi_poco_x3_nfc-10415.php"
           rel="nofollow"
           >Xiaomi Poco X3 NFC</a
         >
-        (Primary phone which I use daily)
+        (primary phone which I use daily)
       </li>
     </ul>
     <p>App/Service I use daily:</p>
@@ -123,13 +123,20 @@
         <a href="https://restic.net/" rel="nofollow">restic</a>: backup data
       </li>
       <li><a href="https://tailscale.com/" rel="nofollow">Tailscale</a></li>
-      <li>GitHub/GitLab</li>
-      <li>Google Keep/Notion</li>
+      <li>
+        GitHub / GitLab /
+        <a href="https://git.sr.ht/" rel="nofollow">SourceHut</a> /
+        <a href="https://codeberg.org/" rel="nofollow">Codeberg</a> /
+        <a href="https://gitea.treehouse.systems/" rel="nofollow"
+          >Treehouse Gitea</a
+        >: stores git repo
+      </li>
+      <li>Google Keep / Notion</li>
       <li>Google Drive (currently use 200GB plan)</li>
       <li>
-        GMail &lt;
-        <a href="https://simplelogin.io/" rel="nofollow">SimpleLogin</a> &lt;
-        Proton Mail
+        GMail /
+        <a href="https://simplelogin.io/" rel="nofollow">SimpleLogin</a> /
+        Proton Mail: my mail
       </li>
     </ul>
     <p>
@@ -139,9 +146,9 @@
       future.
     </p>
     <p>
-      There are 2 sections which I want to share, the first is
+      There are 2 main sections which I want to share, the first is
       <strong>How to backup</strong>, the second is
-      <strong>Recover strategy</strong>.
+      <strong>Recovery strategy</strong>.
     </p>
     <h2>
       <a
@@ -168,7 +175,7 @@
       it. The others are dotfiles, which I write my own
       <a href="https://github.com/haunt98/dotfiles">dotfiles tool</a> to backup
       and reconfigure easily and quickly. Also, I know that installing Arch
-      Linux is not easy, despite I install it too many times (Like thousand
+      Linux is not easy, despite I install it too many times (like thousand
       times since I was in high school). Not because it is hard, but as life
       goes on, the
       <a
@@ -178,18 +185,15 @@
       >
       keeps getting new update and covering too many cases for my own personal
       use, so I write my own
-      <a href="https://github.com/haunt98/til/blob/main/install-archlinux.md"
+      <a
+        href="https://github.com/haunt98/posts-go/blob/main/posts/2022-12-25-archlinux.md"
         >guide</a
       >
-      to quickly capture what I need to do. I back up all my dotfiles in GitHub
-      and GitLab as I trust them both. Also as I travel the Internet, I discover
-      <a href="https://codeberg.org/" rel="nofollow">Codeberg</a>,
-      <a href="https://gitea.treehouse.systems/" rel="nofollow">Treehouse</a>
-      and use them as another backup for git repo.
+      to quickly capture what I need to do.
     </p>
     <p>
       So that is my dotfiles, for my regular data, like Wallpaper or Books,
-      Images, I use Google Drive (Actually I pay for it). But the step: open the
+      Images, I use Google Drive (actually I pay for it). But the step: open the
       webpage, click the upload button and choose files seems boring and
       time-consuming. So I use Rclone, it supports Google Drive, One Drive and
       many providers but I only use Google Drive for now. The commands are
@@ -232,11 +236,11 @@ restic -r rclone:remote:PrivateData restore latest --target <span class="pl-k">~
       for all of my important accounts, should use both OTP and phone method.
     </p>
     <p>
-      I use Bitwarden for passwords (That is a long story, coming from Google
+      I use Bitwarden for passwords (that is a long story, coming from Google
       Password manager to Firefox Lockwise and then settle down with Bitwarden)
       and Aegis for OTPs. The reason I choose Aegis, not Authy (I use Authy for
       so long but Aegis is definitely better) is because Aegis allows me to
-      extract all the OTPs to a single file (Can be encrypted), which I use to
+      extract all the OTPs to a single file (can be encrypted), which I use to
       transfer or backup easily.
     </p>
     <p>
@@ -245,16 +249,15 @@ restic -r rclone:remote:PrivateData restore latest --target <span class="pl-k">~
       phones. The thing I need to remember is the master password of Bitwarden
       in my head.
     </p>
-    <p>With Aegis, I export the data, then:</p>
-    <ul>
-      <li>Sync it to Google Drive</li>
-      <li>Store it locally in my phone.</li>
-    </ul>
     <p>
-      The main problem here is the OTP, I can not store all of my OTPs in the
-      cloud completely. Because if I want to access my OTPs in the cloud, I
-      should log in, and then input my OTP, this is a loop, my friends.
+      With Bitwardent/Aegis, I also can export the data (must always be
+      encrypted), then:
     </p>
+    <ul>
+      <li>Sync to Google Drive</li>
+      <li>Store locally in my laptop</li>
+      <li>Don't store locally in phone (can not keep track easily)</li>
+    </ul>
     <h3>
       <a
         id="user-content-backup-work-related-data"
@@ -311,7 +314,7 @@ restic -r rclone:remote:PrivateData restore latest --target <span class="pl-k">~
         In the worst situation, I lost everything, my laptops, my phone. The
         first step is to recover my SIM, then log in to Google account using the
         password and SMS OTP. After that, log in to Bitwarden account using the
-        master password and OTP from Gmail, which I open previously.
+        master password and OTP from Gmail, which I log in previously.
       </li>
     </ul>
     <h2>
@@ -324,24 +327,8 @@ restic -r rclone:remote:PrivateData restore latest --target <span class="pl-k">~
       things. Pick one then stay away from other cloud services:
     </p>
     <ul>
-      <li>TODOis, Evernote, ... -&gt; Google Keep/Notion</li>
+      <li>TODOis, Evernote, ... -&gt; Google Keep / Notion</li>
       <li>Dropbox, OneDrive, ... -&gt; Google Drive</li>
-    </ul>
-    <h2>
-      <a id="user-content-todo" class="anchor" aria-hidden="true" href="#todo"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >TODO
-    </h2>
-    <ul>
-      <li>
-        [ ] Backup Notion data then stores it in GitHub/GitLab/Goolge Drive.
-      </li>
-      <li>
-        [ ] Convert as many as GMail accounts as possible to SimpleLogin/Proton
-        Mail.
-      </li>
-      <li>[ ] Use Tailscale to selfhost Bitwarden server.</li>
-      <li>[ ] Stop rely on Google Keep / Notion</li>
     </ul>
     <h2>
       <a
