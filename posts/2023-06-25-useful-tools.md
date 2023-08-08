@@ -75,6 +75,7 @@ Fun memory
 - https://tailscale.com/
 - https://www.libreoffice.org/
 - https://github.com/johnfactotum/foliate
+- https://fbreader.org/
 - https://www.xnview.com/en/xnviewmp/
 
 Memory
