@@ -28,3 +28,4 @@ This is where I dump my thoughts.
 - [Pastebin](2023-07-01-pastebin.html)
 - [F(an) android](2023-07-02-fandroid.html)
 - [Cache shenanigan](2023-07-30-cache-shenanigan.html)
+- [VSCode](2023-08-09-vscode.html)
