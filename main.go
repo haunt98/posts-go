@@ -107,7 +107,7 @@ func main() {
 			defer htmlFile.Close()
 
 			// Ignore index in index file
-			indexHTML := `<div><a href="index.html">Index</a></div>`
+			indexHTML := `<h2><a href="index.html"><code>~</code></a></h2>`
 			if strings.Contains(postFilename, "index") {
 				indexHTML = ""
 			}
