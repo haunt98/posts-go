@@ -9,7 +9,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/go-github/v48/github"
+	"github.com/google/go-github/v53/github"
 	"golang.org/x/oauth2"
 	"golang.org/x/sync/errgroup"
 )
@@ -65,7 +65,7 @@ func main() {
 
 	ghTokenSrc := oauth2.StaticTokenSource(
 		&oauth2.Token{
-			AccessToken: string(ghAccessTokenBytes),
+			AccessToken: strings.TrimSpace(string(ghAccessTokenBytes)),
 		},
 	)
 	ghHTTPClient := oauth2.NewClient(ctx, ghTokenSrc)
