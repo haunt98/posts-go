@@ -89,9 +89,7 @@ func main() {
 				return fmt.Errorf("os: failed to read file %s: %w", mdFilename, err)
 			}
 
-			ghMarkdown, _, err := ghClient.Markdown(ctx, string(mdFileBytes), &github.MarkdownOptions{
-				Mode: "markdown",
-			})
+			ghMarkdown, _, err := ghClient.Markdown(ctx, string(mdFileBytes), nil)
 			if err != nil {
 				return fmt.Errorf("github: failed to markdown: %w", err)
 			}
