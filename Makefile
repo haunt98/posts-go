@@ -40,7 +40,6 @@ gen:
 	go run .
 
 format-html:
-	bun upgrade
 	bun install --global prettier
 	prettier --write ./templates ./docs
 	deno fmt ./posts
