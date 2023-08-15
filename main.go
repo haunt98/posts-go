@@ -10,6 +10,7 @@ import (
 	"text/template"
 
 	"github.com/google/go-github/v48/github"
+	"golang.org/x/oauth2"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -57,7 +58,18 @@ func main() {
 	}
 
 	// Prepare GitHub
-	ghClient := github.NewClient(nil)
+	ghAccessTokenBytes, err := os.ReadFile(".github_access_token")
+	if err != nil {
+		log.Fatalln("Failed to read file", ".github_access_token", err)
+	}
+
+	ghTokenSrc := oauth2.StaticTokenSource(
+		&oauth2.Token{
+			AccessToken: string(ghAccessTokenBytes),
+		},
+	)
+	ghHTTPClient := oauth2.NewClient(ctx, ghTokenSrc)
+	ghClient := github.NewClient(ghHTTPClient)
 
 	eg := new(errgroup.Group)
 
