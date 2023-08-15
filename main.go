@@ -12,6 +12,8 @@ import (
 	"github.com/google/go-github/v53/github"
 	"golang.org/x/oauth2"
 	"golang.org/x/sync/errgroup"
+
+	"github.com/make-go-great/netrc-go"
 )
 
 const (
@@ -21,6 +23,9 @@ const (
 	generatedPath = "docs"
 
 	extHTML = ".html"
+
+	netrcPath          = "~/.netrc"
+	netrcMachineGitHub = "github.com"
 )
 
 type templatePostData struct {
@@ -58,14 +63,25 @@ func main() {
 	}
 
 	// Prepare GitHub
-	ghAccessTokenBytes, err := os.ReadFile(".github_access_token")
+	netrcData, err := netrc.ParseFile(netrcPath)
 	if err != nil {
-		log.Fatalln("Failed to read file", ".github_access_token", err)
+		log.Fatalln("Failed to read file netrc", err)
+	}
+
+	var ghAccessToken string
+	for _, machine := range netrcData.Machines {
+		if machine.Name == netrcMachineGitHub {
+			ghAccessToken = machine.Password
+			break
+		}
+	}
+	if ghAccessToken == "" {
+		log.Fatalln("Empty GitHub token in netrc")
 	}
 
 	ghTokenSrc := oauth2.StaticTokenSource(
 		&oauth2.Token{
-			AccessToken: strings.TrimSpace(string(ghAccessTokenBytes)),
+			AccessToken: strings.TrimSpace(ghAccessToken),
 		},
 	)
 	ghHTTPClient := oauth2.NewClient(ctx, ghTokenSrc)

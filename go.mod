@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/google/go-github/v53 v53.2.0
+	github.com/make-go-great/netrc-go v0.0.2
 	golang.org/x/oauth2 v0.11.0
 	golang.org/x/sync v0.3.0
 )

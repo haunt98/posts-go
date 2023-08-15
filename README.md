@@ -2,7 +2,7 @@
 
 Write markdown, convert to html, then publish using Github Pages.
 
-First add GitHub access token in `.github_access_token`.
+First add GitHub access token in `~/.netrc`.
 
 Steps:
 
