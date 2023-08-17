@@ -90,6 +90,10 @@ This is where I build Go program.
 - `-trimpath` to support reproduce build.
 - `-ldflags="-s -w"` to strip debugging information.
 
+Also there are some experiment:
+
+- `GOMEMLIMIT=1024MiB`: soft memory limit.
+
 ```Dockerfile
 FROM gcr.io/distroless/base-debian11
 
@@ -104,3 +108,4 @@ Finally, I copy `app` to Distroless base image.
 
 - [How to start a Go project in 2023](https://boyter.org/posts/how-to-start-go-project-2023/)
 - [Shrink your Go binaries with this one weird trick](https://words.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick/)
+- [GOMEMLIMIT is a game changer for high-memory applications](https://weaviate.io/blog/gomemlimit-a-game-changer-for-high-memory-applications)
