@@ -150,10 +150,10 @@ Memory
 - https://github.com/golangci/golangci-lint
 - https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment
 - https://github.com/gotestyourself/gotestsum
+- https://github.com/maruel/panicparse
 
 Memory
 
-- https://github.com/maruel/panicparse
 - https://github.com/go101/golds
 - https://github.com/burrowers/garble
 
