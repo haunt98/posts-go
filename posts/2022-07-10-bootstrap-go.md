@@ -475,8 +475,9 @@ go clean -cache -testcache -modcache -fuzzcache -x
 
 ## Thanks
 
-- [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
 - [Functional options for friendly APIs](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis)
+- [Designing Go Libraries: The Talk: The Article](https://abhinavg.net/2022/12/06/designing-go-libraries/)
+- [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
 - [Google Go Style](https://google.github.io/styleguide/go/index)
 - [Three bugs in the Go MySQL Driver](https://github.blog/2020-05-20-three-bugs-in-the-go-mysql-driver/)
 - [Fixing Memory Exhaustion Bugs in My Golang Web App](https://mtlynch.io/notes/picoshare-perf/)
