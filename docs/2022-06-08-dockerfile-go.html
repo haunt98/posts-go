@@ -152,6 +152,10 @@
       <li><code>-trimpath</code> to support reproduce build.</li>
       <li><code>-ldflags="-s -w"</code> to strip debugging information.</li>
     </ul>
+    <p>Also there are some experiment:</p>
+    <ul>
+      <li><code>GOMEMLIMIT=1024MiB</code>: soft memory limit.</li>
+    </ul>
     <div class="highlight highlight-source-dockerfile">
       <pre><span class="pl-k">FROM</span> gcr.io/distroless/base-debian11
 
@@ -182,6 +186,13 @@
           href="https://words.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick/"
           rel="nofollow"
           >Shrink your Go binaries with this one weird trick</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://weaviate.io/blog/gomemlimit-a-game-changer-for-high-memory-applications"
+          rel="nofollow"
+          >GOMEMLIMIT is a game changer for high-memory applications</a
         >
       </li>
     </ul>
