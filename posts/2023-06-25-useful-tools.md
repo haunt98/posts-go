@@ -54,6 +54,7 @@ For fun
 - https://github.com/Genymobile/scrcpy
 - https://github.com/libjxl/libjxl
 - https://github.com/yt-dlp/yt-dlp
+- https://github.com/talwat/pokeget-rs
 
 Fun memory
 
@@ -66,6 +67,7 @@ Fun memory
 - https://gitlab.com/jallbrit/cbonsai
 - https://github.com/ytdl-org/youtube-dl
 - https://github.com/instaloader/instaloader
+- https://gitlab.com/phoneybadger/pokemon-colorscripts
 
 ### UI
 
