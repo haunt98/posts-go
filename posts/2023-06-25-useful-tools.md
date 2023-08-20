@@ -104,6 +104,7 @@ Memory
 - https://github.com/ivoronin/TomatoBar
 - https://github.com/pqrs-org/Karabiner-Elements
 - https://zed.dev/
+- https://github.com/alin23/Lunar
 
 ## Developement
 
