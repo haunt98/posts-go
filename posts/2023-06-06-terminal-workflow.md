@@ -24,3 +24,10 @@ All configs are in [my dotfiles](https://github.com/haunt98/dotfiles).
 - `CTRL-SHIFT-SPACE`: quick select mode
 - `CTRL-SHIFT-X`: copy mode
 - `CMD-SHIFT-[`/`CMD-SHIFT-]`: switch tabs
+
+## Use [nnn](https://github.com/jarun/nnn)
+
+- `;-p`: preview mode
+- `SPACE`: toggle select
+- `a`: select all
+- `x`: delete
