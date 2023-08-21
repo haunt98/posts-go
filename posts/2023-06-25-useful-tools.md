@@ -9,6 +9,7 @@ This just a raw list.
 - https://github.com/ohmyzsh/ohmyzsh
   - https://github.com/romkatv/powerlevel10k
   - https://github.com/zsh-users/zsh-autosuggestions
+  - https://github.com/jeffreytse/zsh-vi-mode
 - https://github.com/junegunn/fzf
   - https://github.com/junegunn/fzf-git.sh
 - https://github.com/folke/lazy.nvim
@@ -39,6 +40,7 @@ Memory
 - https://github.com/wbthomason/packer.nvim
 - https://dev.yorhel.nl/ncdu
 - https://github.com/Wilfred/difftastic
+- https://github.com/walles/riff
 - https://github.com/jonas/tig
 - https://github.com/extrawurst/gitui
 - https://github.com/wustho/epr
