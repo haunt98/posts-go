@@ -398,6 +398,21 @@ f2 -r <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mti
     <div class="highlight highlight-text-adblock">
       <pre>instaloader +login.txt +args.txt +targets.txt</pre>
     </div>
+    <h2>
+      <a
+        id="user-content-grpcurl"
+        class="anchor"
+        aria-hidden="true"
+        href="#grpcurl"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a href="https://github.com/fullstorydev/grpcurl">gRPCurl</a>
+    </h2>
+    <div class="highlight highlight-source-shell">
+      <pre>grpcurl -proto path/file.proto \
+    -d <span class="pl-s"><span class="pl-pds">'</span>{"key": "value"}<span class="pl-pds">'</span></span> \
+    internal-social.zalopay.vn:443 \
+    pkg.Service/GetData</pre>
+    </div>
 
     <div>
       Feel free to ask me via
