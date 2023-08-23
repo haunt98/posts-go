@@ -164,7 +164,6 @@ Memory
 ### UI
 
 - https://www.sublimemerge.com/
-- https://insomnia.rest/
 - https://httpie.io/desktop
 - https://redis.com/redis-enterprise/redis-insight/
 - https://www.jetbrains.com/datagrip/
@@ -172,6 +171,9 @@ Memory
 Memory
 
 - https://www.sublimetext.com/
+- https://github.com/Kong/insomnia
+- https://github.com/riok/Kreya
+- https://github.com/bloomrpc/bloomrpc
 - https://github.com/MuhammedKalkan/OpenLens
 
 ### macOS
