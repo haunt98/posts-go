@@ -127,7 +127,6 @@ Language server
 
 - https://github.com/golang/tools/tree/master/gopls
 - https://github.com/bufbuild/buf-language-server
-- https://github.com/luals/lua-language-server
 
 Misc
 
@@ -147,6 +146,7 @@ Memory
 - https://github.com/bojand/ghz
 - https://github.com/sharkdp/hyperfine
 - https://github.com/boyter/cs
+- https://github.com/luals/lua-language-server
 
 #### Go
 
