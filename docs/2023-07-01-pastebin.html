@@ -409,7 +409,7 @@ f2 -r <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mti
     </h2>
     <div class="highlight highlight-source-shell">
       <pre>grpcurl -proto path/file.proto \
-    -d <span class="pl-s"><span class="pl-pds">'</span>{"key": "value"}<span class="pl-pds">'</span></span> \
+    -d <span class="pl-s"><span class="pl-pds">'</span>{"key": "value", "timestamp": "1997-04-01T00:00:00Z"}<span class="pl-pds">'</span></span> \
     internal-social.zalopay.vn:443 \
     pkg.Service/GetData</pre>
     </div>

@@ -56,8 +56,16 @@
     </ul>
     <p>
       <strong>MAC</strong> aka Message Authentication Code produce from key,
-      message to authentication tag.
+      message to authentication tag. <strong>HMAC</strong> is MAC using hash.
     </p>
+    <ul>
+      <li>A send B message with MAC (generate from message and A key).</li>
+      <li>
+        B double check message with MAC (generate from receive message and B
+        key).
+      </li>
+      <li>A and B use same key.</li>
+    </ul>
 
     <div>
       Feel free to ask me via

@@ -11,4 +11,8 @@ My notes when reading
 - Collision resistance: Can not find 2 input produce same digest.
 
 **MAC** aka Message Authentication Code produce from key, message to
-authentication tag.
+authentication tag. **HMAC** is MAC using hash.
+
+- A send B message with MAC (generate from message and A key).
+- B double check message with MAC (generate from receive message and B key).
+- A and B use same key.
