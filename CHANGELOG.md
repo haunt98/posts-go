@@ -1,5 +1,59 @@
 # CHANGELOG
 
+## v0.0.2 (2023-08-27)
+
+### Added
+
+- feat: add buger work (2023-08-27)
+
+- feat: remove insomnia backup (2023-08-24)
+
+- feat: add grpcurl timestamp represent (2023-08-24)
+
+- feat: real world crypto (2023-08-24)
+
+- feat: add cool keeb (2023-08-23)
+
+- feat: deprecated insomnia (2023-08-23)
+
+- Revert "feat: add more zsh goodies" (2023-08-22)
+
+- feat: add more zsh goodies (2023-08-21)
+
+- feat: add grpcurl (2023-08-21)
+
+- feat: add hardware (wip) (2023-08-20)
+
+- feat: add lunar (2023-08-20)
+
+- feat: add pokemon (2023-08-19)
+
+- feat: add metal in ps2 (2023-08-19)
+
+- feaT: more interesting go (2023-08-17)
+
+- feat: add GOMEMLIMIT (2023-08-17)
+
+- feat: health check db (2023-08-17)
+
+- feat: use panicparser (2023-08-17)
+
+- feat: add vim fold (2023-08-16)
+
+### Others
+
+- chore: don't use luals (2023-08-24)
+
+- chore: more fun (2023-08-21)
+
+- chore: more gmk colors (2023-08-20)
+
+- chore: clean up (2023-08-19)
+
+- bump: go-github v54 (2023-08-17)
+
+- chore(changelog): generate v0.0.1 (2023-08-15)
+
 ## v0.0.1 (2023-08-15)
 
 ### Added
