@@ -18,7 +18,6 @@ This just a raw list.
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/dandavison/delta
 - https://github.com/ogham/exa
-- https://github.com/zellij-org/zellij
 
 - https://github.com/adrianlopezroche/fdupes
 - https://github.com/WayneD/rsync
@@ -41,6 +40,7 @@ Memory
 - https://github.com/Wilfred/difftastic
 - https://github.com/jonas/tig
 - https://github.com/extrawurst/gitui
+- https://github.com/zellij-org/zellij
 - https://github.com/wustho/epr
 
 For fun
