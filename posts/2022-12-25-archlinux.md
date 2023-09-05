@@ -400,19 +400,26 @@ pacman -Syu flatpak
 
 ## [Improving performance](https://wiki.archlinux.org/index.php/improving_performance)
 
-https://wiki.archlinux.org/index.php/swap#Swap_file
+- https://wiki.archlinux.org/index.php/swap#Swap_file
+- https://wiki.archlinux.org/index.php/swap#Swappiness
+- https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit
+- https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps
+- https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM
+- https://wiki.archlinux.org/index.php/Silent_boot
+- https://wiki.archlinux.org/title/Improving_performance#Watchdogs
 
-https://wiki.archlinux.org/index.php/swap#Swappiness
+## Hardware dependent
 
-https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit
+- https://wiki.archlinux.org/title/Laptop
+- https://wiki.archlinux.org/title/ASUS_Linux
+- https://wiki.archlinux.org/title/PRIME
 
-https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps
+## Experiment
 
-https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM
+Do it at your own risk!!!
 
-https://wiki.archlinux.org/index.php/Silent_boot
-
-https://wiki.archlinux.org/title/Improving_performance#Watchdogs
+- https://github.com/AdnanHodzic/auto-cpufreq
+- https://github.com/nbfc-linux/nbfc-linux
 
 ## In the end
 
