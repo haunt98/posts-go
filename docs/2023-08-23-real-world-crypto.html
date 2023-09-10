@@ -46,7 +46,17 @@
         >Real-World Cryptography</a
       >
     </p>
-    <p><strong>Hash</strong> function convert from input to digest:</p>
+    <h2>
+      <a
+        id="user-content-hash-function-convert-from-input-to-digest"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#hash-function-convert-from-input-to-digest"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+      <strong>Hash</strong> function convert from input to digest
+    </h2>
     <ul>
       <li>Pre-image resistance: Given digest, can not find input</li>
       <li>
@@ -55,10 +65,18 @@
       </li>
       <li>Collision resistance: Can not find 2 input produce same digest.</li>
     </ul>
-    <p>
+    <h2>
+      <a
+        id="user-content-mac-aka-message-authentication-code-produce-from-key-message-to-authentication-tag"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#mac-aka-message-authentication-code-produce-from-key-message-to-authentication-tag"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
       <strong>MAC</strong> aka Message Authentication Code produce from key,
-      message to authentication tag. <strong>HMAC</strong> is MAC using hash.
-    </p>
+      message to authentication tag.
+    </h2>
     <ul>
       <li>A send B message with MAC (generate from message and A key).</li>
       <li>
@@ -67,6 +85,62 @@
       </li>
       <li>A and B use same key.</li>
     </ul>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">alice</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">bob</span>
+
+    <span class="pl-ent">alice </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">bob</span><span class="pl-k">:</span> <span class="pl-s">send alice, mac(secret_key_alice, alice)</span>
+    <span class="pl-ent">bob </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">bob</span><span class="pl-k">:</span> <span class="pl-s">compare mac(secret_key_alice, alice) with mac(secret_key_bob, alice)</span></pre>
+    </div>
+    <ul>
+      <li>
+        Prevent forgery: without secret_key, can not generate MAC even if
+        knowing <strong>a lot of</strong> alice and mac(secret_key, alice),
+      </li>
+      <li>Prevent collisions: keep MAC long enough (256-bit),</li>
+      <li>
+        Replay attacks: send transaction 2 times with perfectly MAC and u know
+        why -&gt; instead of mac(secret_key, alice), use
+        <strong>counter</strong> as mac(secret_key, counter, alice).
+      </li>
+      <li>
+        Verify must be done in <strong>constant time</strong>: if not, probaly
+        return error the moment the bytes differ -&gt; attacker recreate byte by
+        byte by measuring how long -&gt; timing attacks
+      </li>
+    </ul>
+    <p>Constant time comparision:</p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">:=</span> <span class="pl-c1">0</span>; <span class="pl-s1">i</span> <span class="pl-c1">&lt;</span> <span class="pl-en">len</span>(<span class="pl-s1">x</span>); <span class="pl-s1">i</span><span class="pl-c1">++</span> {
+    <span class="pl-c">// Use XOR instead of compare x[i] == y[i]</span>
+    <span class="pl-c">// If x[i] == y[i] -&gt; XOR is 1</span>
+    <span class="pl-c">// Otherwise XOR is 0</span>
+    <span class="pl-s1">v</span> <span class="pl-c1">|=</span> <span class="pl-s1">x</span>[<span class="pl-s1">i</span>] <span class="pl-c1">^</span> <span class="pl-s1">y</span>[<span class="pl-s1">i</span>]
+}
+
+<span class="pl-c">// v == 1 means all XOR is 1 means x == y</span></pre>
+    </div>
+    <p>Use for:</p>
+    <ul>
+      <li>
+        Integrity: because MAC ensure no one can tamper with message without
+        noticing
+      </li>
+    </ul>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">alice</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">bob</span>
+
+    <span class="pl-ent">alice </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">bob</span><span class="pl-k">:</span> <span class="pl-s">send username, password</span>
+    <span class="pl-ent">bob </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">alice</span><span class="pl-k">:</span> <span class="pl-s">return alice|mac(secret_key, alice)</span>
+    <span class="pl-ent">alice </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">bob</span><span class="pl-k">:</span> <span class="pl-s">send alice|mac(secret_key, alice)</span>
+    <span class="pl-ent">bob </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">alice</span><span class="pl-k">:</span> <span class="pl-s">return OK</span>
+    <span class="pl-ent">alice </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">bob</span><span class="pl-k">:</span> <span class="pl-s">send bob|mac(secret_key, alice)</span>
+    <span class="pl-ent">bob </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">alice</span><span class="pl-k">:</span> <span class="pl-s">return ERROR</span></pre>
+    </div>
+    <p><strong>HMAC</strong> is MAC using hash</p>
 
     <div>
       Feel free to ask me via
