@@ -41,8 +41,7 @@ gen:
 
 format-html:
 	bun upgrade
-	bun install --global prettier
-	prettier --write ./templates ./docs
+	bunx prettier --write ./templates ./docs
 	deno fmt ./posts
 
 srht:
