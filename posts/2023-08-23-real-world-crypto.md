@@ -17,7 +17,7 @@ authentication tag. **HMAC** is MAC using hash.
 - B double check message with MAC (generate from receive message and B key).
 - A and B use same key.
 
-```mermald
+```mermaid
 sequenceDiagram
     participant alice
     participant bob
