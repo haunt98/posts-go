@@ -16,3 +16,16 @@ authentication tag. **HMAC** is MAC using hash.
 - A send B message with MAC (generate from message and A key).
 - B double check message with MAC (generate from receive message and B key).
 - A and B use same key.
+
+```mermald
+sequenceDiagram
+    participant alice
+    participant bob
+
+    alice ->> bob: send username, password
+    bob -->> alice: return alice|mac(private_key, alice)
+    alice ->> bob: send alice|mac(private_key, alice)
+    bob -->> alice: return OK
+    alice ->> bob: send bob|mac(private_key, alice)
+    bob -->> alice: return ERROR
+```
