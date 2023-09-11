@@ -27,7 +27,6 @@ This just a raw list.
 
 - https://github.com/dbrgn/tealdeer
 - https://github.com/GothenburgBitFactory/taskwarrior
-- https://dev.yorhel.nl/ncdu
 - https://github.com/dundee/gdu
 - https://github.com/muesli/duf
 - https://github.com/charmbracelet/glow
@@ -40,6 +39,7 @@ Memory
 - https://github.com/Wilfred/difftastic
 - https://github.com/jonas/tig
 - https://github.com/extrawurst/gitui
+- https://dev.yorhel.nl/ncdu
 - https://github.com/zellij-org/zellij
 - https://github.com/wustho/epr
 
