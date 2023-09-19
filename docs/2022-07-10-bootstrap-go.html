@@ -575,8 +575,7 @@ internal
       But <code>database/sql</code> has its own limit. For example, it is hard
       to get primary key after insert/update. So may be you want to use ORM for
       those cases. I hear that
-      <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a>,
-      <a href="https://github.com/ent/ent">ent/ent</a> is good.
+      <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a> is good.
     </p>
     <h3>
       <a
@@ -697,15 +696,18 @@ internal
     </p>
     <h3>
       <a
-        id="user-content-connect-kafka-with-shopifysarama"
+        id="user-content-connect-kafka-with-ibmsarama"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#connect-kafka-with-shopifysarama"
+        href="#connect-kafka-with-ibmsarama"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Connect Kafka with
-      <a href="https://github.com/Shopify/sarama">Shopify/sarama</a>
+      >Connect Kafka with <a href="https://github.com/IBM/sarama">IBM/sarama</a>
     </h3>
+    <p>
+      Use <code>sarama.V1_0_0_0</code>, because IBM decide to upgrade default
+      version.
+    </p>
     <p>
       Don't use
       <a href="https://github.com/confluentinc/confluent-kafka-go"
@@ -945,6 +947,11 @@ fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
           href="https://turriate.com/articles/making-sqlite-faster-in-go"
           rel="nofollow"
           >Making SQLite faster in Go</a
+        >
+      </li>
+      <li>
+        <a href="https://encore.dev/blog/advanced-go-concurrency" rel="nofollow"
+          >Advanced Go Concurrency</a
         >
       </li>
     </ul>
