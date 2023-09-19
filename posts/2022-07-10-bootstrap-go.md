@@ -303,8 +303,7 @@ connection to cached it, not create it every time we need it.
 
 But `database/sql` has its own limit. For example, it is hard to get primary key
 after insert/update. So may be you want to use ORM for those cases. I hear that
-[go-gorm/gorm](https://github.com/go-gorm/gorm),
-[ent/ent](https://github.com/ent/ent) is good.
+[go-gorm/gorm](https://github.com/go-gorm/gorm) is good.
 
 ### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis)
 
@@ -378,7 +377,9 @@ Remember to config:
 Don't use [mattn/go-sqlite3](https://github.com/mattn/go-sqlite3), it's required
 `CGO_ENABLED`.
 
-### Connect Kafka with [Shopify/sarama](https://github.com/Shopify/sarama)
+### Connect Kafka with [IBM/sarama](https://github.com/IBM/sarama)
+
+Use `sarama.V1_0_0_0`, because IBM decide to upgrade default version.
 
 Don't use
 [confluentinc/confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go),
@@ -484,3 +485,4 @@ go clean -cache -testcache -modcache -fuzzcache -x
 - [Prevent Logging Secrets in Go by Using Custom Types](https://www.commonfate.io/blog/prevent-logging-secrets-in-go-by-using-custom-types)
 - [Speed Up GoMock with Conditional Generation](https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen)
 - [Making SQLite faster in Go](https://turriate.com/articles/making-sqlite-faster-in-go)
+- [Advanced Go Concurrency](https://encore.dev/blog/advanced-go-concurrency)
