@@ -229,18 +229,16 @@ Fix black screen when open game in fullscreen in external monitor with
 `about:config`:
 
 - Disable unused features:
-
   - `extensions.pocket.enabled`: false
   - `identity.fxaccounts.enabled`: false
   - `reader.parse-on-load.enabled`: false
 
 - Good settings:
-
   - `media.videocontrols.picture-in-picture.video-toggle.always-show`: true
   - `network.IDN_show_punycode`: true
+  - `browser.tabs.insertAfterCurrent`: true
 
 - Encrypted Client Hello (ECH):
-
   - `network.dns.echconfig.enabled`: true
   - `network.dns.use_https_rr_as_altsvc`: true
 
