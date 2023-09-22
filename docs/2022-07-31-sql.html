@@ -28,15 +28,10 @@
     <h2>
       <a href="index.html"><code>~</code></a>
     </h2>
-    <h1>
-      <a
-        id="user-content-sql"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#sql"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >SQL
+    <h1 id="user-content-sql">
+      <a class="heading-link" href="#sql"
+        >SQL<span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h1>
     <p>
       Previously in my fresher software developer time, I rarely write SQL, I
@@ -48,29 +43,25 @@
       This guide is not kind of guide which cover all cases. Just my little
       tricks when I work with SQL.
     </p>
-    <h2>
-      <a
-        id="user-content-stay-away-from-database-unique-id"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#stay-away-from-database-unique-id"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Stay away from database unique id
+    <h2 id="user-content-stay-away-from-database-unique-id">
+      <a class="heading-link" href="#stay-away-from-database-unique-id"
+        >Stay away from database unique id<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
     <p>
       Use UUID instead. If you can, and you should, choose UUID type which can
       be sortable.
     </p>
-    <h2>
-      <a
-        id="user-content-stay-away-from-database-timestamp"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#stay-away-from-database-timestamp"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Stay away from database timestamp
+    <h2 id="user-content-stay-away-from-database-timestamp">
+      <a class="heading-link" href="#stay-away-from-database-timestamp"
+        >Stay away from database timestamp<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
     <p>
       Stay away from all kind of database timestamp (MySQL timestmap, SQLite
@@ -89,15 +80,13 @@
 [Business] time, data -&gt; convert to unix timestamp milliseconds -&gt; [Database] int64</pre
       >
     </div>
-    <h2>
-      <a
-        id="user-content-extra-field-for-extra-things"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#extra-field-for-extra-things"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Extra field for extra things
+    <h2 id="user-content-extra-field-for-extra-things">
+      <a class="heading-link" href="#extra-field-for-extra-things"
+        >Extra field for extra things<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
     <p>
       Create new column in database is scary, so I suggest avoid it if you can.
@@ -106,15 +95,13 @@
     </p>
     <p>I always use MySQL json data type for extra field.</p>
     <p>JSON data type also used for dumping request, response data.</p>
-    <h2>
-      <a
-        id="user-content-use-index"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#use-index"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use index!!!
+    <h2 id="user-content-use-index">
+      <a class="heading-link" href="#use-index"
+        >Use index!!!<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
     <p>
       You should use index for faster query, but not too much. Don't create
@@ -157,15 +144,13 @@
         >
       </li>
     </ul>
-    <h2>
-      <a
-        id="user-content-be-careful-with-null"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#be-careful-with-null"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Be careful with NULL
+    <h2 id="user-content-be-careful-with-null">
+      <a class="heading-link" href="#be-careful-with-null"
+        >Be careful with NULL<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
     <p>
       If compare with field which can be NULL, remember to check NULL for
@@ -185,46 +170,36 @@
 <span class="pl-k">WHERE</span> (field_something IS <span class="pl-k">NULL</span> <span class="pl-k">OR</span> field_something <span class="pl-k">!=</span> <span class="pl-c1">1</span>)</pre>
     </div>
     <p>Need clarify why this happpen? Idk :(</p>
-    <h2>
-      <a
-        id="user-content-varchar-or-text"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#varchar-or-text"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
+    <h2 id="user-content-varchar-or-text">
+      <a class="heading-link" href="#varchar-or-text">
+        <code>VARCHAR</code> or <code>TEXT</code>
+        <span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
-      <code>VARCHAR</code> or <code>TEXT</code>
     </h2>
     <p>
       Prefer <code>VARCHAR</code> if you need to query and of course use index,
       and make sure size of value will never hit the limit. Prefer
       <code>TEXT</code> if you don't care, just want to store something.
     </p>
-    <h2>
-      <a
-        id="user-content-limit"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#limit"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><code>LIMIT</code>
+    <h2 id="user-content-limit">
+      <a class="heading-link" href="#limit"
+        ><code>LIMIT</code
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h2>
     <p>
       Prefer <code>LIMIT 10 OFFSET 5</code> to <code>LIMIT 5, 10</code> to avoid
       misunderstanding.
     </p>
-    <h2>
+    <h2
+      id="user-content-be-super-careful-when-migrate-update-database-on-production-and-online"
+    >
       <a
-        id="user-content-be-super-careful-when-migrate-update-database-on-production-and-online"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#be-super-careful-when-migrate-update-database-on-production-and-online"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Be super careful when migrate, update database on production and
-      online!!!
+        >Be super careful when migrate, update database on production and
+        online!!!<span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h2>
     <p>
       Plase read docs about online ddl operations before do anything online
@@ -257,26 +232,16 @@
         >
       </li>
     </ul>
-    <h2>
-      <a
-        id="user-content-heathcheck"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#heathcheck"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Heathcheck
+    <h2 id="user-content-heathcheck">
+      <a class="heading-link" href="#heathcheck"
+        >Heathcheck<span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h2>
     <p>Use <code>SELECT 1</code> to check if database failed yet.</p>
-    <h2>
-      <a
-        id="user-content-tools"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#tools"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Tools
+    <h2 id="user-content-tools">
+      <a class="heading-link" href="#tools"
+        >Tools<span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h2>
     <ul>
       <li>
@@ -289,15 +254,10 @@
         database reality :)
       </li>
     </ul>
-    <h2>
-      <a
-        id="user-content-thanks"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#thanks"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Thanks
+    <h2 id="user-content-thanks">
+      <a class="heading-link" href="#thanks"
+        >Thanks<span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h2>
     <ul>
       <li>

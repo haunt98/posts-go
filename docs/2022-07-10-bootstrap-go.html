@@ -28,15 +28,13 @@
     <h2>
       <a href="index.html"><code>~</code></a>
     </h2>
-    <h1>
-      <a
-        id="user-content-bootstrap-go"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#bootstrap-go"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Bootstrap Go
+    <h1 id="user-content-bootstrap-go">
+      <a class="heading-link" href="#bootstrap-go"
+        >Bootstrap Go<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h1>
     <p>
       It is hard to write bootstrap tool to quickly create Go service. So I
@@ -44,15 +42,10 @@
       I need to write a Go service from scratch. Also, this is my personal
       opinion, so feel free to comment.
     </p>
-    <h2>
-      <a
-        id="user-content-structure"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#structure"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Structure
+    <h2 id="user-content-structure">
+      <a class="heading-link" href="#structure"
+        >Structure<span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h2>
     <div class="highlight highlight-text-adblock">
       <pre>
@@ -135,15 +128,13 @@ internal
         <code>business</code>.
       </li>
     </ul>
-    <h2>
-      <a
-        id="user-content-do-not-repeat"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#do-not-repeat"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Do not repeat!
+    <h2 id="user-content-do-not-repeat">
+      <a class="heading-link" href="#do-not-repeat"
+        >Do not repeat!<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
     <p>If we have too many services, some of the logic will be overlapped.</p>
     <p>
@@ -157,25 +148,21 @@ internal
       Another bad practice is adapter service. No need to write a new service if
       what we need is just common pkg libs.
     </p>
-    <h2>
-      <a
-        id="user-content-taste-on-style-guide"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#taste-on-style-guide"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Taste on style guide
+    <h2 id="user-content-taste-on-style-guide">
+      <a class="heading-link" href="#taste-on-style-guide"
+        >Taste on style guide<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
-    <h3>
-      <a
-        id="user-content-stop-using-global-var"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#stop-using-global-var"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Stop using global var
+    <h3 id="user-content-stop-using-global-var">
+      <a class="heading-link" href="#stop-using-global-var"
+        >Stop using global var<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h3>
     <p>
       If I see someone using global var, I swear I will shoot them twice in the
@@ -186,15 +173,13 @@ internal
       <li>Can not write unit test.</li>
       <li>Is not thread safe.</li>
     </ul>
-    <h3>
-      <a
-        id="user-content-use-functional-options-but-dont-overuse-it"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#use-functional-options-but-dont-overuse-it"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use functional options, but don't overuse it!
+    <h3 id="user-content-use-functional-options-but-dont-overuse-it">
+      <a class="heading-link" href="#use-functional-options-but-dont-overuse-it"
+        >Use functional options, but don't overuse it!<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h3>
     <p>
       For simple struct with 1 or 2 fields, no need to use functional options.
@@ -240,19 +225,15 @@ internal
       <code>WithB</code> option. No need to pass direct field inside
       <code>s</code>.
     </p>
-    <h3>
-      <a
-        id="user-content-use-errgroup-as-much-as-possible"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#use-errgroup-as-much-as-possible"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use
-      <a href="https://pkg.go.dev/golang.org/x/sync/errgroup" rel="nofollow"
+    <h3 id="user-content-use-errgroup-as-much-as-possible">
+      <a class="heading-link" href="#use-errgroup-as-much-as-possible">Use </a
+      ><a href="https://pkg.go.dev/golang.org/x/sync/errgroup" rel="nofollow"
         >errgroup</a
       >
-      as much as possible
+      as much as possible<span
+        aria-hidden="true"
+        class="octicon octicon-link"
+      ></span>
     </h3>
     <p>
       If business logic involves calling too many APIs, but they are not depend
@@ -285,35 +266,33 @@ internal
 	<span class="pl-c">// Handle error</span>
 }</pre>
     </div>
-    <h3>
+    <h3 id="user-content-use-semaphore-when-need-to-implement-workerpool">
       <a
-        id="user-content-use-semaphore-when-need-to-implement-workerpool"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#use-semaphore-when-need-to-implement-workerpool"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use
-      <a href="https://pkg.go.dev/golang.org/x/sync/semaphore" rel="nofollow"
+        >Use </a
+      ><a href="https://pkg.go.dev/golang.org/x/sync/semaphore" rel="nofollow"
         >semaphore</a
       >
-      when need to implement WorkerPool
+      when need to implement WorkerPool<span
+        aria-hidden="true"
+        class="octicon octicon-link"
+      ></span>
     </h3>
     <p>
       Please don't use external libs for WorkerPool, I don't want to deal with
       dependency hell.
     </p>
-    <h3>
+    <h3
+      id="user-content-use-syncpool-when-need-to-reuse-object-mainly-for-bytesbuffer"
+    >
       <a
-        id="user-content-use-syncpool-when-need-to-reuse-object-mainly-for-bytesbuffer"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#use-syncpool-when-need-to-reuse-object-mainly-for-bytesbuffer"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use
-      <a href="https://pkg.go.dev/sync#Pool" rel="nofollow">sync.Pool</a> when
+        >Use </a
+      ><a href="https://pkg.go.dev/sync#Pool" rel="nofollow">sync.Pool</a> when
       need to reuse object, mainly for <code>bytes.Buffer</code>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>Example:</p>
     <div class="highlight highlight-source-go">
@@ -343,39 +322,33 @@ internal
 	<span class="pl-k">return</span> <span class="pl-s1">result</span>, <span class="pl-c1">nil</span>
 }</pre>
     </div>
-    <h2>
-      <a
-        id="user-content-external-libs"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#external-libs"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >External libs
+    <h2 id="user-content-external-libs">
+      <a class="heading-link" href="#external-libs"
+        >External libs<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
-    <h3>
-      <a
-        id="user-content-no-need-vendor"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#no-need-vendor"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >No need <code>vendor</code>
+    <h3 id="user-content-no-need-vendor">
+      <a class="heading-link" href="#no-need-vendor"
+        >No need <code>vendor</code>
+        <span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h3>
     <p>
       Only need if you need something from <code>vendor</code>, to generate mock
       or something else.
     </p>
-    <h3>
+    <h3 id="user-content-use-buildgo-to-include-build-tools-in-gomod">
       <a
-        id="user-content-use-buildgo-to-include-build-tools-in-gomod"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#use-buildgo-to-include-build-tools-in-gomod"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use <code>build.go</code> to include build tools in go.mod
+        >Use <code>build.go</code> to include build tools in go.mod<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h3>
     <p>To easily control version of build tools.</p>
     <p>For example <code>build.go</code>:</p>
@@ -398,18 +371,16 @@ internal
       We always get the version of build tools in <code>go.mod</code> each time
       we install it. Future contributors will not cry anymore.
     </p>
-    <h3>
+    <h3
+      id="user-content-dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service"
+    >
       <a
-        id="user-content-dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Don't use cli libs (<a href="https://github.com/spf13/cobra"
-        >spf13/cobra</a
-      >, <a href="https://github.com/urfave/cli">urfave/cli</a>) just for Go
-      service
+        >Don't use cli libs (</a
+      ><a href="https://github.com/spf13/cobra">spf13/cobra</a>,
+      <a href="https://github.com/urfave/cli">urfave/cli</a>) just for Go
+      service<span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>
       What is the point to pass many params (<code>do-it</code>,
@@ -422,18 +393,13 @@ internal
       <a href="https://12factor.net/" rel="nofollow">The Twelve Factors</a>
       guide.
     </p>
-    <h3>
-      <a
-        id="user-content-dont-use-grpc-ecosystemgrpc-gateway"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#dont-use-grpc-ecosystemgrpc-gateway"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Don't use
-      <a href="https://github.com/grpc-ecosystem/grpc-gateway"
+    <h3 id="user-content-dont-use-grpc-ecosystemgrpc-gateway">
+      <a class="heading-link" href="#dont-use-grpc-ecosystemgrpc-gateway"
+        >Don't use </a
+      ><a href="https://github.com/grpc-ecosystem/grpc-gateway"
         >grpc-ecosystem/grpc-gateway</a
       >
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>Just don't.</p>
     <p>
@@ -446,31 +412,21 @@ internal
       Write 1 for both gRPC, REST sounds good, but in the end, it is not worth
       it.
     </p>
-    <h3>
-      <a
-        id="user-content-dont-use-uberprototool-use-bufbuildbuf"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#dont-use-uberprototool-use-bufbuildbuf"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Don't use <a href="https://github.com/uber/prototool">uber/prototool</a>,
-      use <a href="https://github.com/bufbuild/buf">bufbuild/buf</a>
+    <h3 id="user-content-dont-use-uberprototool-use-bufbuildbuf">
+      <a class="heading-link" href="#dont-use-uberprototool-use-bufbuildbuf"
+        >Don't use </a
+      ><a href="https://github.com/uber/prototool">uber/prototool</a>, use
+      <a href="https://github.com/bufbuild/buf">bufbuild/buf</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>
       prototool is deprecated, and buf can generate, lint, format as good as
       prototool.
     </p>
-    <h3>
-      <a
-        id="user-content-use-gin-gonicgin-for-rest"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#use-gin-gonicgin-for-rest"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a> for
-      REST.
+    <h3 id="user-content-use-gin-gonicgin-for-rest">
+      <a class="heading-link" href="#use-gin-gonicgin-for-rest">Use </a
+      ><a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a> for
+      REST.<span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>With <code>c *gin.Context</code>:</p>
     <ul>
@@ -491,16 +447,11 @@ internal
     }
 }()</pre>
     </div>
-    <h3>
-      <a
-        id="user-content-if-you-want-log-just-use-uber-gozap"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#if-you-want-log-just-use-uber-gozap"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >If you want log, just use
-      <a href="https://github.com/uber-go/zap">uber-go/zap</a>
+    <h3 id="user-content-if-you-want-log-just-use-uber-gozap">
+      <a class="heading-link" href="#if-you-want-log-just-use-uber-gozap"
+        >If you want log, just use </a
+      ><a href="https://github.com/uber-go/zap">uber-go/zap</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>It is fast!</p>
     <ul>
@@ -523,16 +474,11 @@ internal
         for easily debug.
       </li>
     </ul>
-    <h3>
-      <a
-        id="user-content-to-read-config-use-spf13viper"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#to-read-config-use-spf13viper"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >To read config, use
-      <a href="https://github.com/spf13/viper">spf13/viper</a>
+    <h3 id="user-content-to-read-config-use-spf13viper">
+      <a class="heading-link" href="#to-read-config-use-spf13viper"
+        >To read config, use </a
+      ><a href="https://github.com/spf13/viper">spf13/viper</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>
       Only init config in main or cmd layer. Do not use
@@ -547,15 +493,17 @@ internal
       Also, be careful if config value is empty. You should decide to continue
       or stop the service if there is empty config.
     </p>
-    <h3>
+    <h3
+      id="user-content-dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql"
+    >
       <a
-        id="user-content-dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Don't overuse ORM libs, no need to handle another layer above SQL.
+        >Don't overuse ORM libs, no need to handle another layer above SQL.<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h3>
     <p>
       Each ORM libs has each different syntax. To learn and use those libs
@@ -577,16 +525,11 @@ internal
       those cases. I hear that
       <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a> is good.
     </p>
-    <h3>
-      <a
-        id="user-content-connect-redis-with-redisgo-redis"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#connect-redis-with-redisgo-redis"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Connect Redis with
-      <a href="https://github.com/redis/go-redis">redis/go-redis</a>
+    <h3 id="user-content-connect-redis-with-redisgo-redis">
+      <a class="heading-link" href="#connect-redis-with-redisgo-redis"
+        >Connect Redis with </a
+      ><a href="https://github.com/redis/go-redis">redis/go-redis</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>
       Be careful when use
@@ -648,16 +591,11 @@ internal
     <ul>
       <li><code>ReadTimeout</code>, <code>WriteTimeout</code></li>
     </ul>
-    <h3>
-      <a
-        id="user-content-connect-mysql-with-go-sql-drivermysql"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#connect-mysql-with-go-sql-drivermysql"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Connect MySQL with
-      <a href="https://github.com/go-sql-driver/mysql">go-sql-driver/mysql</a>
+    <h3 id="user-content-connect-mysql-with-go-sql-drivermysql">
+      <a class="heading-link" href="#connect-mysql-with-go-sql-drivermysql"
+        >Connect MySQL with </a
+      ><a href="https://github.com/go-sql-driver/mysql">go-sql-driver/mysql</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>Remember to config:</p>
     <ul>
@@ -669,18 +607,13 @@ internal
       <li><code>CheckConnLiveness</code> to true.</li>
       <li><code>ReadTimeout</code>, <code>WriteTimeout</code></li>
     </ul>
-    <h3>
-      <a
-        id="user-content-connect-sqlite-with-moderncorgsqlite"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#connect-sqlite-with-moderncorgsqlite"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Connect SQLite with
-      <a href="https://gitlab.com/cznic/sqlite" rel="nofollow"
+    <h3 id="user-content-connect-sqlite-with-moderncorgsqlite">
+      <a class="heading-link" href="#connect-sqlite-with-moderncorgsqlite"
+        >Connect SQLite with </a
+      ><a href="https://gitlab.com/cznic/sqlite" rel="nofollow"
         >modernc.org/sqlite</a
       >
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>Remember to config:</p>
     <ul>
@@ -694,15 +627,11 @@ internal
       <a href="https://github.com/mattn/go-sqlite3">mattn/go-sqlite3</a>, it's
       required <code>CGO_ENABLED</code>.
     </p>
-    <h3>
-      <a
-        id="user-content-connect-kafka-with-ibmsarama"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#connect-kafka-with-ibmsarama"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Connect Kafka with <a href="https://github.com/IBM/sarama">IBM/sarama</a>
+    <h3 id="user-content-connect-kafka-with-ibmsarama">
+      <a class="heading-link" href="#connect-kafka-with-ibmsarama"
+        >Connect Kafka with </a
+      ><a href="https://github.com/IBM/sarama">IBM/sarama</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>
       Use <code>sarama.V1_0_0_0</code>, because IBM decide to upgrade default
@@ -714,32 +643,26 @@ internal
         >confluentinc/confluent-kafka-go</a
       >, it's required <code>CGO_ENABLED</code>.
     </p>
-    <h3>
-      <a
-        id="user-content-if-you-want-test-just-use-stretchrtestify"
-        class="anchor"
+    <h3 id="user-content-if-you-want-test-just-use-stretchrtestify">
+      <a class="heading-link" href="#if-you-want-test-just-use-stretchrtestify"
+        >If you want test, just use </a
+      ><a href="https://github.com/stretchr/testify">stretchr/testify</a>.<span
         aria-hidden="true"
-        tabindex="-1"
-        href="#if-you-want-test-just-use-stretchrtestify"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >If you want test, just use
-      <a href="https://github.com/stretchr/testify">stretchr/testify</a>.
+        class="octicon octicon-link"
+      ></span>
     </h3>
     <p>
       It is easy to write a suite test, thanks to testify. Also, for mocking,
       there are many options out there. Pick 1 then sleep peacefully.
     </p>
-    <h3>
+    <h3 id="user-content-if-need-to-mock-choose-matryermoq-or-ubermock">
       <a
-        id="user-content-if-need-to-mock-choose-matryermoq-or-ubermock"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#if-need-to-mock-choose-matryermoq-or-ubermock"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >If need to mock, choose
-      <a href="https://github.com/matryer/moq">matryer/moq</a> or
+        >If need to mock, choose </a
+      ><a href="https://github.com/matryer/moq">matryer/moq</a> or
       <a href="https://github.com/uber/mock">uber/mock</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>
       The first is easy to use but not powerful as the later. If you want to
@@ -751,15 +674,11 @@ internal
 <span class="pl-c">// https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen</span>
 <span class="pl-c">//go:generate sh -c "test service_mock_generated.go -nt $GOFILE &amp;&amp; exit 0; moq -rm -out service_mock_generated.go . Service"</span></pre>
     </div>
-    <h3>
-      <a
-        id="user-content-be-careful-with-spf13cast"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#be-careful-with-spf13cast"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Be careful with <a href="https://github.com/spf13/cast">spf13/cast</a>
+    <h3 id="user-content-be-careful-with-spf13cast">
+      <a class="heading-link" href="#be-careful-with-spf13cast"
+        >Be careful with </a
+      ><a href="https://github.com/spf13/cast">spf13/cast</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>Don't cast proto enum:</p>
     <div class="highlight highlight-source-go">
@@ -769,21 +688,22 @@ internal
 <span class="pl-c">// Good</span>
 <span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-en">int32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)</pre>
     </div>
-    <h3>
+    <h3
+      id="user-content-use-stringer-if-you-want-your-type-enum-can-be-print-as-string"
+    >
       <a
-        id="user-content-use-stringer-if-you-want-your-type-enum-can-be-print-as-string"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#use-stringer-if-you-want-your-type-enum-can-be-print-as-string"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use
-      <a
+        >Use </a
+      ><a
         href="https://pkg.go.dev/golang.org/x/tools/cmd/stringer"
         rel="nofollow"
         >stringer</a
       >
-      if you want your type enum can be print as string
+      if you want your type enum can be print as string<span
+        aria-hidden="true"
+        class="octicon octicon-link"
+      ></span>
     </h3>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-k">type</span> <span class="pl-smi">Drink</span> <span class="pl-smi">int</span>
@@ -800,51 +720,40 @@ internal
 <span class="pl-c"><span class="pl-c">#</span> Run inside directory which contains Drink</span>
 stringer -type=Drink</pre>
     </div>
-    <h3>
+    <h3
+      id="user-content-dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate"
+    >
       <a
-        id="user-content-dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="heading-link"
         href="#dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Don't waste your time rewrite rate limiter if your use case is simple,
-      use
-      <a href="https://pkg.go.dev/golang.org/x/time/rate" rel="nofollow"
+        >Don't waste your time rewrite rate limiter if your use case is simple,
+        use </a
+      ><a href="https://pkg.go.dev/golang.org/x/time/rate" rel="nofollow"
         >rate</a
       >
       or
       <a href="https://github.com/go-redis/redis_rate">go-redis/redis_rate</a>
+      <span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>
       <strong>rate</strong> if you want rate limiter locally in your single
       instance of service. <strong>redis_rate</strong> if you want rate limiter
       distributed across all your instances of service.
     </p>
-    <h3>
-      <a
-        id="user-content-replace-go-fmt-goimports-with-mvdangofumpt"
-        class="anchor"
+    <h3 id="user-content-replace-go-fmt-goimports-with-mvdangofumpt">
+      <a class="heading-link" href="#replace-go-fmt-goimports-with-mvdangofumpt"
+        >Replace <code>go fmt</code>, <code>goimports</code> with </a
+      ><a href="https://github.com/mvdan/gofumpt">mvdan/gofumpt</a>.<span
         aria-hidden="true"
-        tabindex="-1"
-        href="#replace-go-fmt-goimports-with-mvdangofumpt"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Replace <code>go fmt</code>, <code>goimports</code> with
-      <a href="https://github.com/mvdan/gofumpt">mvdan/gofumpt</a>.
+        class="octicon octicon-link"
+      ></span>
     </h3>
     <p><code>gofumpt</code> provides more rules when format Go codes.</p>
-    <h3>
-      <a
-        id="user-content-use-golangcigolangci-lint"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#use-golangcigolangci-lint"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Use
-      <a href="https://github.com/golangci/golangci-lint"
+    <h3 id="user-content-use-golangcigolangci-lint">
+      <a class="heading-link" href="#use-golangcigolangci-lint">Use </a
+      ><a href="https://github.com/golangci/golangci-lint"
         >golangci/golangci-lint</a
-      >.
+      >.<span aria-hidden="true" class="octicon octicon-link"></span>
     </h3>
     <p>No need to say more. Lint or get the f out!</p>
     <p>
@@ -863,15 +772,13 @@ go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignme
 <span class="pl-c"><span class="pl-c">#</span> Fix</span>
 fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
     </div>
-    <h2>
-      <a
-        id="user-content-snippetscript"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#snippetscript"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Snippet/script
+    <h2 id="user-content-snippetscript">
+      <a class="heading-link" href="#snippetscript"
+        >Snippet/script<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
     </h2>
     <p>Change import:</p>
     <div class="highlight highlight-source-shell">
@@ -881,15 +788,10 @@ fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
     <div class="highlight highlight-source-shell">
       <pre>go clean -cache -testcache -modcache -fuzzcache -x</pre>
     </div>
-    <h2>
-      <a
-        id="user-content-thanks"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#thanks"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Thanks
+    <h2 id="user-content-thanks">
+      <a class="heading-link" href="#thanks"
+        >Thanks<span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
     </h2>
     <ul>
       <li>
