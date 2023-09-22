@@ -69,6 +69,12 @@ Fun memory
 - https://github.com/instaloader/instaloader
 - https://gitlab.com/phoneybadger/pokemon-colorscripts
 
+#### Windows
+
+- https://github.com/abbodi1406/KMS_VL_ALL_AIO
+- https://github.com/massgravel/Microsoft-Activation-Scripts
+- https://github.com/abbodi1406/vcredist
+
 ### UI
 
 - https://github.com/kovidgoyal/kitty
