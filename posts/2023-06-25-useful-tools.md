@@ -225,6 +225,12 @@ touch Xcode.app
 xcode-select --install
 ```
 
+Clean up leftover data:
+
+- `~/Library/Application Support`
+- `~/Library/LaunchAgents`
+- `/Library/LaunchAgents`
+
 ### Linux
 
 Fix black screen when open game in fullscreen in external monitor with
