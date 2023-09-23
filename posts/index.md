@@ -29,3 +29,7 @@ This is where I dump my thoughts.
 - [F(an) android](2023-07-02-fandroid.html)
 - [Cache shenanigan](2023-07-30-cache-shenanigan.html)
 - [VSCode](2023-08-09-vscode.html)
+- [Hardware 101](2023-08-20-hardware.html)
+- [Real World Crypto 101](2023-08-23-real-world-crypto.html)
+- [Vietnam survivor](2023-09-14-vietnam-survivor.html)
+- [Bloguru](2023-09-23-bloguru.html)
