@@ -156,12 +156,7 @@
       <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;Leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })
 vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;Leader&gt;<span class="pl-pds">"</span></span>, { remap <span class="pl-k">=</span> <span class="pl-c1">true</span> })</pre>
     </div>
-    <p>Misc keymap:</p>
-    <div class="highlight highlight-source-lua">
-      <pre>vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nzz<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>N<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Nzz<span class="pl-pds">"</span></span>)
-vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>q<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>:q&lt;CR&gt;<span class="pl-pds">"</span></span>)</pre>
-    </div>
+    <p>Ground rules:</p>
     <ul>
       <li>
         <p><code>&lt;Leader&gt;</code> prefix: prefer global keymap</p>
@@ -179,8 +174,21 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
         </p>
         <ul>
           <li><code>&lt;Leader&gt;f</code>: find files</li>
+          <li><code>&lt;Leader&gt;l</code>: find lines</li>
           <li><code>&lt;Leader&gt;rg</code>: grep files</li>
-          <li><code>&lt;Space&gt;s</code>: find lsp symbols</li>
+          <li>
+            With
+            <a href="https://github.com/neovim/nvim-lspconfig"
+              >neovim/nvim-lspconfig</a
+            >
+            helps:
+            <ul>
+              <li><code>&lt;Space&gt;s</code>: find lsp symbols</li>
+              <li><code>&lt;Space&gt;d</code>: go to definition</li>
+              <li><code>&lt;Space&gt;r</code>: go to references</li>
+              <li><code>&lt;Space&gt;i</code>: go to implementation</li>
+            </ul>
+          </li>
         </ul>
       </li>
       <li>
@@ -281,12 +289,6 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
               <li><code>sr</code>: replace surround</li>
             </ul>
           </li>
-          <li>
-            With mini-trailspace
-            <ul>
-              <li><code>&lt;Leader&gt;tr</code>: trim trailing whitespace</li>
-            </ul>
-          </li>
         </ul>
       </li>
       <li>
@@ -294,17 +296,13 @@ vim.<span class="pl-smi">keymap</span>.<span class="pl-c1">set</span>(<span clas
           With
           <a href="https://github.com/neovim/nvim-lspconfig"
             >neovim/nvim-lspconfig</a
-          >
+          >:
         </p>
         <ul>
           <li><code>&lt;Space&gt;e</code>: float diagnostic</li>
-          <li><code>&lt;Space&gt;d</code>: go to definition</li>
           <li><code>&lt;Space&gt;k</code>: hover</li>
           <li><code>&lt;F2&gt;</code>: rename</li>
           <li><code>&lt;Space&gt;ca</code>: code action</li>
-          <li><code>&lt;Space&gt;r</code>: go to references</li>
-          <li><code>&lt;Space&gt;i</code>: go to implementation</li>
-          <li><code>&lt;Space&gt;f</code>: format</li>
         </ul>
       </li>
     </ul>
