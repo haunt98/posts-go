@@ -3,7 +3,7 @@
 There come a time when you need to experiment new things, new style, new
 approach. So this post serves as it is named.
 
-# Design API by trimming down the interface/struct or whatever
+## Design API by trimming down the interface/struct or whatever
 
 Instead of:
 
