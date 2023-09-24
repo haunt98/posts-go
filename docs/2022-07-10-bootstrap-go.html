@@ -322,6 +322,26 @@ internal
 	<span class="pl-k">return</span> <span class="pl-s1">result</span>, <span class="pl-c1">nil</span>
 }</pre>
     </div>
+    <h3 id="user-content-generics-with-some-tricks">
+      <a class="heading-link" href="#generics-with-some-tricks"> </a
+      ><a href="https://go.dev/doc/tutorial/generics" rel="nofollow"
+        >Generics</a
+      >
+      with some tricks<span
+        aria-hidden="true"
+        class="octicon octicon-link"
+      ></span>
+    </h3>
+    <p>
+      Take value then return pointer, useful with database struct full of
+      pointers:
+    </p>
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-c">// Ptr takes in non-pointer and returns a pointer</span>
+<span class="pl-k">func</span> <span class="pl-s1">Ptr</span>[<span class="pl-s1">T</span> <span class="pl-en">any</span>](<span class="pl-s1">v</span> <span class="pl-smi">T</span>) <span class="pl-c1">*</span><span class="pl-smi">T</span> {
+	<span class="pl-k">return</span> <span class="pl-c1">&amp;</span><span class="pl-s1">v</span>
+}</pre>
+    </div>
     <h2 id="user-content-external-libs">
       <a class="heading-link" href="#external-libs"
         >External libs<span
@@ -854,6 +874,13 @@ fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
       <li>
         <a href="https://encore.dev/blog/advanced-go-concurrency" rel="nofollow"
           >Advanced Go Concurrency</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://danielms.site/zet/2023/go-generic-non-ptr-to-ptr/"
+          rel="nofollow"
+          >Go generic: non-ptr to ptr</a
         >
       </li>
     </ul>

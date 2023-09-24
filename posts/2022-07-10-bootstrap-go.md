@@ -190,6 +190,17 @@ func MarshalWithoutEscapeHTML(v any) ([]byte, error) {
 }
 ```
 
+### [Generics](https://go.dev/doc/tutorial/generics) with some tricks
+
+Take value then return pointer, useful with database struct full of pointers:
+
+```go
+// Ptr takes in non-pointer and returns a pointer
+func Ptr[T any](v T) *T {
+	return &v
+}
+```
+
 ## External libs
 
 ### No need `vendor`
@@ -486,3 +497,4 @@ go clean -cache -testcache -modcache -fuzzcache -x
 - [Speed Up GoMock with Conditional Generation](https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen)
 - [Making SQLite faster in Go](https://turriate.com/articles/making-sqlite-faster-in-go)
 - [Advanced Go Concurrency](https://encore.dev/blog/advanced-go-concurrency)
+- [Go generic: non-ptr to ptr](https://danielms.site/zet/2023/go-generic-non-ptr-to-ptr/)
