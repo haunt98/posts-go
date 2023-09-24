@@ -201,6 +201,15 @@ func Ptr[T any](v T) *T {
 }
 ```
 
+Return zero value:
+
+```go
+func Zero[T any]() T {
+  var zero T
+  return zero
+}
+```
+
 ## External libs
 
 ### No need `vendor`
@@ -498,3 +507,4 @@ go clean -cache -testcache -modcache -fuzzcache -x
 - [Making SQLite faster in Go](https://turriate.com/articles/making-sqlite-faster-in-go)
 - [Advanced Go Concurrency](https://encore.dev/blog/advanced-go-concurrency)
 - [Go generic: non-ptr to ptr](https://danielms.site/zet/2023/go-generic-non-ptr-to-ptr/)
+- [Crimes with Go Generics](https://xeiaso.net/blog/gonads-2022-04-24)
