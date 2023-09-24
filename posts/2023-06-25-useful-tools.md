@@ -140,6 +140,7 @@ Misc
 
 - https://github.com/mikefarah/yq
 - https://github.com/itchyny/gojq
+- github.com/antonmedv/fx
 - https://github.com/fullstorydev/grpcurl
 - https://github.com/plantuml/plantuml
 
