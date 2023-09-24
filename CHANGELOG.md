@@ -1,5 +1,97 @@
 # CHANGELOG
 
+## v0.0.3 (2023-09-25)
+
+### Added
+
+- feat: more blogs (2023-09-24)
+
+- feat: re gen (2023-09-22)
+
+- feat: add oldschool font (2023-09-07)
+
+- feat: more archlinux goodies (2023-09-06)
+
+- feat(keeb): add totem (2023-09-05)
+
+- feat: zellij memory (2023-08-30)
+
+- feat: bring back ncdu (2023-08-28)
+
+- feat: more games (2023-08-27)
+
+### Others
+
+- chore: add gh badges (2023-09-25)
+
+- blog: kbd (2023-09-25)
+
+- go: more generics (2023-09-24)
+
+- bloguru: more (2023-09-24)
+
+- go: generics tricks (2023-09-24)
+
+- fixed layout (2023-09-24)
+
+- tools: add fx (2023-09-24)
+
+- chore: more blogs (2023-09-24)
+
+- archlinux: new gnome image viewer (2023-09-24)
+
+- chore: add lobste.rs and hacker news (2023-09-24)
+
+- tools: back to RSS (2023-09-24)
+
+- font: add terminus (2023-09-24)
+
+- nvim: sync latest dotfiles (2023-09-23)
+
+- misc macos (2023-09-23)
+
+- keeb: add poco (2023-09-23)
+
+- nvim: remove treesitter objects (2023-09-20)
+
+- firefox tricks (2023-09-20)
+
+- go: ibm/sarama (2023-09-19)
+
+- vietnam: survivor (2023-09-15)
+
+- keeb: cleanup (2023-09-13)
+
+- tools: use linearmouse (2023-09-12)
+
+- tools: move ncdu memory (2023-09-11)
+
+- chore: clean up make (2023-09-11)
+
+- crypto (2023-09-11)
+
+- crypto: fix typo (2023-09-10)
+
+- crypto (1/?) (2023-09-10)
+
+- neovim: more tricks (2023-09-10)
+
+- keeb: add stab dz60rgb (2023-09-09)
+
+- vscode: json sort key (2023-09-08)
+
+- build(deps): bump golang.org/x/oauth2 from 0.11.0 to 0.12.0 (2023-09-06)
+
+- build: bump go-github v55 (2023-09-06)
+
+- build(deps): bump actions/checkout from 3 to 4 (2023-09-05)
+
+- chore: fix typo (2023-08-28)
+
+- chore: fix typo (2023-08-27)
+
+- chore(changelog): generate v0.0.2 (2023-08-27)
+
 ## v0.0.2 (2023-08-27)
 
 ### Added
