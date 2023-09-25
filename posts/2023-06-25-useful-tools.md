@@ -10,7 +10,6 @@ This just a raw list.
   - https://github.com/romkatv/powerlevel10k
   - https://github.com/zsh-users/zsh-autosuggestions
 - https://github.com/junegunn/fzf
-  - https://github.com/junegunn/fzf-git.sh
 - https://github.com/folke/lazy.nvim
 
 - https://github.com/sharkdp/fd
@@ -42,6 +41,7 @@ Memory
 - https://dev.yorhel.nl/ncdu
 - https://github.com/zellij-org/zellij
 - https://github.com/wustho/epr
+- https://github.com/junegunn/fzf-git.sh
 
 For fun
 
