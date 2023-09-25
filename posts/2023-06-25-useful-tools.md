@@ -141,7 +141,6 @@ Misc
 - https://github.com/mikefarah/yq
 - https://github.com/itchyny/gojq
 - github.com/antonmedv/fx
-- https://github.com/fullstorydev/grpcurl
 - https://github.com/plantuml/plantuml
 
 Memory
@@ -156,6 +155,7 @@ Memory
 - https://github.com/sharkdp/hyperfine
 - https://github.com/boyter/cs
 - https://github.com/luals/lua-language-server
+- https://github.com/fullstorydev/grpcurl
 
 #### Go
 
@@ -176,14 +176,14 @@ Memory
 - https://httpie.io/desktop
 - https://redis.com/redis-enterprise/redis-insight/
 - https://www.jetbrains.com/datagrip/
+- https://github.com/riok/Kreya
 
 Memory
 
 - https://www.sublimetext.com/
-- https://github.com/Kong/insomnia
-- https://github.com/riok/Kreya
-- https://github.com/bloomrpc/bloomrpc
 - https://github.com/MuhammedKalkan/OpenLens
+- https://github.com/bloomrpc/bloomrpc
+- https://github.com/Kong/insomnia
 
 ### macOS
 
