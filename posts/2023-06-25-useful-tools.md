@@ -233,6 +233,12 @@ Clean up leftover data:
 - `~/Library/LaunchAgents`
 - `/Library/LaunchAgents`
 
+Clean up clipboard:
+
+```sh
+pbcopy < /dev/null
+```
+
 ### Linux
 
 Fix black screen when open game in fullscreen in external monitor with
