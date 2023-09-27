@@ -191,15 +191,9 @@ Memory
 
 - https://gpgtools.org/
 
-## Games
-
-- https://github.com/PCSX2/pcsx2
-- https://github.com/RPCS3/rpcs3
-- https://github.com/cheat-engine/cheat-engine
-
 ## Notes
 
-MacPorts/native package manager > go/rust/pip.
+go/rust/pipx > MacPorts
 
 Ignore HomeBrew, nix (for now).
 
@@ -232,6 +226,7 @@ Clean up leftover data:
 - `~/Library/Application Support`
 - `~/Library/LaunchAgents`
 - `/Library/LaunchAgents`
+- `~/Library/Fonts (Removed)`
 
 Clean up clipboard:
 
