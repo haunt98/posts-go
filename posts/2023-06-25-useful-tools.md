@@ -195,10 +195,6 @@ Memory
 
 nix/go/rust/pipx > MacPorts, HomeBrew
 
-Use
-[DeterminateSystems/nix-installer](https://github.com/DeterminateSystems/nix-installer)
-instead of official nix install.
-
 Don't install:
 
 - Postman
