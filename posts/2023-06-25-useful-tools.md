@@ -193,9 +193,11 @@ Memory
 
 ## Notes
 
-go/rust/pipx > MacPorts
+nix/go/rust/pipx > MacPorts, HomeBrew
 
-Ignore HomeBrew, nix (for now).
+Use
+[DeterminateSystems/nix-installer](https://github.com/DeterminateSystems/nix-installer)
+instead of official nix install.
 
 Don't install:
 
