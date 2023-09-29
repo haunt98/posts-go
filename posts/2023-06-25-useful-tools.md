@@ -195,6 +195,16 @@ Memory
 
 nix/go/rust/pipx > MacPorts, HomeBrew
 
+Quirks:
+
+```sh
+# Add to ~/.zshrc
+# https://github.com/NixOS/nix/issues/3616
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+```
+
 Don't install:
 
 - Postman
