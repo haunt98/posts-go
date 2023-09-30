@@ -547,6 +547,16 @@ homectl update joker --shell=/usr/bin/zsh</pre>
 pacman -Syu gdm
 systemctl <span class="pl-c1">enable</span> gdm.service</pre>
     </div>
+    <p>Quirks:</p>
+    <ul>
+      <li>
+        Fix black screen when open game in fullscreen in external monitor with
+        <a
+          href="https://github.com/kazysmaster/gnome-shell-extension-disable-unredirect"
+          >kazysmaster/gnome-shell-extension-disable-unredirect</a
+        >
+      </li>
+    </ul>
     <h2 id="user-content-list-of-applications">
       <a class="heading-link" href="#list-of-applications"></a
       ><a
@@ -658,7 +668,17 @@ pacman -Syu pipewire wireplumber \
           >https://wiki.archlinux.org/title/Improving_performance#Watchdogs</a
         >
       </li>
+      <li>
+        <a href="https://wiki.archlinux.org/title/sysctl" rel="nofollow"
+          >https://wiki.archlinux.org/title/sysctl</a
+        >
+      </li>
     </ul>
+    <p><code>/etc/sysctl.d/99-sysctl.conf</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre><span class="pl-c"># https://lwn.net/Articles/911219/</span>
+kernel.split_lock_mitigate = 0</pre>
+    </div>
     <h2 id="user-content-hardware-dependent">
       <a class="heading-link" href="#hardware-dependent"
         >Hardware dependent<span

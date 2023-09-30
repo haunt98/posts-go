@@ -242,11 +242,6 @@ Clean up clipboard:
 pbcopy < /dev/null
 ```
 
-### Linux
-
-Fix black screen when open game in fullscreen in external monitor with
-[kazysmaster/gnome-shell-extension-disable-unredirect](https://github.com/kazysmaster/gnome-shell-extension-disable-unredirect)
-
 ### Firefox
 
 `about:config`:
