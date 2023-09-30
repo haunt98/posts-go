@@ -365,6 +365,11 @@ pacman -Syu gdm
 systemctl enable gdm.service
 ```
 
+Quirks:
+
+- Fix black screen when open game in fullscreen in external monitor with
+  [kazysmaster/gnome-shell-extension-disable-unredirect](https://github.com/kazysmaster/gnome-shell-extension-disable-unredirect)
+
 ## [List of applications](https://wiki.archlinux.org/index.php/List_of_applications)
 
 ### [pacman](https://wiki.archlinux.org/index.php/pacman)
@@ -407,6 +412,14 @@ pacman -Syu flatpak
 - https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM
 - https://wiki.archlinux.org/index.php/Silent_boot
 - https://wiki.archlinux.org/title/Improving_performance#Watchdogs
+- https://wiki.archlinux.org/title/sysctl
+
+`/etc/sysctl.d/99-sysctl.conf`:
+
+```txt
+# https://lwn.net/Articles/911219/
+kernel.split_lock_mitigate = 0
+```
 
 ## Hardware dependent
 
