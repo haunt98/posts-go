@@ -19,3 +19,13 @@ related though.
 > before pushing back, before saying it’s too hard or it’s too much work. Those
 > things may be true, but there may be another truth in there too: It may be
 > worth it.
+
+## [Never say “no,” but rarely say “yes.”](https://longform.asmartbear.com/say-yes/)
+
+> So the principle is straightforward: Set the conditions of “yes” such that:
+>
+> - If they say “yes,” you’re happy because the terms or money are so good, it
+  > more than compensates for the distraction, perhaps funding the thing you
+  > really want to do.
+> - If they say “no,” you’re happy because it wasn’t a great fit anyway; it’s
+  > not a worthwhile return on your time and effort.
