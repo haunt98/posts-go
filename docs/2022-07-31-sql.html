@@ -144,6 +144,23 @@
         >
       </li>
     </ul>
+    <h2 id="user-content-be-careful-with-utf-8">
+      <a class="heading-link" href="#be-careful-with-utf-8"
+        >Be careful with UTF-8<span
+          aria-hidden="true"
+          class="octicon octicon-link"
+        ></span
+      ></a>
+    </h2>
+    <p>TLDR with MySQL:</p>
+    <div class="highlight highlight-source-sql">
+      <pre><span class="pl-k">CREATE</span> <span class="pl-k">TABLE</span> <span class="pl-en">ekyc_approved</span>
+(
+    id <span class="pl-k">varchar</span>(<span class="pl-c1">30</span>) <span class="pl-k">NOT NULL</span>,
+    <span class="pl-k">PRIMARY KEY</span> (id),
+) ENGINE <span class="pl-k">=</span> InnoDB
+  DEFAULT CHARSET <span class="pl-k">=</span> utf8mb4;</pre>
+    </div>
     <h2 id="user-content-be-careful-with-null">
       <a class="heading-link" href="#be-careful-with-null"
         >Be careful with NULL<span
