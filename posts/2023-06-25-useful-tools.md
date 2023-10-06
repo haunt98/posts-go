@@ -35,6 +35,7 @@ Memory
 
 - https://github.com/junegunn/vim-plug
 - https://github.com/wbthomason/packer.nvim
+- https://github.com/so-fancy/diff-so-fancy
 - https://github.com/Wilfred/difftastic
 - https://github.com/jonas/tig
 - https://github.com/extrawurst/gitui
