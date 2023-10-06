@@ -6,7 +6,7 @@ require (
 	github.com/google/go-github/v55 v55.0.0
 	github.com/make-go-great/netrc-go v0.0.2
 	golang.org/x/oauth2 v0.12.0
-	golang.org/x/sync v0.3.0
+	golang.org/x/sync v0.4.0
 )
 
 require (
