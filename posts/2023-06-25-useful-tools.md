@@ -16,6 +16,7 @@ This just a raw list.
 - https://github.com/sharkdp/bat
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/dandavison/delta
+- https://github.com/Wilfred/difftastic
 - https://github.com/ogham/exa
 
 - https://github.com/adrianlopezroche/fdupes
@@ -36,7 +37,6 @@ Memory
 - https://github.com/junegunn/vim-plug
 - https://github.com/wbthomason/packer.nvim
 - https://github.com/so-fancy/diff-so-fancy
-- https://github.com/Wilfred/difftastic
 - https://github.com/jonas/tig
 - https://github.com/extrawurst/gitui
 - https://dev.yorhel.nl/ncdu
