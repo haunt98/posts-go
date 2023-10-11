@@ -6,10 +6,10 @@ Each time I start a new Go project, I repeat many steps. Like set up
 So I decide to have a baseline Dockerfile like this:
 
 ```Dockerfile
-FROM golang:1.20-bullseye as builder
+FROM golang:1.21-bookworm as builder
 
-RUN go install golang.org/dl/go1.20@latest \
-    && go1.20 download
+RUN go install golang.org/dl/go1.21@latest \
+    && go1.21 download
 
 WORKDIR /build
 
@@ -20,7 +20,7 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags="-s -w" .
 
-FROM gcr.io/distroless/base-debian11
+FROM gcr.io/distroless/base-debian12
 
 COPY --from=builder /build/app /app
 
@@ -43,15 +43,15 @@ Also, remember to match Distroless Debian version with Go official image Debian
 version.
 
 ```Dockerfile
-FROM golang:1.20-bullseye as builder
+FROM golang:1.21-bookworm as builder
 ```
 
 This is Go image I use as a build stage. This can be official Go image or custom
 image is required in some companies.
 
 ```Dockerfile
-RUN go install golang.org/dl/go1.20@latest \
-    && go1.20 download
+RUN go install golang.org/dl/go1.21@latest \
+    && go1.21 download
 ```
 
 This is optional. In my case, my company is slow to update Go image so I use
@@ -95,7 +95,7 @@ Also there are some experiment:
 - `GOMEMLIMIT=1024MiB`: soft memory limit.
 
 ```Dockerfile
-FROM gcr.io/distroless/base-debian11
+FROM gcr.io/distroless/base-debian12
 
 COPY --from=builder /build/app /app
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.3.0/github-markdown.min.css"
     />
     <title>haunt98 posts</title>
   </head>
@@ -42,10 +42,10 @@
     </p>
     <p>So I decide to have a baseline Dockerfile like this:</p>
     <div class="highlight highlight-source-dockerfile">
-      <pre><span class="pl-k">FROM</span> golang:1.20-bullseye as builder
+      <pre><span class="pl-k">FROM</span> golang:1.21-bookworm as builder
 
-<span class="pl-k">RUN</span> go install golang.org/dl/go1.20@latest \
-    &amp;&amp; go1.20 download
+<span class="pl-k">RUN</span> go install golang.org/dl/go1.21@latest \
+    &amp;&amp; go1.21 download
 
 <span class="pl-k">WORKDIR</span> /build
 
@@ -56,7 +56,7 @@
 
 <span class="pl-k">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags=<span class="pl-s">"-s -w"</span> .
 
-<span class="pl-k">FROM</span> gcr.io/distroless/base-debian11
+<span class="pl-k">FROM</span> gcr.io/distroless/base-debian12
 
 <span class="pl-k">COPY</span> --from=builder /build/app /app
 
@@ -89,15 +89,15 @@
       Debian version.
     </p>
     <div class="highlight highlight-source-dockerfile">
-      <pre><span class="pl-k">FROM</span> golang:1.20-bullseye as builder</pre>
+      <pre><span class="pl-k">FROM</span> golang:1.21-bookworm as builder</pre>
     </div>
     <p>
       This is Go image I use as a build stage. This can be official Go image or
       custom image is required in some companies.
     </p>
     <div class="highlight highlight-source-dockerfile">
-      <pre><span class="pl-k">RUN</span> go install golang.org/dl/go1.20@latest \
-    &amp;&amp; go1.20 download</pre>
+      <pre><span class="pl-k">RUN</span> go install golang.org/dl/go1.21@latest \
+    &amp;&amp; go1.21 download</pre>
     </div>
     <p>
       This is optional. In my case, my company is slow to update Go image so I
@@ -156,7 +156,7 @@
       <li><code>GOMEMLIMIT=1024MiB</code>: soft memory limit.</li>
     </ul>
     <div class="highlight highlight-source-dockerfile">
-      <pre><span class="pl-k">FROM</span> gcr.io/distroless/base-debian11
+      <pre><span class="pl-k">FROM</span> gcr.io/distroless/base-debian12
 
 <span class="pl-k">COPY</span> --from=builder /build/app /app
 
