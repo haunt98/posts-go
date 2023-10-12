@@ -1,5 +1,91 @@
 # CHANGELOG
 
+## v0.0.4 (2023-10-12)
+
+### Added
+
+- feat(bloguru): more (2023-10-12)
+
+- feat(keeb): add sounds (2023-10-11)
+
+- feat: bump go, debian, css (2023-10-11)
+
+- feat(blog): more (2023-10-11)
+
+- feat(tools): bring back difftastic (2023-10-10)
+
+- feat(bloguru): more blogs (2023-10-10)
+
+- feat(neovim): remove copilot as im poor (2023-10-06)
+
+- feat(tools): more tools (2023-10-06)
+
+- feat(fonts): better (2023-10-06)
+
+- feat(keeb): more switch (2023-10-06)
+
+- feat(keeb): more tools to play (2023-10-06)
+
+- feat(sql): utf-8 (2023-10-05)
+
+- feat(bloguru): more blogs (2023-10-04)
+
+- feat: more neovim keymaps (2023-10-03)
+
+- feat(blog): more keebs (2023-10-02)
+
+- feat(index): add unrelated (2023-10-02)
+
+- feat(unrelated): always say yes (2023-10-02)
+
+- feat(unrelated): give it 5m (2023-10-02)
+
+- feat(archlinux): improve perf (2023-09-30)
+
+- feat(blog): more blogs (2023-09-29)
+
+- feat(tools): nix quirks (2023-09-29)
+
+- feat: more blog (2023-09-29)
+
+- feat(tools): remove nix deter... so buggy (2023-09-28)
+
+- feat(tools): switch to nix (2023-09-28)
+
+- feat(blog): remove news noise (2023-09-27)
+
+- feat(tools): update macos remove (2023-09-27)
+
+- feat: more blogs (2023-09-27)
+
+- feat(tools): cleanup macos clipboard (2023-09-26)
+
+- feat: tools remove fzf.git (2023-09-25)
+
+- feat(tools): prefer kreya (2023-09-25)
+
+- feat: more fonts (2023-09-25)
+
+### Others
+
+- build: bump go-github v56 (2023-10-12)
+
+- build(deps): bump golang.org/x/net from 0.16.0 to 0.17.0 (2023-10-12)
+
+- chore(fonts): re-organize (2023-10-11)
+
+- chore: more fonts (2023-10-10)
+
+- build(deps): bump golang.org/x/oauth2 from 0.12.0 to 0.13.0 (2023-10-07)
+
+- build(deps): bump golang.org/x/sync from 0.3.0 to 0.4.0 (2023-10-06)
+
+- chore(backup): remove treehouse (2023-10-06)
+
+- chore: add ibm fonts (2023-09-25)
+
+- chore(changelog): generate v0.0.3 (2023-09-25)
+
 ## v0.0.3 (2023-09-25)
 
 ### Added
