@@ -9,7 +9,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/go-github/v55/github"
+	"github.com/google/go-github/v56/github"
 	"golang.org/x/oauth2"
 	"golang.org/x/sync/errgroup"
 
@@ -105,7 +105,7 @@ func main() {
 				return fmt.Errorf("os: failed to read file %s: %w", mdFilename, err)
 			}
 
-			ghMarkdown, _, err := ghClient.Markdown(ctx, string(mdFileBytes), nil)
+			ghMarkdown, _, err := ghClient.Markdown.Render(ctx, string(mdFileBytes), nil)
 			if err != nil {
 				return fmt.Errorf("github: failed to markdown: %w", err)
 			}
