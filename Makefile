@@ -42,6 +42,7 @@ gen:
 format-html:
 	bun upgrade
 	bunx prettier --write ./templates ./docs
+	deno upgrade
 	deno fmt ./posts
 
 srht:
