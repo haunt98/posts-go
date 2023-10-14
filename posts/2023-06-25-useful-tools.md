@@ -31,16 +31,17 @@ This just a raw list.
 - https://github.com/muesli/duf
 - https://github.com/charmbracelet/glow
 - https://github.com/sharkdp/vivid
+- https://github.com/zellij-org/zellij
 
 Memory
 
+- https://github.com/tmux/tmux
 - https://github.com/junegunn/vim-plug
 - https://github.com/wbthomason/packer.nvim
 - https://github.com/so-fancy/diff-so-fancy
 - https://github.com/jonas/tig
 - https://github.com/extrawurst/gitui
 - https://dev.yorhel.nl/ncdu
-- https://github.com/zellij-org/zellij
 - https://github.com/wustho/epr
 - https://github.com/junegunn/fzf-git.sh
 
