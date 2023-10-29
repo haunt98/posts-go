@@ -17,7 +17,7 @@ This just a raw list.
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/dandavison/delta
 - https://github.com/Wilfred/difftastic
-- https://github.com/ogham/exa
+- https://github.com/eza-community/eza
 
 - https://github.com/adrianlopezroche/fdupes
 - https://github.com/WayneD/rsync
@@ -44,6 +44,7 @@ Memory
 - https://dev.yorhel.nl/ncdu
 - https://github.com/wustho/epr
 - https://github.com/junegunn/fzf-git.sh
+- https://github.com/ogham/exa
 
 For fun
 
