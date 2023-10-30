@@ -191,13 +191,15 @@ Memory
 
 ### macOS
 
+- https://github.com/orbstack/orbstack
+
 Memory
 
 - https://gpgtools.org/
 
 ## Notes
 
-nix/go/rust/pipx > MacPorts, HomeBrew
+Prefer `nix`/`go`/`rust`/`pipx` to MacPorts, HomeBrew
 
 Quirks:
 
