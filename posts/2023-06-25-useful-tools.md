@@ -32,6 +32,7 @@ This just a raw list.
 - https://github.com/charmbracelet/glow
 - https://github.com/sharkdp/vivid
 - https://github.com/zellij-org/zellij
+- https://github.com/ajeetdsouza/zoxide
 
 Memory
 
