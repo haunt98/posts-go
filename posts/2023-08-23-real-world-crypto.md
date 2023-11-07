@@ -66,3 +66,14 @@ sequenceDiagram
 ```
 
 **HMAC** is MAC using hash
+
+## AES
+
+Currently (2023) the world using AES-128 which take a key 128 bits == 16 bytes/
+
+- Take a variable-length key
+- Take plaintext of 128 bits
+- Give ciphertext of 128 bits
+
+AES is kind of cipher, handle fixed-size plaintext so we called **block
+cipher**.
