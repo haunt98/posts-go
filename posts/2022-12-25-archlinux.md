@@ -431,6 +431,7 @@ kernel.split_lock_mitigate = 0
 
 Do it at your own risk!!!
 
+- https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave
 - https://github.com/AdnanHodzic/auto-cpufreq
 - https://github.com/nbfc-linux/nbfc-linux
 
