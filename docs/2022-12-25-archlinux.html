@@ -28,13 +28,15 @@
     <h2>
       <a href="index.html"><code>~</code></a>
     </h2>
-    <h1 id="user-content-install-arch-linux">
-      <a class="heading-link" href="#install-arch-linux"
-        >Install Arch Linux<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h1>
+      <a
+        id="user-content-install-arch-linux"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#install-arch-linux"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Install Arch Linux
     </h1>
     <p>
       Install Arch Linux is thing I always want to do for my laptop/PC since I
@@ -44,21 +46,29 @@
       This is not a guide for everyone, this is just save for myself in a future
       and for anyone who want to walk in my shoes.
     </p>
-    <h2 id="user-content-installation-guide">
-      <a class="heading-link" href="#installation-guide"></a
+    <h2>
+      <a
+        id="user-content-installation-guide"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#installation-guide"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a
         href="https://wiki.archlinux.org/index.php/Installation_guide"
         rel="nofollow"
         >Installation guide</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h2>
-    <h3 id="user-content-pre-installation">
-      <a class="heading-link" href="#pre-installation"
-        >Pre-installation<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h3>
+      <a
+        id="user-content-pre-installation"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#pre-installation"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Pre-installation
     </h3>
     <p>Check disks carefully:</p>
     <div class="highlight highlight-source-shell"><pre>lsblk</pre></div>
@@ -69,37 +79,43 @@
         >USB flash installation medium</a
       >
     </p>
-    <h4 id="user-content-verify-the-boot-mode">
-      <a class="heading-link" href="#verify-the-boot-mode"
-        >Verify the boot mode<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-verify-the-boot-mode"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#verify-the-boot-mode"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Verify the boot mode
     </h4>
     <p>Check UEFI mode:</p>
     <div class="highlight highlight-source-shell">
       <pre>ls /sys/firmware/efi/efivars</pre>
     </div>
-    <h4 id="user-content-connect-to-the-internet">
-      <a class="heading-link" href="#connect-to-the-internet"
-        >Connect to the internet<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-connect-to-the-internet"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#connect-to-the-internet"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Connect to the internet
     </h4>
     <p>
       For wifi, use
       <a href="https://wiki.archlinux.org/index.php/Iwd" rel="nofollow">iwd</a>.
     </p>
-    <h4 id="user-content-partition-the-disks">
-      <a class="heading-link" href="#partition-the-disks"
-        >Partition the disks<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-partition-the-disks"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#partition-the-disks"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Partition the disks
     </h4>
     <p>
       <a href="https://wiki.archlinux.org/index.php/GPT_fdisk" rel="nofollow"
@@ -224,13 +240,15 @@ mount --mkdir /dev/efi_system_partition /mnt/efi
 <span class="pl-c"><span class="pl-c">#</span> boot</span>
 mount --mkdir /dev/extended_boot_loader_partition /mnt/boot</pre>
     </div>
-    <h3 id="user-content-installation">
-      <a class="heading-link" href="#installation"
-        >Installation<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h3>
+      <a
+        id="user-content-installation"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#installation"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Installation
     </h3>
     <div class="highlight highlight-source-shell">
       <pre>pacstrap -K /mnt base linux linux-firmware
@@ -250,32 +268,53 @@ pacstrap -K /mnt lvm2
 <span class="pl-c"><span class="pl-c">#</span> Text editor</span>
 pacstrap -K /mnt neovim</pre>
     </div>
-    <h3 id="user-content-configure">
-      <a class="heading-link" href="#configure"
-        >Configure<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h3>
+      <a
+        id="user-content-configure"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#configure"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Configure
     </h3>
-    <h4 id="user-content-fstab">
-      <a class="heading-link" href="#fstab"></a
+    <h4>
+      <a
+        id="user-content-fstab"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#fstab"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a href="https://wiki.archlinux.org/index.php/Fstab" rel="nofollow"
         >fstab</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h4>
     <div class="highlight highlight-source-shell">
       <pre>genfstab -U /mnt <span class="pl-k">&gt;&gt;</span> /mnt/etc/fstab</pre>
     </div>
-    <h4 id="user-content-chroot">
-      <a class="heading-link" href="#chroot"
-        >Chroot<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-chroot"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#chroot"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Chroot
     </h4>
     <div class="highlight highlight-source-shell">
       <pre>arch-chroot /mnt</pre>
     </div>
-    <h4 id="user-content-time-zone">
-      <a class="heading-link" href="#time-zone"
-        >Time zone<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-time-zone"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#time-zone"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Time zone
     </h4>
     <div class="highlight highlight-source-shell">
       <pre>
@@ -284,13 +323,15 @@ ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 hwclock --systohc</pre
       >
     </div>
-    <h4 id="user-content-localization">
-      <a class="heading-link" href="#localization"
-        >Localization:<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-localization"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#localization"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Localization:
     </h4>
     <p>Edit <code>/etc/locale.gen</code>:</p>
     <div class="highlight highlight-text-adblock">
@@ -302,20 +343,27 @@ hwclock --systohc</pre
     <div class="highlight highlight-text-adblock">
       <pre>LANG=en_US.UTF-8</pre>
     </div>
-    <h4 id="user-content-network-configuration">
-      <a class="heading-link" href="#network-configuration"
-        >Network configuration<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-network-configuration"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#network-configuration"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Network configuration
     </h4>
     <p>Edit <code>/etc/hostname</code>:</p>
     <div class="highlight highlight-text-adblock"><pre>myhostname</pre></div>
-    <h4 id="user-content-initramfs">
-      <a class="heading-link" href="#initramfs"
-        >Initramfs<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-initramfs"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#initramfs"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Initramfs
     </h4>
     <p>Edit <code>/etc/mkinitcpio.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
@@ -327,25 +375,38 @@ HOOKS=(base udev ... block lvm2 filesystems)
 <span class="pl-c"># Replace udev with systemd</span></pre>
     </div>
     <div class="highlight highlight-source-shell"><pre>mkinitcpio -P</pre></div>
-    <h4 id="user-content-root-password">
-      <a class="heading-link" href="#root-password"
-        >Root password<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-root-password"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#root-password"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Root password
     </h4>
     <div class="highlight highlight-source-shell"><pre>passwd</pre></div>
-    <h4 id="user-content-addition">
-      <a class="heading-link" href="#addition"
-        >Addition<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-addition"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#addition"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Addition
     </h4>
-    <h5 id="user-content-networkmanager-wip">
-      <a class="heading-link" href="#networkmanager-wip"></a
+    <h5>
+      <a
+        id="user-content-networkmanager-wip"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#networkmanager-wip"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a href="https://wiki.archlinux.org/title/NetworkManager" rel="nofollow"
         >NetworkManager (WIP)</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h5>
     <div class="highlight highlight-source-shell">
       <pre>pacman -Syu networkmanager dhcpcd iwd
@@ -380,35 +441,56 @@ noarp
 nohook resolv.conf</pre
       >
     </div>
-    <h5 id="user-content-bluetooth">
-      <a class="heading-link" href="#bluetooth"
-        >Bluetooth<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h5>
+      <a
+        id="user-content-bluetooth"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#bluetooth"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Bluetooth
     </h5>
     <div class="highlight highlight-source-shell">
       <pre>pacman -Syu bluez
 systemctl <span class="pl-c1">enable</span> bluetooth.service</pre>
     </div>
-    <h5 id="user-content-clock">
-      <a class="heading-link" href="#clock"
-        >Clock<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h5>
+      <a
+        id="user-content-clock"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#clock"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Clock
     </h5>
     <div class="highlight highlight-source-shell">
       <pre>timedatectl set-ntp <span class="pl-c1">true</span></pre>
     </div>
-    <h4 id="user-content-boot-loader">
-      <a class="heading-link" href="#boot-loader"
-        >Boot loader<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h4>
+      <a
+        id="user-content-boot-loader"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#boot-loader"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Boot loader
     </h4>
-    <h5 id="user-content-systemd-boot">
-      <a class="heading-link" href="#systemd-boot"></a
+    <h5>
+      <a
+        id="user-content-systemd-boot"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#systemd-boot"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a
         href="https://wiki.archlinux.org/index.php/Systemd-boot"
         rel="nofollow"
         >systemd-boot</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h5>
     <p>Install using XBOOTLDR:</p>
     <div class="highlight highlight-source-shell">
@@ -456,25 +538,33 @@ initrd /initramfs-linux.img
 <span class="pl-c"># nvidia-drm.modeset=1</span>
 options root="LABEL=ROOT" rw</pre>
     </div>
-    <h2 id="user-content-general-recommendations">
-      <a class="heading-link" href="#general-recommendations"></a
+    <h2>
+      <a
+        id="user-content-general-recommendations"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#general-recommendations"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a
         href="https://wiki.archlinux.org/index.php/General_recommendations"
         rel="nofollow"
         >General recommendations</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h2>
     <p>
       Always remember to check <strong>dependencies</strong> when install
       packages.
     </p>
-    <h3 id="user-content-system-administration">
-      <a class="heading-link" href="#system-administration"
-        >System administration<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h3>
+      <a
+        id="user-content-system-administration"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#system-administration"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >System administration
     </h3>
     <p>
       <a href="https://wiki.archlinux.org/index.php/sudo" rel="nofollow">Sudo</a
@@ -514,13 +604,15 @@ homectl update joker --shell=/usr/bin/zsh</pre>
       <strong>Note</strong>: Can not run <code>homectl</code> when install Arch
       Linux. Should run on the first boot.
     </p>
-    <h3 id="user-content-desktop-environment">
-      <a class="heading-link" href="#desktop-environment"
-        >Desktop Environment<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h3>
+      <a
+        id="user-content-desktop-environment"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#desktop-environment"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Desktop Environment
     </h3>
     <p>
       Install
@@ -530,11 +622,17 @@ homectl update joker --shell=/usr/bin/zsh</pre>
     <div class="highlight highlight-source-shell">
       <pre>pacman -Syu xorg-server</pre>
     </div>
-    <h4 id="user-content-gnome">
-      <a class="heading-link" href="#gnome"></a
+    <h4>
+      <a
+        id="user-content-gnome"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#gnome"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a href="https://wiki.archlinux.org/index.php/GNOME" rel="nofollow"
         >GNOME</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h4>
     <div class="highlight highlight-source-shell">
       <pre>pacman -Syu gnome-shell \
@@ -557,19 +655,31 @@ systemctl <span class="pl-c1">enable</span> gdm.service</pre>
         >
       </li>
     </ul>
-    <h2 id="user-content-list-of-applications">
-      <a class="heading-link" href="#list-of-applications"></a
+    <h2>
+      <a
+        id="user-content-list-of-applications"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#list-of-applications"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a
         href="https://wiki.archlinux.org/index.php/List_of_applications"
         rel="nofollow"
         >List of applications</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h2>
-    <h3 id="user-content-pacman">
-      <a class="heading-link" href="#pacman"></a
+    <h3>
+      <a
+        id="user-content-pacman"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#pacman"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a href="https://wiki.archlinux.org/index.php/pacman" rel="nofollow"
         >pacman</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h3>
     <p>Uncomment in <code>/etc/pacman.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
@@ -577,11 +687,17 @@ systemctl <span class="pl-c1">enable</span> gdm.service</pre>
 Color
 ParallelDownloads</pre>
     </div>
-    <h3 id="user-content-pipewire-wip">
-      <a class="heading-link" href="#pipewire-wip"></a
+    <h3>
+      <a
+        id="user-content-pipewire-wip"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#pipewire-wip"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a href="https://wiki.archlinux.org/title/PipeWire" rel="nofollow"
         >Pipewire (WIP)</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h3>
     <div class="highlight highlight-source-shell">
       <pre>
@@ -601,22 +717,34 @@ pacman -Syu pipewire wireplumber \
     <div class="highlight highlight-source-shell">
       <pre>pacman -Syu sof-firmware</pre>
     </div>
-    <h3 id="user-content-flatpak-wip">
-      <a class="heading-link" href="#flatpak-wip"></a
+    <h3>
+      <a
+        id="user-content-flatpak-wip"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#flatpak-wip"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a href="https://wiki.archlinux.org/title/Flatpak" rel="nofollow"
         >Flatpak (WIP)</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h3>
     <div class="highlight highlight-source-shell">
       <pre>pacman -Syu flatpak</pre>
     </div>
-    <h2 id="user-content-improving-performance">
-      <a class="heading-link" href="#improving-performance"></a
+    <h2>
+      <a
+        id="user-content-improving-performance"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#improving-performance"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
       ><a
         href="https://wiki.archlinux.org/index.php/improving_performance"
         rel="nofollow"
         >Improving performance</a
-      ><span aria-hidden="true" class="octicon octicon-link"></span>
+      >
     </h2>
     <ul>
       <li>
@@ -679,13 +807,15 @@ pacman -Syu pipewire wireplumber \
       <pre><span class="pl-c"># https://lwn.net/Articles/911219/</span>
 kernel.split_lock_mitigate = 0</pre>
     </div>
-    <h2 id="user-content-hardware-dependent">
-      <a class="heading-link" href="#hardware-dependent"
-        >Hardware dependent<span
-          aria-hidden="true"
-          class="octicon octicon-link"
-        ></span
-      ></a>
+    <h2>
+      <a
+        id="user-content-hardware-dependent"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#hardware-dependent"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Hardware dependent
     </h2>
     <ul>
       <li>
@@ -704,10 +834,15 @@ kernel.split_lock_mitigate = 0</pre>
         >
       </li>
     </ul>
-    <h2 id="user-content-experiment">
-      <a class="heading-link" href="#experiment"
-        >Experiment<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h2>
+      <a
+        id="user-content-experiment"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#experiment"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Experiment
     </h2>
     <p>Do it at your own risk!!!</p>
     <ul>
@@ -729,10 +864,15 @@ kernel.split_lock_mitigate = 0</pre>
         >
       </li>
     </ul>
-    <h2 id="user-content-in-the-end">
-      <a class="heading-link" href="#in-the-end"
-        >In the end<span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
+    <h2>
+      <a
+        id="user-content-in-the-end"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#in-the-end"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >In the end
     </h2>
     <p>This guide is updated regularly I promise.</p>
 
