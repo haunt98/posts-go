@@ -60,7 +60,7 @@ go install github.com/mikefarah/yq/v4@latest
 yq -o=json <span class="pl-s"><span class="pl-pds">'</span>.<span class="pl-pds">'</span></span> ./docs/swagger.yaml <span class="pl-k">&gt;</span> ./docs/swagger.json
 
 <span class="pl-c"><span class="pl-c">#</span> Format</span>
-bunx prettier --write ./docs/swagger.yaml ./docs/swagger.json
+bunx prettier@latest --write ./docs/swagger.yaml ./docs/swagger.json
 
 <span class="pl-c"><span class="pl-c">#</span> Render locally</span>
 bunx @redocly/cli preview-docs ./docs/swagger.json</pre>
