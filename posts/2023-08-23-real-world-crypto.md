@@ -67,13 +67,85 @@ sequenceDiagram
 
 **HMAC** is MAC using hash
 
-## AES
+## AES (Advanced Encryption Standard)
 
-Currently (2023) the world using AES-128 which take a key 128 bits == 16 bytes/
+Currently (2023) the world using AES-128 which take a key 128 bits == 16 bytes
 
 - Take a variable-length key
 - Take plaintext of 128 bits
 - Give ciphertext of 128 bits
 
 AES is kind of cipher, handle fixed-size plaintext so we called **block
-cipher**.
+cipher**. AES is deterministic so we can encrypt and decrypt.
+
+## AES-CBC (Cipher Block Chaining)
+
+What if text you want to encrypt longer than 128 bytes ? We add **padding** for
+text to become multi block which has 128 bytes, then encrypt each block.
+
+Adding padding bytes is easy, remove it after decrypt is hard. How do you know
+which is padding bytes you add if you use random bytes ?
+
+Just use **PKCS#7 padding**. Example AES-128 use block of 16 bytes but only have
+9 bytes, should add 7 bytes padding. Just fill all padding bytes with padding
+length aka value `07`.
+
+```txt
+XX XX XX XX XX XX XX XX XX 07 07 07 07 07 07 07
+```
+
+So to know how much padding bytes should we remove -> read last bytes (`07`) to
+know the length to remove trailing padding bytes.
+
+The problem with naive way to split text, add padding bytes then encrypt each
+block using AES-128 is repeated text. Because it leaks information if text is
+made up from many repeated text (ECB penguin).
+
+CBC = deterministic block cipher + IV (initialization vector)
+
+AES-CBC encrypt:
+
+- IV XOR first plaintext -> AES encrypt -> first ciphertext. ciphertext.
+- Use first ciphertext as IV to second ciphertext and so on.
+
+AES-CBC decrypt:
+
+- AES decrypt first ciphertext -> XOR IV -> first plaintext.
+- Use first ciphertext as IV to second block and so on.
+
+Because IV, same plaintext can encrypt to different ciphertext.
+
+**WARNING** If IV become predictable, AES-CBC become deterministic -> BEAST
+attack (Browser Exploit Against SSL/TLS).
+
+## AEAD (Authenticated Encryption with Associated Data)
+
+Because AES-CBC requires IV which shows public -> attacker can change IV -> lack
+of authenticity -> use AES-CBC-HMAC or AEAD.
+
+AEAD provides a way to authenticate **associated data**.
+
+## AES-GCM (Galois/Counter Mode) AEAD
+
+AES-GCM = AES-CTR (Counter) + GMAC message authentication code
+
+AES-CTR encrypt:
+
+- Create nonce 12 bytes (same purpose as IV).
+- Concatenate nonce with counter 4 bytes: 1, 2, 3, ...
+- Encrypt AES from concatenated none with counter to **keystream**.
+- XOR keystream with plaintext -> ciphertext.
+
+Limit is counter only up to 4 bytes so only handle plaintext of 2^32 - 1 blocks
+of 16 bytes aka 69 GBs.
+
+AES-CTR no need padding because if keystream is longer than plaintext, it is
+truncated to plaintext length before XOR.
+
+This is stream cipher, differ from block cipher.
+
+GMAC is MAC with GHASH. GHASH resembles CBC mode.
+
+## ChaCha20-Poly1305 AED
+
+ChaCha20-Poly1305 = ChaCha20 stream cipher + Poly1305 MAC

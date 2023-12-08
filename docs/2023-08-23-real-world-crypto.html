@@ -143,17 +143,17 @@
     <p><strong>HMAC</strong> is MAC using hash</p>
     <h2>
       <a
-        id="user-content-aes"
+        id="user-content-aes-advanced-encryption-standard"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#aes"
+        href="#aes-advanced-encryption-standard"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >AES
+      >AES (Advanced Encryption Standard)
     </h2>
     <p>
       Currently (2023) the world using AES-128 which take a key 128 bits == 16
-      bytes/
+      bytes
     </p>
     <ul>
       <li>Take a variable-length key</li>
@@ -162,8 +162,121 @@
     </ul>
     <p>
       AES is kind of cipher, handle fixed-size plaintext so we called
-      <strong>block cipher</strong>.
+      <strong>block cipher</strong>. AES is deterministic so we can encrypt and
+      decrypt.
     </p>
+    <h2>
+      <a
+        id="user-content-aes-cbc-cipher-block-chaining"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#aes-cbc-cipher-block-chaining"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >AES-CBC (Cipher Block Chaining)
+    </h2>
+    <p>
+      What if text you want to encrypt longer than 128 bytes ? We add
+      <strong>padding</strong> for text to become multi block which has 128
+      bytes, then encrypt each block.
+    </p>
+    <p>
+      Adding padding bytes is easy, remove it after decrypt is hard. How do you
+      know which is padding bytes you add if you use random bytes ?
+    </p>
+    <p>
+      Just use <strong>PKCS#7 padding</strong>. Example AES-128 use block of 16
+      bytes but only have 9 bytes, should add 7 bytes padding. Just fill all
+      padding bytes with padding length aka value <code>07</code>.
+    </p>
+    <div class="highlight highlight-text-adblock">
+      <pre>XX XX XX XX XX XX XX XX XX 07 07 07 07 07 07 07</pre>
+    </div>
+    <p>
+      So to know how much padding bytes should we remove -&gt; read last bytes
+      (<code>07</code>) to know the length to remove trailing padding bytes.
+    </p>
+    <p>
+      The problem with naive way to split text, add padding bytes then encrypt
+      each block using AES-128 is repeated text. Because it leaks information if
+      text is made up from many repeated text (ECB penguin).
+    </p>
+    <p>CBC = deterministic block cipher + IV (initialization vector)</p>
+    <p>AES-CBC encrypt:</p>
+    <ul>
+      <li>
+        IV XOR first plaintext -&gt; AES encrypt -&gt; first ciphertext.
+        ciphertext.
+      </li>
+      <li>Use first ciphertext as IV to second ciphertext and so on.</li>
+    </ul>
+    <p>AES-CBC decrypt:</p>
+    <ul>
+      <li>AES decrypt first ciphertext -&gt; XOR IV -&gt; first plaintext.</li>
+      <li>Use first ciphertext as IV to second block and so on.</li>
+    </ul>
+    <p>Because IV, same plaintext can encrypt to different ciphertext.</p>
+    <p>
+      <strong>WARNING</strong> If IV become predictable, AES-CBC become
+      deterministic -&gt; BEAST attack (Browser Exploit Against SSL/TLS).
+    </p>
+    <h2>
+      <a
+        id="user-content-aead-authenticated-encryption-with-associated-data"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#aead-authenticated-encryption-with-associated-data"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >AEAD (Authenticated Encryption with Associated Data)
+    </h2>
+    <p>
+      Because AES-CBC requires IV which shows public -&gt; attacker can change
+      IV -&gt; lack of authenticity -&gt; use AES-CBC-HMAC or AEAD.
+    </p>
+    <p>AEAD provides a way to authenticate <strong>associated data</strong>.</p>
+    <h2>
+      <a
+        id="user-content-aes-gcm-galoiscounter-mode-aead"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#aes-gcm-galoiscounter-mode-aead"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >AES-GCM (Galois/Counter Mode) AEAD
+    </h2>
+    <p>AES-GCM = AES-CTR (Counter) + GMAC message authentication code</p>
+    <p>AES-CTR encrypt:</p>
+    <ul>
+      <li>Create nonce 12 bytes (same purpose as IV).</li>
+      <li>Concatenate nonce with counter 4 bytes: 1, 2, 3, ...</li>
+      <li>
+        Encrypt AES from concatenated none with counter to
+        <strong>keystream</strong>.
+      </li>
+      <li>XOR keystream with plaintext -&gt; ciphertext.</li>
+    </ul>
+    <p>
+      Limit is counter only up to 4 bytes so only handle plaintext of 2^32 - 1
+      blocks of 16 bytes aka 69 GBs.
+    </p>
+    <p>
+      AES-CTR no need padding because if keystream is longer than plaintext, it
+      is truncated to plaintext length before XOR.
+    </p>
+    <p>This is stream cipher, differ from block cipher.</p>
+    <p>GMAC is MAC with GHASH. GHASH resembles CBC mode.</p>
+    <h2>
+      <a
+        id="user-content-chacha20-poly1305-aed"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#chacha20-poly1305-aed"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >ChaCha20-Poly1305 AED
+    </h2>
+    <p>ChaCha20-Poly1305 = ChaCha20 stream cipher + Poly1305 MAC</p>
 
     <div>
       Feel free to ask me via
