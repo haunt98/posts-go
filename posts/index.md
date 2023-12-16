@@ -34,3 +34,4 @@ This is where I dump my thoughts.
 - [Vietnam survivor](2023-09-14-vietnam-survivor.html)
 - [Bloguru](2023-09-23-bloguru.html)
 - [Unrelated engineer](2023-10-02-unrelated.html)
+- [Debounce](2023-12-16-debounce.html)
