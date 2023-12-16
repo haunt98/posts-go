@@ -237,6 +237,12 @@ touch Xcode.app
 xcode-select --install
 ```
 
+Reset launchpad:
+
+```sh
+defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock
+```
+
 Clean up leftover data:
 
 - `~/Library/Application Support`
