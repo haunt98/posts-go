@@ -60,15 +60,15 @@
     <span class="pl-k">activate</span> <span class="pl-ent">service</span>
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">get data</span>
     <span class="pl-k">alt</span> <span class="pl-s">exist in cache</span>
-        <span class="pl-ent">service </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">other</span><span class="pl-k">:</span> <span class="pl-s">return data</span>
-    <span class="pl-k">else</span> <span class="pl-s">not exist in cache</span>
-        <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">db</span><span class="pl-k">:</span> <span class="pl-s">get data</span>
-        <span class="pl-k">alt</span> <span class="pl-s">exist data in db</span>
-            <span class="pl-ent">service </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">other</span><span class="pl-k">:</span> <span class="pl-s">return data</span>
-        <span class="pl-k">else</span> <span class="pl-s">not exist data in db</span>
-            <span class="pl-ent">service </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">other</span><span class="pl-k">:</span> <span class="pl-s">return error not found</span>
+        <span class="pl-s">service --&gt;&gt; other: return data</span>
+    else not exist in cache
+        <span class="pl-s">service -&gt;&gt; db: get data</span>
+        <span class="pl-s">alt exist data in db</span>
+            <span class="pl-s">service --&gt;&gt; other: return data</span>
+        else not exist data in db
+            <span class="pl-s">service --&gt;&gt; other: return error not found</span>
         <span class="pl-k">end</span>
-    <span class="pl-k">end</span>
+    <span class="pl-ent">end</span>
     <span class="pl-k">deactivate</span> <span class="pl-ent">service</span>
 
     <span class="pl-ent">other </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">set data</span>

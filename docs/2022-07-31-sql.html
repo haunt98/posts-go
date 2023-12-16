@@ -194,12 +194,12 @@
       <pre><span class="pl-c"><span class="pl-c">--</span> field_something can be NULL</span>
 
 <span class="pl-c"><span class="pl-c">--</span> Bad</span>
-<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
+SELECT <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> table
 <span class="pl-k">WHERE</span> field_something <span class="pl-k">!=</span> <span class="pl-c1">1</span>
 
 <span class="pl-c"><span class="pl-c">--</span> Good</span>
-<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
+SELECT <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> table
 <span class="pl-k">WHERE</span> (field_something IS <span class="pl-k">NULL</span> <span class="pl-k">OR</span> field_something <span class="pl-k">!=</span> <span class="pl-c1">1</span>)</pre>
     </div>
