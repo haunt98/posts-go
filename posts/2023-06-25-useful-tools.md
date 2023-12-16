@@ -177,14 +177,15 @@ Memory
 
 ### UI
 
-- https://www.sublimemerge.com/
 - https://httpie.io/desktop
 - https://redis.com/redis-enterprise/redis-insight/
 - https://www.jetbrains.com/datagrip/
 - https://github.com/riok/Kreya
+- https://github.com/variar/klogg
 
 Memory
 
+- https://www.sublimemerge.com/
 - https://www.sublimetext.com/
 - https://github.com/MuhammedKalkan/OpenLens
 - https://github.com/bloomrpc/bloomrpc
