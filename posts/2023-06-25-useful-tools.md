@@ -167,6 +167,7 @@ Memory
 - https://github.com/mvdan/gofumpt
 - https://github.com/golangci/golangci-lint
 - https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment
+- https://github.com/dkorunic/betteralign
 - https://github.com/gotestyourself/gotestsum
 - https://github.com/maruel/panicparse
 
