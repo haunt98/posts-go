@@ -2,9 +2,9 @@
 
 all:
 	go mod tidy
+	$(MAKE) format
 	$(MAKE) test-color
 	$(MAKE) lint
-	$(MAKE) format
 	$(MAKE) gen
 	$(MAKE) format-html
 	$(MAKE) srht
