@@ -199,6 +199,7 @@ Memory
 Memory
 
 - https://gpgtools.org/
+- https://github.com/gnachman/iTerm2
 
 ## Notes
 
