@@ -88,11 +88,11 @@ Fun memory
 - https://www.libreoffice.org/
 - https://github.com/johnfactotum/foliate
 - https://fbreader.org/
-- https://www.xnview.com/en/xnviewmp/
 
 Memory
 
 - https://github.com/alacritty/alacritty
+- https://www.xnview.com/en/xnviewmp/
 
 #### macOS
 
