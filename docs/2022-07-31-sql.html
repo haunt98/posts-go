@@ -105,7 +105,27 @@
       everything in there if you want.
     </p>
     <p>I always use MySQL json data type for extra field.</p>
-    <p>JSON data type also used for dumping request, response data.</p>
+    <p>JSON data type is also useful for dumping request, response data.</p>
+    <ul>
+      <li>
+        <a
+          href="https://dev.mysql.com/doc/refman/5.7/en/json.html"
+          rel="nofollow"
+          >For MySQL 5.7</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://dev.mysql.com/doc/refman/8.0/en/json.html"
+          rel="nofollow"
+          >For MySQL 8.0</a
+        >
+      </li>
+    </ul>
+    <p>
+      Use <code>JSON_EXTRACT(col, '$.key') IS NULL</code> to check json field
+      exist or not.
+    </p>
     <h2>
       <a
         id="user-content-use-index"
