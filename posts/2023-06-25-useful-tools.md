@@ -138,7 +138,6 @@ Format
 Language server
 
 - https://github.com/golang/tools/tree/master/gopls
-- https://github.com/bufbuild/buf-language-server
 
 Misc
 
@@ -161,6 +160,7 @@ Memory
 - https://github.com/boyter/cs
 - https://github.com/luals/lua-language-server
 - https://github.com/fullstorydev/grpcurl
+- https://github.com/bufbuild/buf-language-server
 
 #### Go
 
