@@ -40,9 +40,9 @@ gen:
 	go run .
 
 format-html:
-	bun upgrade
+	# bun upgrade
 	bunx prettier@latest --write ./templates ./docs
-	deno upgrade
+	# deno upgrade
 	deno fmt ./posts
 
 srht:
