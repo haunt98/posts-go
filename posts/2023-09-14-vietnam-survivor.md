@@ -47,3 +47,11 @@ Tham khảo:
   nghiệp: Điều kiện, mức hưởng, thủ tục hưởng)
 
 ## GPLX
+
+Nếu mất:
+
+- A1: đem hồ sơ gốc và bản sao CMND/CCCD, Passport ra Sở Giao thông vận tải.
+
+Tham khảo:
+
+- [Cấp lại Giấy phép lái xe](https://dichvucong.gov.vn/p/home/dvc-tthc-thu-tuc-hanh-chinh-chi-tiet.html?ma_thu_tuc=4016)
