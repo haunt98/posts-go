@@ -127,6 +127,7 @@ Memory
 - https://github.com/denoland/deno
 - https://github.com/pypa/pipx
 - https://github.com/sdkman/sdkman-cli
+- https://github.com/corbindavenport/nexus-tools
 
 Format
 
