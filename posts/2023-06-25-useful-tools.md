@@ -104,7 +104,6 @@ Memory
 - https://github.com/pedrommcarrasco/Brooklyn
 - https://github.com/ganeshrvel/openmtp
 - https://github.com/coteditor/CotEditor
-- https://github.com/CodeEditApp/CodeEdit
 - https://github.com/lwouis/alt-tab-macos
 - https://github.com/Ranchero-Software/NetNewsWire
 
@@ -118,6 +117,7 @@ Memory
 - https://github.com/pqrs-org/Karabiner-Elements
 - https://zed.dev/
 - https://github.com/alin23/Lunar
+- https://github.com/CodeEditApp/CodeEdit
 
 ## Developement
 
@@ -219,6 +219,8 @@ fi
 
 Don't install:
 
+- Google Chrome
+- Visual Studio Code
 - Postman
 - Lens
 - Sourcegraph
