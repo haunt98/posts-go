@@ -104,6 +104,7 @@ Memory
 - https://github.com/pedrommcarrasco/Brooklyn
 - https://github.com/ganeshrvel/openmtp
 - https://github.com/coteditor/CotEditor
+- https://github.com/CodeEditApp/CodeEdit
 - https://github.com/lwouis/alt-tab-macos
 - https://github.com/Ranchero-Software/NetNewsWire
 
@@ -168,13 +169,13 @@ Memory
 - https://github.com/mvdan/gofumpt
 - https://github.com/golangci/golangci-lint
 - https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment
+- https://github.com/maruel/panicparse
 - https://github.com/gotestyourself/gotestsum
 
 Memory
 
 - https://github.com/go101/golds
 - https://github.com/burrowers/garble
-- https://github.com/maruel/panicparse
 - https://github.com/dkorunic/betteralign
 
 ### UI
@@ -193,7 +194,7 @@ Memory
 - https://github.com/bloomrpc/bloomrpc
 - https://github.com/Kong/insomnia
 
-### macOS
+#### macOS
 
 - https://github.com/orbstack/orbstack
 
@@ -204,7 +205,7 @@ Memory
 
 ## Notes
 
-Prefer `nix`/`go`/`rust`/`pipx` to MacPorts, HomeBrew
+Prefer `nix`/`go`/`cargo`/`pipx` to MacPorts, HomeBrew
 
 Quirks:
 
