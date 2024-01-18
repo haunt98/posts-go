@@ -84,7 +84,6 @@ Fun memory
 - https://github.com/kovidgoyal/kitty
 - https://github.com/wez/wezterm
 - https://transmissionbt.com/
-- https://tailscale.com/
 - https://www.libreoffice.org/
 - https://github.com/johnfactotum/foliate
 - https://fbreader.org/
@@ -93,6 +92,7 @@ Memory
 
 - https://github.com/alacritty/alacritty
 - https://www.xnview.com/en/xnviewmp/
+- https://tailscale.com/
 
 #### macOS
 
