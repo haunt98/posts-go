@@ -944,6 +944,13 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >macOS
     </h3>
+    <p>Use Touch ID in Terminal:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
+
+<span class="pl-c"><span class="pl-c">#</span> Uncomment last line</span>
+sudo nano /etc/pam.d/sudo_local</pre>
+    </div>
     <p>Hide Developer in Spotlight:</p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c1">cd</span> /Applications
@@ -968,6 +975,14 @@ xcode-select --install</pre>
     <div class="highlight highlight-source-shell">
       <pre>pbcopy <span class="pl-k">&lt;</span> /dev/null</pre>
     </div>
+    <p>Thanks:</p>
+    <ul>
+      <li>
+        <a href="https://apple.stackexchange.com/a/466029" rel="nofollow"
+          >https://apple.stackexchange.com/a/466029</a
+        >
+      </li>
+    </ul>
     <h3>
       <a
         id="user-content-firefox"

@@ -233,6 +233,15 @@ Don't enable plugin `git` in ohmyzsh.
 
 ### macOS
 
+Use Touch ID in Terminal:
+
+```sh
+sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
+
+# Uncomment last line
+sudo nano /etc/pam.d/sudo_local
+```
+
 Hide Developer in Spotlight:
 
 ```sh
@@ -262,6 +271,10 @@ Clean up clipboard:
 ```sh
 pbcopy < /dev/null
 ```
+
+Thanks:
+
+- https://apple.stackexchange.com/a/466029
 
 ### Firefox
 
