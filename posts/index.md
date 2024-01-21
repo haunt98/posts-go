@@ -35,3 +35,4 @@ This is where I dump my thoughts.
 - [Bloguru](2023-09-23-bloguru.html)
 - [Unrelated engineer](2023-10-02-unrelated.html)
 - [Debounce](2023-12-16-debounce.html)
+- [Backend Thinking](2024-01-20-backend-thinking.html)
