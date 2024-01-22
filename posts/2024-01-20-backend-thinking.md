@@ -47,7 +47,7 @@ Bank data (name, dob, id, ...). TODO
 
 TODO: How to split services?
 
-## Technically side
+## Technical side
 
 How do services communicate with each other?
 
@@ -94,6 +94,22 @@ My own experiences:
   think it through before do it. Because back compability is very hard, old apps
   should continue to function if user don't upgrade. Even if we rollout new
   version, it takes time.
+
+TODO: Kafka
+
+## Coding principle
+
+## Known concept
+
+TODO:
+
+## Challenge
+
+TODO: Scale problem
+
+## Damange control
+
+TODO: Take care incident
 
 ## Bonus
 
