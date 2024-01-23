@@ -43,9 +43,7 @@ The question is for each new business requirements, what should we do:
 - Don't do anything?
 
 _Example_: Business requirements says: Must match/compare user EKYC data with
-Bank data (name, dob, id, ...). TODO
-
-TODO: How to split services?
+Bank data (name, dob, id, ...).
 
 ## Technical side
 
@@ -58,11 +56,11 @@ wait for response.
 
 **HTTP**: GET/POST/...
 
-_Example_: TODO use curl
+_Example_: TODO: show API image
 
 **GRPC**: use proto file as constract.
 
-_Example_: TODO: show sample proto file
+_Example_: TODO: show proto file image
 
 There are no hard rules on how to design APIs, only some best practices, like
 REST API, ...
@@ -80,8 +78,6 @@ Why do we use HTTP for Client-Server and GRPC for Server-Server?
 - HTTP for Client-Server is pretty standard. Easy for client to debug, ...
 - Before ZaloPay switch to GRPC for Server-Server, we use HTTP. The reason for
   switch is mainly performance.
-
-#### References
 
 ### Message Broker
 
