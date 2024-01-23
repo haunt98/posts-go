@@ -184,4 +184,10 @@ TODO: Take care incident
 
 ## Bonus
 
-TODO
+- [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/download/): Java
+  coding
+- [GoLand](https://www.jetbrains.com/go/download/): Go coding
+- [DataGrip](https://www.jetbrains.com/datagrip/download/): Database GUI
+- [RedisInsight](https://redis.com/redis-enterprise/redis-insight/): Redis GUI
+- [OrbStack](https://orbstack.dev/download): Better Docker Desktop
+- [Kreya](https://kreya.app/): GRPC caller
