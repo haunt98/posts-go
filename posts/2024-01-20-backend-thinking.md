@@ -83,11 +83,6 @@ Why do we use HTTP for Client-Server and GRPC for Server-Server?
 
 #### References
 
-- [Best practices for REST API design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
-- [ZaloPay API](https://docs.zalopay.vn/v2/)
-- [stripe API](https://stripe.com/docs/api)
-- [moov API](https://docs.moov.io/api/)
-
 ### Message Broker
 
 **Second** way is by Message Broker, the most well known is Kafka.
@@ -106,11 +101,7 @@ Broker, than A forgets about it. Then all B1, B2 can consume A's message if they
 want and do something with it, A does not know and does not need to know about
 it.
 
-#### References
-
-- [Using Apache Kafka to process 1 trillion inter-service messages](https://blog.cloudflare.com/using-apache-kafka-to-process-1-trillion-messages/)
-
-My own experiences:
+### Tip
 
 - Whatever you design, you stick with it consistently. Don't use different name
   for same object/value in your APIs.
@@ -126,11 +117,66 @@ My own experiences:
 **Pro tip**: Use proto to define models (if you can) to take advantage of
 detecting breaking changes.
 
+### References
+
+- [Best practices for REST API design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
+  - [ZaloPay API](https://docs.zalopay.vn/v2/)
+  - [stripe API](https://stripe.com/docs/api)
+  - [moov API](https://docs.moov.io/api/)
+- [Using Apache Kafka to process 1 trillion inter-service messages](https://blog.cloudflare.com/using-apache-kafka-to-process-1-trillion-messages/)
+
 ## Coding principle
+
+You should know about DRY, SOLID, KISS, Design Pattern. The basic is learning
+which is which when you read code. Truly understand will be knowing when to use
+and when to not.
+
+All of these above are industry standard.
+
+The way business moving is fast, so a feature is maybe implemented today, but
+gets thrown out of window tomorrow (Like A/B testing, one of them is chosen, the
+other says bye). So how do we adapt? The problem is to detect, which
+code/function is likely stable, resisted changing and which is likely to change.
+
+For each service, I often split to 3 layers: handler, service, repository.
+
+- Handler layer: Handle HTTP/GRPC/Message Broker/...
+- Service layer: All rules, logic goes here.
+- Repository layer: Interact with cache/databases using CRUD and some cache
+  strategy.
+
+Handler layer is likely never changed. Repository layer is rarely changed.
+Service layer is changed daily, this is where I put so much time on.
+
+The previous question can be asked in many ways:
+
+- How to move fast without breaking things?
+- How to quickly experiment new code without affecting old code?
+- ...
+
+My answer is, as Message Broker introduce concept decoupling, loosely coupled
+coding. Which means, 2 functions which do not share same business can be deleted
+without breaking the other.
+
+For example, we can send noti to users using SMS, Zalo, or Noti in app (3
+providers). They are all independently feature which serves same purpose: alert
+user about something. What happen if we add providers or remove some? Existing
+providers keep working as usual, new providers should behave properly too.
+
+So we have send noti abstraction, which can be implement by each provider, treat
+like a module (think like lego) which can be plug and play right away.
+
+And when we do not need send noti anymore, we can delete whole of it which
+includes all providers and still not affecting main flow.
+
+### References
+
+- [Write code that is easy to delete, not easy to extend.](https://programmingisterrible.com/post/139222674273/write-code-that-is-easy-to-delete-not-easy-to)
+- [Imaginary Problems Are the Root of Bad Software](https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software)
 
 ## Known concept
 
-TODO:
+TODO: Cache strategy, async operation
 
 ## Challenge
 
@@ -143,7 +189,3 @@ TODO: Take care incident
 ## Bonus
 
 TODO
-
-## Draft
-
-single point of failure ownership, debugging
