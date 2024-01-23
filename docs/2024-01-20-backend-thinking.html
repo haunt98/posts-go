@@ -190,22 +190,6 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >References
     </h4>
-    <ul>
-      <li>
-        <a
-          href="https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/"
-          rel="nofollow"
-          >Best practices for REST API design</a
-        >
-      </li>
-      <li>
-        <a href="https://docs.zalopay.vn/v2/" rel="nofollow">ZaloPay API</a>
-      </li>
-      <li>
-        <a href="https://stripe.com/docs/api" rel="nofollow">stripe API</a>
-      </li>
-      <li><a href="https://docs.moov.io/api/" rel="nofollow">moov API</a></li>
-    </ul>
     <h3>
       <a
         id="user-content-message-broker"
@@ -234,26 +218,16 @@
       message if they want and do something with it, A does not know and does
       not need to know about it.
     </p>
-    <h4>
+    <h3>
       <a
-        id="user-content-references-1"
+        id="user-content-tip"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#references-1"
+        href="#tip"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >References
-    </h4>
-    <ul>
-      <li>
-        <a
-          href="https://blog.cloudflare.com/using-apache-kafka-to-process-1-trillion-messages/"
-          rel="nofollow"
-          >Using Apache Kafka to process 1 trillion inter-service messages</a
-        >
-      </li>
-    </ul>
-    <p>My own experiences:</p>
+      >Tip
+    </h3>
     <ul>
       <li>
         Whatever you design, you stick with it consistently. Don't use different
@@ -276,6 +250,43 @@
       <strong>Pro tip</strong>: Use proto to define models (if you can) to take
       advantage of detecting breaking changes.
     </p>
+    <h3>
+      <a
+        id="user-content-references-1"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#references-1"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >References
+    </h3>
+    <ul>
+      <li>
+        <a
+          href="https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/"
+          rel="nofollow"
+          >Best practices for REST API design</a
+        >
+        <ul>
+          <li>
+            <a href="https://docs.zalopay.vn/v2/" rel="nofollow">ZaloPay API</a>
+          </li>
+          <li>
+            <a href="https://stripe.com/docs/api" rel="nofollow">stripe API</a>
+          </li>
+          <li>
+            <a href="https://docs.moov.io/api/" rel="nofollow">moov API</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a
+          href="https://blog.cloudflare.com/using-apache-kafka-to-process-1-trillion-messages/"
+          rel="nofollow"
+          >Using Apache Kafka to process 1 trillion inter-service messages</a
+        >
+      </li>
+    </ul>
     <h2>
       <a
         id="user-content-coding-principle"
@@ -286,6 +297,87 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >Coding principle
     </h2>
+    <p>
+      You should know about DRY, SOLID, KISS, Design Pattern. The basic is
+      learning which is which when you read code. Truly understand will be
+      knowing when to use and when to not.
+    </p>
+    <p>All of these above are industry standard.</p>
+    <p>
+      The way business moving is fast, so a feature is maybe implemented today,
+      but gets thrown out of window tomorrow (Like A/B testing, one of them is
+      chosen, the other says bye). So how do we adapt? The problem is to detect,
+      which code/function is likely stable, resisted changing and which is
+      likely to change.
+    </p>
+    <p>
+      For each service, I often split to 3 layers: handler, service, repository.
+    </p>
+    <ul>
+      <li>Handler layer: Handle HTTP/GRPC/Message Broker/...</li>
+      <li>Service layer: All rules, logic goes here.</li>
+      <li>
+        Repository layer: Interact with cache/databases using CRUD and some
+        cache strategy.
+      </li>
+    </ul>
+    <p>
+      Handler layer is likely never changed. Repository layer is rarely changed.
+      Service layer is changed daily, this is where I put so much time on.
+    </p>
+    <p>The previous question can be asked in many ways:</p>
+    <ul>
+      <li>How to move fast without breaking things?</li>
+      <li>How to quickly experiment new code without affecting old code?</li>
+      <li>...</li>
+    </ul>
+    <p>
+      My answer is, as Message Broker introduce concept decoupling, loosely
+      coupled coding. Which means, 2 functions which do not share same business
+      can be deleted without breaking the other.
+    </p>
+    <p>
+      For example, we can send noti to users using SMS, Zalo, or Noti in app (3
+      providers). They are all independently feature which serves same purpose:
+      alert user about something. What happen if we add providers or remove
+      some? Existing providers keep working as usual, new providers should
+      behave properly too.
+    </p>
+    <p>
+      So we have send noti abstraction, which can be implement by each provider,
+      treat like a module (think like lego) which can be plug and play right
+      away.
+    </p>
+    <p>
+      And when we do not need send noti anymore, we can delete whole of it which
+      includes all providers and still not affecting main flow.
+    </p>
+    <h3>
+      <a
+        id="user-content-references-2"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#references-2"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >References
+    </h3>
+    <ul>
+      <li>
+        <a
+          href="https://programmingisterrible.com/post/139222674273/write-code-that-is-easy-to-delete-not-easy-to"
+          rel="nofollow"
+          >Write code that is easy to delete, not easy to extend.</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software"
+          rel="nofollow"
+          >Imaginary Problems Are the Root of Bad Software</a
+        >
+      </li>
+    </ul>
     <h2>
       <a
         id="user-content-known-concept"
@@ -296,7 +388,7 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >Known concept
     </h2>
-    <p>TODO:</p>
+    <p>TODO: Cache strategy, async operation</p>
     <h2>
       <a
         id="user-content-challenge"
@@ -330,17 +422,6 @@
       >Bonus
     </h2>
     <p>TODO</p>
-    <h2>
-      <a
-        id="user-content-draft"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#draft"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Draft
-    </h2>
-    <p>single point of failure ownership, debugging</p>
 
     <div>
       Feel free to ask me via
