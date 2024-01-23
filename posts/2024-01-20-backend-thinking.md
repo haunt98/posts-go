@@ -51,6 +51,8 @@ TODO: How to split services?
 
 How do services communicate with each other?
 
+### API
+
 **First** is through API, this is the direct way, you send a request then you
 wait for response.
 
@@ -79,8 +81,34 @@ Why do we use HTTP for Client-Server and GRPC for Server-Server?
 - Before ZaloPay switch to GRPC for Server-Server, we use HTTP. The reason for
   switch is mainly performance.
 
-Take a look at [stripe API](https://stripe.com/docs/api) to get quick grasp
-about real world API.
+#### References
+
+- [Best practices for REST API design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
+- [ZaloPay API](https://docs.zalopay.vn/v2/)
+- [stripe API](https://stripe.com/docs/api)
+- [moov API](https://docs.moov.io/api/)
+
+### Message Broker
+
+**Second** way is by Message Broker, the most well known is Kafka.
+
+Main idea is decoupling.
+
+Imaging service A need to call services B, C, D, E after doing some action, but
+B just died. We must handle B errors gracefully if B is not that important (not
+affect main flow of A). Imaging not only B, but multi B, like B1, B2, B3, ...
+Bn, this is so depressed to continue.
+
+Message Broker is a way to detach B from A.
+
+Dumb exaplain be like: each time A do something, A produces message to Message
+Broker, than A forgets about it. Then all B1, B2 can consume A's message if they
+want and do something with it, A does not know and does not need to know about
+it.
+
+#### References
+
+- [Using Apache Kafka to process 1 trillion inter-service messages](https://blog.cloudflare.com/using-apache-kafka-to-process-1-trillion-messages/)
 
 My own experiences:
 
@@ -95,7 +123,8 @@ My own experiences:
   should continue to function if user don't upgrade. Even if we rollout new
   version, it takes time.
 
-TODO: Kafka
+**Pro tip**: Use proto to define models (if you can) to take advantage of
+detecting breaking changes.
 
 ## Coding principle
 
@@ -107,7 +136,7 @@ TODO:
 
 TODO: Scale problem
 
-## Damange control
+## Damage control
 
 TODO: Take care incident
 
@@ -115,6 +144,6 @@ TODO: Take care incident
 
 TODO
 
-## References
+## Draft
 
-- [Best practices for REST API design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
+single point of failure ownership, debugging

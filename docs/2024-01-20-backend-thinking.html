@@ -138,6 +138,16 @@
       >Technical side
     </h2>
     <p>How do services communicate with each other?</p>
+    <h3>
+      <a
+        id="user-content-api"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#api"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >API
+    </h3>
     <p>
       <strong>First</strong> is through API, this is the direct way, you send a
       request then you wait for response.
@@ -170,11 +180,79 @@
         for switch is mainly performance.
       </li>
     </ul>
+    <h4>
+      <a
+        id="user-content-references"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#references"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >References
+    </h4>
+    <ul>
+      <li>
+        <a
+          href="https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/"
+          rel="nofollow"
+          >Best practices for REST API design</a
+        >
+      </li>
+      <li>
+        <a href="https://docs.zalopay.vn/v2/" rel="nofollow">ZaloPay API</a>
+      </li>
+      <li>
+        <a href="https://stripe.com/docs/api" rel="nofollow">stripe API</a>
+      </li>
+      <li><a href="https://docs.moov.io/api/" rel="nofollow">moov API</a></li>
+    </ul>
+    <h3>
+      <a
+        id="user-content-message-broker"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#message-broker"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Message Broker
+    </h3>
     <p>
-      Take a look at
-      <a href="https://stripe.com/docs/api" rel="nofollow">stripe API</a> to get
-      quick grasp about real world API.
+      <strong>Second</strong> way is by Message Broker, the most well known is
+      Kafka.
     </p>
+    <p>Main idea is decoupling.</p>
+    <p>
+      Imaging service A need to call services B, C, D, E after doing some
+      action, but B just died. We must handle B errors gracefully if B is not
+      that important (not affect main flow of A). Imaging not only B, but multi
+      B, like B1, B2, B3, ... Bn, this is so depressed to continue.
+    </p>
+    <p>Message Broker is a way to detach B from A.</p>
+    <p>
+      Dumb exaplain be like: each time A do something, A produces message to
+      Message Broker, than A forgets about it. Then all B1, B2 can consume A's
+      message if they want and do something with it, A does not know and does
+      not need to know about it.
+    </p>
+    <h4>
+      <a
+        id="user-content-references-1"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#references-1"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >References
+    </h4>
+    <ul>
+      <li>
+        <a
+          href="https://blog.cloudflare.com/using-apache-kafka-to-process-1-trillion-messages/"
+          rel="nofollow"
+          >Using Apache Kafka to process 1 trillion inter-service messages</a
+        >
+      </li>
+    </ul>
     <p>My own experiences:</p>
     <ul>
       <li>
@@ -194,7 +272,10 @@
         if we rollout new version, it takes time.
       </li>
     </ul>
-    <p>TODO: Kafka</p>
+    <p>
+      <strong>Pro tip</strong>: Use proto to define models (if you can) to take
+      advantage of detecting breaking changes.
+    </p>
     <h2>
       <a
         id="user-content-coding-principle"
@@ -229,13 +310,13 @@
     <p>TODO: Scale problem</p>
     <h2>
       <a
-        id="user-content-damange-control"
+        id="user-content-damage-control"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#damange-control"
+        href="#damage-control"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Damange control
+      >Damage control
     </h2>
     <p>TODO: Take care incident</p>
     <h2>
@@ -251,23 +332,15 @@
     <p>TODO</p>
     <h2>
       <a
-        id="user-content-references"
+        id="user-content-draft"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#references"
+        href="#draft"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >References
+      >Draft
     </h2>
-    <ul>
-      <li>
-        <a
-          href="https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/"
-          rel="nofollow"
-          >Best practices for REST API design</a
-        >
-      </li>
-    </ul>
+    <p>single point of failure ownership, debugging</p>
 
     <div>
       Feel free to ask me via
