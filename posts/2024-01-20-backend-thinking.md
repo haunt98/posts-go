@@ -207,15 +207,65 @@ Some tips:
 - [Imaginary Problems Are the Root of Bad Software](https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software)
 - [Speed up writing Go test ASAP](https://haunt98.github.io/posts-go/2022-12-25-go-test-asap.html)
 
-## System Design
+## System Design Concept
 
-## Performance
+Start with basic: getting data from database.
 
-## Security
+```mermaid
+sequenceDiagram
+    participant service
+    participant database
+    
+    service ->> database: get (100ms)
+```
+
+Getting data from cache first, then database later.
+
+```mermaid
+sequenceDiagram
+    participant service
+    participant cache
+    participant database
+    
+    service ->> cache: get (5ms)
+    alt not exist in cache
+        service ->> database: get (100ms)
+    end
+```
+
+If data is already in cache, we can get it so fast (5ms), nearly instant. But if
+not, we hit penalty, must get database after then re-update cache if need
+(>105ms). The best case is worth even if hitting penalty sometimes.
+
+Basic cache strategy: combine Write Through and Read Through
+
+```mermaid
+sequenceDiagram
+    participant service
+    participant cache
+    participant database
+    
+    note over service,database: Read Through
+    service ->> cache: get
+    alt not exist in cache
+        service ->> database: get
+        service ->> cache: set
+    end
+
+    note over service,database: Write Through
+    service ->> database: set
+    service ->> cache: set
+```
+
+### References
+
+- [Systems design explains the world: volume 1](https://apenwarr.ca/log/20201227)
+- [Systems design 2: What we hope we know](https://apenwarr.ca/log/20230415)
+- [How to do distributed locking](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
+- [Is Redlock safe?](http://antirez.com/news/101)
+- [Cache Consistency with Database](https://danielw.cn/cache-consistency-with-database#cache-patterns)
 
 ## Damage control
-
-TODO: Take care incident
 
 ## Bonus
 

@@ -453,34 +453,99 @@
     </ul>
     <h2>
       <a
-        id="user-content-system-design"
+        id="user-content-system-design-concept"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#system-design"
+        href="#system-design-concept"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >System Design
+      >System Design Concept
     </h2>
-    <h2>
+    <p>Start with basic: getting data from database.</p>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">service</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">database</span>
+    
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">get (100ms)</span></pre>
+    </div>
+    <p>Getting data from cache first, then database later.</p>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">service</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">cache</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">database</span>
+    
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">get (5ms)</span>
+    <span class="pl-k">alt</span> <span class="pl-s">not exist in cache</span>
+        <span class="pl-s">service -&gt;&gt; database: get (100ms)</span>
+    <span class="pl-k">end</span></pre>
+    </div>
+    <p>
+      If data is already in cache, we can get it so fast (5ms), nearly instant.
+      But if not, we hit penalty, must get database after then re-update cache
+      if need (&gt;105ms). The best case is worth even if hitting penalty
+      sometimes.
+    </p>
+    <p>Basic cache strategy: combine Write Through and Read Through</p>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">service</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">cache</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">database</span>
+    
+    <span class="pl-k">note over </span><span class="pl-ent">service</span><span class="pl-sg">,</span><span class="pl-ent">database</span>: <span class="pl-ent">Read Through</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">get</span>
+    <span class="pl-k">alt</span> <span class="pl-s">not exist in cache</span>
+        <span class="pl-s">service -&gt;&gt; database: get</span>
+        <span class="pl-s">service -&gt;&gt; cache: set</span>
+    <span class="pl-k">end</span>
+
+    <span class="pl-k">note over </span><span class="pl-ent">service</span><span class="pl-sg">,</span><span class="pl-ent">database</span>: <span class="pl-ent">Write Through</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">set</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">set</span></pre>
+    </div>
+    <h3>
       <a
-        id="user-content-performance"
+        id="user-content-references-2"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#performance"
+        href="#references-2"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Performance
-    </h2>
-    <h2>
-      <a
-        id="user-content-security"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
-        href="#security"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Security
-    </h2>
+      >References
+    </h3>
+    <ul>
+      <li>
+        <a href="https://apenwarr.ca/log/20201227" rel="nofollow"
+          >Systems design explains the world: volume 1</a
+        >
+      </li>
+      <li>
+        <a href="https://apenwarr.ca/log/20230415" rel="nofollow"
+          >Systems design 2: What we hope we know</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+          rel="nofollow"
+          >How to do distributed locking</a
+        >
+      </li>
+      <li>
+        <a href="http://antirez.com/news/101" rel="nofollow"
+          >Is Redlock safe?</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://danielw.cn/cache-consistency-with-database#cache-patterns"
+          rel="nofollow"
+          >Cache Consistency with Database</a
+        >
+      </li>
+    </ul>
     <h2>
       <a
         id="user-content-damage-control"
@@ -491,7 +556,6 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >Damage control
     </h2>
-    <p>TODO: Take care incident</p>
     <h2>
       <a
         id="user-content-bonus"
