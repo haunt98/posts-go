@@ -31,8 +31,7 @@ Ideally each team can choose custom backend techstack if they want, but mostly
 boils down to Java or Go. Some teams use Python for scripting, data processing,
 ...
 
-_Example_: UM (Team User Management Core) has 10+ Java services and 30+ Go
-services.
+_Example_: Team UM (User Management) has 10+ Java services and 30+ Go services.
 
 The question is for each new business requirements, what should we do:
 
@@ -172,8 +171,8 @@ includes all providers and still not affecting main flow.
 Test is not a way to find bug, test is a way for us to make sure what we code is
 actually what we think/expect.
 
-Best case scenerio is test with real dependencies (real servives, real Redis,
-real MySQL, real Kafka, ...). But it's not easy way to setup yourself.
+Best case is test with real dependencies (real servives, real Redis, real MySQL,
+real Kafka, ...). But it's not easy way to setup yourself.
 
 The easier way is to use mocks. Mock all dependencies to test all possible edge
 cases you can think of.
@@ -184,12 +183,23 @@ cases you can think of.
   - For big, complex function, the strategy testing goes from happy case to each
     single edge case, each single if else path,... try to cover as much as you
     can.
-- Integration tests in 2 ways:
+- Integration tests is to test your system as a whole package, can be in 2 ways:
   - Locally, which require to run in your computer with fully set up
     dependencies, is hard to set up.
-  - Remotely, use DEV env to test APIs.
+  - Remotely, use DEV/... env to test full business flow with all possible
+    scenario.
 
 TODO: Show example
+
+How to make code easier to test. Same idea loosely coupled as above.
+
+Some tips:
+
+- Rely on abstraction/interface to mock
+- Limit relying on variable outside input (global variable, environment
+  variable, ...)
+- If deleting/adding code but tests are still passed, then maybe your tests are
+  wrong/not enough (tests is missing some code path).
 
 ### References
 
@@ -197,13 +207,11 @@ TODO: Show example
 - [Imaginary Problems Are the Root of Bad Software](https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software)
 - [Speed up writing Go test ASAP](https://haunt98.github.io/posts-go/2022-12-25-go-test-asap.html)
 
-## Known concept
+## System Design
 
-TODO: Cache strategy, async operation
+## Performance
 
-## Challenge
-
-TODO: Scale problem
+## Security
 
 ## Damage control
 
