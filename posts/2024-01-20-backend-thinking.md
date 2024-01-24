@@ -129,7 +129,7 @@ and when to not.
 
 All of these above are industry standard.
 
-### Write code to delete
+### Write code that is easy delete
 
 The way business moving is fast, so a feature is maybe implemented today, but
 gets thrown out of window tomorrow (Like A/B testing, one of them is chosen, the
@@ -167,10 +167,10 @@ like a module (think like lego) which can be plug and play right away.
 And when we do not need send noti anymore, we can delete whole of it which
 includes all providers and still not affecting main flow.
 
-### Write code to test
+### Write code that is easy to test
 
 Test is not a way to find bug, test is a way for us to make sure what we code is
-actually what we think.
+actually what we think/expect.
 
 Best case scenerio is test with real dependencies (real servives, real Redis,
 real MySQL, real Kafka, ...). But it's not easy way to setup yourself.
@@ -178,13 +178,18 @@ real MySQL, real Kafka, ...). But it's not easy way to setup yourself.
 The easier way is to use mocks. Mock all dependencies to test all possible edge
 cases you can think of.
 
+- Unit tests is the standard (ZaloPay currently requires 90% test coverage).
+  - Easy to test small to medium function which have simple rules, likely single
+    purpose with table testing technique.
+  - For big, complex function, the strategy testing goes from happy case to each
+    single edge case, each single if else path,... try to cover as much as you
+    can.
+- Integration tests in 2 ways:
+  - Locally, which require to run in your computer with fully set up
+    dependencies, is hard to set up.
+  - Remotely, use DEV env to test APIs.
+
 TODO: Show example
-
-Same solution is to keep our code loosely coupled as much as possible.
-
-Each function/ should be contained.
-
-Not all
 
 ### References
 

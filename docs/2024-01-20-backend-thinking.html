@@ -294,13 +294,13 @@
     <p>All of these above are industry standard.</p>
     <h3>
       <a
-        id="user-content-write-code-to-delete"
+        id="user-content-write-code-that-is-easy-delete"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#write-code-to-delete"
+        href="#write-code-that-is-easy-delete"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Write code to delete
+      >Write code that is easy delete
     </h3>
     <p>
       The way business moving is fast, so a feature is maybe implemented today,
@@ -353,17 +353,17 @@
     </p>
     <h3>
       <a
-        id="user-content-write-code-to-test"
+        id="user-content-write-code-that-is-easy-to-test"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#write-code-to-test"
+        href="#write-code-that-is-easy-to-test"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Write code to test
+      >Write code that is easy to test
     </h3>
     <p>
       Test is not a way to find bug, test is a way for us to make sure what we
-      code is actually what we think.
+      code is actually what we think/expect.
     </p>
     <p>
       Best case scenerio is test with real dependencies (real servives, real
@@ -374,12 +374,34 @@
       The easier way is to use mocks. Mock all dependencies to test all possible
       edge cases you can think of.
     </p>
+    <ul>
+      <li>
+        Unit tests is the standard (ZaloPay currently requires 90% test
+        coverage).
+        <ul>
+          <li>
+            Easy to test small to medium function which have simple rules,
+            likely single purpose with table testing technique.
+          </li>
+          <li>
+            For big, complex function, the strategy testing goes from happy case
+            to each single edge case, each single if else path,... try to cover
+            as much as you can.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Integration tests in 2 ways:
+        <ul>
+          <li>
+            Locally, which require to run in your computer with fully set up
+            dependencies, is hard to set up.
+          </li>
+          <li>Remotely, use DEV env to test APIs.</li>
+        </ul>
+      </li>
+    </ul>
     <p>TODO: Show example</p>
-    <p>
-      Same solution is to keep our code loosely coupled as much as possible.
-    </p>
-    <p>Each function/ should be contained.</p>
-    <p>Not all</p>
     <h3>
       <a
         id="user-content-references-1"
