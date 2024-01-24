@@ -24,7 +24,7 @@ After successfully do all of that, next step is:
   - Metrics
   - Tracing
 
-In ZaloPay, each team has its own responsibilites/domains, aka many different
+In ZaloPay, each team has its own responsibilities/domains, aka many different
 services.
 
 Ideally each team can choose custom backend techstack if they want, but mostly
@@ -129,6 +129,8 @@ and when to not.
 
 All of these above are industry standard.
 
+### Write code to delete
+
 The way business moving is fast, so a feature is maybe implemented today, but
 gets thrown out of window tomorrow (Like A/B testing, one of them is chosen, the
 other says bye). So how do we adapt? The problem is to detect, which
@@ -154,7 +156,7 @@ My answer is, as Message Broker introduce concept decoupling, loosely coupled
 coding. Which means, 2 functions which do not share same business can be deleted
 without breaking the other.
 
-For example, we can send noti to users using SMS, Zalo, or Noti in app (3
+For example, we can send noti to users using SMS, Zalo, or noti-in-app (3
 providers). They are all independently feature which serves same purpose: alert
 user about something. What happen if we add providers or remove some? Existing
 providers keep working as usual, new providers should behave properly too.
@@ -165,10 +167,30 @@ like a module (think like lego) which can be plug and play right away.
 And when we do not need send noti anymore, we can delete whole of it which
 includes all providers and still not affecting main flow.
 
+### Write code to test
+
+Test is not a way to find bug, test is a way for us to make sure what we code is
+actually what we think.
+
+Best case scenerio is test with real dependencies (real servives, real Redis,
+real MySQL, real Kafka, ...). But it's not easy way to setup yourself.
+
+The easier way is to use mocks. Mock all dependencies to test all possible edge
+cases you can think of.
+
+TODO: Show example
+
+Same solution is to keep our code loosely coupled as much as possible.
+
+Each function/ should be contained.
+
+Not all
+
 ### References
 
 - [Write code that is easy to delete, not easy to extend.](https://programmingisterrible.com/post/139222674273/write-code-that-is-easy-to-delete-not-easy-to)
 - [Imaginary Problems Are the Root of Bad Software](https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software)
+- [Speed up writing Go test ASAP](https://haunt98.github.io/posts-go/2022-12-25-go-test-asap.html)
 
 ## Known concept
 

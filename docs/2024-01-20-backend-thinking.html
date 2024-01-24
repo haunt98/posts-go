@@ -100,7 +100,7 @@
       </li>
     </ul>
     <p>
-      In ZaloPay, each team has its own responsibilites/domains, aka many
+      In ZaloPay, each team has its own responsibilities/domains, aka many
       different services.
     </p>
     <p>
@@ -292,6 +292,16 @@
       knowing when to use and when to not.
     </p>
     <p>All of these above are industry standard.</p>
+    <h3>
+      <a
+        id="user-content-write-code-to-delete"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#write-code-to-delete"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Write code to delete
+    </h3>
     <p>
       The way business moving is fast, so a feature is maybe implemented today,
       but gets thrown out of window tomorrow (Like A/B testing, one of them is
@@ -326,7 +336,7 @@
       can be deleted without breaking the other.
     </p>
     <p>
-      For example, we can send noti to users using SMS, Zalo, or Noti in app (3
+      For example, we can send noti to users using SMS, Zalo, or noti-in-app (3
       providers). They are all independently feature which serves same purpose:
       alert user about something. What happen if we add providers or remove
       some? Existing providers keep working as usual, new providers should
@@ -341,6 +351,35 @@
       And when we do not need send noti anymore, we can delete whole of it which
       includes all providers and still not affecting main flow.
     </p>
+    <h3>
+      <a
+        id="user-content-write-code-to-test"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#write-code-to-test"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Write code to test
+    </h3>
+    <p>
+      Test is not a way to find bug, test is a way for us to make sure what we
+      code is actually what we think.
+    </p>
+    <p>
+      Best case scenerio is test with real dependencies (real servives, real
+      Redis, real MySQL, real Kafka, ...). But it's not easy way to setup
+      yourself.
+    </p>
+    <p>
+      The easier way is to use mocks. Mock all dependencies to test all possible
+      edge cases you can think of.
+    </p>
+    <p>TODO: Show example</p>
+    <p>
+      Same solution is to keep our code loosely coupled as much as possible.
+    </p>
+    <p>Each function/ should be contained.</p>
+    <p>Not all</p>
     <h3>
       <a
         id="user-content-references-1"
@@ -364,6 +403,13 @@
           href="https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software"
           rel="nofollow"
           >Imaginary Problems Are the Root of Bad Software</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://haunt98.github.io/posts-go/2022-12-25-go-test-asap.html"
+          rel="nofollow"
+          >Speed up writing Go test ASAP</a
         >
       </li>
     </ul>
