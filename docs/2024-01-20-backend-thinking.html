@@ -109,8 +109,8 @@
       processing, ...
     </p>
     <p>
-      <em>Example</em>: UM (Team User Management Core) has 10+ Java services and
-      30+ Go services.
+      <em>Example</em>: Team UM (User Management) has 10+ Java services and 30+
+      Go services.
     </p>
     <p>
       The question is for each new business requirements, what should we do:
@@ -366,9 +366,8 @@
       code is actually what we think/expect.
     </p>
     <p>
-      Best case scenerio is test with real dependencies (real servives, real
-      Redis, real MySQL, real Kafka, ...). But it's not easy way to setup
-      yourself.
+      Best case is test with real dependencies (real servives, real Redis, real
+      MySQL, real Kafka, ...). But it's not easy way to setup yourself.
     </p>
     <p>
       The easier way is to use mocks. Mock all dependencies to test all possible
@@ -391,17 +390,34 @@
         </ul>
       </li>
       <li>
-        Integration tests in 2 ways:
+        Integration tests is to test your system as a whole package, can be in 2
+        ways:
         <ul>
           <li>
             Locally, which require to run in your computer with fully set up
             dependencies, is hard to set up.
           </li>
-          <li>Remotely, use DEV env to test APIs.</li>
+          <li>
+            Remotely, use DEV/... env to test full business flow with all
+            possible scenario.
+          </li>
         </ul>
       </li>
     </ul>
     <p>TODO: Show example</p>
+    <p>How to make code easier to test. Same idea loosely coupled as above.</p>
+    <p>Some tips:</p>
+    <ul>
+      <li>Rely on abstraction/interface to mock</li>
+      <li>
+        Limit relying on variable outside input (global variable, environment
+        variable, ...)
+      </li>
+      <li>
+        If deleting/adding code but tests are still passed, then maybe your
+        tests are wrong/not enough (tests is missing some code path).
+      </li>
+    </ul>
     <h3>
       <a
         id="user-content-references-1"
@@ -437,26 +453,34 @@
     </ul>
     <h2>
       <a
-        id="user-content-known-concept"
+        id="user-content-system-design"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#known-concept"
+        href="#system-design"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Known concept
+      >System Design
     </h2>
-    <p>TODO: Cache strategy, async operation</p>
     <h2>
       <a
-        id="user-content-challenge"
+        id="user-content-performance"
         class="anchor"
         aria-hidden="true"
         tabindex="-1"
-        href="#challenge"
+        href="#performance"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Challenge
+      >Performance
     </h2>
-    <p>TODO: Scale problem</p>
+    <h2>
+      <a
+        id="user-content-security"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#security"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      >Security
+    </h2>
     <h2>
       <a
         id="user-content-damage-control"
