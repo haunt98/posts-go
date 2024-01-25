@@ -46,20 +46,30 @@ Bank data (name, dob, id, ...).
 
 ## Technical side
 
-How do services communicate with each other?
+Backend services talk to Frontend, and talk to each other.
+
+How do they communicate?
 
 ### API
 
 **First** is through API, this is the direct way, you send a request then you
 wait for response.
 
-**HTTP**: GET/POST/...
+**HTTP**
 
-_Example_: TODO: show API image
+- Use HTTP Method GET/POST/…
+- HTTP responses status code
+- ZaloPay rule
+  - Only return code 200
+  - Response body is only JSON
 
-**GRPC**: use proto file as constract.
+**GRPC**
 
-_Example_: TODO: show proto file image
+- Use proto file as contract
+- GRPC status code
+  - OK
+  - INVALID_ARGUMENT
+  - INTERNAL …
 
 There are no hard rules on how to design APIs, only some best practices, like
 REST API, ...
@@ -96,6 +106,45 @@ Broker, than A forgets about it. Then all B1, B2 can consume A's message if they
 want and do something with it, A does not know and does not need to know about
 it.
 
+```mermaid
+sequenceDiagram
+    participant A
+    participant B
+    participant C
+    participant D
+    
+    A ->> B: do something
+    A ->> C: do something
+    A ->> D: do something
+```
+
+```mermaid
+sequenceDiagram
+    participant A
+    participant B
+    participant C
+    participant D
+    
+    A ->> B: do something
+    A ->> C: do something
+    A -x D: do something but failed
+```
+
+```mermaid
+sequenceDiagram
+    participant A
+    participant B
+    participant C
+    participant D
+    participant Kafka
+    
+    A ->> B: do something
+    A ->> C: do something
+    A ->> Kafka: produce message
+    D ->> Kafka: consume message
+    D ->> D: do something
+```
+
 ### Tip
 
 - Whatever you design, you stick with it consistently. Don't use different name
@@ -122,9 +171,9 @@ detecting breaking changes.
 
 ## Coding principle
 
-You should know about DRY, SOLID, KISS, Design Pattern. The basic is learning
-which is which when you read code. Truly understand will be knowing when to use
-and when to not.
+You should know about DRY, SOLID, KISS, YAGNI, Design Pattern. The basic is
+learning which is which when you read code. Truly understand will be knowing
+when to use and when to not.
 
 All of these above are industry standard.
 
@@ -168,8 +217,8 @@ includes all providers and still not affecting main flow.
 
 ### Write code that is easy to test
 
-Test is not a way to find bug, test is a way for us to make sure what we code is
-actually what we think/expect.
+Test is not a way to find bug, but to make sure what we code is actually what we
+think/expect.
 
 Best case is test with real dependencies (real servives, real Redis, real MySQL,
 real Kafka, ...). But it's not easy way to setup yourself.
@@ -179,7 +228,7 @@ cases you can think of.
 
 - Unit tests is the standard (ZaloPay currently requires 90% test coverage).
   - Easy to test small to medium function which have simple rules, likely single
-    purpose with table testing technique.
+    purpose, with table testing technique.
   - For big, complex function, the strategy testing goes from happy case to each
     single edge case, each single if else path,... try to cover as much as you
     can.
@@ -196,8 +245,7 @@ How to make code easier to test. Same idea loosely coupled as above.
 Some tips:
 
 - Rely on abstraction/interface to mock
-- Limit relying on variable outside input (global variable, environment
-  variable, ...)
+- Limit variable outside input (global variable, environment variable, ...)
 - If deleting/adding code but tests are still passed, then maybe your tests are
   wrong/not enough (tests is missing some code path).
 

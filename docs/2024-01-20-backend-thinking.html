@@ -136,7 +136,8 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >Technical side
     </h2>
-    <p>How do services communicate with each other?</p>
+    <p>Backend services talk to Frontend, and talk to each other.</p>
+    <p>How do they communicate?</p>
     <h3>
       <a
         id="user-content-api"
@@ -151,10 +152,30 @@
       <strong>First</strong> is through API, this is the direct way, you send a
       request then you wait for response.
     </p>
-    <p><strong>HTTP</strong>: GET/POST/...</p>
-    <p><em>Example</em>: TODO: show API image</p>
-    <p><strong>GRPC</strong>: use proto file as constract.</p>
-    <p><em>Example</em>: TODO: show proto file image</p>
+    <p><strong>HTTP</strong></p>
+    <ul>
+      <li>Use HTTP Method GET/POST/…</li>
+      <li>HTTP responses status code</li>
+      <li>
+        ZaloPay rule
+        <ul>
+          <li>Only return code 200</li>
+          <li>Response body is only JSON</li>
+        </ul>
+      </li>
+    </ul>
+    <p><strong>GRPC</strong></p>
+    <ul>
+      <li>Use proto file as contract</li>
+      <li>
+        GRPC status code
+        <ul>
+          <li>OK</li>
+          <li>INVALID_ARGUMENT</li>
+          <li>INTERNAL …</li>
+        </ul>
+      </li>
+    </ul>
     <p>
       There are no hard rules on how to design APIs, only some best practices,
       like REST API, ...
@@ -207,6 +228,42 @@
       message if they want and do something with it, A does not know and does
       not need to know about it.
     </p>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">A</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">B</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">C</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">D</span>
+    
+    <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">B</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
+    <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">C</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
+    <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">D</span><span class="pl-k">:</span> <span class="pl-s">do something</span></pre>
+    </div>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">A</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">B</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">C</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">D</span>
+    
+    <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">B</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
+    <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">C</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
+    <span class="pl-ent">A </span><span class="pl-k">-x</span> <span class="pl-ent">D</span><span class="pl-k">:</span> <span class="pl-s">do something but failed</span></pre>
+    </div>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">A</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">B</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">C</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">D</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">Kafka</span>
+    
+    <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">B</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
+    <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">C</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
+    <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">Kafka</span><span class="pl-k">:</span> <span class="pl-s">produce message</span>
+    <span class="pl-ent">D </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">Kafka</span><span class="pl-k">:</span> <span class="pl-s">consume message</span>
+    <span class="pl-ent">D </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">D</span><span class="pl-k">:</span> <span class="pl-s">do something</span></pre>
+    </div>
     <h3>
       <a
         id="user-content-tip"
@@ -287,8 +344,8 @@
       >Coding principle
     </h2>
     <p>
-      You should know about DRY, SOLID, KISS, Design Pattern. The basic is
-      learning which is which when you read code. Truly understand will be
+      You should know about DRY, SOLID, KISS, YAGNI, Design Pattern. The basic
+      is learning which is which when you read code. Truly understand will be
       knowing when to use and when to not.
     </p>
     <p>All of these above are industry standard.</p>
@@ -362,8 +419,8 @@
       >Write code that is easy to test
     </h3>
     <p>
-      Test is not a way to find bug, test is a way for us to make sure what we
-      code is actually what we think/expect.
+      Test is not a way to find bug, but to make sure what we code is actually
+      what we think/expect.
     </p>
     <p>
       Best case is test with real dependencies (real servives, real Redis, real
@@ -380,7 +437,7 @@
         <ul>
           <li>
             Easy to test small to medium function which have simple rules,
-            likely single purpose with table testing technique.
+            likely single purpose, with table testing technique.
           </li>
           <li>
             For big, complex function, the strategy testing goes from happy case
@@ -410,8 +467,8 @@
     <ul>
       <li>Rely on abstraction/interface to mock</li>
       <li>
-        Limit relying on variable outside input (global variable, environment
-        variable, ...)
+        Limit variable outside input (global variable, environment variable,
+        ...)
       </li>
       <li>
         If deleting/adding code but tests are still passed, then maybe your
