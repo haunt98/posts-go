@@ -127,7 +127,6 @@ Memory
 - https://github.com/oven-sh/bun
 - https://github.com/denoland/deno
 - https://github.com/pypa/pipx
-- https://github.com/sdkman/sdkman-cli
 - https://github.com/corbindavenport/nexus-tools
 
 Format
@@ -145,7 +144,6 @@ Misc
 
 - https://github.com/mikefarah/yq
 - https://github.com/itchyny/gojq
-- github.com/antonmedv/fx
 - https://github.com/plantuml/plantuml
 - https://github.com/ankitpokhrel/jira-cli
 
@@ -163,6 +161,8 @@ Memory
 - https://github.com/luals/lua-language-server
 - https://github.com/fullstorydev/grpcurl
 - https://github.com/bufbuild/buf-language-server
+- https://github.com/sdkman/sdkman-cli
+- https://github.com/antonmedv/fx
 
 #### Go
 
@@ -184,7 +184,6 @@ Memory
 - https://redis.com/redis-enterprise/redis-insight/
 - https://www.jetbrains.com/datagrip/
 - https://github.com/riok/Kreya
-- https://github.com/variar/klogg
 
 Memory
 
@@ -193,6 +192,7 @@ Memory
 - https://github.com/MuhammedKalkan/OpenLens
 - https://github.com/bloomrpc/bloomrpc
 - https://github.com/Kong/insomnia
+- https://github.com/variar/klogg
 
 #### macOS
 
