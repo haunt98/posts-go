@@ -104,6 +104,7 @@ Memory
 - https://github.com/pedrommcarrasco/Brooklyn
 - https://github.com/ganeshrvel/openmtp
 - https://github.com/coteditor/CotEditor
+- https://github.com/zed-industries/zed
 - https://github.com/lwouis/alt-tab-macos
 - https://github.com/Ranchero-Software/NetNewsWire
 
@@ -115,7 +116,6 @@ Memory
 - https://github.com/objective-see/LuLu
 - https://github.com/ivoronin/TomatoBar
 - https://github.com/pqrs-org/Karabiner-Elements
-- https://zed.dev/
 - https://github.com/alin23/Lunar
 - https://github.com/CodeEditApp/CodeEdit
 
