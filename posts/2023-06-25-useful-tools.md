@@ -18,6 +18,7 @@ This just a raw list.
 - https://github.com/dandavison/delta
 - https://github.com/Wilfred/difftastic
 - https://github.com/eza-community/eza
+- https://github.com/chmln/sd
 
 - https://github.com/adrianlopezroche/fdupes
 - https://github.com/WayneD/rsync
