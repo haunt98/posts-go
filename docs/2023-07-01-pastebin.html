@@ -321,6 +321,22 @@ git gc</pre>
     </div>
     <h2>
       <a
+        id="user-content-sd"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#sd"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a href="https://github.com/chmln/sd">sd</a>
+    </h2>
+    <p>Remove proto options:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
+sd -F <span class="pl-s"><span class="pl-pds">'</span>import "marshal-zap.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
+sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto</pre>
+    </div>
+    <h2>
+      <a
         id="user-content-fdupes"
         class="anchor"
         aria-hidden="true"
