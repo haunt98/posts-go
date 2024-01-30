@@ -147,6 +147,7 @@ Misc
 - https://github.com/itchyny/gojq
 - https://github.com/plantuml/plantuml
 - https://github.com/ankitpokhrel/jira-cli
+- https://github.com/cli/cli
 
 Memory
 
