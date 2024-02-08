@@ -282,7 +282,7 @@ dist</pre>
   <span class="pl-ent">skip</span>: <span class="pl-c1">false</span>
   <span class="pl-ent">use</span>: <span class="pl-s">github</span></pre>
     </div>
-    <h1>
+    <h2>
       <a
         id="user-content-git-clean-up"
         class="anchor"
@@ -291,7 +291,7 @@ dist</pre>
         href="#git-clean-up"
         ><span aria-hidden="true" class="octicon octicon-link"></span></a
       >Git clean up
-    </h1>
+    </h2>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Delete untracked</span>
 git clean -fdx
@@ -451,6 +451,37 @@ f2 -r <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mti
     -d <span class="pl-s"><span class="pl-pds">'</span>{"key": "value", "timestamp": "1997-04-01T00:00:00Z"}<span class="pl-pds">'</span></span> \
     internal-social.zalopay.vn:443 \
     pkg.Service/GetData</pre>
+    </div>
+    <h2>
+      <a
+        id="user-content-zed"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#zed"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a href="https://github.com/zed-industries/zed">Zed</a>
+    </h2>
+    <p>Settings:</p>
+    <div class="highlight highlight-source-json">
+      <pre>{
+  <span class="pl-ent">"telemetry"</span>: {
+    <span class="pl-ent">"diagnostics"</span>: <span class="pl-c1">false</span>,
+    <span class="pl-ent">"metrics"</span>: <span class="pl-c1">false</span>
+  },
+  <span class="pl-ent">"vim_mode"</span>: <span class="pl-c1">true</span>,
+  <span class="pl-ent">"language_overrides"</span>: {
+    <span class="pl-ent">"JSON"</span>: {
+      <span class="pl-ent">"format_on_save"</span>: <span class="pl-s"><span class="pl-pds">"</span>off<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"formatter"</span>: {
+        <span class="pl-ent">"external"</span>: {
+          <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>prettier<span class="pl-pds">"</span></span>,
+          <span class="pl-ent">"arguments"</span>: [<span class="pl-s"><span class="pl-pds">"</span>--stdin-filepath<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>{buffer_path}<span class="pl-pds">"</span></span>]
+        }
+      }
+    }
+  }
+}</pre>
     </div>
 
     <div>
