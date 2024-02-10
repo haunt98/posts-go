@@ -34,6 +34,7 @@ This just a raw list.
 - https://github.com/sharkdp/vivid
 - https://github.com/zellij-org/zellij
 - https://github.com/ajeetdsouza/zoxide
+- https://github.com/atuinsh/atuin
 
 Memory
 
