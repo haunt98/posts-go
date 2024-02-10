@@ -60,6 +60,7 @@ For fun
 - https://github.com/libjxl/libjxl
 - https://github.com/yt-dlp/yt-dlp
 - https://github.com/talwat/pokeget-rs
+- https://github.com/newsboat/newsboat
 
 Fun memory
 
@@ -107,7 +108,7 @@ Memory
 - https://github.com/coteditor/CotEditor
 - https://github.com/zed-industries/zed
 - https://github.com/lwouis/alt-tab-macos
-- https://github.com/Ranchero-Software/NetNewsWire
+- https://github.com/pqrs-org/Karabiner-Elements
 
 Memory
 
@@ -116,9 +117,9 @@ Memory
 - https://github.com/tuyenvm/OpenKey
 - https://github.com/objective-see/LuLu
 - https://github.com/ivoronin/TomatoBar
-- https://github.com/pqrs-org/Karabiner-Elements
 - https://github.com/alin23/Lunar
 - https://github.com/CodeEditApp/CodeEdit
+- https://github.com/Ranchero-Software/NetNewsWire
 
 ## Developement
 
