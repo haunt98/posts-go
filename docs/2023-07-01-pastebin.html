@@ -389,6 +389,24 @@ rsync -avzP src/ dst</pre>
     </ul>
     <h2>
       <a
+        id="user-content-atuin"
+        class="anchor"
+        aria-hidden="true"
+        tabindex="-1"
+        href="#atuin"
+        ><span aria-hidden="true" class="octicon octicon-link"></span></a
+      ><a href="https://github.com/atuinsh/atuin">atuin</a>
+    </h2>
+    <p>Remove duplicated command:</p>
+    <div class="highlight highlight-source-sql">
+      <pre><span class="pl-k">delete</span>
+<span class="pl-k">from</span> history
+<span class="pl-k">where</span> id not <span class="pl-k">in</span> (<span class="pl-k">select</span> <span class="pl-c1">max</span>(id)
+                 <span class="pl-k">from</span> history
+                 <span class="pl-k">group by</span> command);</pre>
+    </div>
+    <h2>
+      <a
         id="user-content-f2"
         class="anchor"
         aria-hidden="true"
