@@ -12,7 +12,7 @@ test:
 	go test -race -failfast ./...
 
 test-color:
-	go install github.com/haunt98/go-test-color@latest
+	# go install github.com/haunt98/go-test-color@latest
 	go-test-color -race -failfast ./...
 
 coverage:
@@ -30,8 +30,8 @@ lint:
 	golangci-lint run ./...
 
 format:
-	go install github.com/haunt98/gofimports/cmd/gofimports@latest
-	go install mvdan.cc/gofumpt@latest
+	# go install github.com/haunt98/gofimports/cmd/gofimports@latest
+	# go install mvdan.cc/gofumpt@latest
 	gofimports -w --company github.com/make-go-great,github.com/haunt98 .
 	gofumpt -w -extra .
 
@@ -46,7 +46,7 @@ format-html:
 
 srht:
 	# https://srht.site/quickstart
-	go install git.sr.ht/~emersion/hut@latest
+	# go install git.sr.ht/~emersion/hut@latest
 	tar -C docs -cvz . > site.tar.gz
 	# Need to run hut init first
 	hut pages publish -d youngyoshie.srht.site site.tar.gz
