@@ -262,6 +262,13 @@ Reset launchpad:
 defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock
 ```
 
+Reduce padding in menu bar (Log out then log in to apply):
+
+```sh
+defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
+defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6
+```
+
 Clean up leftover data:
 
 - `~/Library/Application Support`
@@ -279,6 +286,8 @@ pbcopy < /dev/null
 Thanks:
 
 - https://apple.stackexchange.com/a/466029
+- [Native fix for applications hiding under the MacBook Pro notch](https://flaky.build/native-fix-for-applications-hiding-under-the-macbook-pro-notch)
+  - https://apple.stackexchange.com/q/406316
 
 ### Firefox
 

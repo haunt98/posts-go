@@ -991,6 +991,13 @@ xcode-select --install</pre>
     <div class="highlight highlight-source-shell">
       <pre>defaults write com.apple.dock ResetLaunchPad -bool <span class="pl-c1">true</span><span class="pl-k">;</span> killall Dock</pre>
     </div>
+    <p>Reduce padding in menu bar (Log out then log in to apply):</p>
+    <div class="highlight highlight-source-shell">
+      <pre>
+defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
+defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
+      >
+    </div>
     <p>Clean up leftover data:</p>
     <ul>
       <li><code>~/Library/Application Support</code></li>
@@ -1009,6 +1016,20 @@ xcode-select --install</pre>
         <a href="https://apple.stackexchange.com/a/466029" rel="nofollow"
           >https://apple.stackexchange.com/a/466029</a
         >
+      </li>
+      <li>
+        <a
+          href="https://flaky.build/native-fix-for-applications-hiding-under-the-macbook-pro-notch"
+          rel="nofollow"
+          >Native fix for applications hiding under the MacBook Pro notch</a
+        >
+        <ul>
+          <li>
+            <a href="https://apple.stackexchange.com/q/406316" rel="nofollow"
+              >https://apple.stackexchange.com/q/406316</a
+            >
+          </li>
+        </ul>
       </li>
     </ul>
     <h3>
