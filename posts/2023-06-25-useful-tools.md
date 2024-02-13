@@ -54,8 +54,7 @@ For fun
 - https://github.com/asciinema/asciinema
   - https://github.com/asciinema/agg
 - https://github.com/Gobidev/pfetch-rs
-- https://github.com/jarun/nnn
-  - https://github.com/ImageMagick/ImageMagick
+- https://github.com/sxyazi/yazi
   - https://github.com/dirkvdb/ffmpegthumbnailer
 - https://github.com/Genymobile/scrcpy
 - https://github.com/libjxl/libjxl
@@ -75,6 +74,8 @@ Fun memory
 - https://github.com/ytdl-org/youtube-dl
 - https://github.com/instaloader/instaloader
 - https://gitlab.com/phoneybadger/pokemon-colorscripts
+- https://github.com/jarun/nnn
+  - https://github.com/ImageMagick/ImageMagick
 
 #### Windows
 
