@@ -171,11 +171,14 @@ Memory
 
 #### Go
 
+- https://pkg.go.dev/golang.org/x/telemetry/cmd/gotelemetry
+- https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck
+- https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment
 - https://github.com/mvdan/gofumpt
 - https://github.com/golangci/golangci-lint
-- https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment
 - https://github.com/maruel/panicparse
 - https://github.com/gotestyourself/gotestsum
+- https://github.com/bufbuild/buf
 
 Memory
 
