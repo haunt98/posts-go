@@ -30,7 +30,6 @@ This just a raw list.
 - https://github.com/GothenburgBitFactory/taskwarrior
 - https://github.com/dundee/gdu
 - https://github.com/muesli/duf
-- https://github.com/charmbracelet/glow
 - https://github.com/sharkdp/vivid
 - https://github.com/zellij-org/zellij
 - https://github.com/ajeetdsouza/zoxide
@@ -48,6 +47,7 @@ Memory
 - https://github.com/wustho/epr
 - https://github.com/junegunn/fzf-git.sh
 - https://github.com/ogham/exa
+- https://github.com/charmbracelet/glow
 
 For fun
 
