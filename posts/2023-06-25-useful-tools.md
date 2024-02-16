@@ -148,7 +148,6 @@ Misc
 
 - https://github.com/mikefarah/yq
 - https://github.com/itchyny/gojq
-- https://github.com/plantuml/plantuml
 - https://github.com/ankitpokhrel/jira-cli
 - https://github.com/cli/cli
 
@@ -168,6 +167,7 @@ Memory
 - https://github.com/bufbuild/buf-language-server
 - https://github.com/sdkman/sdkman-cli
 - https://github.com/antonmedv/fx
+- https://github.com/plantuml/plantuml
 
 #### Go
 
