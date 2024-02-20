@@ -150,6 +150,7 @@ Misc
 - https://github.com/itchyny/gojq
 - https://github.com/ankitpokhrel/jira-cli
 - https://github.com/cli/cli
+- https://github.com/Textualize/toolong
 
 Memory
 
