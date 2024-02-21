@@ -313,8 +313,6 @@ sequenceDiagram
 - [Is Redlock safe?](http://antirez.com/news/101)
 - [Cache Consistency with Database](https://danielw.cn/cache-consistency-with-database#cache-patterns)
 
-## Damage control
-
 ## Bonus
 
 - [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/download/): Java
