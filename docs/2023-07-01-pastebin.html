@@ -28,27 +28,27 @@
     <h2>
       <a href="index.html"><code>~</code></a>
     </h2>
-    <h1>
+    <div class="markdown-heading">
+      <h1 class="heading-element">Throw away pastebin</h1>
       <a
         id="user-content-throw-away-pastebin"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Throw away pastebin"
         href="#throw-away-pastebin"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Throw away pastebin
-    </h1>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>Just a place to throw away some text.</p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element"><code>.gitignore</code></h2>
       <a
         id="user-content-gitignore"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: .gitignore"
         href="#gitignore"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><code>.gitignore</code>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <div class="highlight highlight-text-adblock">
       <pre><span class="pl-c"># macOS</span>
 .DS_Store
@@ -69,16 +69,16 @@ vendor
 <span class="pl-c"># GoReleaser</span>
 dist</pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">GitHub Actions</h2>
       <a
         id="user-content-github-actions"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: GitHub Actions"
         href="#github-actions"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >GitHub Actions
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p><code>dependabot.yml</code>:</p>
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">version</span>: <span class="pl-c1">2</span>
@@ -152,16 +152,16 @@ dist</pre>
         <span class="pl-ent">with</span>:
           <span class="pl-ent">version</span>: <span class="pl-s">latest</span></pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Go</h2>
       <a
         id="user-content-go"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Go"
         href="#go"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Go
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p><code>.golangci.yml</code>:</p>
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">run</span>:
@@ -282,32 +282,32 @@ dist</pre>
   <span class="pl-ent">skip</span>: <span class="pl-c1">false</span>
   <span class="pl-ent">use</span>: <span class="pl-s">github</span></pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Git clean up</h2>
       <a
         id="user-content-git-clean-up"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Git clean up"
         href="#git-clean-up"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Git clean up
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Delete untracked</span>
 git clean -fdx
 
 git gc</pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Delete <code>.DS_Store</code></h2>
       <a
         id="user-content-delete-ds_store"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Delete .DS_Store"
         href="#delete-ds_store"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Delete <code>.DS_Store</code>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       With
       <a href="https://stackoverflow.com/q/30483670" rel="nofollow">find</a>:
@@ -319,46 +319,52 @@ git gc</pre>
     <div class="highlight highlight-source-shell">
       <pre>fd -H <span class="pl-s"><span class="pl-pds">'</span>^\.DS_Store$<span class="pl-pds">'</span></span> -tf -X rm</pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/chmln/sd">sd</a>
+      </h2>
       <a
         id="user-content-sd"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: sd"
         href="#sd"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/chmln/sd">sd</a>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>Remove proto options:</p>
     <div class="highlight highlight-source-shell">
       <pre>sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
 sd -F <span class="pl-s"><span class="pl-pds">'</span>import "marshal-zap.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
 sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto</pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/adrianlopezroche/fdupes">fdupes</a>
+      </h2>
       <a
         id="user-content-fdupes"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: fdupes"
         href="#fdupes"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/adrianlopezroche/fdupes">fdupes</a>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>Remove duplicated files:</p>
     <div class="highlight highlight-source-shell">
       <pre>fdupes -rdN <span class="pl-c1">.</span></pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/WayneD/rsync">rsync</a>
+      </h2>
       <a
         id="user-content-rsync"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: rsync"
         href="#rsync"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/WayneD/rsync">rsync</a>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Result is dst/src</span>
 rsync -avzP src dst
@@ -387,16 +393,18 @@ rsync -avzP src/ dst</pre>
         in <strong>src</strong>, useful to sync dst with src
       </li>
     </ul>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/atuinsh/atuin">atuin</a>
+      </h2>
       <a
         id="user-content-atuin"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: atuin"
         href="#atuin"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/atuinsh/atuin">atuin</a>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>Remove duplicated command:</p>
     <div class="highlight highlight-source-sql">
       <pre><span class="pl-k">delete</span>
@@ -405,31 +413,35 @@ rsync -avzP src/ dst</pre>
                  <span class="pl-k">from</span> history
                  <span class="pl-k">group by</span> command);</pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/ayoisaiah/f2">F2</a>
+      </h2>
       <a
         id="user-content-f2"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: F2"
         href="#f2"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/ayoisaiah/f2">F2</a>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>Rename:</p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> If want dry run, remove -x</span>
 f2 -r <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}.{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> -x</pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/instaloader/instaloader">Instaloader</a>
+      </h2>
       <a
         id="user-content-instaloader"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Instaloader"
         href="#instaloader"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/instaloader/instaloader">Instaloader</a>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p><code>args.txt</code>:</p>
     <div class="highlight highlight-text-adblock">
       <pre>
@@ -454,32 +466,36 @@ f2 -r <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mti
     <div class="highlight highlight-text-adblock">
       <pre>instaloader +login.txt +args.txt +targets.txt</pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/fullstorydev/grpcurl">gRPCurl</a>
+      </h2>
       <a
         id="user-content-grpcurl"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: gRPCurl"
         href="#grpcurl"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/fullstorydev/grpcurl">gRPCurl</a>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <div class="highlight highlight-source-shell">
       <pre>grpcurl -proto path/file.proto \
     -d <span class="pl-s"><span class="pl-pds">'</span>{"key": "value", "timestamp": "1997-04-01T00:00:00Z"}<span class="pl-pds">'</span></span> \
     internal-social.zalopay.vn:443 \
     pkg.Service/GetData</pre>
     </div>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/zed-industries/zed">Zed</a>
+      </h2>
       <a
         id="user-content-zed"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Zed"
         href="#zed"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      ><a href="https://github.com/zed-industries/zed">Zed</a>
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>Settings:</p>
     <div class="highlight highlight-source-json">
       <pre>{

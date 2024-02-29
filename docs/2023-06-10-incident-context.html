@@ -28,28 +28,28 @@
     <h2>
       <a href="index.html"><code>~</code></a>
     </h2>
-    <h1>
+    <div class="markdown-heading">
+      <h1 class="heading-element">Another day another incident #02</h1>
       <a
         id="user-content-another-day-another-incident-02"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Another day another incident #02"
         href="#another-day-another-incident-02"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Another day another incident #02
-    </h1>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>Today's incident is all about Go context.</p>
     <p>TLDR: context got canceled, but it shouldn't.</p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">The problem</h2>
       <a
         id="user-content-the-problem"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: The problem"
         href="#the-problem"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >The problem
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>Imagine a chain of APIs:</p>
     <ul>
       <li>Calling API A</li>
@@ -123,16 +123,16 @@ doB context deadline exceeded</pre
       >
     </div>
     <p>As you see both <code>doA</code> and <code>doB</code> are canceled.</p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">The (temporary) solution</h2>
       <a
         id="user-content-the-temporary-solution"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: The (temporary) solution"
         href="#the-temporary-solution"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >The (temporary) solution
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       Quick Google search leads me to
       <a href="https://github.com/golang/go/issues/40221"
@@ -246,16 +246,16 @@ doB</pre
       As you see only <code>doA</code> is canceled, <code>doB</code> is done
       perfectly. And that what we want in this case.
     </p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Thanks</h2>
       <a
         id="user-content-thanks"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Thanks"
         href="#thanks"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Thanks
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <ul>
       <li>
         <a
