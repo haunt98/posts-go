@@ -145,6 +145,7 @@ Format
 Language server
 
 - https://github.com/golang/tools/tree/master/gopls
+- https://github.com/Microsoft/pyright
 
 Misc
 

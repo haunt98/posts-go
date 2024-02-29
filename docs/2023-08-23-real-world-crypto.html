@@ -28,16 +28,16 @@
     <h2>
       <a href="index.html"><code>~</code></a>
     </h2>
-    <h1>
+    <div class="markdown-heading">
+      <h1 class="heading-element">Real World Crypto 101</h1>
       <a
         id="user-content-real-world-crypto-101"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Real World Crypto 101"
         href="#real-world-crypto-101"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Real World Crypto 101
-    </h1>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       My notes when reading
       <a
@@ -46,17 +46,18 @@
         >Real-World Cryptography</a
       >
     </p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <strong>Hash</strong> function convert from input to digest
+      </h2>
       <a
         id="user-content-hash-function-convert-from-input-to-digest"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Hash function convert from input to digest"
         href="#hash-function-convert-from-input-to-digest"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
-      <strong>Hash</strong> function convert from input to digest
-    </h2>
+    </div>
     <ul>
       <li>Pre-image resistance: Given digest, can not find input</li>
       <li>
@@ -65,18 +66,19 @@
       </li>
       <li>Collision resistance: Can not find 2 input produce same digest.</li>
     </ul>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <strong>MAC</strong> aka Message Authentication Code produce from key,
+        message to authentication tag.
+      </h2>
       <a
         id="user-content-mac-aka-message-authentication-code-produce-from-key-message-to-authentication-tag"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: MAC aka Message Authentication Code produce from key, message to authentication tag."
         href="#mac-aka-message-authentication-code-produce-from-key-message-to-authentication-tag"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
-      <strong>MAC</strong> aka Message Authentication Code produce from key,
-      message to authentication tag.
-    </h2>
+    </div>
     <ul>
       <li>A send B message with MAC (generate from message and A key).</li>
       <li>
@@ -141,16 +143,16 @@
     <span class="pl-ent">bob </span><span class="pl-k">--&gt;&gt;</span> <span class="pl-ent">alice</span><span class="pl-k">:</span> <span class="pl-s">return ERROR</span></pre>
     </div>
     <p><strong>HMAC</strong> is MAC using hash</p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">AES (Advanced Encryption Standard)</h2>
       <a
         id="user-content-aes-advanced-encryption-standard"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: AES (Advanced Encryption Standard)"
         href="#aes-advanced-encryption-standard"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >AES (Advanced Encryption Standard)
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       Currently (2023) the world using AES-128 which take a key 128 bits == 16
       bytes
@@ -165,16 +167,16 @@
       <strong>block cipher</strong>. AES is deterministic so we can encrypt and
       decrypt.
     </p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">AES-CBC (Cipher Block Chaining)</h2>
       <a
         id="user-content-aes-cbc-cipher-block-chaining"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: AES-CBC (Cipher Block Chaining)"
         href="#aes-cbc-cipher-block-chaining"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >AES-CBC (Cipher Block Chaining)
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       What if text you want to encrypt longer than 128 bytes ? We add
       <strong>padding</strong> for text to become multi block which has 128
@@ -220,31 +222,33 @@
       <strong>WARNING</strong> If IV become predictable, AES-CBC become
       deterministic -&gt; BEAST attack (Browser Exploit Against SSL/TLS).
     </p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        AEAD (Authenticated Encryption with Associated Data)
+      </h2>
       <a
         id="user-content-aead-authenticated-encryption-with-associated-data"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: AEAD (Authenticated Encryption with Associated Data)"
         href="#aead-authenticated-encryption-with-associated-data"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >AEAD (Authenticated Encryption with Associated Data)
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       Because AES-CBC requires IV which shows public -&gt; attacker can change
       IV -&gt; lack of authenticity -&gt; use AES-CBC-HMAC or AEAD.
     </p>
     <p>AEAD provides a way to authenticate <strong>associated data</strong>.</p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">AES-GCM (Galois/Counter Mode) AEAD</h2>
       <a
         id="user-content-aes-gcm-galoiscounter-mode-aead"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: AES-GCM (Galois/Counter Mode) AEAD"
         href="#aes-gcm-galoiscounter-mode-aead"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >AES-GCM (Galois/Counter Mode) AEAD
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>AES-GCM = AES-CTR (Counter) + GMAC message authentication code</p>
     <p>AES-CTR encrypt:</p>
     <ul>
@@ -266,16 +270,16 @@
     </p>
     <p>This is stream cipher, differ from block cipher.</p>
     <p>GMAC is MAC with GHASH. GHASH resembles CBC mode.</p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">ChaCha20-Poly1305 AED</h2>
       <a
         id="user-content-chacha20-poly1305-aed"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: ChaCha20-Poly1305 AED"
         href="#chacha20-poly1305-aed"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >ChaCha20-Poly1305 AED
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>ChaCha20-Poly1305 = ChaCha20 stream cipher + Poly1305 MAC</p>
 
     <div>

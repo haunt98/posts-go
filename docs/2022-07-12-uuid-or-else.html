@@ -28,16 +28,16 @@
     <h2>
       <a href="index.html"><code>~</code></a>
     </h2>
-    <h1>
+    <div class="markdown-heading">
+      <h1 class="heading-element">UUID or else</h1>
       <a
         id="user-content-uuid-or-else"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: UUID or else"
         href="#uuid-or-else"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >UUID or else
-    </h1>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       There are many use cases where we need to use a unique ID. In my
       experience, I only encouter 2 cases:
@@ -56,16 +56,18 @@
       <li><a href="https://github.com/segmentio/ksuid">segmentio/ksuid</a></li>
       <li><a href="https://github.com/oklog/ulid">oklog/ulid</a></li>
     </ul>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        First use case is trace ID, or context aware ID
+      </h2>
       <a
         id="user-content-first-use-case-is-trace-id-or-context-aware-id"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: First use case is trace ID, or context aware ID"
         href="#first-use-case-is-trace-id-or-context-aware-id"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >First use case is trace ID, or context aware ID
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       The ID is used only for trace and log. If same ID is generated twice
       (because maybe the possibilty is too small but not 0), honestly I don't
@@ -76,16 +78,18 @@
       My choice for this use case is <strong>rs/xid</strong>. Because it is
       small (not span too much on log line) and copy friendly.
     </p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        Second use case is primary key, also hard choice
+      </h2>
       <a
         id="user-content-second-use-case-is-primary-key-also-hard-choice"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Second use case is primary key, also hard choice"
         href="#second-use-case-is-primary-key-also-hard-choice"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Second use case is primary key, also hard choice
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       Why I don't use auto increment key for primary key? The answer is simple,
       I don't want to write database specific SQL. SQLite has some different
@@ -101,30 +105,30 @@
       database is sensitive subject, and I need more testing and battle test
       proof to trust those libs.
     </p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">What else?</h2>
       <a
         id="user-content-what-else"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: What else?"
         href="#what-else"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >What else?
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <p>
       I think about adding prefix to ID to identify which resource that ID
       represents.
     </p>
-    <h2>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Thanks</h2>
       <a
         id="user-content-thanks"
-        class="anchor"
-        aria-hidden="true"
-        tabindex="-1"
+        class="anchor-element"
+        aria-label="Permalink: Thanks"
         href="#thanks"
-        ><span aria-hidden="true" class="octicon octicon-link"></span></a
-      >Thanks
-    </h2>
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <ul>
       <li>
         <a
