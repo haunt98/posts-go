@@ -15,6 +15,9 @@ Steps:
 
 - Generate HTML by running `make`
 
+I use
+[My fonts CSS](https://gist.github.com/haunt98/b2e40a3e4882e820a04816a7f1dc2358)
+
 ## Thanks
 
 - https://github.com/sindresorhus/github-markdown-css
