@@ -6,10 +6,10 @@ Each time I start a new Go project, I repeat many steps. Like set up
 So I decide to have a baseline Dockerfile like this:
 
 ```Dockerfile
-FROM golang:1.21-bookworm as builder
+FROM golang:1.22.0-bookworm as builder
 
-RUN go install golang.org/dl/go1.21@latest \
-    && go1.21 download
+RUN go install golang.org/dl/go1.22.0@latest \
+    && go1.22.0 download
 
 WORKDIR /build
 
@@ -43,15 +43,15 @@ Also, remember to match Distroless Debian version with Go official image Debian
 version.
 
 ```Dockerfile
-FROM golang:1.21-bookworm as builder
+FROM golang:1.22.0-bookworm as builder
 ```
 
 This is Go image I use as a build stage. This can be official Go image or custom
 image is required in some companies.
 
 ```Dockerfile
-RUN go install golang.org/dl/go1.21@latest \
-    && go1.21 download
+RUN go install golang.org/dl/go1.22.0@latest \
+    && go1.22.0 download
 ```
 
 This is optional. In my case, my company is slow to update Go image so I use
