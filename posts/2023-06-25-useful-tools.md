@@ -153,7 +153,6 @@ Misc
 - https://github.com/itchyny/gojq
 - https://github.com/ankitpokhrel/jira-cli
 - https://github.com/cli/cli
-- https://github.com/Textualize/toolong
 
 Memory
 
@@ -172,6 +171,7 @@ Memory
 - https://github.com/sdkman/sdkman-cli
 - https://github.com/antonmedv/fx
 - https://github.com/plantuml/plantuml
+- https://github.com/Textualize/toolong
 
 #### Go
 
