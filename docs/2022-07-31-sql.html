@@ -48,7 +48,7 @@
       <h1 class="heading-element">SQL</h1>
       <a
         id="user-content-sql"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: SQL"
         href="#sql"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -68,7 +68,7 @@
       <h2 class="heading-element">Stay away from database unique id</h2>
       <a
         id="user-content-stay-away-from-database-unique-id"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Stay away from database unique id"
         href="#stay-away-from-database-unique-id"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -82,7 +82,7 @@
       <h2 class="heading-element">Stay away from database timestamp</h2>
       <a
         id="user-content-stay-away-from-database-timestamp"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Stay away from database timestamp"
         href="#stay-away-from-database-timestamp"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -109,7 +109,7 @@
       <h2 class="heading-element">Extra field for extra things</h2>
       <a
         id="user-content-extra-field-for-extra-things"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Extra field for extra things"
         href="#extra-field-for-extra-things"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -146,7 +146,7 @@
       <h2 class="heading-element">Use index!!!</h2>
       <a
         id="user-content-use-index"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Use index!!!"
         href="#use-index"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -197,7 +197,7 @@
       <h2 class="heading-element">Be careful with UTF-8</h2>
       <a
         id="user-content-be-careful-with-utf-8"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Be careful with UTF-8"
         href="#be-careful-with-utf-8"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -216,7 +216,7 @@
       <h2 class="heading-element">Be careful with NULL</h2>
       <a
         id="user-content-be-careful-with-null"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Be careful with NULL"
         href="#be-careful-with-null"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -230,12 +230,12 @@
       <pre><span class="pl-c"><span class="pl-c">--</span> field_something can be NULL</span>
 
 <span class="pl-c"><span class="pl-c">--</span> Bad</span>
-SELECT <span class="pl-k">*</span>
+<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> table
 <span class="pl-k">WHERE</span> field_something <span class="pl-k">!=</span> <span class="pl-c1">1</span>
 
 <span class="pl-c"><span class="pl-c">--</span> Good</span>
-SELECT <span class="pl-k">*</span>
+<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> table
 <span class="pl-k">WHERE</span> (field_something IS <span class="pl-k">NULL</span> <span class="pl-k">OR</span> field_something <span class="pl-k">!=</span> <span class="pl-c1">1</span>)</pre>
     </div>
@@ -244,7 +244,7 @@ SELECT <span class="pl-k">*</span>
       <h2 class="heading-element"><code>VARCHAR</code> or <code>TEXT</code></h2>
       <a
         id="user-content-varchar-or-text"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: VARCHAR or TEXT"
         href="#varchar-or-text"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -259,7 +259,7 @@ SELECT <span class="pl-k">*</span>
       <h2 class="heading-element"><code>LIMIT</code></h2>
       <a
         id="user-content-limit"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: LIMIT"
         href="#limit"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -276,7 +276,7 @@ SELECT <span class="pl-k">*</span>
       </h2>
       <a
         id="user-content-be-super-careful-when-migrate-update-database-on-production-and-online"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Be super careful when migrate, update database on production and online!!!"
         href="#be-super-careful-when-migrate-update-database-on-production-and-online"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -317,7 +317,7 @@ SELECT <span class="pl-k">*</span>
       <h2 class="heading-element">Heathcheck</h2>
       <a
         id="user-content-heathcheck"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Heathcheck"
         href="#heathcheck"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -328,7 +328,7 @@ SELECT <span class="pl-k">*</span>
       <h2 class="heading-element">Tools</h2>
       <a
         id="user-content-tools"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Tools"
         href="#tools"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -349,7 +349,7 @@ SELECT <span class="pl-k">*</span>
       <h2 class="heading-element">Thanks</h2>
       <a
         id="user-content-thanks"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Thanks"
         href="#thanks"
         ><span aria-hidden="true" class="octicon octicon-link"></span

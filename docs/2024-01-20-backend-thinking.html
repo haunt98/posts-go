@@ -48,7 +48,7 @@
       <h1 class="heading-element">Backend Thinking</h1>
       <a
         id="user-content-backend-thinking"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Backend Thinking"
         href="#backend-thinking"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -58,7 +58,7 @@
       <h2 class="heading-element">Backend Role</h2>
       <a
         id="user-content-backend-role"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Backend Role"
         href="#backend-role"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -146,7 +146,7 @@
       <h2 class="heading-element">Technical side</h2>
       <a
         id="user-content-technical-side"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Technical side"
         href="#technical-side"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -158,7 +158,7 @@
       <h3 class="heading-element">API</h3>
       <a
         id="user-content-api"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: API"
         href="#api"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -220,7 +220,7 @@
       <h3 class="heading-element">Message Broker</h3>
       <a
         id="user-content-message-broker"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Message Broker"
         href="#message-broker"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -284,7 +284,7 @@
       <h3 class="heading-element">Tip</h3>
       <a
         id="user-content-tip"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Tip"
         href="#tip"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -316,7 +316,7 @@
       <h3 class="heading-element">References</h3>
       <a
         id="user-content-references"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: References"
         href="#references"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -353,7 +353,7 @@
       <h2 class="heading-element">Coding principle</h2>
       <a
         id="user-content-coding-principle"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Coding principle"
         href="#coding-principle"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -369,7 +369,7 @@
       <h3 class="heading-element">Write code that is easy delete</h3>
       <a
         id="user-content-write-code-that-is-easy-delete"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Write code that is easy delete"
         href="#write-code-that-is-easy-delete"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -428,7 +428,7 @@
       <h3 class="heading-element">Write code that is easy to test</h3>
       <a
         id="user-content-write-code-that-is-easy-to-test"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Write code that is easy to test"
         href="#write-code-that-is-easy-to-test"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -495,7 +495,7 @@
       <h3 class="heading-element">References</h3>
       <a
         id="user-content-references-1"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: References"
         href="#references-1"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -528,7 +528,7 @@
       <h2 class="heading-element">System Design Concept</h2>
       <a
         id="user-content-system-design-concept"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: System Design Concept"
         href="#system-design-concept"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -551,7 +551,7 @@
     
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">get (5ms)</span>
     <span class="pl-k">alt</span> <span class="pl-s">not exist in cache</span>
-        <span class="pl-s">service -&gt;&gt; database: get (100ms)</span>
+        <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">get (100ms)</span>
     <span class="pl-k">end</span></pre>
     </div>
     <p>
@@ -567,14 +567,14 @@
     <span class="pl-k">participant</span> <span class="pl-ent">cache</span>
     <span class="pl-k">participant</span> <span class="pl-ent">database</span>
     
-    <span class="pl-k">note over </span><span class="pl-ent">service</span><span class="pl-sg">,</span><span class="pl-ent">database</span>: <span class="pl-ent">Read Through</span>
+    <span class="pl-k">note over </span><span class="pl-ent">service</span><span class="pl-sg">,</span><span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">Read Through</span>
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">get</span>
     <span class="pl-k">alt</span> <span class="pl-s">not exist in cache</span>
-        <span class="pl-s">service -&gt;&gt; database: get</span>
-        <span class="pl-s">service -&gt;&gt; cache: set</span>
+        <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">get</span>
+        <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">set</span>
     <span class="pl-k">end</span>
 
-    <span class="pl-k">note over </span><span class="pl-ent">service</span><span class="pl-sg">,</span><span class="pl-ent">database</span>: <span class="pl-ent">Write Through</span>
+    <span class="pl-k">note over </span><span class="pl-ent">service</span><span class="pl-sg">,</span><span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">Write Through</span>
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">set</span>
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">set</span></pre>
     </div>
@@ -582,7 +582,7 @@
       <h3 class="heading-element">References</h3>
       <a
         id="user-content-references-2"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: References"
         href="#references-2"
         ><span aria-hidden="true" class="octicon octicon-link"></span
@@ -623,7 +623,7 @@
       <h2 class="heading-element">Bonus</h2>
       <a
         id="user-content-bonus"
-        class="anchor-element"
+        class="anchor"
         aria-label="Permalink: Bonus"
         href="#bonus"
         ><span aria-hidden="true" class="octicon octicon-link"></span
