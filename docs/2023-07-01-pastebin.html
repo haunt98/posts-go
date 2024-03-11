@@ -427,7 +427,15 @@ rsync -avzP src/ dst</pre>
 <span class="pl-k">from</span> history
 <span class="pl-k">where</span> id not <span class="pl-k">in</span> (<span class="pl-k">select</span> <span class="pl-c1">max</span>(id)
                  <span class="pl-k">from</span> history
-                 <span class="pl-k">group by</span> command);</pre>
+                 <span class="pl-k">group by</span> command);
+
+<span class="pl-k">delete</span>
+<span class="pl-k">from</span> history
+<span class="pl-k">where</span> length(command) <span class="pl-k">&gt;</span> <span class="pl-c1">128</span>;</pre>
+    </div>
+    <p>Remove shell history:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>cat /dev/null <span class="pl-k">&gt;</span> <span class="pl-k">~</span>/.zsh_history</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
