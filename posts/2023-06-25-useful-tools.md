@@ -10,6 +10,7 @@ This just a raw list.
   - https://github.com/romkatv/powerlevel10k
   - https://github.com/zsh-users/zsh-autosuggestions
 - https://github.com/junegunn/fzf
+  - https://github.com/Aloxaf/fzf-tab
 - https://github.com/folke/lazy.nvim
 
 - https://github.com/sharkdp/fd
