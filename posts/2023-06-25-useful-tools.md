@@ -102,7 +102,6 @@ Memory
 
 - https://theunarchiver.com/
 - https://github.com/iina/iina
-- https://github.com/linearmouse/linearmouse
 - https://github.com/rxhanson/Rectangle
 - https://github.com/waydabber/BetterDisplay
 - https://github.com/pedrommcarrasco/Brooklyn
@@ -115,6 +114,7 @@ Memory
 Memory
 
 - https://github.com/pilotmoon/Scroll-Reverser
+- https://github.com/linearmouse/linearmouse
 - https://www.tunabellysoftware.com/balance_lock/
 - https://github.com/tuyenvm/OpenKey
 - https://github.com/objective-see/LuLu
