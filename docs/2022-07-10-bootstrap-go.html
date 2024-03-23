@@ -342,7 +342,7 @@ internal
     <p>Example:</p>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-k">var</span> <span class="pl-s1">bufPool</span> <span class="pl-c1">=</span> sync.<span class="pl-smi">Pool</span>{
-	<span class="pl-c1">New</span>: <span class="pl-k">func</span>() <span class="pl-smi">any</span> {
+	<span class="pl-s1">New</span>: <span class="pl-k">func</span>() <span class="pl-smi">any</span> {
 		<span class="pl-k">return</span> <span class="pl-en">new</span>(bytes.<span class="pl-smi">Buffer</span>)
 	},
 }
@@ -388,13 +388,13 @@ internal
     </p>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-c">// Ptr takes in non-pointer and returns a pointer</span>
-<span class="pl-k">func</span> <span class="pl-s1">Ptr</span>[<span class="pl-s1">T</span> <span class="pl-en">any</span>](<span class="pl-s1">v</span> <span class="pl-smi">T</span>) <span class="pl-c1">*</span><span class="pl-smi">T</span> {
+<span class="pl-k">func</span> <span class="pl-en">Ptr</span>[<span class="pl-s1">T</span> <span class="pl-smi">any</span>](<span class="pl-s1">v</span> <span class="pl-smi">T</span>) <span class="pl-c1">*</span><span class="pl-smi">T</span> {
 	<span class="pl-k">return</span> <span class="pl-c1">&amp;</span><span class="pl-s1">v</span>
 }</pre>
     </div>
     <p>Return zero value:</p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">func</span> <span class="pl-en">Zero</span>[<span class="pl-s1">T</span> <span class="pl-s1">any</span>]() <span class="pl-smi">T</span> {
+      <pre><span class="pl-k">func</span> <span class="pl-en">Zero</span>[<span class="pl-s1">T</span> <span class="pl-smi">any</span>]() <span class="pl-smi">T</span> {
   <span class="pl-k">var</span> <span class="pl-s1">zero</span> <span class="pl-smi">T</span>
   <span class="pl-k">return</span> <span class="pl-s1">zero</span>
 }</pre>
@@ -879,7 +879,7 @@ internal
       <pre><span class="pl-k">type</span> <span class="pl-smi">Drink</span> <span class="pl-smi">int</span>
 
 <span class="pl-k">const</span> (
-	<span class="pl-s1">Beer</span> <span class="pl-smi">Drink</span> <span class="pl-c1">=</span> <span class="pl-s1">iota</span>
+	<span class="pl-s1">Beer</span> <span class="pl-smi">Drink</span> <span class="pl-c1">=</span> <span class="pl-c1">iota</span>
 	<span class="pl-s1">Water</span>
 	<span class="pl-s1">OrangeJuice</span>
 )</pre>

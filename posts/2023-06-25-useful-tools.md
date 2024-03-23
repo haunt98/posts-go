@@ -111,6 +111,7 @@ Memory
 - https://github.com/zed-industries/zed
 - https://github.com/lwouis/alt-tab-macos
 - https://github.com/pqrs-org/Karabiner-Elements
+- https://github.com/crystalidea/macs-fan-control
 
 Memory
 
@@ -131,6 +132,7 @@ Memory
 - https://github.com/Schniz/fnm
 - https://github.com/oven-sh/bun
 - https://github.com/denoland/deno
+- https://github.com/pyenv/pyenv
 - https://github.com/pypa/pipx
 - https://github.com/astral-sh/uv
 - https://github.com/corbindavenport/nexus-tools
