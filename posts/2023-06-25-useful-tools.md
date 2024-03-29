@@ -149,6 +149,7 @@ Language server
 
 - https://github.com/golang/tools/tree/master/gopls
 - https://github.com/Microsoft/pyright
+- https://github.com/artempyanykh/marksman
 
 Misc
 
