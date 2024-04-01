@@ -287,9 +287,18 @@ Clean up leftover data:
 
 - `~/Library/Application Support`
 - `/Library/Application Support`
+
 - `~/Library/LaunchAgents`
 - `/Library/LaunchAgents`
+
+- `/Library/LaunchDaemons`
+
+- `~/Library/Preferences`
+- `/Library/Preferences`
+
 - `~/Library/Fonts (Removed)`
+
+- `/Users/Shared`
 
 Clean up clipboard:
 
@@ -302,6 +311,7 @@ Thanks:
 - https://apple.stackexchange.com/a/466029
 - [Native fix for applications hiding under the MacBook Pro notch](https://flaky.build/native-fix-for-applications-hiding-under-the-macbook-pro-notch)
   - https://apple.stackexchange.com/q/406316
+- https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116
 
 ### Firefox
 
