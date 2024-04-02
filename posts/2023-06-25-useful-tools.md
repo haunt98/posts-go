@@ -27,7 +27,7 @@ This just a raw list.
 - https://github.com/restic/restic
 - https://github.com/ayoisaiah/f2
 
-- https://github.com/dbrgn/tealdeer
+- https://github.com/tldr-pages/tlrc
 - https://github.com/GothenburgBitFactory/taskwarrior
 - https://github.com/dundee/gdu
 - https://github.com/muesli/duf
@@ -49,6 +49,7 @@ Memory
 - https://github.com/junegunn/fzf-git.sh
 - https://github.com/ogham/exa
 - https://github.com/charmbracelet/glow
+- https://github.com/dbrgn/tealdeer
 
 For fun
 
