@@ -55,14 +55,13 @@ For fun
 
 - https://github.com/asciinema/asciinema
   - https://github.com/asciinema/agg
-- https://github.com/Gobidev/pfetch-rs
 - https://github.com/sxyazi/yazi
   - https://github.com/dirkvdb/ffmpegthumbnailer
-- https://github.com/Genymobile/scrcpy
 - https://github.com/libjxl/libjxl
 - https://github.com/yt-dlp/yt-dlp
 - https://github.com/talwat/pokeget-rs
 - https://github.com/newsboat/newsboat
+- https://github.com/orhun/daktilo
 
 Fun memory
 
@@ -70,14 +69,17 @@ Fun memory
 - https://github.com/aristocratos/btop
 - https://github.com/dylanaraps/neofetch
 - https://github.com/dylanaraps/pfetch
+- https://github.com/Gobidev/pfetch-rs
 - https://github.com/Dr-Noob/cpufetch
 - https://github.com/o2sh/onefetch
 - https://gitlab.com/jallbrit/cbonsai
 - https://github.com/ytdl-org/youtube-dl
 - https://github.com/instaloader/instaloader
 - https://gitlab.com/phoneybadger/pokemon-colorscripts
+- https://github.com/Genymobile/scrcpy
 - https://github.com/jarun/nnn
-  - https://github.com/ImageMagick/ImageMagick
+- https://github.com/ImageMagick/ImageMagick
+- https://github.com/bloznelis/kbt
 
 #### Windows
 
