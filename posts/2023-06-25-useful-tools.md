@@ -309,6 +309,8 @@ Clean up clipboard:
 pbcopy < /dev/null
 ```
 
+[Disable **Smart zoom** in **Track pad** settings to make right click instant](https://mastodon.online/@nikitonsky/112220593113484602)
+
 Thanks:
 
 - https://apple.stackexchange.com/a/466029
