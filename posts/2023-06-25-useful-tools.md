@@ -95,6 +95,7 @@ Fun memory
 - https://www.libreoffice.org/
 - https://github.com/johnfactotum/foliate
 - https://fbreader.org/
+- https://github.com/localsend/localsend
 
 Memory
 
