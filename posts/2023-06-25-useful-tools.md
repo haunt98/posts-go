@@ -163,6 +163,7 @@ Misc
 - https://github.com/ankitpokhrel/jira-cli
 - https://github.com/cli/cli
 - https://github.com/walles/moar
+- https://github.com/ollama/ollama
 
 Memory
 
