@@ -230,17 +230,7 @@ Memory
 
 ## Notes
 
-Prefer `nix`/`go`/`cargo`/`pipx` to MacPorts, HomeBrew
-
-Quirks:
-
-```sh
-# Add to ~/.zshrc
-# https://github.com/NixOS/nix/issues/3616
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
-```
+Prefer `go`/`cargo`/`pipx` to MacPorts, HomeBrew
 
 Don't install:
 
