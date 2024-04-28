@@ -54,11 +54,6 @@ Memory
 
 For fun
 
-- https://github.com/asciinema/asciinema
-  - https://github.com/asciinema/agg
-- https://github.com/sxyazi/yazi
-  - https://github.com/dirkvdb/ffmpegthumbnailer
-- https://github.com/libjxl/libjxl
 - https://github.com/yt-dlp/yt-dlp
 - https://github.com/talwat/pokeget-rs
 - https://github.com/newsboat/newsboat
@@ -78,8 +73,13 @@ Fun memory
 - https://github.com/instaloader/instaloader
 - https://gitlab.com/phoneybadger/pokemon-colorscripts
 - https://github.com/Genymobile/scrcpy
+- https://github.com/asciinema/asciinema
+  - https://github.com/asciinema/agg
+- https://github.com/sxyazi/yazi
+  - https://github.com/dirkvdb/ffmpegthumbnailer
 - https://github.com/jarun/nnn
 - https://github.com/ImageMagick/ImageMagick
+- https://github.com/libjxl/libjxl
 - https://github.com/bloznelis/kbt
 
 #### Windows
