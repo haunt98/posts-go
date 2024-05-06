@@ -25,7 +25,7 @@ related though.
 > So the principle is straightforward: Set the conditions of “yes” such that:
 >
 > - If they say “yes,” you’re happy because the terms or money are so good, it
-  > more than compensates for the distraction, perhaps funding the thing you
-  > really want to do.
+>   more than compensates for the distraction, perhaps funding the thing you
+>   really want to do.
 > - If they say “no,” you’re happy because it wasn’t a great fit anyway; it’s
-  > not a worthwhile return on your time and effort.
+>   not a worthwhile return on your time and effort.
