@@ -83,11 +83,11 @@ and I quote:
 > This is useful in multiple frequently recurring and important scenarios:
 >
 > - Handling of rollback/cleanup operations in the context of an event (e.g.,
-  > HTTP request) that has to continue regardless of whether the triggering
-  > event is canceled (e.g., due to timeout or the client going away)
+>   HTTP request) that has to continue regardless of whether the triggering
+>   event is canceled (e.g., due to timeout or the client going away)
 > - Handling of long-running operations triggered by an event (e.g., HTTP
-  > request) that terminates before the termination of the long-running
-  > operation
+>   request) that terminates before the termination of the long-running
+>   operation
 
 So beside waiting to upgrade to Go `1.21` to use `context.WithoutCancel`, you
 can use this [workaround code](https://pkg.go.dev/context@master#WithoutCancel):
