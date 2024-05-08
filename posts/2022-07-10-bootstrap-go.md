@@ -158,7 +158,7 @@ if err := eg.Wait(); err != nil {
 Please don't use external libs for WorkerPool, I don't want to deal with
 dependency hell.
 
-### Use [sync.Pool](https://pkg.go.dev/sync#Pool) when need to reuse object, mainly for `bytes.Buffer`
+### Use [sync.Pool](https://pkg.go.dev/sync#Pool) when need to re-use object, mainly for `bytes.Buffer`
 
 Example:
 
@@ -209,6 +209,22 @@ func Zero[T any]() T {
   return zero
 }
 ```
+
+### As go evolve, things should change
+
+Since go 1.21:
+
+- Use `slices.SortFunc` instead of `sort.Slice`.
+- Use `ctx.WithoutCancel` to disconnect context from parent.
+- Use `clear(m)` to clear map entirely.
+
+Since go 1.20:
+
+- Use `errors.Join` for multiple errors.
+
+Since go 1.18:
+
+- Use `any` instead of `interface{}`.
 
 ## External libs
 
@@ -325,7 +341,7 @@ But `database/sql` has its own limit. For example, it is hard to get primary key
 after insert/update. So may be you want to use ORM for those cases. I hear that
 [go-gorm/gorm](https://github.com/go-gorm/gorm) is good.
 
-### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis)
+### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis) or [redis/rueidis](https://github.com/redis/rueidis)
 
 Be careful when use [HGETALL](https://redis.io/commands/hgetall/). If key not
 found, empty data will be returned not nil error. See
@@ -471,6 +487,9 @@ No need to say more. Lint or get the f out!
 If you get `fieldalignment` error, use
 [fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment)
 to fix them.
+
+My heuristic for fieldalignment (not work all the time): pointer -> string ->
+[]byte -> int64 -> int32.
 
 ```sh
 # Install
