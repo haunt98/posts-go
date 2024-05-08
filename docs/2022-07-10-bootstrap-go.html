@@ -329,13 +329,13 @@ internal
       <h3 class="heading-element">
         Use
         <a href="https://pkg.go.dev/sync#Pool" rel="nofollow">sync.Pool</a> when
-        need to reuse object, mainly for <code>bytes.Buffer</code>
+        need to re-use object, mainly for <code>bytes.Buffer</code>
       </h3>
       <a
-        id="user-content-use-syncpool-when-need-to-reuse-object-mainly-for-bytesbuffer"
+        id="user-content-use-syncpool-when-need-to-re-use-object-mainly-for-bytesbuffer"
         class="anchor"
-        aria-label="Permalink: Use sync.Pool when need to reuse object, mainly for bytes.Buffer"
-        href="#use-syncpool-when-need-to-reuse-object-mainly-for-bytesbuffer"
+        aria-label="Permalink: Use sync.Pool when need to re-use object, mainly for bytes.Buffer"
+        href="#use-syncpool-when-need-to-re-use-object-mainly-for-bytesbuffer"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -399,6 +399,34 @@ internal
   <span class="pl-k">return</span> <span class="pl-s1">zero</span>
 }</pre>
     </div>
+    <div class="markdown-heading">
+      <h3 class="heading-element">As go evolve, things should change</h3>
+      <a
+        id="user-content-as-go-evolve-things-should-change"
+        class="anchor"
+        aria-label="Permalink: As go evolve, things should change"
+        href="#as-go-evolve-things-should-change"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>Since go 1.21:</p>
+    <ul>
+      <li>
+        Use <code>slices.SortFunc</code> instead of <code>sort.Slice</code>.
+      </li>
+      <li>
+        Use <code>ctx.WithoutCancel</code> to disconnect context from parent.
+      </li>
+      <li>Use <code>clear(m)</code> to clear map entirely.</li>
+    </ul>
+    <p>Since go 1.20:</p>
+    <ul>
+      <li>Use <code>errors.Join</code> for multiple errors.</li>
+    </ul>
+    <p>Since go 1.18:</p>
+    <ul>
+      <li>Use <code>any</code> instead of <code>interface{}</code>.</li>
+    </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">External libs</h2>
       <a
@@ -653,13 +681,14 @@ internal
     <div class="markdown-heading">
       <h3 class="heading-element">
         Connect Redis with
-        <a href="https://github.com/redis/go-redis">redis/go-redis</a>
+        <a href="https://github.com/redis/go-redis">redis/go-redis</a> or
+        <a href="https://github.com/redis/rueidis">redis/rueidis</a>
       </h3>
       <a
-        id="user-content-connect-redis-with-redisgo-redis"
+        id="user-content-connect-redis-with-redisgo-redis-or-redisrueidis"
         class="anchor"
-        aria-label="Permalink: Connect Redis with redis/go-redis"
-        href="#connect-redis-with-redisgo-redis"
+        aria-label="Permalink: Connect Redis with redis/go-redis or redis/rueidis"
+        href="#connect-redis-with-redisgo-redis-or-redisrueidis"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -951,6 +980,10 @@ stringer -type=Drink</pre>
         >fieldalignment</a
       >
       to fix them.
+    </p>
+    <p>
+      My heuristic for fieldalignment (not work all the time): pointer -&gt;
+      string -&gt; []byte -&gt; int64 -&gt; int32.
     </p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Install</span>
