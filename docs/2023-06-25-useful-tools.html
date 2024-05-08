@@ -1078,6 +1078,35 @@
       ></a>
     </div>
     <p>Don't enable plugin <code>git</code> in ohmyzsh.</p>
+    <p>Edit <code>~/.ssh/config</code></p>
+    <pre lang="ssh"><code>Host *
+    IdentitiesOnly yes
+    UseKeychain yes
+</code></pre>
+    <p>Thanks:</p>
+    <ul>
+      <li>
+        <a
+          href="https://tim.siosm.fr/blog/2023/01/13/openssh-key-management/"
+          rel="nofollow"
+          >OpenSSH client side key management for better privacy and security</a
+        >
+      </li>
+      <li>
+        <a href="https://stackoverflow.com/a/41576222" rel="nofollow"
+          >Git keeps asking me for my ssh key passphrase</a
+        >
+        <ul>
+          <li>
+            <a
+              href="https://developer.apple.com/library/archive/technotes/tn2449/_index.html"
+              rel="nofollow"
+              >OpenSSH updates in macOS 10.12.2</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
     <div class="markdown-heading">
       <h3 class="heading-element">macOS</h3>
       <a
@@ -1160,7 +1189,7 @@ defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
     <ul>
       <li>
         <a href="https://apple.stackexchange.com/a/466029" rel="nofollow"
-          >https://apple.stackexchange.com/a/466029</a
+          >Can Touch ID on Mac authenticate sudo in Terminal?</a
         >
       </li>
       <li>
@@ -1172,7 +1201,8 @@ defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
         <ul>
           <li>
             <a href="https://apple.stackexchange.com/q/406316" rel="nofollow"
-              >https://apple.stackexchange.com/q/406316</a
+              >Can the spacing of menu bar apps be modified in macOS Big Sur and
+              later?</a
             >
           </li>
         </ul>
@@ -1180,7 +1210,8 @@ defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
       <li>
         <a
           href="https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116"
-          >https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116</a
+          >How to fully uninstall Logitech G HUB on macOS via terminal/command
+          line</a
         >
       </li>
     </ul>

@@ -246,6 +246,20 @@ Don't install:
 
 Don't enable plugin `git` in ohmyzsh.
 
+Edit `~/.ssh/config`
+
+```ssh
+Host *
+    IdentitiesOnly yes
+    UseKeychain yes
+```
+
+Thanks:
+
+- [OpenSSH client side key management for better privacy and security](https://tim.siosm.fr/blog/2023/01/13/openssh-key-management/)
+- [Git keeps asking me for my ssh key passphrase](https://stackoverflow.com/a/41576222)
+  - [OpenSSH updates in macOS 10.12.2](https://developer.apple.com/library/archive/technotes/tn2449/_index.html)
+
 ### macOS
 
 Use Touch ID in Terminal:
@@ -307,10 +321,10 @@ pbcopy < /dev/null
 
 Thanks:
 
-- https://apple.stackexchange.com/a/466029
+- [Can Touch ID on Mac authenticate sudo in Terminal?](https://apple.stackexchange.com/a/466029)
 - [Native fix for applications hiding under the MacBook Pro notch](https://flaky.build/native-fix-for-applications-hiding-under-the-macbook-pro-notch)
-  - https://apple.stackexchange.com/q/406316
-- https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116
+  - [Can the spacing of menu bar apps be modified in macOS Big Sur and later?](https://apple.stackexchange.com/q/406316)
+- [How to fully uninstall Logitech G HUB on macOS via terminal/command line](https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116)
 
 ### Firefox
 
