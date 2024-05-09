@@ -167,20 +167,6 @@
       </li>
     </ul>
     <div class="markdown-heading">
-      <h2 class="heading-element">Fold</h2>
-      <a
-        id="user-content-fold"
-        class="anchor"
-        aria-label="Permalink: Fold"
-        href="#fold"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <ul>
-      <li><code>zR</code>: open all folds.</li>
-      <li><code>za</code>, <code>zA</code>: toggle fold</li>
-    </ul>
-    <div class="markdown-heading">
       <h2 class="heading-element">Keymap</h2>
       <a
         id="user-content-keymap"
@@ -207,6 +193,14 @@
         </p>
       </li>
       <li>
+        <p>Black hole register:</p>
+        <ul>
+          <li><code>&lt;Leader&gt;d</code>: <code>d</code> without yank</li>
+          <li><code>&lt;Leader&gt;c</code>: <code>c</code> without yank</li>
+          <li><code>&lt;Leader&gt;x</code>: <code>x</code> without yank</li>
+        </ul>
+      </li>
+      <li>
         <p>
           With
           <a href="https://github.com/ibhagwan/fzf-lua">ibhagwan/fzf-lua</a>:
@@ -215,6 +209,7 @@
           <li><code>&lt;Leader&gt;f</code>: find files</li>
           <li><code>&lt;Leader&gt;l</code>: find lines</li>
           <li><code>&lt;Leader&gt;rg</code>: grep files</li>
+          <li><code>&lt;Leader&gt;g</code>: git status</li>
           <li>
             With
             <a href="https://github.com/neovim/nvim-lspconfig"
@@ -222,12 +217,25 @@
             >
             helps:
             <ul>
-              <li><code>&lt;Space&gt;s</code>: find lsp symbols</li>
-              <li><code>&lt;Space&gt;d</code>: go to definition</li>
-              <li><code>&lt;Space&gt;r</code>: go to references</li>
-              <li><code>&lt;Space&gt;i</code>: go to implementation</li>
+              <li><code>&lt;Space&gt;s</code>: list lsp symbols</li>
+              <li>
+                <code>&lt;Space&gt;r</code>, <code>gr</code>: list references
+              </li>
+              <li>
+                <code>&lt;Space&gt;i</code>, <code>gi</code>: list
+                implementation
+              </li>
+              <li><code>&lt;Space&gt;ca</code>: list code action</li>
             </ul>
           </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          With <a href="https://github.com/ms-jpq/coq_nvim">ms-jpq/coq_nvim</a>:
+        </p>
+        <ul>
+          <li><code>&lt;C-Space&gt;</code>: trigger completion</li>
         </ul>
       </li>
       <li>
@@ -280,41 +288,10 @@
         </p>
         <ul>
           <li>
-            With mini-bracketed
-            <ul>
-              <li>
-                <code>[D</code>, <code>]D</code>, <code>[d</code>,
-                <code>]d</code>: diagnostic backward/forward
-              </li>
-              <li>
-                <code>[Q</code>, <code>]Q</code>, <code>[q</code>,
-                <code>]q</code>: quickfix backward/forward
-              </li>
-              <li>
-                <code>[T</code>, <code>]T</code>, <code>[t</code>,
-                <code>]t</code>: tree-sitter backward/forward
-                <ul>
-                  <li>
-                    Support more languages with
-                    <a href="https://github.com/nvim-treesitter/nvim-treesitter"
-                      >nvim-treesitter/nvim-treesitter</a
-                    >
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
             With mini-comment
             <ul>
               <li><code>gcc</code>: comment/uncomment current line</li>
               <li><code>gc</code>: comment/uncomment selected lines</li>
-            </ul>
-          </li>
-          <li>
-            With mini-completion
-            <ul>
-              <li><code>&lt;C-Space&gt;</code>: trigger completion</li>
             </ul>
           </li>
           <li>
@@ -330,17 +307,40 @@
       <li>
         <p>
           With
+          <a href="https://github.com/stevearc/conform.nvim"
+            >stevearc/conform.nvim</a
+          >:
+        </p>
+        <ul>
+          <li><code>&lt;Space&gt;f</code>: format code</li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          With
           <a href="https://github.com/neovim/nvim-lspconfig"
             >neovim/nvim-lspconfig</a
           >:
         </p>
         <ul>
-          <li><code>&lt;Space&gt;e</code>: float diagnostic</li>
-          <li><code>&lt;Space&gt;k</code>: hover</li>
+          <li><code>]d</code>, <code>[d</code>: next/previous diagnostic</li>
+          <li><code>&lt;Space&gt;e</code>: current diagnostic</li>
+          <li><code>&lt;Space&gt;lr</code>: restart lsp server</li>
+          <li><code>gd</code>: go to definition</li>
+          <li><code>&lt;Space&gt;k</code>, <code>gk</code>: hover</li>
           <li><code>&lt;F2&gt;</code>: rename</li>
-          <li><code>&lt;Space&gt;f</code>: format code</li>
-          <li><code>&lt;Space&gt;ca</code>: code action</li>
-          <li><code>&lt;Space&gt;ci</code>: organize imports</li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          With
+          <a href="https://github.com/github/copilot.vim">github/copilot.vim</a
+          >:
+        </p>
+        <ul>
+          <li>
+            <code>&lt;M-Right&gt;</code>: completion, replace <code>Tab</code>
+          </li>
         </ul>
       </li>
     </ul>
