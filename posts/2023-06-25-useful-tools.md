@@ -137,9 +137,9 @@ Memory
 - https://github.com/Schniz/fnm
 - https://github.com/oven-sh/bun
 - https://github.com/denoland/deno
-- https://github.com/pyenv/pyenv
-- https://github.com/pypa/pipx
+- https://github.com/astral-sh/rye
 - https://github.com/astral-sh/uv
+- https://github.com/astral-sh/ruff
 - https://github.com/corbindavenport/nexus-tools
 
 Format
@@ -148,7 +148,8 @@ Format
 - https://github.com/mvdan/sh
 - https://github.com/JohnnyMorganz/StyLua
 - https://github.com/tamasfe/taplo
-- https://github.com/astral-sh/ruff
+- https://github.com/pyenv/pyenv
+- https://github.com/pypa/pipx
 
 Language server
 
