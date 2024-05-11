@@ -1,5 +1,349 @@
 # CHANGELOG
 
+## v0.0.5 (2024-05-11)
+
+### Added
+
+- feat: use rye instead of pyenv, pipx (2024-05-11)
+
+- feat: rework nvim keymap (2024-05-10)
+
+- feat: more go (2024-05-09)
+
+- feat: add ssh config (2024-05-09)
+
+- feat: add my standard for choosing fonts (2024-05-07)
+
+- feat: remove taskwarrior (2024-05-01)
+
+- feat: add 0xPropo (2024-04-30)
+
+- feat: remove unused tools (2024-04-29)
+
+- feat: cleanup unused (2024-04-29)
+
+- feat: remove nix (sadly) (2024-04-28)
+
+- feat: add Gestalt from Timothy (2024-04-21)
+
+- feat: add ollama to useful tools (2024-04-21)
+
+- feat: add MQTTX (2024-04-21)
+
+- feat: add vscode logo (2024-04-21)
+
+- feat: update neovim logo (2024-04-21)
+
+- feat: more tips (2024-04-20)
+
+- feat: receive JTK Ride Space kit OK (2024-04-20)
+
+- feat: more fonts (2024-04-20)
+
+- feat: add more fonts (2024-04-16)
+
+- feat: more vim (2024-04-15)
+
+- feat: add markdown link check workflow (2024-04-15)
+
+- feat: add gitfast (2024-04-14)
+
+- feat: add LocalSend (2024-04-13)
+
+- feat: add tlrc (2024-04-02)
+
+- feat: clean up macos (2024-04-01)
+
+- feat: re-add gitui (2024-04-01)
+
+- feat: add marksman (2024-03-29)
+
+- feat: add milktooth docs (2024-03-29)
+
+- feat: more tools (2024-03-23)
+
+- feat: update fonts (2024-03-22)
+
+- feat: more neovim (2024-03-21)
+
+- feat: f2 conflict (2024-03-16)
+
+- feat: more quirks (2024-03-15)
+
+- feat: remove linearmouse (2024-03-15)
+
+- feat: more atuin tricks (2024-03-12)
+
+- feat: add moar, riff (2024-03-11)
+
+- feat: remove toolong (2024-03-08)
+
+- feat: update fonts css (2024-03-01)
+
+- feat: update go version to 1.22.0 (2024-03-01)
+
+- feat: add pyright (2024-02-29)
+
+- feat: update android (2024-02-26)
+
+- feat: more python (2024-02-22)
+
+- feat: more keeb (2024-02-22)
+
+- feat: more blogs (2024-02-22)
+
+- feat: add toolong (2024-02-20)
+
+- feat: add gmk mecha 01 (2024-02-20)
+
+- feat: remove fonts trendy (2024-02-19)
+
+- feat: no need plantuml local (2024-02-16)
+
+- feat: more go tools (2024-02-14)
+
+- feat: remove glow (2024-02-14)
+
+- feat: remove nnn (2024-02-14)
+
+- feat: replace nnn with yazi-fm (2024-02-14)
+
+- feat: more blogs (2024-02-13)
+
+- feat: macos tricks reduce padding (2024-02-12)
+
+- feat: add atuin sqlite tricks (2024-02-11)
+
+- Revert "feat: update neovim keybindings" (2024-02-10)
+
+- feat: add atuin (2024-02-10)
+
+- feat: update tools (2024-02-10)
+
+- feat: update neovim keybindings (2024-02-10)
+
+- feat: add zed settings (2024-02-09)
+
+- feat: update price (2024-02-04)
+
+- feat: new keeb price (2024-02-04)
+
+- feat: keeb price (2024-02-04)
+
+- feat: add keeb buy list (2024-01-31)
+
+- feat: add github gh cli (2024-01-31)
+
+- feat: add sd (2024-01-28)
+
+- feat: add xkcd (2024-01-26)
+
+- feat: make zed comeback (2024-01-25)
+
+- feat: finale (2024-01-25)
+
+- feat: more draft (2024-01-25)
+
+- feat: draft test (2024-01-24)
+
+- feat: draft testing (2024-01-24)
+
+- feat: draft be (2024-01-24)
+
+- feat: add bonus (2024-01-24)
+
+- feat: draft (2024-01-24)
+
+- feat: draft 3 (2024-01-24)
+
+- feat: draft 2 (2024-01-24)
+
+- feat: backend thinking (2024-01-22)
+
+- feat: backthink (2024-01-22)
+
+- feat: draft backend thinking (2024-01-21)
+
+- feat: more macos good (2024-01-20)
+
+- feat: more macos (2024-01-20)
+
+- feat: more fonts (2024-01-13)
+
+- feat: more tools (2024-01-12)
+
+- feat: more fonts (2024-01-07)
+
+- feat: gplx (2024-01-07)
+
+- feat: update keeb (2024-01-07)
+
+- feat: add cherry mx2a (2024-01-07)
+
+- feat: remove keeb (2024-01-07)
+
+- feat: more fonts (2024-01-07)
+
+- feat: remove bufls (2024-01-05)
+
+- feat: update fonts (2024-01-05)
+
+- feat: sql json (2024-01-03)
+
+- feat: remove xnview (2023-12-22)
+
+- feat: vietnam (2023-12-22)
+
+- feat: more tools (2023-12-21)
+
+- feat: more go tools (2023-12-21)
+
+- feat: bump github-markdown-css v5.5.0 (2023-12-21)
+
+- feat: more old fonts (2023-12-21)
+
+- feat: add jvns (2023-12-17)
+
+- feat: add curl author (2023-12-17)
+
+- feat: reset macos launchpad (2023-12-17)
+
+- feat: add klogg (2023-12-16)
+
+- feat: add debounce (wip) (2023-12-16)
+
+- feat: update android (2023-12-16)
+
+- feat: more blogs (2023-12-11)
+
+- feat: more games links (2023-12-10)
+
+- feat: aes-gcm (2023-12-09)
+
+- feat: re-add basic apple (2023-12-04)
+
+- feat: update swagger prettier (2023-12-01)
+
+- feat: more clean (2023-11-30)
+
+- feat: clean up (2023-11-30)
+
+- feat: add monaspace font (2023-11-20)
+
+- feat: re-gen all (2023-11-19)
+
+- feat(games): more goodies (2023-11-11)
+
+- feat(keeb): more sounds (2023-11-11)
+
+- feat(archlinux): handle pacdiff (2023-11-09)
+
+- feat(keeb): review sofle v2 (2023-11-08)
+
+- feat: add kbdfans 40s (2023-11-08)
+
+- feat: crypto aes (2023-11-08)
+
+- feat: add vanced microg (2023-11-06)
+
+- feat: add zoxide (2023-11-03)
+
+- feat(blog): update (2023-11-01)
+
+- feat: add orb (2023-10-31)
+
+- feat: replace exa with eza (2023-10-29)
+
+- feat: add nerd fonts (2023-10-29)
+
+- feat: add jira cli (2023-10-29)
+
+- feat: more blogs (2023-10-29)
+
+- feat: more blogs (2023-10-23)
+
+- feat: use zellij (2023-10-14)
+
+- feat: more blog (2023-10-13)
+
+### Others
+
+- build: bump go-github to v62 (2024-05-11)
+
+- chore: re-gen (2024-05-08)
+
+- build(deps): bump golang.org/x/oauth2 from 0.19.0 to 0.20.0 (#42) (2024-05-07)
+
+- config: improve the GitHub Actions workflow (2024-04-15)
+
+- Merge branch 'main' of https://github.com/haunt98/posts-go (2024-04-15)
+
+- config: disable smart zoom macos (2024-04-07)
+
+- chore: update unused (2024-04-07)
+
+- chore: clean up blogs (2024-04-05)
+
+- chore: cleanup blogs (2024-04-05)
+
+- Merge branch 'main' of https://github.com/haunt98/posts-go (2024-04-05)
+
+- chore: more blogs (2024-04-05)
+
+- chore: add monolisa (2024-03-27)
+
+- Merge branch 'main' of https://github.com/haunt98/posts-go (2024-03-15)
+
+- Merge branch 'main' of https://github.com/haunt98/posts-go (2024-03-08)
+
+- build: bump go-github to v60 (2024-03-01)
+
+- chore: close it (2024-02-22)
+
+- chore: disable go install (2024-02-10)
+
+- build(deps): bump golang.org/x/oauth2 from 0.16.0 to 0.17.0 (#36) (2024-02-10)
+
+- build: bump go-github v59 (2024-02-10)
+
+- build: bump github-markdow-css v5.5.1 (2024-02-04)
+
+- chore: update current (2024-01-25)
+
+- chore: move tailscale (2024-01-19)
+
+- chore: clean up tools (2024-01-17)
+
+- chore: more goodies (2024-01-16)
+
+- build: bump go-github v58 (2024-01-10)
+
+- Merge branch 'main' of https://github.com/haunt98/posts-go (2024-01-10)
+
+- chore: update fonts (2024-01-10)
+
+- Merge branch 'main' of https://github.com/haunt98/posts-go (2024-01-05)
+
+- build(deps): bump actions/setup-go from 4 to 5 (2023-12-07)
+
+- build: bump go-github v57 (2023-12-02)
+
+- chore: latest prettier (2023-12-01)
+
+- build(deps): bump golang.org/x/oauth2 from 0.14.0 to 0.15.0 (2023-11-28)
+
+- chore: more blogs (2023-11-09)
+
+- build(deps): bump golang.org/x/oauth2 from 0.13.0 to 0.14.0 (2023-11-09)
+
+- chore(keeb): clean up (2023-11-08)
+
+- build(deps): bump golang.org/x/sync from 0.4.0 to 0.5.0 (2023-11-07)
+
+- chore: add deno upgrade (2023-10-13)
+
+- chore(changelog): generate v0.0.4 (2023-10-12)
+
 ## v0.0.4 (2023-10-12)
 
 ### Added
