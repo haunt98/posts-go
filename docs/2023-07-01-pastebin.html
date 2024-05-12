@@ -451,95 +451,34 @@ rsync -avzP src/ dst</pre>
     </div>
     <p>Rename:</p>
     <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> If want dry run, remove -x</span>
-f2 -r <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}.{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> -F -x</pre>
+      <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> --fix-conflicts --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}{ext}<span class="pl-pds">"</span></span> --fix-conflicts --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
+f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
-        <a href="https://github.com/instaloader/instaloader">Instaloader</a>
+        <a href="https://github.com/libvips/libvips">libvips</a>
       </h2>
       <a
-        id="user-content-instaloader"
+        id="user-content-libvips"
         class="anchor"
-        aria-label="Permalink: Instaloader"
-        href="#instaloader"
+        aria-label="Permalink: libvips"
+        href="#libvips"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p><code>args.txt</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>
---no-video-thumbnails
---no-captions
---no-metadata-json
---stories
---fast-update
---sanitize-paths
---abort-on=302,400,429
---no-iphone</pre
-      >
-    </div>
-    <p><code>login.txt</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>
---login=your_insta_username
---sessionfile=where/sessionfile/store</pre
-      >
-    </div>
-    <p>Run:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>instaloader +login.txt +args.txt +targets.txt</pre>
-    </div>
-    <div class="markdown-heading">
-      <h2 class="heading-element">
-        <a href="https://github.com/fullstorydev/grpcurl">gRPCurl</a>
-      </h2>
-      <a
-        id="user-content-grpcurl"
-        class="anchor"
-        aria-label="Permalink: gRPCurl"
-        href="#grpcurl"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
+    <p>Convert:</p>
     <div class="highlight highlight-source-shell">
-      <pre>grpcurl -proto path/file.proto \
-    -d <span class="pl-s"><span class="pl-pds">'</span>{"key": "value", "timestamp": "1997-04-01T00:00:00Z"}<span class="pl-pds">'</span></span> \
-    internal-social.zalopay.vn:443 \
-    pkg.Service/GetData</pre>
-    </div>
-    <div class="markdown-heading">
-      <h2 class="heading-element">
-        <a href="https://github.com/zed-industries/zed">Zed</a>
-      </h2>
-      <a
-        id="user-content-zed"
-        class="anchor"
-        aria-label="Permalink: Zed"
-        href="#zed"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Settings:</p>
-    <div class="highlight highlight-source-json">
-      <pre>{
-  <span class="pl-ent">"telemetry"</span>: {
-    <span class="pl-ent">"diagnostics"</span>: <span class="pl-c1">false</span>,
-    <span class="pl-ent">"metrics"</span>: <span class="pl-c1">false</span>
-  },
-  <span class="pl-ent">"vim_mode"</span>: <span class="pl-c1">true</span>,
-  <span class="pl-ent">"language_overrides"</span>: {
-    <span class="pl-ent">"JSON"</span>: {
-      <span class="pl-ent">"format_on_save"</span>: <span class="pl-s"><span class="pl-pds">"</span>off<span class="pl-pds">"</span></span>,
-      <span class="pl-ent">"formatter"</span>: {
-        <span class="pl-ent">"external"</span>: {
-          <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>prettier<span class="pl-pds">"</span></span>,
-          <span class="pl-ent">"arguments"</span>: [<span class="pl-s"><span class="pl-pds">"</span>--stdin-filepath<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>{buffer_path}<span class="pl-pds">"</span></span>]
-        }
-      }
-    }
-  }
-}</pre>
+      <pre>vips jxlsave filename.jpg filename.jxl --keep=none
+
+<span class="pl-c"><span class="pl-c">#</span> Batch convert (require fd)</span>
+fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp<span class="pl-pds">"</span></span> --exec vips jxlsave {} {.}.jxl --keep=none
+fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp<span class="pl-pds">"</span></span> --exec-batch rm</pre>
     </div>
 
     <div>
