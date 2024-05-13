@@ -452,10 +452,10 @@ rsync -avzP src/ dst</pre>
     <p>Rename:</p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> --fix-conflicts --exec
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> --fix-conflicts --fix-conflicts-pattern <span class="pl-s"><span class="pl-pds">"</span>_%02d<span class="pl-pds">"</span></span> --exec
 
 <span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}{ext}<span class="pl-pds">"</span></span> --fix-conflicts --exec
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}{ext}<span class="pl-pds">"</span></span> --fix-conflicts --fix-conflicts-pattern <span class="pl-s"><span class="pl-pds">"</span>_%02d<span class="pl-pds">"</span></span> --exec
 
 <span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
 f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
@@ -474,11 +474,15 @@ f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">
     </div>
     <p>Convert:</p>
     <div class="highlight highlight-source-shell">
-      <pre>vips jxlsave filename.jpg filename.jxl --keep=none
+      <pre><span class="pl-c"><span class="pl-c">#</span> Add --vips-progress to show progress</span>
+vips jxlsave filename.jpg filename.jxl --keep=none
 
 <span class="pl-c"><span class="pl-c">#</span> Batch convert (require fd)</span>
 fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp<span class="pl-pds">"</span></span> --exec vips jxlsave {} {.}.jxl --keep=none
-fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp<span class="pl-pds">"</span></span> --exec-batch rm</pre>
+fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp<span class="pl-pds">"</span></span> --exec-batch rm
+
+<span class="pl-c"><span class="pl-c">#</span> Rotate</span>
+vips rot filename.jxl new_filename.jxl d90</pre>
     </div>
 
     <div>
