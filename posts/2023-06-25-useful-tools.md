@@ -161,9 +161,8 @@ Misc
 
 - https://github.com/mikefarah/yq
 - https://github.com/itchyny/gojq
-- https://github.com/ankitpokhrel/jira-cli
-- https://github.com/cli/cli
 - https://github.com/walles/moar
+- https://github.com/antonmedv/fx
 - https://github.com/ollama/ollama
 
 Memory
@@ -181,10 +180,11 @@ Memory
 - https://github.com/fullstorydev/grpcurl
 - https://github.com/bufbuild/buf-language-server
 - https://github.com/sdkman/sdkman-cli
-- https://github.com/antonmedv/fx
 - https://github.com/plantuml/plantuml
 - https://github.com/Textualize/toolong
 - https://github.com/walles/riff
+- https://github.com/cli/cli
+- https://github.com/ankitpokhrel/jira-cli
 
 #### Go
 
