@@ -348,7 +348,7 @@ Thanks:
 - Experiment
   - `image.jxl.enabled`: true
 
-## Thanks
+Thanks:
 
 - [My list of useful command line tools](https://boyter.org/posts/my-list-of-useful-command-line-tools/)
 - [Useful Customizations for Firefox](http://www.quippd.com/firefox/wiki/useful-customizations/)
