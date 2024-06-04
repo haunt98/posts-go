@@ -452,10 +452,13 @@ rsync -avzP src/ dst</pre>
     <p>Rename:</p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> --fix-conflicts --fix-conflicts-pattern <span class="pl-s"><span class="pl-pds">"</span>_%02d<span class="pl-pds">"</span></span> --exec
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
 
 <span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}{ext}<span class="pl-pds">"</span></span> --fix-conflicts --fix-conflicts-pattern <span class="pl-s"><span class="pl-pds">"</span>_%02d<span class="pl-pds">"</span></span> --exec
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Not include time</span>
+f2 --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
 
 <span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
 f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
