@@ -96,13 +96,13 @@ Fun memory
 - https://www.libreoffice.org/
 - https://github.com/johnfactotum/foliate
 - https://fbreader.org/
+- https://tailscale.com/
 - https://github.com/localsend/localsend
 
 Memory
 
 - https://github.com/alacritty/alacritty
 - https://www.xnview.com/en/xnviewmp/
-- https://tailscale.com/
 
 #### macOS
 
@@ -112,6 +112,7 @@ Memory
 - https://github.com/waydabber/BetterDisplay
 - https://github.com/lwouis/alt-tab-macos
 - https://github.com/pqrs-org/Karabiner-Elements
+- https://github.com/coteditor/CotEditor
 - https://github.com/crystalidea/macs-fan-control
 
 Memory
@@ -125,7 +126,6 @@ Memory
 - https://github.com/alin23/Lunar
 - https://github.com/pedrommcarrasco/Brooklyn
 - https://github.com/ganeshrvel/openmtp
-- https://github.com/coteditor/CotEditor
 - https://github.com/zed-industries/zed
 - https://github.com/CodeEditApp/CodeEdit
 - https://github.com/Ranchero-Software/NetNewsWire
