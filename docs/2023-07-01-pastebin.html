@@ -458,7 +458,7 @@ f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.
 f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
 
 <span class="pl-c"><span class="pl-c">#</span> Not include time</span>
-f2 --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+f2 --exclude=<span class="pl-s"><span class="pl-pds">"</span>\d+x\d+_[a-z\d]{32}<span class="pl-pds">"</span></span> --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
 
 <span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
 f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
