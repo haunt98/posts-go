@@ -29,13 +29,10 @@ This just a raw list.
 - https://github.com/ayoisaiah/f2
 
 - https://github.com/tldr-pages/tlrc
-- https://github.com/dundee/gdu
-- https://github.com/muesli/duf
 - https://github.com/sharkdp/vivid
 - https://github.com/zellij-org/zellij
 - https://github.com/ajeetdsouza/zoxide
 - https://github.com/atuinsh/atuin
-- https://github.com/extrawurst/gitui
 
 Memory
 
@@ -44,7 +41,10 @@ Memory
 - https://github.com/wbthomason/packer.nvim
 - https://github.com/so-fancy/diff-so-fancy
 - https://github.com/jonas/tig
+- https://github.com/extrawurst/gitui
 - https://dev.yorhel.nl/ncdu
+- https://github.com/dundee/gdu
+- https://github.com/muesli/duf
 - https://github.com/wustho/epr
 - https://github.com/junegunn/fzf-git.sh
 - https://github.com/ogham/exa
@@ -58,6 +58,7 @@ For fun
 - https://github.com/talwat/pokeget-rs
 - https://github.com/newsboat/newsboat
 - https://github.com/orhun/daktilo
+- https://github.com/libvips/libvips
 
 Fun memory
 
@@ -164,6 +165,7 @@ Misc
 - https://github.com/itchyny/gojq
 - https://github.com/walles/moar
 - https://github.com/antonmedv/fx
+- https://github.com/asciidoctor/asciidoctor
 - https://github.com/ollama/ollama
 - https://github.com/gitleaks/gitleaks
 
