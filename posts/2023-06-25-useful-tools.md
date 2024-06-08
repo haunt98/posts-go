@@ -114,6 +114,7 @@ Memory
 - https://github.com/pqrs-org/Karabiner-Elements
 - https://github.com/coteditor/CotEditor
 - https://github.com/crystalidea/macs-fan-control
+- https://github.com/jordanbaird/Ice
 
 Memory
 
