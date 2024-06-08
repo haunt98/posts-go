@@ -165,6 +165,7 @@ Misc
 - https://github.com/walles/moar
 - https://github.com/antonmedv/fx
 - https://github.com/ollama/ollama
+- https://github.com/gitleaks/gitleaks
 
 Memory
 
