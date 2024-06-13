@@ -32,7 +32,6 @@ This just a raw list.
 - https://github.com/sharkdp/vivid
 - https://github.com/zellij-org/zellij
 - https://github.com/ajeetdsouza/zoxide
-- https://github.com/atuinsh/atuin
 
 Memory
 
@@ -51,6 +50,7 @@ Memory
 - https://github.com/charmbracelet/glow
 - https://github.com/dbrgn/tealdeer
 - https://github.com/GothenburgBitFactory/taskwarrior
+- https://github.com/atuinsh/atuin
 
 For fun
 
