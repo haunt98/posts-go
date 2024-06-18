@@ -45,6 +45,7 @@ format-html:
 	deno fmt ./posts
 
 srht:
+	$(MAKE) all
 	# https://srht.site/quickstart
 	# go install git.sr.ht/~emersion/hut@latest
 	tar -C docs -cvz . > site.tar.gz
