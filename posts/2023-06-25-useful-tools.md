@@ -150,6 +150,7 @@ Format
 - https://github.com/mvdan/sh
 - https://github.com/JohnnyMorganz/StyLua
 - https://github.com/tamasfe/taplo
+- https://github.com/sqlfluff/sqlfluff
 
 Language server
 
