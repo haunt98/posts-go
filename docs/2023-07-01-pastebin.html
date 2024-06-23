@@ -451,10 +451,14 @@ f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Add --vips-progress to show progress</span>
 vips jxlsave filename.jpg filename.jxl --keep=none
+vips jpegsave filename.png filename.jpg --keep=none
 
 <span class="pl-c"><span class="pl-c">#</span> Batch convert (require fd)</span>
-fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp<span class="pl-pds">"</span></span> --exec vips jxlsave {} {.}.jxl --keep=none
-fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp<span class="pl-pds">"</span></span> --exec-batch rm
+fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp|gif<span class="pl-pds">"</span></span> --exec vips jxlsave {} {.}.jxl --keep=none
+fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp|gif<span class="pl-pds">"</span></span> --exec-batch rm
+
+fd <span class="pl-s"><span class="pl-pds">"</span>png|webp|gif<span class="pl-pds">"</span></span> --exec vips jpegsave {} {.}.jpg --keep=none
+fd <span class="pl-s"><span class="pl-pds">"</span>png|webp|gif<span class="pl-pds">"</span></span> --exec-batch rm
 
 <span class="pl-c"><span class="pl-c">#</span> Rotate</span>
 vips rot filename.jxl new_filename.jxl d90</pre>
