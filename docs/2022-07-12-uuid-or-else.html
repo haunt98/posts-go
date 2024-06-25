@@ -112,15 +112,15 @@
       syntax from MySQL, and PostgreSQL and so on. Every logic I can move to
       application layer from database layer, I will.
     </p>
-    <p>
-      In the past and present, I use <strong>google/uuid</strong>, specificially
-      I use UUID v4. In the future I will look to use
-      <strong>segmentio/ksuid</strong> and <strong>oklog/ulid</strong> (trial
-      and error of course). Both are sortable, but
-      <strong>google/uuid</strong> is not. The reason I'm afraid because the
-      database is sensitive subject, and I need more testing and battle test
-      proof to trust those libs.
-    </p>
+    <p>The ID must be sortable (because index) and unique.</p>
+    <p>I have 3 choices:</p>
+    <ul>
+      <li><strong>google/uuid</strong>: use UUID v7 not v4.</li>
+      <li>
+        <strong>segmentio/ksuid</strong>: handle error if you don't want panic.
+      </li>
+      <li><strong>oklog/ulid</strong>: don't use yet.</li>
+    </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">What else?</h2>
       <a
@@ -135,6 +135,7 @@
       I think about adding prefix to ID to identify which resource that ID
       represents.
     </p>
+    <p>For example: <code>user:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</code>.</p>
     <div class="markdown-heading">
       <h2 class="heading-element">Thanks</h2>
       <a
@@ -147,41 +148,67 @@
     </div>
     <ul>
       <li>
-        <a
-          href="https://www.cybertec-postgresql.com/en/uuid-serial-or-identity-columns-for-postgresql-auto-generated-primary-keys/"
-          rel="nofollow"
-          >UUID, SERIAL OR IDENTITY COLUMNS FOR POSTGRESQL AUTO-GENERATED
-          PRIMARY KEYS?</a
-        >
+        <p>
+          <a href="https://datatracker.ietf.org/doc/html/rfc9562" rel="nofollow"
+            >Universally Unique IDentifiers (UUIDs)</a
+          >
+        </p>
       </li>
       <li>
-        <a href="https://brandur.org/nanoglyphs/026-ids" rel="nofollow"
-          >Identity Crisis: Sequence v. UUID as Primary Key</a
-        >
+        <p>
+          <a href="https://0pointer.net/blog/projects/ids.html" rel="nofollow"
+            >On IDs</a
+          >
+        </p>
       </li>
       <li>
-        <a
-          href="https://blog.kowalczyk.info/article/JyRZ/generating-good-unique-ids-in-go.html"
-          rel="nofollow"
-          >Generating good unique ids in Go</a
-        >
+        <p>
+          <a
+            href="https://www.cybertec-postgresql.com/en/uuid-serial-or-identity-columns-for-postgresql-auto-generated-primary-keys/"
+            rel="nofollow"
+            >UUID, SERIAL OR IDENTITY COLUMNS FOR POSTGRESQL AUTO-GENERATED
+            PRIMARY KEYS?</a
+          >
+        </p>
       </li>
       <li>
-        <a
-          href="https://encore.dev/blog/go-1.18-generic-identifiers"
-          rel="nofollow"
-          >How we used Go 1.18 when designing our Identifiers</a
-        >
+        <p>
+          <a href="https://brandur.org/nanoglyphs/026-ids" rel="nofollow"
+            >Identity Crisis: Sequence v. UUID as Primary Key</a
+          >
+        </p>
       </li>
       <li>
-        <a href="https://blog.daveallie.com/ulid-primary-keys" rel="nofollow"
-          >ULIDs and Primary Keys</a
-        >
+        <p>
+          <a
+            href="https://blog.kowalczyk.info/article/JyRZ/generating-good-unique-ids-in-go.html"
+            rel="nofollow"
+            >Generating good unique ids in Go</a
+          >
+        </p>
       </li>
       <li>
-        <a href="https://0pointer.net/blog/projects/ids.html" rel="nofollow"
-          >On IDs</a
-        >
+        <p>
+          <a
+            href="https://encore.dev/blog/go-1.18-generic-identifiers"
+            rel="nofollow"
+            >How we used Go 1.18 when designing our Identifiers</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://blog.daveallie.com/ulid-primary-keys" rel="nofollow"
+            >ULIDs and Primary Keys</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://antonz.org/uuidv7/" rel="nofollow"
+            >UUIDv7 in 32 languages</a
+          >
+        </p>
       </li>
     </ul>
 

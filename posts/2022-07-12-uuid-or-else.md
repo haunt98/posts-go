@@ -31,21 +31,28 @@ don't want to write database specific SQL. SQLite has some different syntax from
 MySQL, and PostgreSQL and so on. Every logic I can move to application layer
 from database layer, I will.
 
-In the past and present, I use **google/uuid**, specificially I use UUID v4. In
-the future I will look to use **segmentio/ksuid** and **oklog/ulid** (trial and
-error of course). Both are sortable, but **google/uuid** is not. The reason I'm
-afraid because the database is sensitive subject, and I need more testing and
-battle test proof to trust those libs.
+The ID must be sortable (because index) and unique.
+
+I have 3 choices:
+
+- **google/uuid**: use UUID v7 not v4.
+- **segmentio/ksuid**: handle error if you don't want panic.
+- **oklog/ulid**: don't use yet.
 
 ## What else?
 
 I think about adding prefix to ID to identify which resource that ID represents.
 
+For example: `user:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`.
+
 ## Thanks
+
+- [Universally Unique IDentifiers (UUIDs)](https://datatracker.ietf.org/doc/html/rfc9562)
+- [On IDs](https://0pointer.net/blog/projects/ids.html)
 
 - [UUID, SERIAL OR IDENTITY COLUMNS FOR POSTGRESQL AUTO-GENERATED PRIMARY KEYS?](https://www.cybertec-postgresql.com/en/uuid-serial-or-identity-columns-for-postgresql-auto-generated-primary-keys/)
 - [Identity Crisis: Sequence v. UUID as Primary Key](https://brandur.org/nanoglyphs/026-ids)
 - [Generating good unique ids in Go](https://blog.kowalczyk.info/article/JyRZ/generating-good-unique-ids-in-go.html)
 - [How we used Go 1.18 when designing our Identifiers](https://encore.dev/blog/go-1.18-generic-identifiers)
 - [ULIDs and Primary Keys](https://blog.daveallie.com/ulid-primary-keys)
-- [On IDs](https://0pointer.net/blog/projects/ids.html)
+- [UUIDv7 in 32 languages](https://antonz.org/uuidv7/)
