@@ -112,14 +112,15 @@ Memory
 - https://github.com/rxhanson/Rectangle
 - https://github.com/waydabber/BetterDisplay
 - https://github.com/lwouis/alt-tab-macos
+- https://github.com/pilotmoon/Scroll-Reverser
 - https://github.com/pqrs-org/Karabiner-Elements
 - https://github.com/coteditor/CotEditor
 - https://github.com/crystalidea/macs-fan-control
 - https://github.com/jordanbaird/Ice
+- https://github.com/zed-industries/zed
 
 Memory
 
-- https://github.com/pilotmoon/Scroll-Reverser
 - https://github.com/linearmouse/linearmouse
 - https://www.tunabellysoftware.com/balance_lock/
 - https://github.com/tuyenvm/OpenKey
@@ -128,7 +129,6 @@ Memory
 - https://github.com/alin23/Lunar
 - https://github.com/pedrommcarrasco/Brooklyn
 - https://github.com/ganeshrvel/openmtp
-- https://github.com/zed-industries/zed
 - https://github.com/CodeEditApp/CodeEdit
 - https://github.com/Ranchero-Software/NetNewsWire
 
