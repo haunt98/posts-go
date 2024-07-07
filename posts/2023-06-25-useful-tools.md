@@ -151,6 +151,7 @@ Format
 - https://github.com/JohnnyMorganz/StyLua
 - https://github.com/tamasfe/taplo
 - https://github.com/sqlfluff/sqlfluff
+- https://github.com/crate-ci/typos
 
 Language server
 
