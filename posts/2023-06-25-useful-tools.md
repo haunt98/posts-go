@@ -27,6 +27,7 @@ This just a raw list.
 - https://github.com/rclone/rclone
 - https://github.com/restic/restic
 - https://github.com/ayoisaiah/f2
+- https://github.com/Debian/wcurl
 
 - https://github.com/tldr-pages/tlrc
 - https://github.com/sharkdp/vivid
@@ -99,6 +100,7 @@ Fun memory
 - https://fbreader.org/
 - https://tailscale.com/
 - https://github.com/localsend/localsend
+- https://github.com/ahrm/sioyek
 
 Memory
 
