@@ -369,6 +369,10 @@ Color
 ParallelDownloads
 ```
 
+```sh
+systemctl enable paccache.timer
+```
+
 ### [Pipewire](https://wiki.archlinux.org/title/PipeWire)
 
 ```sh
@@ -421,6 +425,15 @@ Do it at your own risk!!!
 - https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave
 - https://github.com/AdnanHodzic/auto-cpufreq
 - https://github.com/nbfc-linux/nbfc-linux
+
+## Maintenance
+
+See
+[pacman/Tips and tricks](https://wiki.archlinux.org/title/Pacman/Tips_and_tricks)
+
+```sh
+sudo pacman -Syu
+```
 
 ## In the end
 
