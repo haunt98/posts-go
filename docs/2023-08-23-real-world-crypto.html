@@ -123,12 +123,12 @@
         <strong>counter</strong> as mac(secret_key, counter, alice).
       </li>
       <li>
-        Verify must be done in <strong>constant time</strong>: if not, probaly
+        Verify must be done in <strong>constant time</strong>: if not, probably
         return error the moment the bytes differ -&gt; attacker recreate byte by
         byte by measuring how long -&gt; timing attacks
       </li>
     </ul>
-    <p>Constant time comparision:</p>
+    <p>Constant time comparison:</p>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">:=</span> <span class="pl-c1">0</span>; <span class="pl-s1">i</span> <span class="pl-c1">&lt;</span> <span class="pl-en">len</span>(<span class="pl-s1">x</span>); <span class="pl-s1">i</span><span class="pl-c1">++</span> {
     <span class="pl-c">// Use XOR instead of compare x[i] == y[i]</span>

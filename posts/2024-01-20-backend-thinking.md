@@ -101,7 +101,7 @@ Bn, this is so depressed to continue.
 
 Message Broker is a way to detach B from A.
 
-Dumb exaplain be like: each time A do something, A produces message to Message
+Dumb explain be like: each time A do something, A produces message to Message
 Broker, than A forgets about it. Then all B1, B2 can consume A's message if they
 want and do something with it, A does not know and does not need to know about
 it.
@@ -154,8 +154,8 @@ sequenceDiagram
   hacker computer. (Actually we can but this is out of scope, and require lots
   of advance work)
 - Don't delete/rename/change old fields because you want and you can, please
-  think it through before do it. Because back compability is very hard, old apps
-  should continue to function if user don't upgrade. Even if we rollout new
+  think it through before do it. Because back compatibility is very hard, old
+  apps should continue to function if user don't upgrade. Even if we rollout new
   version, it takes time.
 
 **Pro tip**: Use proto to define models (if you can) to take advantage of

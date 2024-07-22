@@ -12,7 +12,7 @@ coverage, with minimum effort as possible, I hope this will show you some idea
 you can use :)
 
 In my opinion, unit test is not that important (like must must have). It's just
-make sure your code is running excatly as you intent it to be. If you don't
+make sure your code is running exactly as you intent it to be. If you don't
 think about edge case before, unit test won't help you.
 
 ## First, rewrite the impossible (to test) out
@@ -138,7 +138,7 @@ Looks good right? Be careful with this. It can go from 0 to 100 ugly real quick.
 What if req is a struct with many fields? So in each test case you need to set
 up req. They are almost the same, but with some error case you must alter req.
 It's easy to be init with wrong value here (typing maybe ?). Also all req looks
-similiar, kinda duplicated.
+similar, kinda duplicated.
 
 ```go
 tests := []struct{
