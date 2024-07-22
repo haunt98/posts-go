@@ -23,7 +23,9 @@ lsblk
 Check UEFI mode:
 
 ```sh
-ls /sys/firmware/efi/efivars
+cat /sys/firmware/efi/fw_platform_size
+# 64 or 32 is UEFI
+# File not found is BIOS
 ```
 
 #### Connect to the internet
@@ -38,27 +40,28 @@ For wifi, use [iwd](https://wiki.archlinux.org/index.php/Iwd).
 cgdisk /dev/sdx
 ```
 
-[Partition scheme](https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme)
+- [Partition scheme](https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme)
+- [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition)
 
 UEFI/GPT layout:
 
-| Mount point | Partition                             | Partition type                 | Suggested size |
-| ----------- | ------------------------------------- | ------------------------------ | -------------- |
-| `/mnt/efi`  | `/dev/efi_system_partition`           | EFI System Partition           | 512 MiB        |
-| `/mnt/boot` | `/dev/extended_boot_loader_partition` | Extended Boot Loader Partition | 1 GiB          |
-| `/mnt`      | `/dev/root_partition`                 | Root Partition                 |                |
+| Mount point | Partition                             | Partition type                            | Suggested size | gdisk code |
+| ----------- | ------------------------------------- | ----------------------------------------- | -------------- | ---------- |
+| `/mnt/efi`  | `/dev/efi_system_partition`           | EFI System Partition                      | 512 MiB        | EF00       |
+| `/mnt/boot` | `/dev/extended_boot_loader_partition` | Extended Boot Loader Partition (XBOOTLDR) | 1 GiB          | EA00       |
+| `/mnt`      | `/dev/root_partition`                 | Root Partition                            |                | 8300       |
 
 Why not `/boot/efi`? See
 [Lennart Poettering comment](https://github.com/systemd/systemd/pull/3757#issuecomment-234290236).
 
 BIOS/GPT layout:
 
-| Mount point | Partition             | Partition type      | Suggested size |
-| ----------- | --------------------- | ------------------- | -------------- |
-|             |                       | BIOS boot partition | 1 MiB          |
-| `/mnt`      | `/dev/root_partition` | Root Partition      |                |
+| Mount point | Partition             | Partition type      | Suggested size | gdisk code |
+| ----------- | --------------------- | ------------------- | -------------- | ---------- |
+|             |                       | BIOS boot partition | 1 MiB          | EF02       |
+| `/mnt`      | `/dev/root_partition` | Root Partition      |                | 8300       |
 
-LVM:
+LVM (optional):
 
 ```sh
 # Create physical volumes
@@ -83,10 +86,10 @@ mkfs.fat -F32 /dev/extended_boot_loader_partition
 # root
 mkfs.ext4 -L ROOT /dev/root_partition
 
-# root with btrfs
+# root with btrfs (optional)
 mkfs.btrfs -L ROOT /dev/root_partition
 
-# root on lvm
+# root on lvm (optional)
 mkfs.ext4 /dev/RootGroup/rootvol
 ```
 
@@ -96,10 +99,10 @@ Mount:
 # root
 mount /dev/root_partition /mnt
 
-# root with btrfs
+# root with btrfs (optional)
 mount -o compress=zstd /dev/root_partition /mnt
 
-# root on lvm
+# root on lvm (optional)
 mount /dev/RootGroup/rootvol /mnt
 
 # efi
@@ -111,19 +114,22 @@ mount --mkdir /dev/extended_boot_loader_partition /mnt/boot
 
 ### Installation
 
+Please check [Mirrors](https://wiki.archlinux.org/title/Mirrors) if you have
+slow Internet.
+
 ```sh
 pacstrap -K /mnt base linux linux-firmware
 
-# AMD
+# AMD (optional)
 pacstrap -K /mnt amd-ucode
 
-# Intel
+# Intel (optional)
 pacstrap -K /mnt intel-ucode
 
-# Btrfs
+# Btrfs (optional)
 pacstrap -K /mnt btrfs-progs
 
-# LVM
+# LVM (optional)
 pacstrap -K /mnt lvm2
 
 # Text editor
@@ -147,6 +153,7 @@ arch-chroot /mnt
 #### Time zone
 
 ```sh
+# Change Region/City to your location
 ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 
 hwclock --systohc
@@ -154,11 +161,8 @@ hwclock --systohc
 
 #### Localization:
 
-Edit `/etc/locale.gen`:
-
-```txt
-# Uncomment en_US.UTF-8 UTF-8
-```
+Edit `/etc/locale.gen` then uncomment `# en_US.UTF-8 UTF-8` by removing `#` at
+the beginning.
 
 Generate locales:
 
@@ -185,12 +189,12 @@ myhostname
 Edit `/etc/mkinitcpio.conf`:
 
 ```txt
-# LVM
+# LVM (optional)
 # https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks
-HOOKS=(base udev ... block lvm2 filesystems)
-
 # https://wiki.archlinux.org/title/mkinitcpio#Common_hooks
 # Replace udev with systemd
+# Add lvm2 between block and filesystems
+HOOKS=(base systemd ... block lvm2 filesystems)
 ```
 
 ```sh
@@ -203,28 +207,12 @@ mkinitcpio -P
 passwd
 ```
 
-#### Addition
-
-##### [NetworkManager (WIP)](https://wiki.archlinux.org/title/NetworkManager)
+#### [NetworkManager](https://wiki.archlinux.org/title/NetworkManager)
 
 ```sh
 pacman -Syu networkmanager dhcpcd iwd
 systemctl enable NetworkManager.service
 systemctl enable systemd-resolved.service
-```
-
-Edit `/etc/NetworkManager/conf.d/dns.conf`:
-
-```txt
-[main]
-dns=systemd-resolved
-```
-
-Edit `/etc/NetworkManager/conf.d/dhcp-client.conf`:
-
-```txt
-[main]
-dhcp=dhcpcd
 ```
 
 Edit `/etc/NetworkManager/conf.d/wifi_backend.conf`:
@@ -234,31 +222,26 @@ Edit `/etc/NetworkManager/conf.d/wifi_backend.conf`:
 wifi.backend=iwd
 ```
 
-See [dhcpcd](https://wiki.archlinux.org/title/Dhcpcd)
-
-Append `/etc/dhcpcd.conf`
-
-```txt
-noarp
-nohook resolv.conf
-```
-
-##### Bluetooth
+#### [Bluetooth](https://wiki.archlinux.org/title/Bluetooth)
 
 ```sh
 pacman -Syu bluez
 systemctl enable bluetooth.service
 ```
 
-##### Clock
+#### Clock
+
+Use [systemd-timesyncd](https://wiki.archlinux.org/title/Systemd-timesyncd)
 
 ```sh
 timedatectl set-ntp true
+
+timedatectl status
 ```
 
 #### Boot loader
 
-##### [systemd-boot](https://wiki.archlinux.org/index.php/Systemd-boot)
+Use [systemd-boot](https://wiki.archlinux.org/index.php/Systemd-boot)
 
 Install using XBOOTLDR:
 
@@ -285,15 +268,15 @@ Edit `/boot/loader/entries/archlinux.conf`:
 title Arch Linux
 linux /vmlinuz-linux
 
-# Intel
+# Intel (optional)
 initrd /intel-ucode.img
 
-# AMD
+# AMD (optional)
 initrd /amd-ucode.img
 
 initrd /initramfs-linux.img
 
-# Kernel parameters
+# Kernel parameters (optional)
 #
 # Acer Nitro AN515-45
 # https://wiki.archlinux.org/title/backlight#Kernel_command-line_options
@@ -317,26 +300,26 @@ Always remember to check **dependencies** when install packages.
 pacman -Syu sudo
 
 EDITOR=nvim visudo
-# Uncomment group wheel
+# Uncomment group wheel by removing % at the beginning of %wheel ...
 
 # Add user if don't want to use systemd-homed
 useradd -m -G wheel -c "The Joker" joker
 
-# Or using zsh
+# Or using zsh (optional)
 useradd -m -G wheel -s /usr/bin/zsh -c "The Joker" joker
 
 # Set password
 passwd joker
 ```
 
-[systemd-homed (WIP)](https://wiki.archlinux.org/index.php/Systemd-homed):
+[systemd-homed (optional if no useradd before)](https://wiki.archlinux.org/index.php/Systemd-homed):
 
 ```sh
 systemctl enable systemd-homed.service
 
 homectl create joker --real-name="The Joker" --member-of=wheel
 
-# Using zsh
+# Using zsh (optional)
 homectl update joker --shell=/usr/bin/zsh
 ```
 
@@ -382,7 +365,7 @@ Color
 ParallelDownloads
 ```
 
-### [Pipewire (WIP)](https://wiki.archlinux.org/title/PipeWire)
+### [Pipewire](https://wiki.archlinux.org/title/PipeWire)
 
 ```sh
 pacman -Syu pipewire wireplumber \
@@ -397,7 +380,7 @@ See
 pacman -Syu sof-firmware
 ```
 
-### [Flatpak (WIP)](https://wiki.archlinux.org/title/Flatpak)
+### [Flatpak](https://wiki.archlinux.org/title/Flatpak)
 
 ```sh
 pacman -Syu flatpak
