@@ -308,6 +308,9 @@ pacstrap -K /mnt btrfs-progs
 <span class="pl-c"><span class="pl-c">#</span> LVM (optional)</span>
 pacstrap -K /mnt lvm2
 
+<span class="pl-c"><span class="pl-c">#</span> zsh (optional)</span>
+pacstrap -K /mnt zsh
+
 <span class="pl-c"><span class="pl-c">#</span> Text editor</span>
 pacstrap -K /mnt neovim</pre>
     </div>
@@ -607,13 +610,20 @@ useradd -m -G wheel -s /usr/bin/zsh -c <span class="pl-s"><span class="pl-pds">"
 <span class="pl-c"><span class="pl-c">#</span> Set password</span>
 passwd joker</pre>
     </div>
-    <p>
-      <a
-        href="https://wiki.archlinux.org/index.php/Systemd-homed"
-        rel="nofollow"
-        >systemd-homed (optional if no useradd before)</a
-      >:
-    </p>
+    <ul>
+      <li>
+        <a
+          href="https://wiki.archlinux.org/index.php/Systemd-homed"
+          rel="nofollow"
+          >systemd-homed (optional if no useradd before)</a
+        >:
+      </li>
+      <li>
+        <a href="https://systemd.io/HOME_DIRECTORY/" rel="nofollow"
+          >Home Directories</a
+        >
+      </li>
+    </ul>
     <div class="highlight highlight-source-shell">
       <pre>systemctl <span class="pl-c1">enable</span> systemd-homed.service
 
