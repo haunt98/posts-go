@@ -132,6 +132,9 @@ pacstrap -K /mnt btrfs-progs
 # LVM (optional)
 pacstrap -K /mnt lvm2
 
+# zsh (optional)
+pacstrap -K /mnt zsh
+
 # Text editor
 pacstrap -K /mnt neovim
 ```
@@ -312,7 +315,8 @@ useradd -m -G wheel -s /usr/bin/zsh -c "The Joker" joker
 passwd joker
 ```
 
-[systemd-homed (optional if no useradd before)](https://wiki.archlinux.org/index.php/Systemd-homed):
+- [systemd-homed (optional if no useradd before)](https://wiki.archlinux.org/index.php/Systemd-homed):
+- [Home Directories](https://systemd.io/HOME_DIRECTORY/)
 
 ```sh
 systemctl enable systemd-homed.service
