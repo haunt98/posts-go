@@ -31,11 +31,11 @@ sequenceDiagram
 - Replay attacks: send transaction 2 times with perfectly MAC and u know why ->
   instead of mac(secret_key, alice), use **counter** as mac(secret_key, counter,
   alice).
-- Verify must be done in **constant time**: if not, probaly return error the
+- Verify must be done in **constant time**: if not, probably return error the
   moment the bytes differ -> attacker recreate byte by byte by measuring how
   long -> timing attacks
 
-Constant time comparision:
+Constant time comparison:
 
 ```go
 for i := 0; i < len(x); i++ {

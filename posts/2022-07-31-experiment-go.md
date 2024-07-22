@@ -57,7 +57,7 @@ This pattern is used by [google/go-github](https://github.com/google/go-github).
 ## Find alternative to [grpc/grpc-go](https://github.com/grpc/grpc-go)
 
 Why?
-[See for yourself](https://github.com/grpc/grpc-go/issues?q=is%3Aissue+compatibility+is%3Aclosed).
+[See for yourself](https://github.com/grpc/grpc-go/issues?qgis%3Aissue+compatibility+is%3Aclosed).
 
 Also read:
 
@@ -67,7 +67,7 @@ Also read:
 
 Currently there are some:
 
-- [bufbuild/connect-go](https://github.com/bufbuild/connect-go). Comming from
+- [bufbuild/connect-go](https://github.com/bufbuild/connect-go). Coming from
   buf, trust worthy but need time to make it match feature parity with grpc-go.
 - [twitchtv/twirp](https://github.com/twitchtv/twirp)
 - [storj/drpc](https://github.com/storj/drpc)

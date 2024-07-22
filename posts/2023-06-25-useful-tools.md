@@ -1,4 +1,4 @@
-# Userful tools
+# Useful tools
 
 This just a raw list.
 
@@ -134,7 +134,7 @@ Memory
 - https://github.com/CodeEditApp/CodeEdit
 - https://github.com/Ranchero-Software/NetNewsWire
 
-## Developement
+## Development
 
 ### Terminal
 

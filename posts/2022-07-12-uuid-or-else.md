@@ -1,7 +1,7 @@
 # UUID or else
 
 There are many use cases where we need to use a unique ID. In my experience, I
-only encouter 2 cases:
+only encounter 2 cases:
 
 - ID to trace request from client to server, from service to service
   (microservice architecture or nanoservice I don't know).
@@ -17,7 +17,7 @@ In my Go universe, there are some libs to help us with this:
 ## First use case is trace ID, or context aware ID
 
 The ID is used only for trace and log. If same ID is generated twice (because
-maybe the possibilty is too small but not 0), honestly I don't care. When I use
+maybe the possibility is too small but not 0), honestly I don't care. When I use
 that ID to search log , if it pops more than things I care for, it is still no
 harm to me.
 
