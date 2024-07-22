@@ -109,7 +109,9 @@
     </div>
     <p>Check UEFI mode:</p>
     <div class="highlight highlight-source-shell">
-      <pre>ls /sys/firmware/efi/efivars</pre>
+      <pre>cat /sys/firmware/efi/fw_platform_size
+<span class="pl-c"><span class="pl-c">#</span> 64 or 32 is UEFI</span>
+<span class="pl-c"><span class="pl-c">#</span> File not found is BIOS</span></pre>
     </div>
     <div class="markdown-heading">
       <h4 class="heading-element">Connect to the internet</h4>
@@ -143,13 +145,22 @@
     <div class="highlight highlight-source-shell">
       <pre>cgdisk /dev/sdx</pre>
     </div>
-    <p>
-      <a
-        href="https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme"
-        rel="nofollow"
-        >Partition scheme</a
-      >
-    </p>
+    <ul>
+      <li>
+        <a
+          href="https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme"
+          rel="nofollow"
+          >Partition scheme</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://wiki.archlinux.org/title/EFI_system_partition"
+          rel="nofollow"
+          >EFI system partition</a
+        >
+      </li>
+    </ul>
     <p>UEFI/GPT layout:</p>
     <table>
       <thead>
@@ -158,6 +169,7 @@
           <th>Partition</th>
           <th>Partition type</th>
           <th>Suggested size</th>
+          <th>gdisk code</th>
         </tr>
       </thead>
       <tbody>
@@ -166,18 +178,21 @@
           <td><code>/dev/efi_system_partition</code></td>
           <td>EFI System Partition</td>
           <td>512 MiB</td>
+          <td>EF00</td>
         </tr>
         <tr>
           <td><code>/mnt/boot</code></td>
           <td><code>/dev/extended_boot_loader_partition</code></td>
-          <td>Extended Boot Loader Partition</td>
+          <td>Extended Boot Loader Partition (XBOOTLDR)</td>
           <td>1 GiB</td>
+          <td>EA00</td>
         </tr>
         <tr>
           <td><code>/mnt</code></td>
           <td><code>/dev/root_partition</code></td>
           <td>Root Partition</td>
           <td></td>
+          <td>8300</td>
         </tr>
       </tbody>
     </table>
@@ -196,6 +211,7 @@
           <th>Partition</th>
           <th>Partition type</th>
           <th>Suggested size</th>
+          <th>gdisk code</th>
         </tr>
       </thead>
       <tbody>
@@ -204,16 +220,18 @@
           <td></td>
           <td>BIOS boot partition</td>
           <td>1 MiB</td>
+          <td>EF02</td>
         </tr>
         <tr>
           <td><code>/mnt</code></td>
           <td><code>/dev/root_partition</code></td>
           <td>Root Partition</td>
           <td></td>
+          <td>8300</td>
         </tr>
       </tbody>
     </table>
-    <p>LVM:</p>
+    <p>LVM (optional):</p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Create physical volumes</span>
 pvcreate /dev/sdaX
@@ -235,10 +253,10 @@ mkfs.fat -F32 /dev/extended_boot_loader_partition
 <span class="pl-c"><span class="pl-c">#</span> root</span>
 mkfs.ext4 -L ROOT /dev/root_partition
 
-<span class="pl-c"><span class="pl-c">#</span> root with btrfs</span>
+<span class="pl-c"><span class="pl-c">#</span> root with btrfs (optional)</span>
 mkfs.btrfs -L ROOT /dev/root_partition
 
-<span class="pl-c"><span class="pl-c">#</span> root on lvm</span>
+<span class="pl-c"><span class="pl-c">#</span> root on lvm (optional)</span>
 mkfs.ext4 /dev/RootGroup/rootvol</pre>
     </div>
     <p>Mount:</p>
@@ -246,10 +264,10 @@ mkfs.ext4 /dev/RootGroup/rootvol</pre>
       <pre><span class="pl-c"><span class="pl-c">#</span> root</span>
 mount /dev/root_partition /mnt
 
-<span class="pl-c"><span class="pl-c">#</span> root with btrfs</span>
+<span class="pl-c"><span class="pl-c">#</span> root with btrfs (optional)</span>
 mount -o compress=zstd /dev/root_partition /mnt
 
-<span class="pl-c"><span class="pl-c">#</span> root on lvm</span>
+<span class="pl-c"><span class="pl-c">#</span> root on lvm (optional)</span>
 mount /dev/RootGroup/rootvol /mnt
 
 <span class="pl-c"><span class="pl-c">#</span> efi</span>
@@ -268,19 +286,26 @@ mount --mkdir /dev/extended_boot_loader_partition /mnt/boot</pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>
+      Please check
+      <a href="https://wiki.archlinux.org/title/Mirrors" rel="nofollow"
+        >Mirrors</a
+      >
+      if you have slow Internet.
+    </p>
     <div class="highlight highlight-source-shell">
       <pre>pacstrap -K /mnt base linux linux-firmware
 
-<span class="pl-c"><span class="pl-c">#</span> AMD</span>
+<span class="pl-c"><span class="pl-c">#</span> AMD (optional)</span>
 pacstrap -K /mnt amd-ucode
 
-<span class="pl-c"><span class="pl-c">#</span> Intel</span>
+<span class="pl-c"><span class="pl-c">#</span> Intel (optional)</span>
 pacstrap -K /mnt intel-ucode
 
-<span class="pl-c"><span class="pl-c">#</span> Btrfs</span>
+<span class="pl-c"><span class="pl-c">#</span> Btrfs (optional)</span>
 pacstrap -K /mnt btrfs-progs
 
-<span class="pl-c"><span class="pl-c">#</span> LVM</span>
+<span class="pl-c"><span class="pl-c">#</span> LVM (optional)</span>
 pacstrap -K /mnt lvm2
 
 <span class="pl-c"><span class="pl-c">#</span> Text editor</span>
@@ -337,11 +362,10 @@ pacstrap -K /mnt neovim</pre>
       ></a>
     </div>
     <div class="highlight highlight-source-shell">
-      <pre>
+      <pre><span class="pl-c"><span class="pl-c">#</span> Change Region/City to your location</span>
 ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 
-hwclock --systohc</pre
-      >
+hwclock --systohc</pre>
     </div>
     <div class="markdown-heading">
       <h4 class="heading-element">Localization:</h4>
@@ -353,10 +377,11 @@ hwclock --systohc</pre
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>Edit <code>/etc/locale.gen</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre><span class="pl-c"># Uncomment en_US.UTF-8 UTF-8</span></pre>
-    </div>
+    <p>
+      Edit <code>/etc/locale.gen</code> then uncomment
+      <code># en_US.UTF-8 UTF-8</code> by removing <code>#</code> at the
+      beginning.
+    </p>
     <p>Generate locales:</p>
     <div class="highlight highlight-source-shell"><pre>locale-gen</pre></div>
     <p>Edit <code>/etc/locale.conf</code>:</p>
@@ -387,12 +412,12 @@ hwclock --systohc</pre
     </div>
     <p>Edit <code>/etc/mkinitcpio.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
-      <pre><span class="pl-c"># LVM</span>
+      <pre><span class="pl-c"># LVM (optional)</span>
 <span class="pl-c"># https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks</span>
-HOOKS=(base udev ... block lvm2 filesystems)
-
 <span class="pl-c"># https://wiki.archlinux.org/title/mkinitcpio#Common_hooks</span>
-<span class="pl-c"># Replace udev with systemd</span></pre>
+<span class="pl-c"># Replace udev with systemd</span>
+<span class="pl-c"># Add lvm2 between block and filesystems</span>
+HOOKS=(base systemd ... block lvm2 filesystems)</pre>
     </div>
     <div class="highlight highlight-source-shell"><pre>mkinitcpio -P</pre></div>
     <div class="markdown-heading">
@@ -407,26 +432,16 @@ HOOKS=(base udev ... block lvm2 filesystems)
     </div>
     <div class="highlight highlight-source-shell"><pre>passwd</pre></div>
     <div class="markdown-heading">
-      <h4 class="heading-element">Addition</h4>
-      <a
-        id="user-content-addition"
-        class="anchor"
-        aria-label="Permalink: Addition"
-        href="#addition"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <div class="markdown-heading">
-      <h5 class="heading-element">
+      <h4 class="heading-element">
         <a href="https://wiki.archlinux.org/title/NetworkManager" rel="nofollow"
-          >NetworkManager (WIP)</a
+          >NetworkManager</a
         >
-      </h5>
+      </h4>
       <a
-        id="user-content-networkmanager-wip"
+        id="user-content-networkmanager"
         class="anchor"
-        aria-label="Permalink: NetworkManager (WIP)"
-        href="#networkmanager-wip"
+        aria-label="Permalink: NetworkManager"
+        href="#networkmanager"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -435,36 +450,17 @@ HOOKS=(base udev ... block lvm2 filesystems)
 systemctl <span class="pl-c1">enable</span> NetworkManager.service
 systemctl <span class="pl-c1">enable</span> systemd-resolved.service</pre>
     </div>
-    <p>Edit <code>/etc/NetworkManager/conf.d/dns.conf</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>[<span class="pl-ii">main</span>]
-dns=systemd-resolved</pre>
-    </div>
-    <p>Edit <code>/etc/NetworkManager/conf.d/dhcp-client.conf</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>[<span class="pl-ii">main</span>]
-dhcp=dhcpcd</pre>
-    </div>
     <p>Edit <code>/etc/NetworkManager/conf.d/wifi_backend.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
       <pre>[<span class="pl-ii">device</span>]
 wifi.backend=iwd</pre>
     </div>
-    <p>
-      See
-      <a href="https://wiki.archlinux.org/title/Dhcpcd" rel="nofollow"
-        >dhcpcd</a
-      >
-    </p>
-    <p>Append <code>/etc/dhcpcd.conf</code></p>
-    <div class="highlight highlight-text-adblock">
-      <pre>
-noarp
-nohook resolv.conf</pre
-      >
-    </div>
     <div class="markdown-heading">
-      <h5 class="heading-element">Bluetooth</h5>
+      <h4 class="heading-element">
+        <a href="https://wiki.archlinux.org/title/Bluetooth" rel="nofollow"
+          >Bluetooth</a
+        >
+      </h4>
       <a
         id="user-content-bluetooth"
         class="anchor"
@@ -478,7 +474,7 @@ nohook resolv.conf</pre
 systemctl <span class="pl-c1">enable</span> bluetooth.service</pre>
     </div>
     <div class="markdown-heading">
-      <h5 class="heading-element">Clock</h5>
+      <h4 class="heading-element">Clock</h4>
       <a
         id="user-content-clock"
         class="anchor"
@@ -487,8 +483,18 @@ systemctl <span class="pl-c1">enable</span> bluetooth.service</pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>
+      Use
+      <a
+        href="https://wiki.archlinux.org/title/Systemd-timesyncd"
+        rel="nofollow"
+        >systemd-timesyncd</a
+      >
+    </p>
     <div class="highlight highlight-source-shell">
-      <pre>timedatectl set-ntp <span class="pl-c1">true</span></pre>
+      <pre>timedatectl set-ntp <span class="pl-c1">true</span>
+
+timedatectl status</pre>
     </div>
     <div class="markdown-heading">
       <h4 class="heading-element">Boot loader</h4>
@@ -500,22 +506,12 @@ systemctl <span class="pl-c1">enable</span> bluetooth.service</pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <div class="markdown-heading">
-      <h5 class="heading-element">
-        <a
-          href="https://wiki.archlinux.org/index.php/Systemd-boot"
-          rel="nofollow"
-          >systemd-boot</a
-        >
-      </h5>
-      <a
-        id="user-content-systemd-boot"
-        class="anchor"
-        aria-label="Permalink: systemd-boot"
-        href="#systemd-boot"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
+    <p>
+      Use
+      <a href="https://wiki.archlinux.org/index.php/Systemd-boot" rel="nofollow"
+        >systemd-boot</a
+      >
+    </p>
     <p>Install using XBOOTLDR:</p>
     <div class="highlight highlight-source-shell">
       <pre>bootctl --esp-path=/efi --boot-path=/boot install
@@ -543,15 +539,15 @@ console-mode max</pre
       <pre>title Arch Linux
 linux /vmlinuz-linux
 
-<span class="pl-c"># Intel</span>
+<span class="pl-c"># Intel (optional)</span>
 initrd /intel-ucode.img
 
-<span class="pl-c"># AMD</span>
+<span class="pl-c"># AMD (optional)</span>
 initrd /amd-ucode.img
 
 initrd /initramfs-linux.img
 
-<span class="pl-c"># Kernel parameters</span>
+<span class="pl-c"># Kernel parameters (optional)</span>
 <span class="pl-c">#</span>
 <span class="pl-c"># Acer Nitro AN515-45</span>
 <span class="pl-c"># https://wiki.archlinux.org/title/backlight#Kernel_command-line_options</span>
@@ -600,12 +596,12 @@ options root="LABEL=ROOT" rw</pre>
       <pre>pacman -Syu sudo
 
 EDITOR=nvim visudo
-<span class="pl-c"><span class="pl-c">#</span> Uncomment group wheel</span>
+<span class="pl-c"><span class="pl-c">#</span> Uncomment group wheel by removing % at the beginning of %wheel ...</span>
 
 <span class="pl-c"><span class="pl-c">#</span> Add user if don't want to use systemd-homed</span>
 useradd -m -G wheel -c <span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> joker
 
-<span class="pl-c"><span class="pl-c">#</span> Or using zsh</span>
+<span class="pl-c"><span class="pl-c">#</span> Or using zsh (optional)</span>
 useradd -m -G wheel -s /usr/bin/zsh -c <span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> joker
 
 <span class="pl-c"><span class="pl-c">#</span> Set password</span>
@@ -615,7 +611,7 @@ passwd joker</pre>
       <a
         href="https://wiki.archlinux.org/index.php/Systemd-homed"
         rel="nofollow"
-        >systemd-homed (WIP)</a
+        >systemd-homed (optional if no useradd before)</a
       >:
     </p>
     <div class="highlight highlight-source-shell">
@@ -623,7 +619,7 @@ passwd joker</pre>
 
 homectl create joker --real-name=<span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> --member-of=wheel
 
-<span class="pl-c"><span class="pl-c">#</span> Using zsh</span>
+<span class="pl-c"><span class="pl-c">#</span> Using zsh (optional)</span>
 homectl update joker --shell=/usr/bin/zsh</pre>
     </div>
     <p>
@@ -722,14 +718,14 @@ ParallelDownloads</pre>
     <div class="markdown-heading">
       <h3 class="heading-element">
         <a href="https://wiki.archlinux.org/title/PipeWire" rel="nofollow"
-          >Pipewire (WIP)</a
+          >Pipewire</a
         >
       </h3>
       <a
-        id="user-content-pipewire-wip"
+        id="user-content-pipewire"
         class="anchor"
-        aria-label="Permalink: Pipewire (WIP)"
-        href="#pipewire-wip"
+        aria-label="Permalink: Pipewire"
+        href="#pipewire"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -754,14 +750,14 @@ pacman -Syu pipewire wireplumber \
     <div class="markdown-heading">
       <h3 class="heading-element">
         <a href="https://wiki.archlinux.org/title/Flatpak" rel="nofollow"
-          >Flatpak (WIP)</a
+          >Flatpak</a
         >
       </h3>
       <a
-        id="user-content-flatpak-wip"
+        id="user-content-flatpak"
         class="anchor"
-        aria-label="Permalink: Flatpak (WIP)"
-        href="#flatpak-wip"
+        aria-label="Permalink: Flatpak"
+        href="#flatpak"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
