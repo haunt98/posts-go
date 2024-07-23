@@ -63,17 +63,16 @@
       >
     </p>
     <div class="markdown-heading">
-      <h2 class="heading-element">
-        <strong>Hash</strong> function convert from input to digest
-      </h2>
+      <h2 class="heading-element"><strong>Hash</strong> function</h2>
       <a
-        id="user-content-hash-function-convert-from-input-to-digest"
+        id="user-content-hash-function"
         class="anchor"
-        aria-label="Permalink: Hash function convert from input to digest"
-        href="#hash-function-convert-from-input-to-digest"
+        aria-label="Permalink: Hash function"
+        href="#hash-function"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>... convert from input to digest</p>
     <ul>
       <li>Pre-image resistance: Given digest, can not find input</li>
       <li>
@@ -84,17 +83,17 @@
     </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">
-        <strong>MAC</strong> aka Message Authentication Code produce from key,
-        message to authentication tag.
+        <strong>MAC</strong> aka Message Authentication Code
       </h2>
       <a
-        id="user-content-mac-aka-message-authentication-code-produce-from-key-message-to-authentication-tag"
+        id="user-content-mac-aka-message-authentication-code"
         class="anchor"
-        aria-label="Permalink: MAC aka Message Authentication Code produce from key, message to authentication tag."
-        href="#mac-aka-message-authentication-code-produce-from-key-message-to-authentication-tag"
+        aria-label="Permalink: MAC aka Message Authentication Code"
+        href="#mac-aka-message-authentication-code"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>... produce from key, message to authentication tag.</p>
     <ul>
       <li>A send B message with MAC (generate from message and A key).</li>
       <li>
@@ -194,7 +193,7 @@
       ></a>
     </div>
     <p>
-      What if text you want to encrypt longer than 128 bytes ? We add
+      What if text you want to encrypt is longer than 128 bytes ? We add
       <strong>padding</strong> for text to become multi block which has 128
       bytes, then encrypt each block.
     </p>
@@ -217,15 +216,15 @@
     <p>
       The problem with naive way to split text, add padding bytes then encrypt
       each block using AES-128 is repeated text. Because it leaks information if
-      text is made up from many repeated text (ECB penguin).
+      text is made up from many repeated text (See
+      <a href="https://words.filippo.io/the-ecb-penguin/" rel="nofollow"
+        >The ECB penguin</a
+      >).
     </p>
     <p>CBC = deterministic block cipher + IV (initialization vector)</p>
     <p>AES-CBC encrypt:</p>
     <ul>
-      <li>
-        IV XOR first plaintext -&gt; AES encrypt -&gt; first ciphertext.
-        ciphertext.
-      </li>
+      <li>IV XOR first plaintext -&gt; AES encrypt -&gt; first ciphertext.</li>
       <li>Use first ciphertext as IV to second ciphertext and so on.</li>
     </ul>
     <p>AES-CBC decrypt:</p>
@@ -256,15 +255,16 @@
     </p>
     <p>AEAD provides a way to authenticate <strong>associated data</strong>.</p>
     <div class="markdown-heading">
-      <h2 class="heading-element">AES-GCM (Galois/Counter Mode) AEAD</h2>
+      <h2 class="heading-element">AES-GCM (Galois/Counter Mode)</h2>
       <a
-        id="user-content-aes-gcm-galoiscounter-mode-aead"
+        id="user-content-aes-gcm-galoiscounter-mode"
         class="anchor"
-        aria-label="Permalink: AES-GCM (Galois/Counter Mode) AEAD"
-        href="#aes-gcm-galoiscounter-mode-aead"
+        aria-label="Permalink: AES-GCM (Galois/Counter Mode)"
+        href="#aes-gcm-galoiscounter-mode"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>... is one of AEAD implementation.</p>
     <p>AES-GCM = AES-CTR (Counter) + GMAC message authentication code</p>
     <p>AES-CTR encrypt:</p>
     <ul>
@@ -284,19 +284,81 @@
       AES-CTR no need padding because if keystream is longer than plaintext, it
       is truncated to plaintext length before XOR.
     </p>
-    <p>This is stream cipher, differ from block cipher.</p>
+    <p>This is stream cipher, differ from block cipher</p>
+    <ul>
+      <li>No need padding.</li>
+      <li>Ciphertext is same length as plaintext.</li>
+    </ul>
     <p>GMAC is MAC with GHASH. GHASH resembles CBC mode.</p>
     <div class="markdown-heading">
-      <h2 class="heading-element">ChaCha20-Poly1305 AED</h2>
+      <h2 class="heading-element">ChaCha20-Poly1305</h2>
       <a
-        id="user-content-chacha20-poly1305-aed"
+        id="user-content-chacha20-poly1305"
         class="anchor"
-        aria-label="Permalink: ChaCha20-Poly1305 AED"
-        href="#chacha20-poly1305-aed"
+        aria-label="Permalink: ChaCha20-Poly1305"
+        href="#chacha20-poly1305"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>... is one of AEAD implementation.</p>
     <p>ChaCha20-Poly1305 = ChaCha20 stream cipher + Poly1305 MAC</p>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Key exchange</h2>
+      <a
+        id="user-content-key-exchange"
+        class="anchor"
+        aria-label="Permalink: Key exchange"
+        href="#key-exchange"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">alice</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">bob</span>
+
+    <span class="pl-ent">alice </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">alice</span><span class="pl-k">:</span> <span class="pl-s">generate key pair: public_key, secret_key</span>
+    <span class="pl-ent">bob </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">bob</span><span class="pl-k">:</span> <span class="pl-s">generate key pair: public_key, secret_key</span>
+    <span class="pl-ent">alice </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">bob</span><span class="pl-k">:</span> <span class="pl-s">send public_key</span>
+    <span class="pl-ent">bob </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">alice</span><span class="pl-k">:</span> <span class="pl-s">send public_key</span>
+    <span class="pl-ent">alice </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">alice</span><span class="pl-k">:</span> <span class="pl-s">generate shared_secret(secret_key, bob_public_key)</span>
+    <span class="pl-ent">bob </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">bob</span><span class="pl-k">:</span> <span class="pl-s">generate shared_secret(secret_key, alice_public_key)</span></pre>
+    </div>
+    <p>
+      Prevent MITM (Man In The Middle) passive attack. If attacker can intercept
+      public_key then it's over.
+    </p>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Diffie-Hellman</h2>
+      <a
+        id="user-content-diffie-hellman"
+        class="anchor"
+        aria-label="Permalink: Diffie-Hellman"
+        href="#diffie-hellman"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>... is key exchange algorithm.</p>
+    <ul>
+      <li>
+        Alice and Bob agree on prime number <code>p</code> and generator
+        <code>g</code>.
+      </li>
+      <li>
+        Alice generate secret <code>a</code> and public
+        <code>A = g^a mod p</code>.
+      </li>
+      <li>
+        Bob generate secret <code>b</code> and public
+        <code>B = g^b mod p</code>.
+      </li>
+      <li>
+        Alice and Bob exchange <code>A</code> and <code>B</code>
+        <ul>
+          <li>Same secret <code>A^b mod p == B^a mod p</code></li>
+        </ul>
+      </li>
+    </ul>
 
     <div>
       Feel free to ask me via

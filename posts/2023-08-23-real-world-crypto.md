@@ -3,14 +3,18 @@
 My notes when reading
 [Real-World Cryptography](https://www.manning.com/books/real-world-cryptography)
 
-## **Hash** function convert from input to digest
+## **Hash** function
+
+... convert from input to digest
 
 - Pre-image resistance: Given digest, can not find input
 - Second pre-image resistance: Given input, digest, can not find another input
   produce same digest. Small change to input make digest big change.
 - Collision resistance: Can not find 2 input produce same digest.
 
-## **MAC** aka Message Authentication Code produce from key, message to authentication tag.
+## **MAC** aka Message Authentication Code
+
+... produce from key, message to authentication tag.
 
 - A send B message with MAC (generate from message and A key).
 - B double check message with MAC (generate from receive message and B key).
@@ -80,8 +84,8 @@ cipher**. AES is deterministic so we can encrypt and decrypt.
 
 ## AES-CBC (Cipher Block Chaining)
 
-What if text you want to encrypt longer than 128 bytes ? We add **padding** for
-text to become multi block which has 128 bytes, then encrypt each block.
+What if text you want to encrypt is longer than 128 bytes ? We add **padding**
+for text to become multi block which has 128 bytes, then encrypt each block.
 
 Adding padding bytes is easy, remove it after decrypt is hard. How do you know
 which is padding bytes you add if you use random bytes ?
@@ -99,13 +103,14 @@ know the length to remove trailing padding bytes.
 
 The problem with naive way to split text, add padding bytes then encrypt each
 block using AES-128 is repeated text. Because it leaks information if text is
-made up from many repeated text (ECB penguin).
+made up from many repeated text (See
+[The ECB penguin](https://words.filippo.io/the-ecb-penguin/)).
 
 CBC = deterministic block cipher + IV (initialization vector)
 
 AES-CBC encrypt:
 
-- IV XOR first plaintext -> AES encrypt -> first ciphertext. ciphertext.
+- IV XOR first plaintext -> AES encrypt -> first ciphertext.
 - Use first ciphertext as IV to second ciphertext and so on.
 
 AES-CBC decrypt:
@@ -125,7 +130,9 @@ of authenticity -> use AES-CBC-HMAC or AEAD.
 
 AEAD provides a way to authenticate **associated data**.
 
-## AES-GCM (Galois/Counter Mode) AEAD
+## AES-GCM (Galois/Counter Mode)
+
+... is one of AEAD implementation.
 
 AES-GCM = AES-CTR (Counter) + GMAC message authentication code
 
@@ -142,10 +149,43 @@ of 16 bytes aka 69 GBs.
 AES-CTR no need padding because if keystream is longer than plaintext, it is
 truncated to plaintext length before XOR.
 
-This is stream cipher, differ from block cipher.
+This is stream cipher, differ from block cipher
+
+- No need padding.
+- Ciphertext is same length as plaintext.
 
 GMAC is MAC with GHASH. GHASH resembles CBC mode.
 
-## ChaCha20-Poly1305 AED
+## ChaCha20-Poly1305
+
+... is one of AEAD implementation.
 
 ChaCha20-Poly1305 = ChaCha20 stream cipher + Poly1305 MAC
+
+## Key exchange
+
+```mermaid
+sequenceDiagram
+    participant alice
+    participant bob
+
+    alice ->> alice: generate key pair: public_key, secret_key
+    bob ->> bob: generate key pair: public_key, secret_key
+    alice ->> bob: send public_key
+    bob ->> alice: send public_key
+    alice ->> alice: generate shared_secret(secret_key, bob_public_key)
+    bob ->> bob: generate shared_secret(secret_key, alice_public_key)
+```
+
+Prevent MITM (Man In The Middle) passive attack. If attacker can intercept
+public_key then it's over.
+
+## Diffie-Hellman
+
+... is key exchange algorithm.
+
+- Alice and Bob agree on prime number `p` and generator `g`.
+- Alice generate secret `a` and public `A = g^a mod p`.
+- Bob generate secret `b` and public `B = g^b mod p`.
+- Alice and Bob exchange `A` and `B`
+  - Same secret `A^b mod p == B^a mod p`
