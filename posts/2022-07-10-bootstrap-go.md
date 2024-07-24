@@ -441,7 +441,7 @@ Example with `matryer/moq`:
 
 ### Be careful with [spf13/cast](https://github.com/spf13/cast)
 
-Don't cast proto enum:
+Don't cast enum:
 
 ```go
 // Bad
