@@ -355,7 +355,39 @@
       <li>
         Alice and Bob exchange <code>A</code> and <code>B</code>
         <ul>
-          <li>Same secret <code>A^b mod p == B^a mod p</code></li>
+          <li>
+            Same secret <code>A^b mod p == B^a mod p == g^(ab) mod p</code>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>Diffie-Hellman is based on group theory.</p>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Elliptic Curve Diffie-Hellman (ECDH)</h2>
+      <a
+        id="user-content-elliptic-curve-diffie-hellman-ecdh"
+        class="anchor"
+        aria-label="Permalink: Elliptic Curve Diffie-Hellman (ECDH)"
+        href="#elliptic-curve-diffie-hellman-ecdh"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>Instead of prime number, use elliptic curve.</p>
+    <ul>
+      <li>
+        Alice and Bob agree on elliptic curve <code>E</code> and generator
+        <code>G</code>.
+      </li>
+      <li>
+        Alice generate secret <code>a</code> and public <code>A = [a]G</code>.
+      </li>
+      <li>
+        Bob generate secret <code>b</code> and public <code>B = [b]G</code>.
+      </li>
+      <li>
+        Alice and Bob exchange <code>A</code> and <code>B</code>
+        <ul>
+          <li>Same secret <code>[a]B == [b]A == [ab]G</code></li>
         </ul>
       </li>
     </ul>
