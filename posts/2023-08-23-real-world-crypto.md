@@ -188,4 +188,16 @@ public_key then it's over.
 - Alice generate secret `a` and public `A = g^a mod p`.
 - Bob generate secret `b` and public `B = g^b mod p`.
 - Alice and Bob exchange `A` and `B`
-  - Same secret `A^b mod p == B^a mod p`
+  - Same secret `A^b mod p == B^a mod p == g^(ab) mod p`
+
+Diffie-Hellman is based on group theory.
+
+## Elliptic Curve Diffie-Hellman (ECDH)
+
+Instead of prime number, use elliptic curve.
+
+- Alice and Bob agree on elliptic curve `E` and generator `G`.
+- Alice generate secret `a` and public `A = [a]G`.
+- Bob generate secret `b` and public `B = [b]G`.
+- Alice and Bob exchange `A` and `B`
+  - Same secret `[a]B == [b]A == [ab]G`
