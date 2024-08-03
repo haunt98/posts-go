@@ -303,6 +303,13 @@ defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
 defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6
 ```
 
+Disable IPv6:
+
+```sh
+sudo networksetup -listallnetworkservices
+sudo networksetup -setv6off Wi-Fi
+```
+
 Clean up leftover data:
 
 - `~/Library/Application Support`
@@ -333,7 +340,10 @@ Thanks:
 - [Can Touch ID on Mac authenticate sudo in Terminal?](https://apple.stackexchange.com/a/466029)
 - [Native fix for applications hiding under the MacBook Pro notch](https://flaky.build/native-fix-for-applications-hiding-under-the-macbook-pro-notch)
   - [Can the spacing of menu bar apps be modified in macOS Big Sur and later?](https://apple.stackexchange.com/q/406316)
+- [macOS: How to Disable IPv6](https://appletoolbox.com/macos-how-to-disable-ipv6/)
 - [How to fully uninstall Logitech G HUB on macOS via terminal/command line](https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116)
+- [Hardening macOS](https://www.bejarano.io/hardening-macos/)
+  - https://github.com/drduh/macOS-Security-and-Privacy-Guide
 
 ### Firefox
 

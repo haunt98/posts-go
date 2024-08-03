@@ -192,11 +192,13 @@ myhostname
 Edit `/etc/mkinitcpio.conf`:
 
 ```txt
-# LVM (optional)
-# https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks
 # https://wiki.archlinux.org/title/mkinitcpio#Common_hooks
 # Replace udev with systemd
+#
+# LVM (optional)
+# https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks
 # Add lvm2 between block and filesystems
+#
 HOOKS=(base systemd ... block lvm2 filesystems)
 ```
 
@@ -223,6 +225,17 @@ Edit `/etc/NetworkManager/conf.d/wifi_backend.conf`:
 ```txt
 [device]
 wifi.backend=iwd
+```
+
+Edit `/etc/NetworkManager/conf.d/wifi_rand_mac.conf`:
+
+```txt
+[device-mac-randomization]
+wifi.scan-rand-mac-address=yes
+ 
+[connection-mac-randomization]
+ethernet.cloned-mac-address=stable
+wifi.cloned-mac-address=stable
 ```
 
 #### [Bluetooth](https://wiki.archlinux.org/title/Bluetooth)
@@ -288,7 +301,8 @@ initrd /initramfs-linux.img
 # NVIDIA
 # https://wiki.archlinux.org/title/NVIDIA#DRM_kernel_mode_setting
 # nvidia-drm.modeset=1
-options root="LABEL=ROOT" rw
+#
+options root="LABEL=ROOT" rw quiet loglevel=3 nowatchdog module_blacklist=iTCO_wdt,sp5100_tco ipv6.disable=1 init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1
 ```
 
 ## [General recommendations](https://wiki.archlinux.org/index.php/General_recommendations)
@@ -336,26 +350,21 @@ Install [Xorg](https://wiki.archlinux.org/index.php/Xorg):
 
 ```sh
 pacman -Syu xorg-server
+
+# Remember to install GPU driver
 ```
 
-#### [GNOME](https://wiki.archlinux.org/index.php/GNOME)
+#### [KDE](https://wiki.archlinux.org/title/KDE)
+
+See
+[KDE Distributions/Packaging Recommendations](https://community.kde.org/Distributions/Packaging_Recommendations)
 
 ```sh
-pacman -Syu gnome-shell \
-	gnome-control-center gnome-system-monitor power-profiles-daemon \
-	gnome-tweaks gnome-backgrounds gnome-firmware \
-	nautilus xdg-user-dirs-gtk xdg-desktop-portal \
-	gnome-console gnome-text-editor loupe evince
+pacman -Syu plasma-desktop
 
 # Login manager
-pacman -Syu gdm
-systemctl enable gdm.service
+pacman -Syu sddm
 ```
-
-Quirks:
-
-- Fix black screen when open game in fullscreen in external monitor with
-  [kazysmaster/gnome-shell-extension-disable-unredirect](https://github.com/kazysmaster/gnome-shell-extension-disable-unredirect)
 
 ## [List of applications](https://wiki.archlinux.org/index.php/List_of_applications)
 
@@ -400,16 +409,60 @@ pacman -Syu flatpak
 - https://wiki.archlinux.org/index.php/swap#Swappiness
 - https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit
 - https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps
+- https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit_in_existing_filesystems
 - https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM
 - https://wiki.archlinux.org/index.php/Silent_boot
 - https://wiki.archlinux.org/title/Improving_performance#Watchdogs
-- https://wiki.archlinux.org/title/sysctl
+- https://wiki.archlinux.org/title/Sysctl#Enable_TCP_Fast_Open
+- [Fast commits for ext4](https://lwn.net/Articles/842385/)
+- [TCP Fast Open: expediting web services](https://lwn.net/Articles/508865/)
+- [The search for the correct amount of split-lock misery](https://lwn.net/Articles/911219/)
 
-`/etc/sysctl.d/99-sysctl.conf`:
+Edit `/etc/systemd/journald.conf.d/00-journal-size.conf` then restart:
 
 ```txt
-# https://lwn.net/Articles/911219/
+[Journal]
+SystemMaxUse=50M
+```
+
+Edit `/etc/systemd/coredump.conf.d/custom.conf` then restart:
+
+```txt
+[Coredump]
+Storage=none
+ProcessSizeMax=0
+```
+
+Enable ext4 fast commit:
+
+```sh
+tune2fs -O fast_commit /dev/partition
+```
+
+Periodic TRIM:
+
+```sh
+systemctl enable fstrim.timer
+```
+
+Edit `/etc/sysctl.d/99-sysctl.conf`:
+
+```txt
+# Enable TCP Fast Open
+net.ipv4.tcp_fastopen = 3
+
 kernel.split_lock_mitigate = 0
+```
+
+## [Security](https://wiki.archlinux.org/title/Security)
+
+- https://wiki.archlinux.org/title/IPv6#Disable_IPv6
+- [add init_on_alloc/init_on_free boot options](https://lwn.net/Articles/791380/)
+- [mm: Randomize free memory](https://lwn.net/Articles/776228/)
+- [mm: introduce Designated Movable Blocks](https://lwn.net/Articles/925941/)
+
+```sh
+# Kernel parameters
 ```
 
 ## Hardware dependent
@@ -422,7 +475,10 @@ kernel.split_lock_mitigate = 0
 
 Do it at your own risk!!!
 
+- https://wiki.archlinux.org/title/Unified_kernel_image
 - https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave
+- [Linux Hardening Guide](https://madaidans-insecurities.github.io/guides/linux-hardening.html)
+- https://github.com/GrapheneOS/hardened_malloc
 - https://github.com/AdnanHodzic/auto-cpufreq
 - https://github.com/nbfc-linux/nbfc-linux
 
