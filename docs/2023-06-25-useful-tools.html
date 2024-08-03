@@ -1182,6 +1182,13 @@ defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
 defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
       >
     </div>
+    <p>Disable IPv6:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>
+sudo networksetup -listallnetworkservices
+sudo networksetup -setv6off Wi-Fi</pre
+      >
+    </div>
     <p>Clean up leftover data:</p>
     <ul>
       <li>
@@ -1248,10 +1255,29 @@ defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
       </li>
       <li>
         <a
+          href="https://appletoolbox.com/macos-how-to-disable-ipv6/"
+          rel="nofollow"
+          >macOS: How to Disable IPv6</a
+        >
+      </li>
+      <li>
+        <a
           href="https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116"
           >How to fully uninstall Logitech G HUB on macOS via terminal/command
           line</a
         >
+      </li>
+      <li>
+        <a href="https://www.bejarano.io/hardening-macos/" rel="nofollow"
+          >Hardening macOS</a
+        >
+        <ul>
+          <li>
+            <a href="https://github.com/drduh/macOS-Security-and-Privacy-Guide"
+              >https://github.com/drduh/macOS-Security-and-Privacy-Guide</a
+            >
+          </li>
+        </ul>
       </li>
     </ul>
     <div class="markdown-heading">

@@ -415,11 +415,13 @@ hwclock --systohc</pre>
     </div>
     <p>Edit <code>/etc/mkinitcpio.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
-      <pre><span class="pl-c"># LVM (optional)</span>
-<span class="pl-c"># https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks</span>
-<span class="pl-c"># https://wiki.archlinux.org/title/mkinitcpio#Common_hooks</span>
+      <pre><span class="pl-c"># https://wiki.archlinux.org/title/mkinitcpio#Common_hooks</span>
 <span class="pl-c"># Replace udev with systemd</span>
+<span class="pl-c">#</span>
+<span class="pl-c"># LVM (optional)</span>
+<span class="pl-c"># https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks</span>
 <span class="pl-c"># Add lvm2 between block and filesystems</span>
+<span class="pl-c">#</span>
 HOOKS=(base systemd ... block lvm2 filesystems)</pre>
     </div>
     <div class="highlight highlight-source-shell"><pre>mkinitcpio -P</pre></div>
@@ -457,6 +459,15 @@ systemctl <span class="pl-c1">enable</span> systemd-resolved.service</pre>
     <div class="highlight highlight-text-adblock">
       <pre>[<span class="pl-ii">device</span>]
 wifi.backend=iwd</pre>
+    </div>
+    <p>Edit <code>/etc/NetworkManager/conf.d/wifi_rand_mac.conf</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>[<span class="pl-ii">device-mac-randomization</span>]
+wifi.scan-rand-mac-address=yes
+ 
+[<span class="pl-ii">connection-mac-randomization</span>]
+ethernet.cloned-mac-address=stable
+wifi.cloned-mac-address=stable</pre>
     </div>
     <div class="markdown-heading">
       <h4 class="heading-element">
@@ -559,7 +570,8 @@ initrd /initramfs-linux.img
 <span class="pl-c"># NVIDIA</span>
 <span class="pl-c"># https://wiki.archlinux.org/title/NVIDIA#DRM_kernel_mode_setting</span>
 <span class="pl-c"># nvidia-drm.modeset=1</span>
-options root="LABEL=ROOT" rw</pre>
+<span class="pl-c">#</span>
+options root="LABEL=ROOT" rw quiet loglevel=3 nowatchdog module_blacklist=iTCO_wdt,sp5100_tco ipv6.disable=1 init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
@@ -652,43 +664,36 @@ homectl update joker --shell=/usr/bin/zsh</pre>
       >:
     </p>
     <div class="highlight highlight-source-shell">
-      <pre>pacman -Syu xorg-server</pre>
+      <pre>pacman -Syu xorg-server
+
+<span class="pl-c"><span class="pl-c">#</span> Remember to install GPU driver</span></pre>
     </div>
     <div class="markdown-heading">
       <h4 class="heading-element">
-        <a href="https://wiki.archlinux.org/index.php/GNOME" rel="nofollow"
-          >GNOME</a
-        >
+        <a href="https://wiki.archlinux.org/title/KDE" rel="nofollow">KDE</a>
       </h4>
       <a
-        id="user-content-gnome"
+        id="user-content-kde"
         class="anchor"
-        aria-label="Permalink: GNOME"
-        href="#gnome"
+        aria-label="Permalink: KDE"
+        href="#kde"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>
+      See
+      <a
+        href="https://community.kde.org/Distributions/Packaging_Recommendations"
+        rel="nofollow"
+        >KDE Distributions/Packaging Recommendations</a
+      >
+    </p>
     <div class="highlight highlight-source-shell">
-      <pre>pacman -Syu gnome-shell \
-	gnome-control-center gnome-system-monitor power-profiles-daemon \
-	gnome-tweaks gnome-backgrounds gnome-firmware \
-	nautilus xdg-user-dirs-gtk xdg-desktop-portal \
-	gnome-console gnome-text-editor loupe evince
+      <pre>pacman -Syu plasma-desktop
 
 <span class="pl-c"><span class="pl-c">#</span> Login manager</span>
-pacman -Syu gdm
-systemctl <span class="pl-c1">enable</span> gdm.service</pre>
+pacman -Syu sddm</pre>
     </div>
-    <p>Quirks:</p>
-    <ul>
-      <li>
-        Fix black screen when open game in fullscreen in external monitor with
-        <a
-          href="https://github.com/kazysmaster/gnome-shell-extension-disable-unredirect"
-          >kazysmaster/gnome-shell-extension-disable-unredirect</a
-        >
-      </li>
-    </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">
         <a
@@ -824,6 +829,13 @@ pacman -Syu pipewire wireplumber \
       </li>
       <li>
         <a
+          href="https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit_in_existing_filesystems"
+          rel="nofollow"
+          >https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit_in_existing_filesystems</a
+        >
+      </li>
+      <li>
+        <a
           href="https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM"
           rel="nofollow"
           >https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM</a
@@ -844,15 +856,99 @@ pacman -Syu pipewire wireplumber \
         >
       </li>
       <li>
-        <a href="https://wiki.archlinux.org/title/sysctl" rel="nofollow"
-          >https://wiki.archlinux.org/title/sysctl</a
+        <a
+          href="https://wiki.archlinux.org/title/Sysctl#Enable_TCP_Fast_Open"
+          rel="nofollow"
+          >https://wiki.archlinux.org/title/Sysctl#Enable_TCP_Fast_Open</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/842385/" rel="nofollow"
+          >Fast commits for ext4</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/508865/" rel="nofollow"
+          >TCP Fast Open: expediting web services</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/911219/" rel="nofollow"
+          >The search for the correct amount of split-lock misery</a
         >
       </li>
     </ul>
-    <p><code>/etc/sysctl.d/99-sysctl.conf</code>:</p>
+    <p>
+      Edit <code>/etc/systemd/journald.conf.d/00-journal-size.conf</code> then
+      restart:
+    </p>
     <div class="highlight highlight-text-adblock">
-      <pre><span class="pl-c"># https://lwn.net/Articles/911219/</span>
+      <pre>[<span class="pl-ii">Journal</span>]
+SystemMaxUse=50M</pre>
+    </div>
+    <p>
+      Edit <code>/etc/systemd/coredump.conf.d/custom.conf</code> then restart:
+    </p>
+    <div class="highlight highlight-text-adblock">
+      <pre>[<span class="pl-ii">Coredump</span>]
+Storage=none
+ProcessSizeMax=0</pre>
+    </div>
+    <p>Enable ext4 fast commit:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>tune2fs -O fast_commit /dev/partition</pre>
+    </div>
+    <p>Periodic TRIM:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>systemctl <span class="pl-c1">enable</span> fstrim.timer</pre>
+    </div>
+    <p>Edit <code>/etc/sysctl.d/99-sysctl.conf</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre><span class="pl-c"># Enable TCP Fast Open</span>
+net.ipv4.tcp_fastopen = 3
+
 kernel.split_lock_mitigate = 0</pre>
+    </div>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://wiki.archlinux.org/title/Security" rel="nofollow"
+          >Security</a
+        >
+      </h2>
+      <a
+        id="user-content-security"
+        class="anchor"
+        aria-label="Permalink: Security"
+        href="#security"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <ul>
+      <li>
+        <a
+          href="https://wiki.archlinux.org/title/IPv6#Disable_IPv6"
+          rel="nofollow"
+          >https://wiki.archlinux.org/title/IPv6#Disable_IPv6</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/791380/" rel="nofollow"
+          >add init_on_alloc/init_on_free boot options</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/776228/" rel="nofollow"
+          >mm: Randomize free memory</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/925941/" rel="nofollow"
+          >mm: introduce Designated Movable Blocks</a
+        >
+      </li>
+    </ul>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> Kernel parameters</span></pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">Hardware dependent</h2>
@@ -895,9 +991,28 @@ kernel.split_lock_mitigate = 0</pre>
     <ul>
       <li>
         <a
+          href="https://wiki.archlinux.org/title/Unified_kernel_image"
+          rel="nofollow"
+          >https://wiki.archlinux.org/title/Unified_kernel_image</a
+        >
+      </li>
+      <li>
+        <a
           href="https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave"
           rel="nofollow"
           >https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://madaidans-insecurities.github.io/guides/linux-hardening.html"
+          rel="nofollow"
+          >Linux Hardening Guide</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/GrapheneOS/hardened_malloc"
+          >https://github.com/GrapheneOS/hardened_malloc</a
         >
       </li>
       <li>
