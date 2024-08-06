@@ -366,6 +366,11 @@ pacman -Syu plasma-desktop
 pacman -Syu sddm
 ```
 
+#### Worth trying
+
+- [COSMIC](https://wiki.archlinux.org/title/COSMIC)
+- [Pantheon](https://wiki.archlinux.org/title/Pantheon)
+
 ## [List of applications](https://wiki.archlinux.org/index.php/List_of_applications)
 
 ### [pacman](https://wiki.archlinux.org/index.php/pacman)
