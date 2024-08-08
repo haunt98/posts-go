@@ -335,6 +335,13 @@ pbcopy < /dev/null
 
 [Disable **Smart zoom** in **Track pad** settings to make right click instant](https://mastodon.online/@nikitonsky/112220593113484602)
 
+Fix OpenVPN Client 3
+
+```sh
+sudo launchctl unload -w /Library/LaunchDaemons/org.openvpn.client.plist
+sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist
+```
+
 Thanks:
 
 - [Can Touch ID on Mac authenticate sudo in Terminal?](https://apple.stackexchange.com/a/466029)

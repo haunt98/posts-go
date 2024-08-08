@@ -1233,6 +1233,13 @@ sudo networksetup -setv6off Wi-Fi</pre
         <strong>Track pad</strong> settings to make right click instant</a
       >
     </p>
+    <p>Fix OpenVPN Client 3</p>
+    <div class="highlight highlight-source-shell">
+      <pre>
+sudo launchctl unload -w /Library/LaunchDaemons/org.openvpn.client.plist
+sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre
+      >
+    </div>
     <p>Thanks:</p>
     <ul>
       <li>
