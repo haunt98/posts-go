@@ -351,6 +351,7 @@ Thanks:
 - [How to fully uninstall Logitech G HUB on macOS via terminal/command line](https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116)
 - [Hardening macOS](https://www.bejarano.io/hardening-macos/)
   - https://github.com/drduh/macOS-Security-and-Privacy-Guide
+- https://github.com/OpenVPN/openvpn3/issues/243
 
 ### Firefox
 
