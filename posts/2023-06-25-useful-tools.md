@@ -60,11 +60,11 @@ For fun
 - https://github.com/newsboat/newsboat
 - https://github.com/orhun/daktilo
 - https://github.com/libvips/libvips
+- https://github.com/aristocratos/btop
 
 Fun memory
 
 - https://github.com/htop-dev/htop
-- https://github.com/aristocratos/btop
 - https://github.com/dylanaraps/neofetch
 - https://github.com/dylanaraps/pfetch
 - https://github.com/Gobidev/pfetch-rs
