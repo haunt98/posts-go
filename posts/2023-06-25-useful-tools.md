@@ -33,6 +33,7 @@ This just a raw list.
 - https://github.com/sharkdp/vivid
 - https://github.com/zellij-org/zellij
 - https://github.com/ajeetdsouza/zoxide
+- https://dev.yorhel.nl/ncdu
 
 Memory
 
@@ -42,7 +43,6 @@ Memory
 - https://github.com/so-fancy/diff-so-fancy
 - https://github.com/jonas/tig
 - https://github.com/extrawurst/gitui
-- https://dev.yorhel.nl/ncdu
 - https://github.com/dundee/gdu
 - https://github.com/muesli/duf
 - https://github.com/wustho/epr
