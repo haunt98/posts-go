@@ -520,6 +520,7 @@ go clean -cache -testcache -modcache -fuzzcache -x
 - [Designing Go Libraries: The Talk: The Article](https://abhinavg.net/2022/12/06/designing-go-libraries/)
 - [GopherCon 2023: Future-Proof Go Packages](https://abhinavg.net/2023/09/27/future-proof-packages/)
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
+- [Common Go Mistakes](https://100go.co/)
 
 - [Three bugs in the Go MySQL Driver](https://github.blog/2020-05-20-three-bugs-in-the-go-mysql-driver/)
 - [Fixing Memory Exhaustion Bugs in My Golang Web App](https://mtlynch.io/notes/picoshare-perf/)
