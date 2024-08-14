@@ -158,6 +158,7 @@ Format
 Language server
 
 - https://github.com/golang/tools/tree/master/gopls
+- https://github.com/Microsoft/pyright
 - https://github.com/artempyanykh/marksman
 
 Misc
@@ -192,7 +193,6 @@ Memory
 - https://github.com/ankitpokhrel/jira-cli
 - https://github.com/pyenv/pyenv
 - https://github.com/pypa/pipx
-- https://github.com/Microsoft/pyright
 
 #### Go
 
