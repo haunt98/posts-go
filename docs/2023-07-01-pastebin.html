@@ -183,14 +183,6 @@ dist</pre>
       <pre><span class="pl-ent">run</span>:
   <span class="pl-ent">timeout</span>: <span class="pl-c1">5m</span>
   <span class="pl-ent">tests</span>: <span class="pl-c1">false</span>
-  <span class="pl-ent">skip-dirs</span>:
-    - <span class="pl-s"><span class="pl-pds">"</span>.*test.*<span class="pl-pds">"</span></span>
-    - <span class="pl-s"><span class="pl-pds">"</span>.*mock.*<span class="pl-pds">"</span></span>
-    - <span class="pl-s"><span class="pl-pds">"</span>.*example.*<span class="pl-pds">"</span></span>
-    - <span class="pl-s"><span class="pl-pds">"</span>.*utils.*<span class="pl-pds">"</span></span>
-  <span class="pl-ent">skip-files</span>:
-    - <span class="pl-s"><span class="pl-pds">"</span>.*Mock.*<span class="pl-pds">"</span></span>
-    - <span class="pl-s"><span class="pl-pds">"</span>.*_mock.*<span class="pl-pds">"</span></span>
 
 <span class="pl-ent">output</span>:
   <span class="pl-ent">sort-results</span>: <span class="pl-c1">true</span>
@@ -207,13 +199,12 @@ dist</pre>
     - <span class="pl-s">typecheck</span>
     - <span class="pl-s">unused</span>
     <span class="pl-c"><span class="pl-c">#</span> Custom</span>
+    - <span class="pl-s">err113</span>
     - <span class="pl-s">errchkjson</span>
     - <span class="pl-s">errname</span>
     - <span class="pl-s">errorlint</span>
-    - <span class="pl-s">execinquery</span>
     - <span class="pl-s">forcetypeassert</span>
     - <span class="pl-s">gocritic</span>
-    - <span class="pl-s">goerr113</span>
     - <span class="pl-s">gofumpt</span>
     - <span class="pl-s">gosec</span>
     - <span class="pl-s">importas</span>
@@ -222,10 +213,8 @@ dist</pre>
     - <span class="pl-s">noctx</span>
     - <span class="pl-s">prealloc</span>
     - <span class="pl-s">reassign</span>
-    <span class="pl-c"><span class="pl-c">#</span> - rowserrcheck</span>
     - <span class="pl-s">sqlclosecheck</span>
     - <span class="pl-s">unconvert</span>
-    <span class="pl-c"><span class="pl-c">#</span> - wastedassign</span>
   <span class="pl-ent">fast</span>: <span class="pl-c1">true</span>
 
 <span class="pl-ent">linters-settings</span>:
@@ -265,6 +254,7 @@ dist</pre>
     <span class="pl-ent">excludes</span>:
       - <span class="pl-c1">G101</span>
       - <span class="pl-c1">G112</span>
+      - <span class="pl-c1">G115</span>
       - <span class="pl-c1">G402</span>
       - <span class="pl-c1">G404</span>
       - <span class="pl-c1">G501</span>
@@ -272,7 +262,17 @@ dist</pre>
     <span class="pl-ent">exclude-generated</span>: <span class="pl-c1">true</span>
   <span class="pl-ent">reassign</span>:
     <span class="pl-ent">patterns</span>:
-      - <span class="pl-s"><span class="pl-pds">"</span>.*<span class="pl-pds">"</span></span></pre>
+      - <span class="pl-s"><span class="pl-pds">"</span>.*<span class="pl-pds">"</span></span>
+
+<span class="pl-ent">issues</span>:
+  <span class="pl-ent">exclude-dirs</span>:
+    - <span class="pl-s"><span class="pl-pds">"</span>.*test.*<span class="pl-pds">"</span></span>
+    - <span class="pl-s"><span class="pl-pds">"</span>.*mock.*<span class="pl-pds">"</span></span>
+    - <span class="pl-s"><span class="pl-pds">"</span>.*example.*<span class="pl-pds">"</span></span>
+    - <span class="pl-s"><span class="pl-pds">"</span>.*utils.*<span class="pl-pds">"</span></span>
+  <span class="pl-ent">exclude-files</span>:
+    - <span class="pl-s"><span class="pl-pds">"</span>.*Mock.*<span class="pl-pds">"</span></span>
+    - <span class="pl-s"><span class="pl-pds">"</span>.*_mock.*<span class="pl-pds">"</span></span></pre>
     </div>
     <p><code>.goreleaser.yml</code>:</p>
     <div class="highlight highlight-source-yaml">
