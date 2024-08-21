@@ -170,6 +170,7 @@ Misc
 - https://github.com/asciidoctor/asciidoctor
 - https://github.com/ollama/ollama
 - https://github.com/gitleaks/gitleaks
+- https://github.com/cli/cli
 
 Memory
 
@@ -189,7 +190,6 @@ Memory
 - https://github.com/plantuml/plantuml
 - https://github.com/Textualize/toolong
 - https://github.com/walles/riff
-- https://github.com/cli/cli
 - https://github.com/ankitpokhrel/jira-cli
 - https://github.com/pyenv/pyenv
 - https://github.com/pypa/pipx
