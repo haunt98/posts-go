@@ -35,7 +35,7 @@ This just a raw list.
 - https://github.com/ajeetdsouza/zoxide
 - https://dev.yorhel.nl/ncdu
 
-Memory
+~~Memory~~
 
 - https://github.com/tmux/tmux
 - https://github.com/junegunn/vim-plug
@@ -62,7 +62,7 @@ For fun
 - https://github.com/libvips/libvips
 - https://github.com/aristocratos/btop
 
-Fun memory
+~~Fun memory~~
 
 - https://github.com/htop-dev/htop
 - https://github.com/dylanaraps/neofetch
@@ -102,7 +102,7 @@ Fun memory
 - https://github.com/localsend/localsend
 - https://github.com/ahrm/sioyek
 
-Memory
+~~Memory~~
 
 - https://github.com/alacritty/alacritty
 - https://www.xnview.com/en/xnviewmp/
@@ -121,7 +121,7 @@ Memory
 - https://github.com/jordanbaird/Ice
 - https://github.com/zed-industries/zed
 
-Memory
+~~Memory~~
 
 - https://github.com/linearmouse/linearmouse
 - https://www.tunabellysoftware.com/balance_lock/
@@ -141,7 +141,6 @@ Memory
 - https://github.com/Schniz/fnm
 - https://github.com/oven-sh/bun
 - https://github.com/denoland/deno
-- https://github.com/astral-sh/rye
 - https://github.com/astral-sh/uv
 - https://github.com/astral-sh/ruff
 - https://github.com/corbindavenport/nexus-tools
@@ -172,7 +171,7 @@ Misc
 - https://github.com/gitleaks/gitleaks
 - https://github.com/cli/cli
 
-Memory
+~~Memory~~
 
 - https://github.com/stedolan/jq
 - https://github.com/sigstore/gitsign
@@ -193,6 +192,7 @@ Memory
 - https://github.com/ankitpokhrel/jira-cli
 - https://github.com/pyenv/pyenv
 - https://github.com/pypa/pipx
+- https://github.com/astral-sh/rye
 
 #### Go
 
@@ -207,7 +207,7 @@ Memory
 - https://github.com/gotestyourself/gotestsum
 - https://github.com/bufbuild/buf
 
-Memory
+~~Memory~~
 
 - https://github.com/go101/golds
 - https://github.com/burrowers/garble
@@ -220,7 +220,7 @@ Memory
 - https://github.com/riok/Kreya
 - https://github.com/emqx/MQTTX
 
-Memory
+~~Memory~~
 
 - https://www.sublimemerge.com/
 - https://www.sublimetext.com/
@@ -233,7 +233,7 @@ Memory
 
 - https://github.com/orbstack/orbstack
 
-Memory
+~~Memory~~
 
 - https://gpgtools.org/
 - https://github.com/gnachman/iTerm2
