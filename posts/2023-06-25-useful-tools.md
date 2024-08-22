@@ -143,6 +143,7 @@ For fun
 - https://github.com/denoland/deno
 - https://github.com/astral-sh/uv
 - https://github.com/astral-sh/ruff
+- https://github.com/casey/just
 - https://github.com/corbindavenport/nexus-tools
 
 Format
