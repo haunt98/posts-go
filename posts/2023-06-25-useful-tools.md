@@ -273,6 +273,13 @@ Thanks:
 
 ### macOS
 
+Never sleep:
+
+```sh
+caffeinate -u -t 3600
+caffeinate -i
+```
+
 Use Touch ID in Terminal:
 
 ```sh
