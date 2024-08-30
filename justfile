@@ -39,8 +39,8 @@ format-html:
 
 srht:
     # https://srht.site/quickstart
-    # go install git.sr.ht/~emersion/hut@latest
+    # go install git.sr.ht/~xenrox/hut@latest
+    # hut init
     tar -C docs -cvz . > site.tar.gz
-    # Need to run hut init first
     hut pages publish -d youngyoshie.srht.site site.tar.gz
     rm -rf site.tar.gz
