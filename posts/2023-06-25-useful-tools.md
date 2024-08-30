@@ -9,7 +9,7 @@ This just a raw list.
 - https://github.com/ohmyzsh/ohmyzsh
   - https://github.com/romkatv/powerlevel10k
   - https://github.com/zsh-users/zsh-autosuggestions
-  - https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/gitfast
+  - https://github.com/zsh-users/zsh-completions
 - https://github.com/junegunn/fzf
   - https://github.com/Aloxaf/fzf-tab
 - https://github.com/folke/lazy.nvim
