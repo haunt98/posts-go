@@ -171,6 +171,7 @@ Misc
 - https://github.com/ollama/ollama
 - https://github.com/gitleaks/gitleaks
 - https://github.com/cli/cli
+- https://gitlab.com/gitlab-org/cli
 
 ~~Memory~~
 
