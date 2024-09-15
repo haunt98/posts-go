@@ -100,12 +100,12 @@ For fun
 - https://fbreader.org/
 - https://tailscale.com/
 - https://github.com/localsend/localsend
-- https://github.com/ahrm/sioyek
 
 ~~Memory~~
 
 - https://github.com/alacritty/alacritty
 - https://www.xnview.com/en/xnviewmp/
+- https://github.com/ahrm/sioyek
 
 #### macOS
 
