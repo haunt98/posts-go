@@ -412,30 +412,30 @@ rsync -avzP src/ dst</pre>
     </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">
-        <a href="https://github.com/ayoisaiah/f2">F2</a>
+        <a href="https://github.com/FFmpeg/FFmpeg">ffmpeg</a>
       </h2>
       <a
-        id="user-content-f2"
+        id="user-content-ffmpeg"
         class="anchor"
-        aria-label="Permalink: F2"
-        href="#f2"
+        aria-label="Permalink: ffmpeg"
+        href="#ffmpeg"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>Rename:</p>
     <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Not include time</span>
-f2 --exclude=<span class="pl-s"><span class="pl-pds">"</span>\d+x\d+_[a-z\d]{32}<span class="pl-pds">"</span></span> --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
-f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
+      <pre><span class="pl-c"><span class="pl-c">#</span> -crf: quality, 0 is lossless, more is lower quality</span>
+<span class="pl-c"><span class="pl-c">#</span> -an: no audio </span>
+<span class="pl-c"><span class="pl-c">#</span> -c:a aac -b:a 128k: audio codec and bitrate</span>
+ffmpeg -i input -c:v libx265 -crf 26 -preset fast -an output.mp4</pre>
     </div>
+    <p>Links:</p>
+    <ul>
+      <li>
+        <a href="https://trac.ffmpeg.org/wiki/Encode/H.265" rel="nofollow"
+          >H.265/HEVC Video Encoding Guide</a
+        >
+      </li>
+    </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">
         <a href="https://github.com/libvips/libvips">libvips</a>
@@ -479,6 +479,32 @@ vips rot filename.jxl new_filename.jxl d90</pre>
     <p>Download:</p>
     <div class="highlight highlight-source-shell">
       <pre>yt-dlp -f - <span class="pl-s"><span class="pl-pds">"</span>https://www.youtube.com/watch?v=video_id<span class="pl-pds">"</span></span></pre>
+    </div>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/ayoisaiah/f2">F2</a>
+      </h2>
+      <a
+        id="user-content-f2"
+        class="anchor"
+        aria-label="Permalink: F2"
+        href="#f2"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>Rename:</p>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Not include time</span>
+f2 --exclude=<span class="pl-s"><span class="pl-pds">"</span>\d+x\d+_[a-z\d]{32}<span class="pl-pds">"</span></span> --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
+f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
     </div>
 
     <div>
