@@ -313,6 +313,23 @@ defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
 defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6
 ```
 
+Tweak Finder:
+
+```sh
+# Use list view
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+# Show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+# Show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+# Show filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+killall Finder
+```
+
 Disable IPv6:
 
 ```sh
@@ -361,6 +378,7 @@ Thanks:
 - [How to fully uninstall Logitech G HUB on macOS via terminal/command line](https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116)
 - [Hardening macOS](https://www.bejarano.io/hardening-macos/)
   - https://github.com/drduh/macOS-Security-and-Privacy-Guide
+- [Mac Setup](https://mac.install.guide/mac-setup/)
 - https://github.com/OpenVPN/openvpn3/issues/243
 
 ### Firefox

@@ -1207,6 +1207,21 @@ defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
 defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
       >
     </div>
+    <p>Tweak Finder:</p>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> Use list view</span>
+defaults write com.apple.finder FXPreferredViewStyle -string <span class="pl-s"><span class="pl-pds">"</span>Nlsv<span class="pl-pds">"</span></span>
+<span class="pl-c"><span class="pl-c">#</span> Show path bar</span>
+defaults write com.apple.finder ShowPathbar -bool <span class="pl-c1">true</span>
+<span class="pl-c"><span class="pl-c">#</span> Show status bar</span>
+defaults write com.apple.finder ShowStatusBar -bool <span class="pl-c1">true</span>
+<span class="pl-c"><span class="pl-c">#</span> Show filename extensions</span>
+defaults write NSGlobalDomain AppleShowAllExtensions -bool <span class="pl-c1">true</span>
+<span class="pl-c"><span class="pl-c">#</span> Keep folders on top when sorting by name</span>
+defaults write com.apple.finder _FXSortFoldersFirst -bool <span class="pl-c1">true</span>
+
+killall Finder</pre>
+    </div>
     <p>Disable IPv6:</p>
     <div class="highlight highlight-source-shell">
       <pre>
@@ -1310,6 +1325,11 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre
             >
           </li>
         </ul>
+      </li>
+      <li>
+        <a href="https://mac.install.guide/mac-setup/" rel="nofollow"
+          >Mac Setup</a
+        >
       </li>
       <li>
         <a href="https://github.com/OpenVPN/openvpn3/issues/243"
