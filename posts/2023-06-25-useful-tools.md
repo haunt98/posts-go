@@ -369,6 +369,13 @@ sudo launchctl unload -w /Library/LaunchDaemons/org.openvpn.client.plist
 sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist
 ```
 
+Bluetooth stutter:
+
+```sh
+sudo rm /Library/Preferences/com.apple.Bluetooth.plist
+sudo pkill bluetoothd
+```
+
 Thanks:
 
 - [Can Touch ID on Mac authenticate sudo in Terminal?](https://apple.stackexchange.com/a/466029)
