@@ -1278,6 +1278,13 @@ sudo launchctl unload -w /Library/LaunchDaemons/org.openvpn.client.plist
 sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre
       >
     </div>
+    <p>Bluetooth stutter:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>
+sudo rm /Library/Preferences/com.apple.Bluetooth.plist
+sudo pkill bluetoothd</pre
+      >
+    </div>
     <p>Thanks:</p>
     <ul>
       <li>
