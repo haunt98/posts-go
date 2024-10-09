@@ -6,12 +6,10 @@ This just a raw list.
 
 ### Terminal
 
-- https://github.com/ohmyzsh/ohmyzsh
-  - https://github.com/romkatv/powerlevel10k
-  - https://github.com/zsh-users/zsh-autosuggestions
-  - https://github.com/zsh-users/zsh-completions
+- https://github.com/starship/starship
+- https://github.com/zsh-users/zsh-autosuggestions
 - https://github.com/junegunn/fzf
-  - https://github.com/Aloxaf/fzf-tab
+- https://github.com/Aloxaf/fzf-tab
 - https://github.com/folke/lazy.nvim
 
 - https://github.com/sharkdp/fd
@@ -37,6 +35,9 @@ This just a raw list.
 
 ~~Memory~~
 
+- https://github.com/ohmyzsh/ohmyzsh
+- https://github.com/romkatv/powerlevel10k
+- https://github.com/zsh-users/zsh-completions
 - https://github.com/tmux/tmux
 - https://github.com/junegunn/vim-plug
 - https://github.com/wbthomason/packer.nvim
