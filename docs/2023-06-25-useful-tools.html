@@ -1230,35 +1230,28 @@ sudo networksetup -setv6off Wi-Fi</pre
       >
     </div>
     <p>Clean up leftover data:</p>
-    <ul>
-      <li>
-        <p><code>~/Library/Application Support</code></p>
-      </li>
-      <li>
-        <p><code>/Library/Application Support</code></p>
-      </li>
-      <li>
-        <p><code>~/Library/LaunchAgents</code></p>
-      </li>
-      <li>
-        <p><code>/Library/LaunchAgents</code></p>
-      </li>
-      <li>
-        <p><code>/Library/LaunchDaemons</code></p>
-      </li>
-      <li>
-        <p><code>~/Library/Preferences</code></p>
-      </li>
-      <li>
-        <p><code>/Library/Preferences</code></p>
-      </li>
-      <li>
-        <p><code>~/Library/Fonts (Removed)</code></p>
-      </li>
-      <li>
-        <p><code>/Users/Shared</code></p>
-      </li>
-    </ul>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+/Library/Application Support
+/Library/LaunchAgents
+/Library/LaunchDaemons
+/Library/Preferences
+/Users/Shared
+~/Library/Application Support
+~/Library/Fonts (Removed)
+~/Library/LaunchAgents
+~/Library/Preferences</pre
+      >
+    </div>
+    <p>Clean up leftover shell:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+/etc/bashrc
+/etc/profile
+/etc/zshrc
+/etc/paths.d</pre
+      >
+    </div>
     <p>Clean up clipboard:</p>
     <div class="highlight highlight-source-shell">
       <pre>pbcopy <span class="pl-k">&lt;</span> /dev/null</pre>
@@ -1341,6 +1334,11 @@ sudo pkill bluetoothd</pre
       <li>
         <a href="https://github.com/OpenVPN/openvpn3/issues/243"
           >https://github.com/OpenVPN/openvpn3/issues/243</a
+        >
+      </li>
+      <li>
+        <a href="https://stackoverflow.com/q/15872666" rel="nofollow"
+          >https://stackoverflow.com/q/15872666</a
         >
       </li>
     </ul>
