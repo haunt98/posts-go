@@ -1,6 +1,6 @@
 # Useful tools
 
-This just a raw list.
+This is just a raw list.
 
 ## Tools
 
@@ -8,6 +8,7 @@ This just a raw list.
 
 - https://github.com/starship/starship
 - https://github.com/zsh-users/zsh-autosuggestions
+- https://github.com/zsh-users/zsh-history-substring-search
 - https://github.com/junegunn/fzf
 - https://github.com/Aloxaf/fzf-tab
 - https://github.com/folke/lazy.nvim
