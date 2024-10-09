@@ -339,20 +339,26 @@ sudo networksetup -setv6off Wi-Fi
 
 Clean up leftover data:
 
-- `~/Library/Application Support`
-- `/Library/Application Support`
+```txt
+/Library/Application Support
+/Library/LaunchAgents
+/Library/LaunchDaemons
+/Library/Preferences
+/Users/Shared
+~/Library/Application Support
+~/Library/Fonts (Removed)
+~/Library/LaunchAgents
+~/Library/Preferences
+```
 
-- `~/Library/LaunchAgents`
-- `/Library/LaunchAgents`
+Clean up leftover shell:
 
-- `/Library/LaunchDaemons`
-
-- `~/Library/Preferences`
-- `/Library/Preferences`
-
-- `~/Library/Fonts (Removed)`
-
-- `/Users/Shared`
+```txt
+/etc/bashrc
+/etc/profile
+/etc/zshrc
+/etc/paths.d
+```
 
 Clean up clipboard:
 
@@ -387,6 +393,7 @@ Thanks:
   - https://github.com/drduh/macOS-Security-and-Privacy-Guide
 - [Mac Setup](https://mac.install.guide/mac-setup/)
 - https://github.com/OpenVPN/openvpn3/issues/243
+- https://stackoverflow.com/q/15872666
 
 ### Firefox
 
