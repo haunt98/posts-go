@@ -244,10 +244,9 @@ Misc
 
 ## Notes
 
-Prefer `go`/`cargo`/`pipx` to MacPorts, HomeBrew
-
 Don't install:
 
+- MacPorts
 - Google Chrome
 - Visual Studio Code
 - Postman
@@ -396,6 +395,8 @@ Thanks:
 - [Mac Setup](https://mac.install.guide/mac-setup/)
 - https://github.com/OpenVPN/openvpn3/issues/243
 - https://stackoverflow.com/q/15872666
+- [Reclaiming storage/space from 'System Data' in macOS: A tutorial on understanding the System Data usage](http://blog.greggant.com/posts/2022/04/10/reclaiming-space-from-system-data-in-macos.html)
+- [Upgrading Homebrew and avoiding the failed to verify attestation error](https://til.simonwillison.net/homebrew/no-verify-attestations)
 
 ### Firefox
 
