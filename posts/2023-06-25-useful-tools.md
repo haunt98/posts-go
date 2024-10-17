@@ -12,6 +12,7 @@ This is just a raw list.
 - https://github.com/junegunn/fzf
 - https://github.com/Aloxaf/fzf-tab
 - https://github.com/folke/lazy.nvim
+- https://github.com/ajeetdsouza/zoxide
 
 - https://github.com/sharkdp/fd
 - https://github.com/sharkdp/bat
@@ -31,8 +32,8 @@ This is just a raw list.
 - https://github.com/tldr-pages/tlrc
 - https://github.com/sharkdp/vivid
 - https://github.com/zellij-org/zellij
-- https://github.com/ajeetdsouza/zoxide
 - https://dev.yorhel.nl/ncdu
+- https://github.com/yitsushi/totp-cli
 
 ~~Memory~~
 
