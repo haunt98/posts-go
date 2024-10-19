@@ -16,6 +16,7 @@ This is just a raw list.
 
 - https://github.com/sharkdp/fd
 - https://github.com/sharkdp/bat
+- https://github.com/eth-p/bat-extras
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/dandavison/delta
 - https://github.com/Wilfred/difftastic
