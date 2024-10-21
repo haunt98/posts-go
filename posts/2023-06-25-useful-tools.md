@@ -147,8 +147,13 @@ For fun
 - https://github.com/denoland/deno
 - https://github.com/astral-sh/uv
 - https://github.com/astral-sh/ruff
-- https://github.com/casey/just
 - https://github.com/corbindavenport/nexus-tools
+
+Language
+
+- https://github.com/casey/just
+- https://github.com/typst/typst
+- https://github.com/asciidoctor/asciidoctor
 
 Format
 
@@ -158,12 +163,14 @@ Format
 - https://github.com/tamasfe/taplo
 - https://github.com/sqlfluff/sqlfluff
 - https://github.com/crate-ci/typos
+- https://github.com/Enter-tainer/typstyle
 
 Language server
 
 - https://github.com/golang/tools/tree/master/gopls
 - https://github.com/Microsoft/pyright
 - https://github.com/artempyanykh/marksman
+- https://github.com/Myriad-Dreamin/tinymist
 
 Misc
 
@@ -171,7 +178,6 @@ Misc
 - https://github.com/itchyny/gojq
 - https://github.com/walles/moar
 - https://github.com/antonmedv/fx
-- https://github.com/asciidoctor/asciidoctor
 - https://github.com/ollama/ollama
 - https://github.com/gitleaks/gitleaks
 - https://github.com/cli/cli
