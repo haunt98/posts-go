@@ -568,11 +568,6 @@
           >https://www.xnview.com/en/xnviewmp/</a
         >
       </li>
-      <li>
-        <a href="https://github.com/ahrm/sioyek"
-          >https://github.com/ahrm/sioyek</a
-        >
-      </li>
     </ul>
     <div class="markdown-heading">
       <h4 class="heading-element">macOS</h4>
@@ -638,6 +633,11 @@
           >https://github.com/zed-industries/zed</a
         >
       </li>
+      <li>
+        <a href="https://sourceforge.net/projects/skim-app/" rel="nofollow"
+          >https://sourceforge.net/projects/skim-app/</a
+        >
+      </li>
     </ul>
     <p><del>Memory</del></p>
     <ul>
@@ -689,6 +689,11 @@
       <li>
         <a href="https://github.com/Ranchero-Software/NetNewsWire"
           >https://github.com/Ranchero-Software/NetNewsWire</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/ahrm/sioyek"
+          >https://github.com/ahrm/sioyek</a
         >
       </li>
     </ul>
@@ -1164,320 +1169,6 @@
       <li>Sourcegraph</li>
       <li>Docker Desktop</li>
       <li>Any JetBrains IDE beside DataGrip</li>
-    </ul>
-    <div class="markdown-heading">
-      <h2 class="heading-element">Misc</h2>
-      <a
-        id="user-content-misc"
-        class="anchor"
-        aria-label="Permalink: Misc"
-        href="#misc"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Don't enable plugin <code>git</code> in ohmyzsh.</p>
-    <p>Edit <code>~/.ssh/config</code></p>
-    <pre lang="ssh"><code>Host *
-    IdentitiesOnly yes
-    UseKeychain yes
-</code></pre>
-    <p>Thanks:</p>
-    <ul>
-      <li>
-        <a
-          href="https://tim.siosm.fr/blog/2023/01/13/openssh-key-management/"
-          rel="nofollow"
-          >OpenSSH client side key management for better privacy and security</a
-        >
-      </li>
-      <li>
-        <a href="https://stackoverflow.com/a/41576222" rel="nofollow"
-          >Git keeps asking me for my ssh key passphrase</a
-        >
-        <ul>
-          <li>
-            <a
-              href="https://developer.apple.com/library/archive/technotes/tn2449/_index.html"
-              rel="nofollow"
-              >OpenSSH updates in macOS 10.12.2</a
-            >
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <div class="markdown-heading">
-      <h3 class="heading-element">macOS</h3>
-      <a
-        id="user-content-macos-2"
-        class="anchor"
-        aria-label="Permalink: macOS"
-        href="#macos-2"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Never sleep:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-caffeinate -u -t 3600
-caffeinate -i</pre
-      >
-    </div>
-    <p>Use Touch ID in Terminal:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
-
-<span class="pl-c"><span class="pl-c">#</span> Uncomment last line</span>
-sudo nano /etc/pam.d/sudo_local</pre>
-    </div>
-    <p>Hide Developer in Spotlight:</p>
-    <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c1">cd</span> /Applications
-touch Xcode.app
-
-<span class="pl-c"><span class="pl-c">#</span> Xcode mini version</span>
-xcode-select --install</pre>
-    </div>
-    <p>Reset launchpad:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>defaults write com.apple.dock ResetLaunchPad -bool <span class="pl-c1">true</span><span class="pl-k">;</span> killall Dock</pre>
-    </div>
-    <p>Reduce padding in menu bar (Log out then log in to apply):</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
-defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
-      >
-    </div>
-    <p>Tweak Finder:</p>
-    <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> Use list view</span>
-defaults write com.apple.finder FXPreferredViewStyle -string <span class="pl-s"><span class="pl-pds">"</span>Nlsv<span class="pl-pds">"</span></span>
-<span class="pl-c"><span class="pl-c">#</span> Show path bar</span>
-defaults write com.apple.finder ShowPathbar -bool <span class="pl-c1">true</span>
-<span class="pl-c"><span class="pl-c">#</span> Show status bar</span>
-defaults write com.apple.finder ShowStatusBar -bool <span class="pl-c1">true</span>
-<span class="pl-c"><span class="pl-c">#</span> Show filename extensions</span>
-defaults write NSGlobalDomain AppleShowAllExtensions -bool <span class="pl-c1">true</span>
-<span class="pl-c"><span class="pl-c">#</span> Keep folders on top when sorting by name</span>
-defaults write com.apple.finder _FXSortFoldersFirst -bool <span class="pl-c1">true</span>
-
-killall Finder</pre>
-    </div>
-    <p>Disable IPv6:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-sudo networksetup -listallnetworkservices
-sudo networksetup -setv6off Wi-Fi</pre
-      >
-    </div>
-    <p>Clean up leftover data:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>
-/Library/Application Support
-/Library/LaunchAgents
-/Library/LaunchDaemons
-/Library/Preferences
-/Users/Shared
-~/Library/Application Support
-~/Library/Fonts (Removed)
-~/Library/LaunchAgents
-~/Library/Preferences</pre
-      >
-    </div>
-    <p>Clean up leftover shell:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>
-/etc/bashrc
-/etc/profile
-/etc/zshrc
-/etc/paths.d</pre
-      >
-    </div>
-    <p>Clean up clipboard:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>pbcopy <span class="pl-k">&lt;</span> /dev/null</pre>
-    </div>
-    <p>
-      <a
-        href="https://mastodon.online/@nikitonsky/112220593113484602"
-        rel="nofollow"
-        >Disable <strong>Smart zoom</strong> in
-        <strong>Track pad</strong> settings to make right click instant</a
-      >
-    </p>
-    <p>Fix OpenVPN Client 3</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-sudo launchctl unload -w /Library/LaunchDaemons/org.openvpn.client.plist
-sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre
-      >
-    </div>
-    <p>Bluetooth stutter:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-sudo rm /Library/Preferences/com.apple.Bluetooth.plist
-sudo pkill bluetoothd</pre
-      >
-    </div>
-    <p>Thanks:</p>
-    <ul>
-      <li>
-        <a href="https://apple.stackexchange.com/a/466029" rel="nofollow"
-          >Can Touch ID on Mac authenticate sudo in Terminal?</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://flaky.build/native-fix-for-applications-hiding-under-the-macbook-pro-notch"
-          rel="nofollow"
-          >Native fix for applications hiding under the MacBook Pro notch</a
-        >
-        <ul>
-          <li>
-            <a href="https://apple.stackexchange.com/q/406316" rel="nofollow"
-              >Can the spacing of menu bar apps be modified in macOS Big Sur and
-              later?</a
-            >
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a
-          href="https://appletoolbox.com/macos-how-to-disable-ipv6/"
-          rel="nofollow"
-          >macOS: How to Disable IPv6</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116"
-          >How to fully uninstall Logitech G HUB on macOS via terminal/command
-          line</a
-        >
-      </li>
-      <li>
-        <a href="https://www.bejarano.io/hardening-macos/" rel="nofollow"
-          >Hardening macOS</a
-        >
-        <ul>
-          <li>
-            <a href="https://github.com/drduh/macOS-Security-and-Privacy-Guide"
-              >https://github.com/drduh/macOS-Security-and-Privacy-Guide</a
-            >
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="https://mac.install.guide/mac-setup/" rel="nofollow"
-          >Mac Setup</a
-        >
-      </li>
-      <li>
-        <a href="https://github.com/OpenVPN/openvpn3/issues/243"
-          >https://github.com/OpenVPN/openvpn3/issues/243</a
-        >
-      </li>
-      <li>
-        <a href="https://stackoverflow.com/q/15872666" rel="nofollow"
-          >https://stackoverflow.com/q/15872666</a
-        >
-      </li>
-      <li>
-        <a
-          href="http://blog.greggant.com/posts/2022/04/10/reclaiming-space-from-system-data-in-macos.html"
-          rel="nofollow"
-          >Reclaiming storage/space from 'System Data' in macOS: A tutorial on
-          understanding the System Data usage</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://til.simonwillison.net/homebrew/no-verify-attestations"
-          rel="nofollow"
-          >Upgrading Homebrew and avoiding the failed to verify attestation
-          error</a
-        >
-      </li>
-    </ul>
-    <div class="markdown-heading">
-      <h3 class="heading-element">Firefox</h3>
-      <a
-        id="user-content-firefox"
-        class="anchor"
-        aria-label="Permalink: Firefox"
-        href="#firefox"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p><code>about:config</code>:</p>
-    <ul>
-      <li>
-        <p>Disable unused features:</p>
-        <ul>
-          <li><code>extensions.pocket.enabled</code>: false</li>
-          <li><code>identity.fxaccounts.enabled</code>: false</li>
-          <li><code>reader.parse-on-load.enabled</code>: false</li>
-        </ul>
-      </li>
-      <li>
-        <p>Good settings:</p>
-        <ul>
-          <li>
-            <code
-              >media.videocontrols.picture-in-picture.video-toggle.always-show</code
-            >: true
-          </li>
-          <li><code>network.IDN_show_punycode</code>: true</li>
-          <li><code>browser.tabs.insertAfterCurrent</code>: true</li>
-        </ul>
-      </li>
-      <li>
-        <p>Encrypted Client Hello (ECH):</p>
-        <ul>
-          <li><code>network.dns.echconfig.enabled</code>: true</li>
-          <li><code>network.dns.use_https_rr_as_altsvc</code>: true</li>
-        </ul>
-      </li>
-      <li>
-        <p>Experiment</p>
-        <ul>
-          <li><code>image.jxl.enabled</code>: true</li>
-        </ul>
-      </li>
-    </ul>
-    <p>Thanks:</p>
-    <ul>
-      <li>
-        <a
-          href="https://boyter.org/posts/my-list-of-useful-command-line-tools/"
-          rel="nofollow"
-          >My list of useful command line tools</a
-        >
-      </li>
-      <li>
-        <a
-          href="http://www.quippd.com/firefox/wiki/useful-customizations/"
-          rel="nofollow"
-          >Useful Customizations for Firefox</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://blog.mozilla.org/security/2021/01/07/encrypted-client-hello-the-future-of-esni-in-firefox/"
-          rel="nofollow"
-          >Encrypted Client Hello: the future of ESNI in Firefox</a
-        >
-      </li>
-      <li>
-        <a href="https://www.xudongz.com/blog/2017/idn-phishing/" rel="nofollow"
-          >Phishing with Unicode Domains</a
-        >
-      </li>
-      <li>
-        <a href="https://sizeof.cat/links/" rel="nofollow"
-          >https://sizeof.cat/links/</a
-        >
-      </li>
     </ul>
 
     <div>
