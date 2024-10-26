@@ -473,10 +473,12 @@ dist</pre>
     - <span class="pl-s">typecheck</span>
     - <span class="pl-s">unused</span>
     <span class="pl-c"><span class="pl-c">#</span> Custom</span>
+    - <span class="pl-s">bodyclose</span>
     - <span class="pl-s">err113</span>
     - <span class="pl-s">errchkjson</span>
     - <span class="pl-s">errname</span>
     - <span class="pl-s">errorlint</span>
+    - <span class="pl-s">fatcontext</span>
     - <span class="pl-s">forcetypeassert</span>
     - <span class="pl-s">gocritic</span>
     - <span class="pl-s">gofumpt</span>
@@ -548,30 +550,6 @@ dist</pre>
   <span class="pl-ent">exclude-files</span>:
     - <span class="pl-s"><span class="pl-pds">"</span>.*Mock.*<span class="pl-pds">"</span></span>
     - <span class="pl-s"><span class="pl-pds">"</span>.*_mock.*<span class="pl-pds">"</span></span></pre>
-    </div>
-    <p><code>.goreleaser.yml</code>:</p>
-    <div class="highlight highlight-source-yaml">
-      <pre><span class="pl-ent">before</span>:
-  <span class="pl-ent">hooks</span>:
-    - <span class="pl-s">go mod tidy</span>
-<span class="pl-ent">builds</span>:
-  - <span class="pl-ent">main</span>: <span class="pl-s">.</span>
-    <span class="pl-ent">goos</span>:
-      - <span class="pl-s">linux</span>
-      - <span class="pl-s">windows</span>
-      - <span class="pl-s">darwin</span>
-    <span class="pl-ent">goarch</span>:
-      - <span class="pl-s">amd64</span>
-      - <span class="pl-s">arm64</span>
-<span class="pl-ent">universal_binaries</span>:
-  - <span class="pl-ent">replace</span>: <span class="pl-c1">true</span>
-<span class="pl-ent">archives</span>:
-  - <span class="pl-ent">format_overrides</span>:
-      - <span class="pl-ent">goos</span>: <span class="pl-s">windows</span>
-        <span class="pl-ent">format</span>: <span class="pl-s">zip</span>
-<span class="pl-ent">changelog</span>:
-  <span class="pl-ent">skip</span>: <span class="pl-c1">false</span>
-  <span class="pl-ent">use</span>: <span class="pl-s">github</span></pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">ssh config</h2>
