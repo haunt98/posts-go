@@ -60,11 +60,12 @@ This is just a raw list.
 For fun
 
 - https://github.com/yt-dlp/yt-dlp
-- https://github.com/talwat/pokeget-rs
 - https://github.com/newsboat/newsboat
 - https://github.com/orhun/daktilo
 - https://github.com/libvips/libvips
 - https://github.com/aristocratos/btop
+- https://github.com/asciinema/asciinema
+  - https://github.com/asciinema/agg
 
 ~~Fun memory~~
 
@@ -78,9 +79,8 @@ For fun
 - https://github.com/ytdl-org/youtube-dl
 - https://github.com/instaloader/instaloader
 - https://gitlab.com/phoneybadger/pokemon-colorscripts
+- https://github.com/talwat/pokeget-rs
 - https://github.com/Genymobile/scrcpy
-- https://github.com/asciinema/asciinema
-  - https://github.com/asciinema/agg
 - https://github.com/sxyazi/yazi
   - https://github.com/dirkvdb/ffmpegthumbnailer
 - https://github.com/jarun/nnn
