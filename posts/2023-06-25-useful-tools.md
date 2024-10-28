@@ -183,6 +183,7 @@ Misc
 - https://github.com/gitleaks/gitleaks
 - https://github.com/cli/cli
 - https://gitlab.com/gitlab-org/cli
+- https://github.com/k1LoW/tbls
 
 ~~Memory~~
 
