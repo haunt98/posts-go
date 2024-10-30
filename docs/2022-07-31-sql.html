@@ -124,24 +124,42 @@
     <p>JSON data type is also useful for dumping request, response data.</p>
     <ul>
       <li>
-        <a
-          href="https://dev.mysql.com/doc/refman/5.7/en/json.html"
-          rel="nofollow"
-          >For MySQL 5.7</a
-        >
+        <p>
+          Use <code>JSON_CONTAINS_PATH(col, 'one', '$.key')</code> to check json
+          field exist or not
+        </p>
       </li>
       <li>
-        <a
-          href="https://dev.mysql.com/doc/refman/8.0/en/json.html"
-          rel="nofollow"
-          >For MySQL 8.0</a
-        >
+        <p>Use <code>col-&gt;'$.key'</code> to get value</p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://dev.mysql.com/doc/refman/5.7/en/json.html"
+            rel="nofollow"
+            >For MySQL 5.7</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://dev.mysql.com/doc/refman/8.0/en/json.html"
+            rel="nofollow"
+            >For MySQL 8.0</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://planetscale.com/blog/indexing-json-in-mysql"
+            rel="nofollow"
+            >Indexing JSON in MySQL</a
+          >
+        </p>
       </li>
     </ul>
-    <p>
-      Use <code>JSON_EXTRACT(col, '$.key') IS NULL</code> to check json field
-      exist or not.
-    </p>
     <div class="markdown-heading">
       <h2 class="heading-element">Use index!!!</h2>
       <a
