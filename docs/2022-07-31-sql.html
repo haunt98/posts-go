@@ -197,6 +197,29 @@
     INDEX idx_user_id (user_id)
 );</pre>
     </div>
+    <p>
+      If use composite index, order is important, either both
+      <code>DESC</code> or both <code>ASC</code>, do not mix:
+    </p>
+    <div class="highlight highlight-source-sql">
+      <pre><span class="pl-k">CREATE</span> <span class="pl-k">INDEX</span> <span class="pl-en">idx_user_id_created_at</span>
+    <span class="pl-k">ON</span> user_upload (user_id, created_at);
+
+<span class="pl-c"><span class="pl-c">--</span> Do not</span>
+<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
+<span class="pl-k">FROM</span> user_upload
+<span class="pl-k">ORDER BY</span> user_id, created_at <span class="pl-k">DESC</span>;
+
+<span class="pl-c"><span class="pl-c">--</span> Do</span>
+<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
+<span class="pl-k">FROM</span> user_upload
+<span class="pl-k">ORDER BY</span> user_id <span class="pl-k">DESC</span>, created_at <span class="pl-k">DESC</span>;
+
+<span class="pl-c"><span class="pl-c">--</span> Or do</span>
+<span class="pl-k">SELECT</span> <span class="pl-k">*</span>
+<span class="pl-k">FROM</span> user_upload
+<span class="pl-k">ORDER BY</span> user_id, created_at;</pre>
+    </div>
     <p>Use <code>EXPLAIN</code> to check if index is used or not:</p>
     <ul>
       <li>
