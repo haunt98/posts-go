@@ -180,7 +180,7 @@
     <p>For example, create index in MySQL:</p>
     <div class="highlight highlight-source-sql">
       <pre><span class="pl-k">CREATE</span> <span class="pl-k">INDEX</span> <span class="pl-en">idx_user_id</span>
-    <span class="pl-k">ON</span> user_upload (user_id);</pre>
+<span class="pl-k">ON</span> user_upload (user_id);</pre>
     </div>
     <p>
       If create index inside <code>CREATE TABLE</code>,
@@ -191,8 +191,8 @@
     <div class="highlight highlight-source-sql">
       <pre><span class="pl-k">CREATE</span> <span class="pl-k">TABLE</span> <span class="pl-en">user_upload</span>
 (
-    id      <span class="pl-k">int</span>(<span class="pl-c1">11</span>) <span class="pl-k">NOT NULL</span>,
-    user_id <span class="pl-k">int</span>(<span class="pl-c1">11</span>) <span class="pl-k">NULL</span> DEFAULT <span class="pl-k">NULL</span>,
+    id <span class="pl-k">INT</span>(<span class="pl-c1">11</span>) <span class="pl-k">NOT NULL</span>,
+    user_id <span class="pl-k">INT</span>(<span class="pl-c1">11</span>) <span class="pl-k">NULL</span> DEFAULT <span class="pl-k">NULL</span>,
     <span class="pl-k">PRIMARY KEY</span> (id),
     INDEX idx_user_id (user_id)
 );</pre>
@@ -203,7 +203,7 @@
     </p>
     <div class="highlight highlight-source-sql">
       <pre><span class="pl-k">CREATE</span> <span class="pl-k">INDEX</span> <span class="pl-en">idx_user_id_created_at</span>
-    <span class="pl-k">ON</span> user_upload (user_id, created_at);
+<span class="pl-k">ON</span> user_upload (user_id, created_at);
 
 <span class="pl-c"><span class="pl-c">--</span> Bad</span>
 <span class="pl-k">SELECT</span> <span class="pl-k">*</span>
