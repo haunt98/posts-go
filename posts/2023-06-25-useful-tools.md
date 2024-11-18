@@ -112,7 +112,6 @@ For fun
 
 #### macOS
 
-- https://theunarchiver.com/
 - https://github.com/iina/iina
 - https://github.com/rxhanson/Rectangle
 - https://github.com/waydabber/BetterDisplay
@@ -126,11 +125,13 @@ For fun
 - https://github.com/jordanbaird/Ice
 - https://github.com/zed-industries/zed
 - https://sourceforge.net/projects/skim-app/
+- https://github.com/alienator88/Pearcleaner
 
 ~~Memory~~
 
-- https://github.com/linearmouse/linearmouse
+- https://theunarchiver.com/
 - https://www.tunabellysoftware.com/balance_lock/
+- https://github.com/linearmouse/linearmouse
 - https://github.com/tuyenvm/OpenKey
 - https://github.com/objective-see/LuLu
 - https://github.com/ivoronin/TomatoBar

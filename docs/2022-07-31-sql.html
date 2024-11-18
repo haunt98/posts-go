@@ -205,17 +205,17 @@
       <pre><span class="pl-k">CREATE</span> <span class="pl-k">INDEX</span> <span class="pl-en">idx_user_id_created_at</span>
     <span class="pl-k">ON</span> user_upload (user_id, created_at);
 
-<span class="pl-c"><span class="pl-c">--</span> Do not</span>
+<span class="pl-c"><span class="pl-c">--</span> Bad</span>
 <span class="pl-k">SELECT</span> <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> user_upload
 <span class="pl-k">ORDER BY</span> user_id, created_at <span class="pl-k">DESC</span>;
 
-<span class="pl-c"><span class="pl-c">--</span> Do</span>
+<span class="pl-c"><span class="pl-c">--</span> Good</span>
 <span class="pl-k">SELECT</span> <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> user_upload
 <span class="pl-k">ORDER BY</span> user_id <span class="pl-k">DESC</span>, created_at <span class="pl-k">DESC</span>;
 
-<span class="pl-c"><span class="pl-c">--</span> Or do</span>
+<span class="pl-c"><span class="pl-c">--</span> Also good</span>
 <span class="pl-k">SELECT</span> <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> user_upload
 <span class="pl-k">ORDER BY</span> user_id, created_at;</pre>
@@ -390,6 +390,27 @@
         database reality :)
       </li>
     </ul>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Pastebin</h2>
+      <a
+        id="user-content-pastebin"
+        class="anchor"
+        aria-label="Permalink: Pastebin"
+        href="#pastebin"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>
+      <a href="https://stackoverflow.com/a/5213364" rel="nofollow"
+        >Show index of table</a
+      >:
+    </p>
+    <div class="highlight highlight-source-sql">
+      <pre><span class="pl-k">SELECT DISTINCT</span>
+    table_name,
+    index_name
+<span class="pl-k">FROM</span> <span class="pl-c1">information_schema</span>.<span class="pl-c1">statistics</span>;</pre>
+    </div>
     <div class="markdown-heading">
       <h2 class="heading-element">Thanks</h2>
       <a
