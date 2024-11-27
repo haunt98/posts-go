@@ -486,6 +486,7 @@ Do it at your own risk!!!
 - https://github.com/GrapheneOS/hardened_malloc
 - https://github.com/AdnanHodzic/auto-cpufreq
 - https://github.com/nbfc-linux/nbfc-linux
+- https://github.com/erpalma/throttled
 
 ## Maintenance
 
