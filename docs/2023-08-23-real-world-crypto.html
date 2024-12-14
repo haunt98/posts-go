@@ -132,7 +132,7 @@
     </ul>
     <p>Constant time comparison:</p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">:=</span> <span class="pl-c1">0</span>; <span class="pl-s1">i</span> <span class="pl-c1">&lt;</span> <span class="pl-en">len</span>(<span class="pl-s1">x</span>); <span class="pl-s1">i</span><span class="pl-c1">++</span> {
+      <pre><span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">:=</span> <span class="pl-c1">0</span>; <span class="pl-s1">i</span> <span class="pl-c1">&lt;</span> <span class="pl-s1">len</span>(<span class="pl-s1">x</span>); <span class="pl-s1">i</span><span class="pl-c1">++</span> {
     <span class="pl-c">// Use XOR instead of compare x[i] == y[i]</span>
     <span class="pl-c">// If x[i] == y[i] -&gt; XOR is 1</span>
     <span class="pl-c">// Otherwise XOR is 0</span>

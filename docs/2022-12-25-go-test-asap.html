@@ -141,25 +141,25 @@
     <span class="pl-c1">verifyService</span> <span class="pl-smi">VerifyService</span>
 }
 
-<span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">service</span>) <span class="pl-en">Upload</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>, <span class="pl-s1">req</span> <span class="pl-smi">Request</span>) <span class="pl-smi">error</span> {
+<span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">service</span>) <span class="pl-c1">Upload</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>, <span class="pl-s1">req</span> <span class="pl-smi">Request</span>) <span class="pl-smi">error</span> {
     <span class="pl-c">// I simplify by omitting the response, only care error for now</span>
-    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">verifyService</span>.<span class="pl-en">Verify</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">verifyService</span>.<span class="pl-c1">Verify</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
         <span class="pl-k">return</span> <span class="pl-s1">err</span>
     }
 
-    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">minio</span>.<span class="pl-en">Put</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">minio</span>.<span class="pl-c1">Put</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
         <span class="pl-k">return</span> <span class="pl-s1">err</span>
     }
 
-    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">redis</span>.<span class="pl-en">Set</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">redis</span>.<span class="pl-c1">Set</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
         <span class="pl-k">return</span> <span class="pl-s1">err</span>
     }
 
-    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">db</span>.<span class="pl-en">Save</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">db</span>.<span class="pl-c1">Save</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
         <span class="pl-k">return</span> <span class="pl-s1">err</span>
     }
 
-    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">logService</span>.<span class="pl-en">Save</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">logService</span>.<span class="pl-c1">Save</span>(<span class="pl-s1">req</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
         <span class="pl-k">return</span> <span class="pl-s1">err</span>
     }
 
@@ -184,12 +184,12 @@
     <span class="pl-c1">s</span> <span class="pl-smi">service</span>
 }
 
-<span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">ServiceSuite</span>) <span class="pl-en">SetupTest</span>() {
+<span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">ServiceSuite</span>) <span class="pl-c1">SetupTest</span>() {
     <span class="pl-c">// Init mock</span>
     <span class="pl-c">// Init service</span>
 }
 
-<span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">ServiceSuite</span>) <span class="pl-en">TestUpload</span>() {
+<span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">ServiceSuite</span>) <span class="pl-c1">TestUpload</span>() {
     <span class="pl-s1">tests</span> <span class="pl-c1">:=</span> []<span class="pl-k">struct</span>{
         <span class="pl-c1">name</span> <span class="pl-smi">string</span>
         <span class="pl-c1">req</span> <span class="pl-smi">Request</span>
@@ -206,15 +206,15 @@
     }
 
     <span class="pl-k">for</span> <span class="pl-s1">_</span>, <span class="pl-s1">tc</span> <span class="pl-c1">:=</span> <span class="pl-k">range</span> <span class="pl-s1">tests</span> {
-        <span class="pl-s1">s</span>.<span class="pl-en">Run</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">name</span>, <span class="pl-k">func</span>(){
+        <span class="pl-s1">s</span>.<span class="pl-c1">Run</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">name</span>, <span class="pl-k">func</span>(){
             <span class="pl-c">// Mock all error depends on test case</span>
             <span class="pl-k">if</span> <span class="pl-s1">tc</span>.<span class="pl-c1">verifyErr</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
-                <span class="pl-s1">s</span>.<span class="pl-c1">verifyService</span>.<span class="pl-en">MockVerify</span>().<span class="pl-en">Return</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">verifyErr</span>)
+                <span class="pl-s1">s</span>.<span class="pl-c1">verifyService</span>.<span class="pl-c1">MockVerify</span>().<span class="pl-c1">Return</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">verifyErr</span>)
             }
             <span class="pl-c">// ...</span>
 
-            <span class="pl-s1">gotErr</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">service</span>.<span class="pl-en">Upload</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">req</span>)
-            <span class="pl-s1">s</span>.<span class="pl-en">Equal</span>(<span class="pl-s1">wantErr</span>, <span class="pl-s1">gotErr</span>)
+            <span class="pl-s1">gotErr</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">service</span>.<span class="pl-c1">Upload</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">req</span>)
+            <span class="pl-s1">s</span>.<span class="pl-c1">Equal</span>(<span class="pl-s1">wantErr</span>, <span class="pl-s1">gotErr</span>)
         })
     }
 }</pre>
@@ -326,36 +326,36 @@
     <div class="highlight highlight-source-go">
       <pre><span class="pl-c">// Init ServiceSuite as above</span>
 
-<span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">ServiceSuite</span>) <span class="pl-en">TestUpload</span>() {
+<span class="pl-k">func</span> (<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">ServiceSuite</span>) <span class="pl-c1">TestUpload</span>() {
     <span class="pl-c">// Init success request</span>
     <span class="pl-s1">req</span> <span class="pl-c1">:=</span> <span class="pl-smi">Request</span>{
         <span class="pl-c">// ...</span>
     }
 
     <span class="pl-c">// Init success action</span>
-    <span class="pl-s1">s</span>.<span class="pl-c1">verifyService</span>.<span class="pl-en">MockVerify</span>().<span class="pl-en">Return</span>(<span class="pl-c1">nil</span>)
+    <span class="pl-s1">s</span>.<span class="pl-c1">verifyService</span>.<span class="pl-c1">MockVerify</span>().<span class="pl-c1">Return</span>(<span class="pl-c1">nil</span>)
     <span class="pl-c">// ...</span>
 
-    <span class="pl-s1">gotErr</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">service</span>.<span class="pl-en">Upload</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">req</span>)
-    <span class="pl-s1">s</span>.<span class="pl-en">NoError</span>(<span class="pl-s1">gotErr</span>)
+    <span class="pl-s1">gotErr</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">service</span>.<span class="pl-c1">Upload</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">req</span>)
+    <span class="pl-s1">s</span>.<span class="pl-c1">NoError</span>(<span class="pl-s1">gotErr</span>)
 
-    <span class="pl-s1">s</span>.<span class="pl-en">Run</span>(<span class="pl-s">"failed"</span>, <span class="pl-k">func</span>(){
+    <span class="pl-s1">s</span>.<span class="pl-c1">Run</span>(<span class="pl-s">"failed"</span>, <span class="pl-k">func</span>(){
         <span class="pl-c">// Alter failed request from default</span>
         <span class="pl-s1">req</span> <span class="pl-c1">:=</span> <span class="pl-smi">Request</span>{
             <span class="pl-c">// ...</span>
         }
 
-        <span class="pl-s1">gotErr</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">service</span>.<span class="pl-en">Upload</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">req</span>)
-        <span class="pl-s1">s</span>.<span class="pl-en">Error</span>(<span class="pl-s1">gotErr</span>)
+        <span class="pl-s1">gotErr</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">service</span>.<span class="pl-c1">Upload</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">req</span>)
+        <span class="pl-s1">s</span>.<span class="pl-c1">Error</span>(<span class="pl-s1">gotErr</span>)
     })
 
-    <span class="pl-s1">s</span>.<span class="pl-en">Run</span>(<span class="pl-s">"another failed"</span>, <span class="pl-k">func</span>(){
+    <span class="pl-s1">s</span>.<span class="pl-c1">Run</span>(<span class="pl-s">"another failed"</span>, <span class="pl-k">func</span>(){
         <span class="pl-c">// Alter verify return</span>
-        <span class="pl-s1">s</span>.<span class="pl-c1">verifyService</span>.<span class="pl-en">MockVerify</span>().<span class="pl-en">Return</span>(<span class="pl-s1">someErr</span>)
+        <span class="pl-s1">s</span>.<span class="pl-c1">verifyService</span>.<span class="pl-c1">MockVerify</span>().<span class="pl-c1">Return</span>(<span class="pl-s1">someErr</span>)
 
 
-        <span class="pl-s1">gotErr</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">service</span>.<span class="pl-en">Upload</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">req</span>)
-        <span class="pl-s1">s</span>.<span class="pl-en">Error</span>(<span class="pl-s1">gotErr</span>)
+        <span class="pl-s1">gotErr</span> <span class="pl-c1">:=</span> <span class="pl-s1">s</span>.<span class="pl-c1">service</span>.<span class="pl-c1">Upload</span>(<span class="pl-s1">tc</span>.<span class="pl-c1">req</span>)
+        <span class="pl-s1">s</span>.<span class="pl-c1">Error</span>(<span class="pl-s1">gotErr</span>)
     })
 
     <span class="pl-c">// ...</span>

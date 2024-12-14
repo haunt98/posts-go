@@ -224,9 +224,9 @@ internal
       <a href="https://go.dev/play/p/0XnOLiHuoz3" rel="nofollow">Example</a>:
     </p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">func</span> <span class="pl-en">main</span>() {
-	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-en">NewS</span>(<span class="pl-en">WithA</span>(<span class="pl-c1">1</span>), <span class="pl-en">WithB</span>(<span class="pl-s">"b"</span>))
-	<span class="pl-s1">fmt</span>.<span class="pl-en">Printf</span>(<span class="pl-s">"%+v<span class="pl-cce">\n</span>"</span>, <span class="pl-s1">s</span>)
+      <pre><span class="pl-k">func</span> <span class="pl-s1">main</span>() {
+	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-s1">NewS</span>(<span class="pl-s1">WithA</span>(<span class="pl-c1">1</span>), <span class="pl-s1">WithB</span>(<span class="pl-s">"b"</span>))
+	<span class="pl-s1">fmt</span>.<span class="pl-c1">Printf</span>(<span class="pl-s">"%+v<span class="pl-cce">\n</span>"</span>, <span class="pl-s1">s</span>)
 }
 
 <span class="pl-k">type</span> <span class="pl-smi">S</span> <span class="pl-k">struct</span> {
@@ -236,22 +236,22 @@ internal
 
 <span class="pl-k">type</span> <span class="pl-smi">OptionS</span> <span class="pl-k">func</span>(<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">S</span>)
 
-<span class="pl-k">func</span> <span class="pl-en">WithA</span>(<span class="pl-s1">a</span> <span class="pl-smi">int</span>) <span class="pl-smi">OptionS</span> {
+<span class="pl-k">func</span> <span class="pl-s1">WithA</span>(<span class="pl-s1">a</span> <span class="pl-smi">int</span>) <span class="pl-smi">OptionS</span> {
 	<span class="pl-k">return</span> <span class="pl-k">func</span>(<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">S</span>) {
 		<span class="pl-s1">s</span>.<span class="pl-c1">fieldA</span> <span class="pl-c1">=</span> <span class="pl-s1">a</span>
 	}
 }
 
-<span class="pl-k">func</span> <span class="pl-en">WithB</span>(<span class="pl-s1">b</span> <span class="pl-smi">string</span>) <span class="pl-smi">OptionS</span> {
+<span class="pl-k">func</span> <span class="pl-s1">WithB</span>(<span class="pl-s1">b</span> <span class="pl-smi">string</span>) <span class="pl-smi">OptionS</span> {
 	<span class="pl-k">return</span> <span class="pl-k">func</span>(<span class="pl-s1">s</span> <span class="pl-c1">*</span><span class="pl-smi">S</span>) {
 		<span class="pl-s1">s</span>.<span class="pl-c1">fieldB</span> <span class="pl-c1">=</span> <span class="pl-s1">b</span>
 	}
 }
 
-<span class="pl-k">func</span> <span class="pl-en">NewS</span>(<span class="pl-s1">opts</span> <span class="pl-c1">...</span><span class="pl-smi">OptionS</span>) <span class="pl-c1">*</span><span class="pl-smi">S</span> {
+<span class="pl-k">func</span> <span class="pl-s1">NewS</span>(<span class="pl-s1">opts</span> <span class="pl-c1">...</span><span class="pl-smi">OptionS</span>) <span class="pl-c1">*</span><span class="pl-smi">S</span> {
 	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-c1">&amp;</span><span class="pl-smi">S</span>{}
 	<span class="pl-k">for</span> <span class="pl-s1">_</span>, <span class="pl-s1">opt</span> <span class="pl-c1">:=</span> <span class="pl-k">range</span> <span class="pl-s1">opts</span> {
-		<span class="pl-en">opt</span>(<span class="pl-s1">s</span>)
+		<span class="pl-s1">opt</span>(<span class="pl-s1">s</span>)
 	}
 	<span class="pl-k">return</span> <span class="pl-s1">s</span>
 }</pre>
@@ -292,19 +292,19 @@ internal
     </p>
     <p>Example:</p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-s1">eg</span>, <span class="pl-s1">egCtx</span> <span class="pl-c1">:=</span> <span class="pl-s1">errgroup</span>.<span class="pl-en">WithContext</span>(<span class="pl-s1">ctx</span>)
+      <pre><span class="pl-s1">eg</span>, <span class="pl-s1">egCtx</span> <span class="pl-c1">:=</span> <span class="pl-s1">errgroup</span>.<span class="pl-c1">WithContext</span>(<span class="pl-s1">ctx</span>)
 
-<span class="pl-s1">eg</span>.<span class="pl-en">Go</span>(<span class="pl-k">func</span>() <span class="pl-smi">error</span> {
+<span class="pl-s1">eg</span>.<span class="pl-c1">Go</span>(<span class="pl-k">func</span>() <span class="pl-smi">error</span> {
 	<span class="pl-c">// Do some thing</span>
 	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 })
 
-<span class="pl-s1">eg</span>.<span class="pl-en">Go</span>(<span class="pl-k">func</span>() <span class="pl-smi">error</span> {
+<span class="pl-s1">eg</span>.<span class="pl-c1">Go</span>(<span class="pl-k">func</span>() <span class="pl-smi">error</span> {
 	<span class="pl-c">// Do other thing</span>
 	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 })
 
-<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">eg</span>.<span class="pl-en">Wait</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">eg</span>.<span class="pl-c1">Wait</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
 	<span class="pl-c">// Handle error</span>
 }</pre>
     </div>
@@ -346,27 +346,27 @@ internal
     <div class="highlight highlight-source-go">
       <pre><span class="pl-k">var</span> <span class="pl-s1">bufPool</span> <span class="pl-c1">=</span> sync.<span class="pl-smi">Pool</span>{
 	<span class="pl-s1">New</span>: <span class="pl-k">func</span>() <span class="pl-smi">any</span> {
-		<span class="pl-k">return</span> <span class="pl-en">new</span>(bytes.<span class="pl-smi">Buffer</span>)
+		<span class="pl-k">return</span> <span class="pl-s1">new</span>(bytes.<span class="pl-smi">Buffer</span>)
 	},
 }
 
-<span class="pl-k">func</span> <span class="pl-en">MarshalWithoutEscapeHTML</span>(<span class="pl-s1">v</span> <span class="pl-smi">any</span>) ([]<span class="pl-smi">byte</span>, <span class="pl-smi">error</span>) {
-	<span class="pl-s1">b</span>, <span class="pl-s1">ok</span> <span class="pl-c1">:=</span> <span class="pl-s1">bufPool</span>.<span class="pl-en">Get</span>().(<span class="pl-c1">*</span>bytes.<span class="pl-smi">Buffer</span>)
+<span class="pl-k">func</span> <span class="pl-s1">MarshalWithoutEscapeHTML</span>(<span class="pl-s1">v</span> <span class="pl-smi">any</span>) ([]<span class="pl-smi">byte</span>, <span class="pl-smi">error</span>) {
+	<span class="pl-s1">b</span>, <span class="pl-s1">ok</span> <span class="pl-c1">:=</span> <span class="pl-s1">bufPool</span>.<span class="pl-c1">Get</span>().(<span class="pl-c1">*</span>bytes.<span class="pl-smi">Buffer</span>)
 	<span class="pl-k">if</span> <span class="pl-c1">!</span><span class="pl-s1">ok</span> {
 		<span class="pl-k">return</span> <span class="pl-c1">nil</span>, <span class="pl-s1">ErrBufPoolNotBytesBuffer</span>
 	}
 
-	<span class="pl-s1">b</span>.<span class="pl-en">Reset</span>()
-	<span class="pl-k">defer</span> <span class="pl-s1">bufPool</span>.<span class="pl-en">Put</span>(<span class="pl-s1">b</span>)
+	<span class="pl-s1">b</span>.<span class="pl-c1">Reset</span>()
+	<span class="pl-k">defer</span> <span class="pl-s1">bufPool</span>.<span class="pl-c1">Put</span>(<span class="pl-s1">b</span>)
 
-	<span class="pl-s1">encoder</span> <span class="pl-c1">:=</span> <span class="pl-s1">json</span>.<span class="pl-en">NewEncoder</span>(<span class="pl-s1">b</span>)
-	<span class="pl-s1">encoder</span>.<span class="pl-en">SetEscapeHTML</span>(<span class="pl-c1">false</span>)
-	<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">encoder</span>.<span class="pl-en">Encode</span>(<span class="pl-s1">v</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+	<span class="pl-s1">encoder</span> <span class="pl-c1">:=</span> <span class="pl-s1">json</span>.<span class="pl-c1">NewEncoder</span>(<span class="pl-s1">b</span>)
+	<span class="pl-s1">encoder</span>.<span class="pl-c1">SetEscapeHTML</span>(<span class="pl-c1">false</span>)
+	<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">encoder</span>.<span class="pl-c1">Encode</span>(<span class="pl-s1">v</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
 		<span class="pl-k">return</span> <span class="pl-c1">nil</span>, <span class="pl-s1">err</span>
 	}
 
-	<span class="pl-s1">result</span> <span class="pl-c1">:=</span> <span class="pl-en">make</span>([]<span class="pl-smi">byte</span>, <span class="pl-s1">b</span>.<span class="pl-en">Len</span>())
-	<span class="pl-en">copy</span>(<span class="pl-s1">result</span>, <span class="pl-s1">b</span>.<span class="pl-en">Bytes</span>())
+	<span class="pl-s1">result</span> <span class="pl-c1">:=</span> <span class="pl-s1">make</span>([]<span class="pl-smi">byte</span>, <span class="pl-s1">b</span>.<span class="pl-c1">Len</span>())
+	<span class="pl-s1">copy</span>(<span class="pl-s1">result</span>, <span class="pl-s1">b</span>.<span class="pl-c1">Bytes</span>())
 	<span class="pl-k">return</span> <span class="pl-s1">result</span>, <span class="pl-c1">nil</span>
 }</pre>
     </div>
@@ -391,13 +391,13 @@ internal
     </p>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-c">// Ptr takes in non-pointer and returns a pointer</span>
-<span class="pl-k">func</span> <span class="pl-en">Ptr</span>[<span class="pl-s1">T</span> <span class="pl-smi">any</span>](<span class="pl-s1">v</span> <span class="pl-smi">T</span>) <span class="pl-c1">*</span><span class="pl-smi">T</span> {
+<span class="pl-k">func</span> <span class="pl-s1">Ptr</span>[<span class="pl-s1">T</span> <span class="pl-smi">any</span>](<span class="pl-s1">v</span> <span class="pl-smi">T</span>) <span class="pl-c1">*</span><span class="pl-smi">T</span> {
 	<span class="pl-k">return</span> <span class="pl-c1">&amp;</span><span class="pl-s1">v</span>
 }</pre>
     </div>
     <p>Return zero value:</p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">func</span> <span class="pl-en">Zero</span>[<span class="pl-s1">T</span> <span class="pl-smi">any</span>]() <span class="pl-smi">T</span> {
+      <pre><span class="pl-k">func</span> <span class="pl-s1">Zero</span>[<span class="pl-s1">T</span> <span class="pl-smi">any</span>]() <span class="pl-smi">T</span> {
   <span class="pl-k">var</span> <span class="pl-s1">zero</span> <span class="pl-smi">T</span>
   <span class="pl-k">return</span> <span class="pl-s1">zero</span>
 }</pre>
@@ -584,8 +584,8 @@ internal
     <p>Remember to free resources after parse multipart form:</p>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-k">defer</span> <span class="pl-k">func</span>() {
-    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">c</span>.<span class="pl-c1">Request</span>.<span class="pl-c1">MultipartForm</span>.<span class="pl-en">RemoveAll</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
-        <span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s1">err</span>)
+    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">c</span>.<span class="pl-c1">Request</span>.<span class="pl-c1">MultipartForm</span>.<span class="pl-c1">RemoveAll</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+        <span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">err</span>)
     }
 }()</pre>
     </div>
@@ -723,14 +723,14 @@ internal
     </p>
     <p>Example:</p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">func</span> (<span class="pl-s1">c</span> <span class="pl-c1">*</span><span class="pl-smi">client</span>) <span class="pl-en">HSetWithExpire</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>, <span class="pl-s1">key</span> <span class="pl-smi">string</span>, <span class="pl-s1">values</span> []<span class="pl-smi">any</span>, <span class="pl-s1">expired</span> time.<span class="pl-smi">Duration</span>) <span class="pl-smi">error</span> {
-	<span class="pl-s1">cmds</span> <span class="pl-c1">:=</span> <span class="pl-en">make</span>([]redis.<span class="pl-smi">Cmder</span>, <span class="pl-c1">2</span>)
+      <pre><span class="pl-k">func</span> (<span class="pl-s1">c</span> <span class="pl-c1">*</span><span class="pl-smi">client</span>) <span class="pl-c1">HSetWithExpire</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>, <span class="pl-s1">key</span> <span class="pl-smi">string</span>, <span class="pl-s1">values</span> []<span class="pl-smi">any</span>, <span class="pl-s1">expired</span> time.<span class="pl-smi">Duration</span>) <span class="pl-smi">error</span> {
+	<span class="pl-s1">cmds</span> <span class="pl-c1">:=</span> <span class="pl-s1">make</span>([]redis.<span class="pl-smi">Cmder</span>, <span class="pl-c1">2</span>)
 
-	<span class="pl-k">if</span> <span class="pl-s1">_</span>, <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">c</span>.<span class="pl-en">Pipelined</span>(<span class="pl-s1">ctx</span>, <span class="pl-k">func</span>(<span class="pl-s1">pipe</span> redis.<span class="pl-smi">Pipeliner</span>) <span class="pl-smi">error</span> {
-		<span class="pl-s1">cmds</span>[<span class="pl-c1">0</span>] <span class="pl-c1">=</span> <span class="pl-s1">pipe</span>.<span class="pl-en">HSet</span>(<span class="pl-s1">ctx</span>, <span class="pl-s1">key</span>, <span class="pl-s1">values</span><span class="pl-c1">...</span>)
+	<span class="pl-k">if</span> <span class="pl-s1">_</span>, <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">c</span>.<span class="pl-c1">Pipelined</span>(<span class="pl-s1">ctx</span>, <span class="pl-k">func</span>(<span class="pl-s1">pipe</span> redis.<span class="pl-smi">Pipeliner</span>) <span class="pl-smi">error</span> {
+		<span class="pl-s1">cmds</span>[<span class="pl-c1">0</span>] <span class="pl-c1">=</span> <span class="pl-s1">pipe</span>.<span class="pl-c1">HSet</span>(<span class="pl-s1">ctx</span>, <span class="pl-s1">key</span>, <span class="pl-s1">values</span><span class="pl-c1">...</span>)
 
 		<span class="pl-k">if</span> <span class="pl-s1">expired</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span> {
-			<span class="pl-s1">cmds</span>[<span class="pl-c1">1</span>] <span class="pl-c1">=</span> <span class="pl-s1">pipe</span>.<span class="pl-en">Expire</span>(<span class="pl-s1">ctx</span>, <span class="pl-s1">key</span>, <span class="pl-s1">expired</span>)
+			<span class="pl-s1">cmds</span>[<span class="pl-c1">1</span>] <span class="pl-c1">=</span> <span class="pl-s1">pipe</span>.<span class="pl-c1">Expire</span>(<span class="pl-s1">ctx</span>, <span class="pl-s1">key</span>, <span class="pl-s1">expired</span>)
 		}
 
 		<span class="pl-k">return</span> <span class="pl-c1">nil</span>
@@ -743,7 +743,7 @@ internal
 			<span class="pl-k">continue</span>
 		}
 
-		<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">cmd</span>.<span class="pl-en">Err</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+		<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">cmd</span>.<span class="pl-c1">Err</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
 			<span class="pl-k">return</span> <span class="pl-s1">err</span>
 		}
 	}
@@ -884,10 +884,10 @@ internal
     <p>Don't cast enum:</p>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-c">// Bad</span>
-<span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-s1">cast</span>.<span class="pl-en">ToInt32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)
+<span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-s1">cast</span>.<span class="pl-c1">ToInt32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)
 
 <span class="pl-c">// Good</span>
-<span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-en">int32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)</pre>
+<span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-s1">int32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)</pre>
     </div>
     <div class="markdown-heading">
       <h3 class="heading-element">

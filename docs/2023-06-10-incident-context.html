@@ -81,12 +81,12 @@
     </p>
     <p>My buggy code is like this:</p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-en">doA</span>(<span class="pl-s1">ctx</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
-    <span class="pl-s1">log</span>.<span class="pl-en">Error</span>(<span class="pl-s1">err</span>)
+      <pre><span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+    <span class="pl-s1">log</span>.<span class="pl-c1">Error</span>(<span class="pl-s1">err</span>)
     <span class="pl-c">// Skip error</span>
 }
 
-<span class="pl-en">doB</span>(<span class="pl-s1">ctx</span>)</pre>
+<span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span>)</pre>
     </div>
     <p>
       The problem is <code>doA</code> taking too long, so <code>ctx</code> is
@@ -102,35 +102,35 @@
       >):
     </p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">func</span> <span class="pl-en">main</span>() {
-	<span class="pl-s1">ctx</span>, <span class="pl-s1">cancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">context</span>.<span class="pl-en">Background</span>(), <span class="pl-c1">2</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
-	<span class="pl-k">defer</span> <span class="pl-en">cancel</span>()
+      <pre><span class="pl-k">func</span> <span class="pl-s1">main</span>() {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">cancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">context</span>.<span class="pl-c1">Background</span>(), <span class="pl-c1">2</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">cancel</span>()
 
-	<span class="pl-en">doA</span>(<span class="pl-s1">ctx</span>)
-	<span class="pl-en">doB</span>(<span class="pl-s1">ctx</span>)
+	<span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span>)
+	<span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span>)
 }
 
-<span class="pl-k">func</span> <span class="pl-en">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
-	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
-	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
+<span class="pl-k">func</span> <span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">ctxCancel</span>()
 
 	<span class="pl-k">select</span> {
-	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-en">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
-		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doA"</span>)
-	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-en">Done</span>():
-		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doA"</span>, <span class="pl-s1">ctx</span>.<span class="pl-en">Err</span>())
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-c1">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doA"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-c1">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doA"</span>, <span class="pl-s1">ctx</span>.<span class="pl-c1">Err</span>())
 	}
 }
 
-<span class="pl-k">func</span> <span class="pl-en">doB</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
-	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">3</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
-	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
+<span class="pl-k">func</span> <span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">3</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">ctxCancel</span>()
 
 	<span class="pl-k">select</span> {
-	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-en">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
-		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doB"</span>)
-	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-en">Done</span>():
-		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doB"</span>, <span class="pl-s1">ctx</span>.<span class="pl-en">Err</span>())
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-c1">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doB"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-c1">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doB"</span>, <span class="pl-s1">ctx</span>.<span class="pl-c1">Err</span>())
 	}
 }</pre>
     </div>
@@ -185,9 +185,9 @@ doB context deadline exceeded</pre
       >:
     </p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">func</span> <span class="pl-en">DisconnectContext</span>(<span class="pl-s1">parent</span> context.<span class="pl-smi">Context</span>) context.<span class="pl-smi">Context</span> {
+      <pre><span class="pl-k">func</span> <span class="pl-s1">DisconnectContext</span>(<span class="pl-s1">parent</span> context.<span class="pl-smi">Context</span>) context.<span class="pl-smi">Context</span> {
 	<span class="pl-k">if</span> <span class="pl-s1">parent</span> <span class="pl-c1">==</span> <span class="pl-c1">nil</span> {
-		<span class="pl-k">return</span> <span class="pl-s1">context</span>.<span class="pl-en">Background</span>()
+		<span class="pl-k">return</span> <span class="pl-s1">context</span>.<span class="pl-c1">Background</span>()
 	}
 
 	<span class="pl-k">return</span> <span class="pl-smi">disconnectedContext</span>{
@@ -199,20 +199,20 @@ doB context deadline exceeded</pre
 	<span class="pl-c1">parent</span> context.<span class="pl-smi">Context</span>
 }
 
-<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Deadline</span>() (<span class="pl-s1">deadline</span> time.<span class="pl-smi">Time</span>, <span class="pl-s1">ok</span> <span class="pl-smi">bool</span>) {
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-c1">Deadline</span>() (<span class="pl-s1">deadline</span> time.<span class="pl-smi">Time</span>, <span class="pl-s1">ok</span> <span class="pl-smi">bool</span>) {
 	<span class="pl-k">return</span>
 }
 
-<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Done</span>() <span class="pl-c1">&lt;-</span><span class="pl-k">chan</span> <span class="pl-k">struct</span>{} {
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-c1">Done</span>() <span class="pl-c1">&lt;-</span><span class="pl-k">chan</span> <span class="pl-k">struct</span>{} {
 	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 }
 
-<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Err</span>() <span class="pl-smi">error</span> {
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-c1">Err</span>() <span class="pl-smi">error</span> {
 	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 }
 
-<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-en">Value</span>(<span class="pl-s1">key</span> <span class="pl-smi">any</span>) <span class="pl-smi">any</span> {
-	<span class="pl-k">return</span> <span class="pl-s1">ctx</span>.<span class="pl-c1">parent</span>.<span class="pl-en">Value</span>(<span class="pl-s1">key</span>)
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-c1">Value</span>(<span class="pl-s1">key</span> <span class="pl-smi">any</span>) <span class="pl-smi">any</span> {
+	<span class="pl-k">return</span> <span class="pl-s1">ctx</span>.<span class="pl-c1">parent</span>.<span class="pl-c1">Value</span>(<span class="pl-s1">key</span>)
 }</pre>
     </div>
     <p>
@@ -223,34 +223,34 @@ doB context deadline exceeded</pre
       >):
     </p>
     <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">func</span> <span class="pl-en">main</span>() {
-	<span class="pl-s1">ctx</span>, <span class="pl-s1">cancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">context</span>.<span class="pl-en">Background</span>(), <span class="pl-c1">2</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
-	<span class="pl-k">defer</span> <span class="pl-en">cancel</span>()
-	<span class="pl-en">doA</span>(<span class="pl-s1">ctx</span>)
-	<span class="pl-en">doB</span>(<span class="pl-s1">ctx</span>)
+      <pre><span class="pl-k">func</span> <span class="pl-s1">main</span>() {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">cancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">context</span>.<span class="pl-c1">Background</span>(), <span class="pl-c1">2</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">cancel</span>()
+	<span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span>)
+	<span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span>)
 }
 
-<span class="pl-k">func</span> <span class="pl-en">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
-	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
-	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
+<span class="pl-k">func</span> <span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">ctxCancel</span>()
 
 	<span class="pl-k">select</span> {
-	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-en">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
-		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doA"</span>)
-	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-en">Done</span>():
-		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doA"</span>, <span class="pl-s1">ctx</span>.<span class="pl-en">Err</span>())
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-c1">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doA"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-c1">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doA"</span>, <span class="pl-s1">ctx</span>.<span class="pl-c1">Err</span>())
 	}
 }
 
-<span class="pl-k">func</span> <span class="pl-en">doB</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
-	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-en">WithTimeout</span>(<span class="pl-en">DisconnectContext</span>(<span class="pl-s1">ctx</span>), <span class="pl-c1">3</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
-	<span class="pl-k">defer</span> <span class="pl-en">ctxCancel</span>()
+<span class="pl-k">func</span> <span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">DisconnectContext</span>(<span class="pl-s1">ctx</span>), <span class="pl-c1">3</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">ctxCancel</span>()
 
 	<span class="pl-k">select</span> {
-	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-en">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
-		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doB"</span>)
-	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-en">Done</span>():
-		<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s">"doB"</span>, <span class="pl-s1">ctx</span>.<span class="pl-en">Err</span>())
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-c1">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doB"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-c1">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doB"</span>, <span class="pl-s1">ctx</span>.<span class="pl-c1">Err</span>())
 	}
 }</pre>
     </div>
