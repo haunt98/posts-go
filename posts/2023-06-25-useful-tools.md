@@ -151,7 +151,6 @@ For fun
 - https://github.com/denoland/deno
 - https://github.com/astral-sh/uv
 - https://github.com/astral-sh/ruff
-- https://github.com/corbindavenport/nexus-tools
 
 Language
 
@@ -187,29 +186,32 @@ Misc
 - https://github.com/cli/cli
 - https://gitlab.com/gitlab-org/cli
 - https://github.com/k1LoW/tbls
+- https://github.com/bojand/ghz
+- https://github.com/grafana/k6
 
 ~~Memory~~
 
-- https://github.com/stedolan/jq
-- https://github.com/sigstore/gitsign
-- https://github.com/gitleaks/gitleaks
-- https://github.com/tailscale/golink
-- https://github.com/burntsushi/toml
-- https://github.com/koalaman/shellcheck
-- https://github.com/bojand/ghz
-- https://github.com/sharkdp/hyperfine
-- https://github.com/boyter/cs
-- https://github.com/luals/lua-language-server
-- https://github.com/fullstorydev/grpcurl
-- https://github.com/bufbuild/buf-language-server
-- https://github.com/sdkman/sdkman-cli
-- https://github.com/plantuml/plantuml
 - https://github.com/Textualize/toolong
-- https://github.com/walles/riff
 - https://github.com/ankitpokhrel/jira-cli
+- https://github.com/astral-sh/rye
+- https://github.com/bojand/ghz
+- https://github.com/boyter/cs
+- https://github.com/bufbuild/buf-language-server
+- https://github.com/burntsushi/toml
+- https://github.com/corbindavenport/nexus-tools
+- https://github.com/fullstorydev/grpcurl
+- https://github.com/gitleaks/gitleaks
+- https://github.com/koalaman/shellcheck
+- https://github.com/luals/lua-language-server
+- https://github.com/plantuml/plantuml
 - https://github.com/pyenv/pyenv
 - https://github.com/pypa/pipx
-- https://github.com/astral-sh/rye
+- https://github.com/sdkman/sdkman-cli
+- https://github.com/sharkdp/hyperfine
+- https://github.com/sigstore/gitsign
+- https://github.com/stedolan/jq
+- https://github.com/tailscale/golink
+- https://github.com/walles/riff
 
 #### Go
 
