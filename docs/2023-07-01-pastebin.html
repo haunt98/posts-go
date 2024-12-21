@@ -90,6 +90,10 @@ touch Xcode.app
 <span class="pl-c"><span class="pl-c">#</span> Xcode mini version</span>
 xcode-select --install</pre>
     </div>
+    <p>Repeat key:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>defaults write -g ApplePressAndHoldEnabled -bool <span class="pl-c1">false</span></pre>
+    </div>
     <p>Reset launchpad:</p>
     <div class="highlight highlight-source-shell">
       <pre>defaults write com.apple.dock ResetLaunchPad -bool <span class="pl-c1">true</span><span class="pl-k">;</span> killall Dock</pre>
