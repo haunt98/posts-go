@@ -408,6 +408,7 @@ Remember to config:
 Remember to config:
 
 - Write-Ahead Logging: `PRAGMA journal_mode=WAL`
+- Set timeout retry lock: `PRAGMA busy_timeout=5000`
 - Disable connections pool with `SetMaxOpenConns` sets to 1
 
 Don't use [mattn/go-sqlite3](https://github.com/mattn/go-sqlite3), it's required
