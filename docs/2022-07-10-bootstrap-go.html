@@ -796,6 +796,7 @@ internal
     <p>Remember to config:</p>
     <ul>
       <li>Write-Ahead Logging: <code>PRAGMA journal_mode=WAL</code></li>
+      <li>Set timeout retry lock: <code>PRAGMA busy_timeout=5000</code></li>
       <li>
         Disable connections pool with <code>SetMaxOpenConns</code> sets to 1
       </li>
