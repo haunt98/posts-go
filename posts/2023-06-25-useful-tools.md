@@ -23,10 +23,10 @@ This is just a raw list.
 - https://github.com/eza-community/eza
 - https://github.com/chmln/sd
 
-- https://github.com/adrianlopezroche/fdupes
 - https://github.com/WayneD/rsync
 - https://github.com/rclone/rclone
 - https://github.com/restic/restic
+- https://github.com/pkolaczk/fclones
 - https://github.com/ayoisaiah/f2
 - https://github.com/Debian/wcurl
 
@@ -56,6 +56,7 @@ This is just a raw list.
 - https://github.com/dbrgn/tealdeer
 - https://github.com/GothenburgBitFactory/taskwarrior
 - https://github.com/atuinsh/atuin
+- https://github.com/adrianlopezroche/fdupes
 
 For fun
 
@@ -66,6 +67,7 @@ For fun
 - https://github.com/aristocratos/btop
 - https://github.com/asciinema/asciinema
   - https://github.com/asciinema/agg
+- https://github.com/qpdf/qpdf
 
 ~~Fun memory~~
 
