@@ -487,27 +487,11 @@ git gc</pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>Remove proto options:</p>
     <div class="highlight highlight-source-shell">
-      <pre>sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
+      <pre><span class="pl-c"><span class="pl-c">#</span> Remove proto option</span>
+sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
 sd -F <span class="pl-s"><span class="pl-pds">'</span>import "marshal-zap.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
-sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto</pre>
-    </div>
-    <div class="markdown-heading">
-      <h2 class="heading-element">
-        <a href="https://github.com/adrianlopezroche/fdupes">fdupes</a>
-      </h2>
-      <a
-        id="user-content-fdupes"
-        class="anchor"
-        aria-label="Permalink: fdupes"
-        href="#fdupes"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Remove duplicated files:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>fdupes -rdN <span class="pl-c1">.</span></pre>
+sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[\s*\(.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
@@ -551,6 +535,46 @@ rsync -avzP src/ dst</pre>
     </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">
+        <a href="https://github.com/pkolaczk/fclones">fclones</a>
+      </h2>
+      <a
+        id="user-content-fclones"
+        class="anchor"
+        aria-label="Permalink: fclones"
+        href="#fclones"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <div class="highlight highlight-source-shell">
+      <pre>fclones group <span class="pl-c1">.</span> <span class="pl-k">|</span> fclones remove</pre>
+    </div>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/ayoisaiah/f2">F2</a>
+      </h2>
+      <a
+        id="user-content-f2"
+        class="anchor"
+        aria-label="Permalink: F2"
+        href="#f2"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Not include time</span>
+f2 --exclude=<span class="pl-s"><span class="pl-pds">"</span>\d+x\d+_[a-z\d]{32}<span class="pl-pds">"</span></span> --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
+f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
+    </div>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
         <a href="https://github.com/FFmpeg/FFmpeg">ffmpeg</a>
       </h2>
       <a
@@ -577,6 +601,21 @@ ffmpeg -i input -c:v libx265 -crf 26 -preset fast -an output.mp4</pre>
     </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">
+        <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a>
+      </h2>
+      <a
+        id="user-content-yt-dlp"
+        class="anchor"
+        aria-label="Permalink: yt-dlp"
+        href="#yt-dlp"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <div class="highlight highlight-source-shell">
+      <pre>yt-dlp -f - <span class="pl-s"><span class="pl-pds">"</span>https://www.youtube.com/watch?v=video_id<span class="pl-pds">"</span></span></pre>
+    </div>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
         <a href="https://github.com/libvips/libvips">libvips</a>
       </h2>
       <a
@@ -587,7 +626,6 @@ ffmpeg -i input -c:v libx265 -crf 26 -preset fast -an output.mp4</pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>Convert:</p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Add --vips-progress to show progress</span>
 vips jxlsave filename.jpg filename.jxl --keep=none
@@ -605,45 +643,19 @@ vips rot filename.jxl new_filename.jxl d90</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
-        <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a>
+        <a href="https://github.com/qpdf/qpdf">qpdf</a>
       </h2>
       <a
-        id="user-content-yt-dlp"
+        id="user-content-qpdf"
         class="anchor"
-        aria-label="Permalink: yt-dlp"
-        href="#yt-dlp"
+        aria-label="Permalink: qpdf"
+        href="#qpdf"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>Download:</p>
     <div class="highlight highlight-source-shell">
-      <pre>yt-dlp -f - <span class="pl-s"><span class="pl-pds">"</span>https://www.youtube.com/watch?v=video_id<span class="pl-pds">"</span></span></pre>
-    </div>
-    <div class="markdown-heading">
-      <h2 class="heading-element">
-        <a href="https://github.com/ayoisaiah/f2">F2</a>
-      </h2>
-      <a
-        id="user-content-f2"
-        class="anchor"
-        aria-label="Permalink: F2"
-        href="#f2"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Rename:</p>
-    <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Not include time</span>
-f2 --exclude=<span class="pl-s"><span class="pl-pds">"</span>\d+x\d+_[a-z\d]{32}<span class="pl-pds">"</span></span> --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
-f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
+      <pre><span class="pl-c"><span class="pl-c">#</span> Compress pdf</span>
+qpdf input.pdf output.pdf --verbose --linearize --optimize-images</pre>
     </div>
 
     <div>
