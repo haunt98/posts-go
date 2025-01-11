@@ -562,6 +562,9 @@ rsync -avzP src/ dst</pre>
     </div>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Include hash md5</span>
 f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
 
 <span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
