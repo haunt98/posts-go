@@ -10,7 +10,6 @@ This is just a raw list.
 - https://github.com/zsh-users/zsh-autosuggestions
 - https://github.com/zsh-users/zsh-history-substring-search
 - https://github.com/junegunn/fzf
-- https://github.com/Aloxaf/fzf-tab
 - https://github.com/folke/lazy.nvim
 - https://github.com/ajeetdsouza/zoxide
 
@@ -51,7 +50,7 @@ This is just a raw list.
 - https://github.com/muesli/duf
 - https://github.com/wustho/epr
 - https://github.com/junegunn/fzf-git.sh
-- https://github.com/ogham/exa
+- https://github.com/Aloxaf/fzf-tab
 - https://github.com/charmbracelet/glow
 - https://github.com/dbrgn/tealdeer
 - https://github.com/GothenburgBitFactory/taskwarrior
@@ -98,12 +97,10 @@ For fun
 
 ### UI
 
+- https://github.com/ghostty-org/ghostty
 - https://github.com/kovidgoyal/kitty
 - https://github.com/wez/wezterm
 - https://transmissionbt.com/
-- https://www.libreoffice.org/
-- https://github.com/johnfactotum/foliate
-- https://fbreader.org/
 - https://tailscale.com/
 - https://github.com/localsend/localsend
 
@@ -111,6 +108,9 @@ For fun
 
 - https://github.com/alacritty/alacritty
 - https://www.xnview.com/en/xnviewmp/
+- https://www.libreoffice.org/
+- https://github.com/johnfactotum/foliate
+- https://fbreader.org/
 
 #### macOS
 
