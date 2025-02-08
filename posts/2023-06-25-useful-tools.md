@@ -63,6 +63,7 @@ For fun
 - https://github.com/newsboat/newsboat
 - https://github.com/orhun/daktilo
 - https://github.com/libvips/libvips
+  - https://github.com/libjxl/libjxl
 - https://github.com/aristocratos/btop
 - https://github.com/asciinema/asciinema
   - https://github.com/asciinema/agg
@@ -76,6 +77,7 @@ For fun
 - https://github.com/Gobidev/pfetch-rs
 - https://github.com/Dr-Noob/cpufetch
 - https://github.com/o2sh/onefetch
+- https://github.com/fastfetch-cli/fastfetch
 - https://gitlab.com/jallbrit/cbonsai
 - https://github.com/ytdl-org/youtube-dl
 - https://github.com/instaloader/instaloader
@@ -86,7 +88,6 @@ For fun
   - https://github.com/dirkvdb/ffmpegthumbnailer
 - https://github.com/jarun/nnn
 - https://github.com/ImageMagick/ImageMagick
-- https://github.com/libjxl/libjxl
 - https://github.com/bloznelis/kbt
 
 #### Windows
