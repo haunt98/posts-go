@@ -184,6 +184,7 @@ Misc
 - https://github.com/itchyny/gojq
 - https://github.com/walles/moar
 - https://github.com/antonmedv/fx
+- https://github.com/josephburnett/jd
 - https://github.com/ollama/ollama
 - https://github.com/ggerganov/llama.cpp
 - https://github.com/gitleaks/gitleaks
@@ -192,13 +193,12 @@ Misc
 - https://github.com/k1LoW/tbls
 - https://github.com/bojand/ghz
 - https://github.com/grafana/k6
+- https://github.com/ankitpokhrel/jira-cli
 
 ~~Memory~~
 
 - https://github.com/Textualize/toolong
-- https://github.com/ankitpokhrel/jira-cli
 - https://github.com/astral-sh/rye
-- https://github.com/bojand/ghz
 - https://github.com/boyter/cs
 - https://github.com/bufbuild/buf-language-server
 - https://github.com/burntsushi/toml
