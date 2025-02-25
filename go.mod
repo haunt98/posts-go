@@ -1,6 +1,7 @@
 module github.com/haunt98/posts-go
 
-go 1.23
+go 1.24
+
 require (
 	github.com/google/go-github/v69 v69.2.0
 	github.com/make-go-great/netrc-go v0.0.2
