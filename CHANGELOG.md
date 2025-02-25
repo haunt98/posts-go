@@ -1,5 +1,341 @@
 # CHANGELOG
 
+## v0.0.6 (2025-02-25)
+
+### Added
+
+- feat: add llama.cpp (2025-02-02)
+
+- feat: add typst (2024-10-22)
+
+- feat: add ffmpeg (2024-09-21)
+
+- feat(archlinux): add maintenance (2024-07-23)
+
+- feat(archlinux): add zsh (2024-07-23)
+
+- feat: latest archlinux (2024-07-23)
+
+- feat: add termux (2024-07-21)
+
+- feat: add wcurl, sioyek (2024-07-15)
+
+- feat: more data (2024-07-08)
+
+- feat: re-add old tools (2024-06-28)
+
+- feat: add new keeb (2024-06-28)
+
+- feat: update uuid (2024-06-25)
+
+- feat: add yt-dlp (2024-06-25)
+
+- feat: add vips jpegsave (2024-06-23)
+
+- Revert "feat: remove gitsigns" (2024-06-23)
+
+- feat: remove gitsigns (2024-06-18)
+
+- feat: add sqlfluff (2024-06-18)
+
+- feat: more fonts (2024-06-17)
+
+- feat: hinting (2024-06-16)
+
+- feat: use ruff instead of pyright (2024-06-15)
+
+- feat: prefer fonts (2024-06-12)
+
+- feat: more tools (2024-06-08)
+
+- feat: add gitleaks (2024-06-08)
+
+- feat: macos add ice (2024-06-08)
+
+- feat: f2 exclude (2024-06-05)
+
+- feaT: improve f2 (2024-06-05)
+
+- feat: more tools (2024-06-05)
+
+- feat: remove jira (2024-05-27)
+
+- feat: nvim 0.10.0 comment (2024-05-21)
+
+- feat(nvim): more keys (2024-05-17)
+
+- feat: add my custom iosevka (2024-05-17)
+
+- feat: neovim 0.10.0 (2024-05-17)
+
+- feat: update font configs (2024-05-16)
+
+- feat: more f2 and vips (2024-05-13)
+
+- feat: use jxl (2024-05-12)
+
+### Others
+
+- build: bump go.mod go 1.24 (2025-02-25)
+
+- build(deps): bump golang.org/x/oauth2 from 0.26.0 to 0.27.0 (#58) (2025-02-25)
+
+- tools (2025-02-24)
+
+- keeb ok (2025-02-24)
+
+- sync keeb (2025-02-23)
+
+- chore (2025-02-22)
+
+- chore (2025-02-22)
+
+- font: reconsider m+ (2025-02-20)
+
+- back gaming (2025-02-18)
+
+- build(deps): bump github.com/google/go-github/v69 from 69.1.0 to 69.2.0 (#57) (2025-02-18)
+
+- build(deps): bump github.com/google/go-github/v69 from 69.0.0 to 69.1.0 (#56) (2025-02-14)
+
+- use folke/snacks.nvim (2025-02-14)
+
+- more qpdf (2025-02-09)
+
+- fastfetch (2025-02-09)
+
+- improve neovim (2025-02-09)
+
+- chore (2025-02-06)
+
+- build: bump go-github v69 (2025-02-05)
+
+- build(deps): bump golang.org/x/oauth2 from 0.25.0 to 0.26.0 (#55) (2025-02-05)
+
+- build(deps): bump golang.org/x/sync from 0.10.0 to 0.11.0 (#54) (2025-02-05)
+
+- add kindle (2025-02-05)
+
+- renew backup (2025-02-04)
+
+- clean up (2025-02-02)
+
+- more android (2025-02-02)
+
+- chore: remove unused (2025-02-02)
+
+- chore: improve font (2025-01-14)
+
+- true false unknown logic (2025-01-12)
+
+- sql null (2025-01-12)
+
+- f2 (2025-01-11)
+
+- build(deps): bump golang.org/x/oauth2 from 0.24.0 to 0.25.0 (#53) (2025-01-07)
+
+- chore: deprecated check-shadowing in golangci.yml (2025-01-05)
+
+- more pastebin (2025-01-05)
+
+- more tools (2025-01-05)
+
+- go: sqlite (2025-01-04)
+
+- build: bump go-github to v68 (2024-12-23)
+
+- apple repeat key (2024-12-22)
+
+- k6 (2024-12-21)
+
+- chore (2024-12-15)
+
+- chore (2024-12-15)
+
+- daily (2024-12-15)
+
+- daily (2024-12-14)
+
+- build(deps): bump golang.org/x/sync from 0.9.0 to 0.10.0 (#52) (2024-12-05)
+
+- build: bump github-markdown-css to 5.8.1 (2024-11-28)
+
+- build: bump go-github to v67 (2024-11-28)
+
+- daily (2024-11-27)
+
+- daily (2024-11-27)
+
+- macos: accent color (2024-11-22)
+
+- chore: use sqlfluff to format sql code (2024-11-18)
+
+- sql (2024-11-18)
+
+- fonts tweak (2024-11-17)
+
+- sql: compositex index (2024-11-17)
+
+- Merge branch 'main' of https://github.com/haunt98/posts-go (2024-11-16)
+
+- firefox extension (2024-11-16)
+
+- build: bump github-markdown-css to 5.8.0 (2024-11-16)
+
+- build(deps): bump golang.org/x/sync from 0.8.0 to 0.9.0 (#50) (2024-11-16)
+
+- macos notes (2024-10-31)
+
+- mysql json (2024-10-31)
+
+- migrate github gist (2024-10-30)
+
+- tools: add tbls (2024-10-29)
+
+- bring back asciinema (2024-10-28)
+
+- chore: sync lint (2024-10-26)
+
+- chore: update golangci-lint config (2024-10-26)
+
+- macos skim (2024-10-23)
+
+- build: bump github-markdown-css to 5.7.0 (2024-10-22)
+
+- batman (2024-10-19)
+
+- add totp-cli (2024-10-17)
+
+- macos (2024-10-10)
+
+- feat; add zsh-history-substring-search to useful tools (2024-10-09)
+
+- deprecated omz (2024-10-09)
+
+- macOS leftover cleanup (2024-10-09)
+
+- macos bluetooth (2024-10-02)
+
+- mac install guide (2024-09-29)
+
+- quirk xiaomi (2024-09-29)
+
+- Revert "build: bump 5.7.0 github-markdown-css" (2024-09-28)
+
+- build: bump 5.7.0 github-markdown-css (2024-09-26)
+
+- build: bump go-github to v65 (2024-09-16)
+
+- rm sioyek (2024-09-15)
+
+- build(deps): bump golang.org/x/oauth2 from 0.22.0 to 0.23.0 (#48) (2024-09-05)
+
+- keeb (2024-09-05)
+
+- gosec (2024-09-04)
+
+- glab (2024-09-04)
+
+- fonts: more (2024-09-03)
+
+- fix srht (2024-08-30)
+
+- zsh (2024-08-30)
+
+- macos caffeinate (2024-08-24)
+
+- more fandroid (2024-08-22)
+
+- migrate to justfile (2024-08-22)
+
+- remove rye (2024-08-22)
+
+- add gosec (2024-08-22)
+
+- chore: sync golangci-lint config (2024-08-22)
+
+- keeb sort (2024-08-21)
+
+- build: update go-github to v64 (2024-08-21)
+
+- github cli (2024-08-21)
+
+- go betteralign (2024-08-19)
+
+- bring back pyright (2024-08-15)
+
+- go 1.23.0 (2024-08-14)
+
+- sql (2024-08-11)
+
+- chore: common (2024-08-10)
+
+- chore (2024-08-08)
+
+- fix openvpn (2024-08-08)
+
+- btop (2024-08-08)
+
+- ncdu (2024-08-08)
+
+- arch recommend (2024-08-06)
+
+- build(deps): bump golang.org/x/sync from 0.7.0 to 0.8.0 (#45) (2024-08-06)
+
+- build(deps): bump golang.org/x/oauth2 from 0.21.0 to 0.22.0 (#44) (2024-08-06)
+
+- sec and perf for archlinux (2024-08-04)
+
+- ecdh (2024-07-30)
+
+- receive hmx eva today (2024-07-29)
+
+- chore keeb (2024-07-28)
+
+- keeb no current (2024-07-28)
+
+- hmx eva (2024-07-28)
+
+- ICAO (2024-07-25)
+
+- go: don't cast enum (2024-07-24)
+
+- crypto (2024-07-23)
+
+- fix typos (2024-07-22)
+
+- keeb: quirk sofle v2 (2024-07-18)
+
+- build: bump go-github v62 to v63 (2024-07-12)
+
+- keeb: bye c3 (2024-06-26)
+
+- nvim: use mini-git (2024-06-23)
+
+- chore: srht make all (2024-06-18)
+
+- build: bump github css (2024-06-18)
+
+- chore: bump github css (2024-06-15)
+
+- chore: remove atuin (2024-06-13)
+
+- chore: gitleaksignore (2024-06-08)
+
+- chore: add gitleaks (2024-06-08)
+
+- build(deps): bump golang.org/x/oauth2 from 0.20.0 to 0.21.0 (#43) (2024-06-05)
+
+- chore: clean android (2024-06-05)
+
+- chore: cleanup firefox thanks (2024-06-03)
+
+- chore: remove prettier latest (2024-06-02)
+
+- chore: remove links (2024-05-22)
+
+- chore(changelog): generate v0.0.5 (2024-05-11)
+
 ## v0.0.5 (2024-05-11)
 
 ### Added
