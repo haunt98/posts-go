@@ -30,7 +30,6 @@ This is just a raw list.
 - https://github.com/Debian/wcurl
 
 - https://github.com/tldr-pages/tlrc
-- https://github.com/sharkdp/vivid
 - https://github.com/zellij-org/zellij
 - https://dev.yorhel.nl/ncdu
 - https://github.com/yitsushi/totp-cli
@@ -52,6 +51,7 @@ This is just a raw list.
 - https://github.com/junegunn/fzf-git.sh
 - https://github.com/Aloxaf/fzf-tab
 - https://github.com/charmbracelet/glow
+- https://github.com/sharkdp/vivid
 - https://github.com/dbrgn/tealdeer
 - https://github.com/GothenburgBitFactory/taskwarrior
 - https://github.com/atuinsh/atuin
@@ -61,13 +61,13 @@ For fun
 
 - https://github.com/yt-dlp/yt-dlp
 - https://github.com/newsboat/newsboat
-- https://github.com/orhun/daktilo
 - https://github.com/libvips/libvips
   - https://github.com/libjxl/libjxl
 - https://github.com/aristocratos/btop
 - https://github.com/asciinema/asciinema
   - https://github.com/asciinema/agg
 - https://github.com/qpdf/qpdf
+- https://github.com/fastfetch-cli/fastfetch
 
 ~~Fun memory~~
 
@@ -77,7 +77,6 @@ For fun
 - https://github.com/Gobidev/pfetch-rs
 - https://github.com/Dr-Noob/cpufetch
 - https://github.com/o2sh/onefetch
-- https://github.com/fastfetch-cli/fastfetch
 - https://gitlab.com/jallbrit/cbonsai
 - https://github.com/ytdl-org/youtube-dl
 - https://github.com/instaloader/instaloader
@@ -89,6 +88,7 @@ For fun
 - https://github.com/jarun/nnn
 - https://github.com/ImageMagick/ImageMagick
 - https://github.com/bloznelis/kbt
+- https://github.com/orhun/daktilo
 
 #### Windows
 
