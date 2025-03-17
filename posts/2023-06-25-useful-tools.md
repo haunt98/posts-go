@@ -30,7 +30,6 @@ This is just a raw list.
 - https://github.com/Debian/wcurl
 
 - https://github.com/tldr-pages/tlrc
-- https://github.com/zellij-org/zellij
 - https://dev.yorhel.nl/ncdu
 - https://github.com/yitsushi/totp-cli
 
@@ -56,6 +55,7 @@ This is just a raw list.
 - https://github.com/GothenburgBitFactory/taskwarrior
 - https://github.com/atuinsh/atuin
 - https://github.com/adrianlopezroche/fdupes
+- https://github.com/zellij-org/zellij
 
 For fun
 
