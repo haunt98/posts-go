@@ -530,3 +530,6 @@ go clean -cache -testcache -modcache -fuzzcache -x
 - [Making SQLite faster in Go](https://turriate.com/articles/making-sqlite-faster-in-go)
 - [Go generic: non-ptr to ptr](https://danielms.site/zet/2023/go-generic-non-ptr-to-ptr/)
 - [Crimes with Go Generics](https://xeiaso.net/blog/gonads-2022-04-24)
+
+- TODO:
+  - [] https://github.com/go-playground/validator
