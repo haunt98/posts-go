@@ -175,12 +175,12 @@ internal
       what we need is just common pkg libs.
     </p>
     <div class="markdown-heading">
-      <h2 class="heading-element">Taste on style guide</h2>
+      <h2 class="heading-element">Good taste</h2>
       <a
-        id="user-content-taste-on-style-guide"
+        id="user-content-good-taste"
         class="anchor"
-        aria-label="Permalink: Taste on style guide"
-        href="#taste-on-style-guide"
+        aria-label="Permalink: Good taste"
+        href="#good-taste"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -401,12 +401,12 @@ internal
 }</pre>
     </div>
     <div class="markdown-heading">
-      <h3 class="heading-element">As go evolve, things should change</h3>
+      <h3 class="heading-element">As go evolves, things should change</h3>
       <a
-        id="user-content-as-go-evolve-things-should-change"
+        id="user-content-as-go-evolves-things-should-change"
         class="anchor"
-        aria-label="Permalink: As go evolve, things should change"
-        href="#as-go-evolve-things-should-change"
+        aria-label="Permalink: As go evolves, things should change"
+        href="#as-go-evolves-things-should-change"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -428,6 +428,15 @@ internal
     <ul>
       <li>Use <code>any</code> instead of <code>interface{}</code>.</li>
     </ul>
+    <p>
+      Use
+      <a
+        href="https://pkg.go.dev/golang.org/x/tools/gopls/internal/analysis/modernize"
+        rel="nofollow"
+        >gopls/modernize</a
+      >
+      to automatically simplify code.
+    </p>
     <div class="markdown-heading">
       <h2 class="heading-element">External libs</h2>
       <a
@@ -587,6 +596,13 @@ internal
     }
 }()</pre>
     </div>
+    <p>
+      Combine with
+      <a href="https://github.com/go-playground/validator"
+        >go-playground/validator</a
+      >
+      to validate request structs.
+    </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
         If you want log, just use
@@ -617,7 +633,7 @@ internal
       </li>
       <li>If doubt, use <code>zap.Any</code>.</li>
       <li>
-        Use <code>contextID</code> or <code>traceID</code> in every log lines
+        Use <code>context_id</code> or <code>trace_id</code> in every log lines
         for easily debug.
       </li>
     </ul>
@@ -676,20 +692,19 @@ internal
     <p>
       But <code>database/sql</code> has its own limit. For example, it is hard
       to get primary key after insert/update. So may be you want to use ORM for
-      those cases. I hear that
-      <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a> is good.
+      those cases, <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a> is
+      good.
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
         Connect Redis with
-        <a href="https://github.com/redis/go-redis">redis/go-redis</a> or
-        <a href="https://github.com/redis/rueidis">redis/rueidis</a>
+        <a href="https://github.com/redis/go-redis">redis/go-redis</a>
       </h3>
       <a
-        id="user-content-connect-redis-with-redisgo-redis-or-redisrueidis"
+        id="user-content-connect-redis-with-redisgo-redis"
         class="anchor"
-        aria-label="Permalink: Connect Redis with redis/go-redis or redis/rueidis"
-        href="#connect-redis-with-redisgo-redis-or-redisrueidis"
+        aria-label="Permalink: Connect Redis with redis/go-redis"
+        href="#connect-redis-with-redisgo-redis"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -778,34 +793,6 @@ internal
     </ul>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        Connect SQLite with
-        <a href="https://gitlab.com/cznic/sqlite" rel="nofollow"
-          >modernc.org/sqlite</a
-        >
-      </h3>
-      <a
-        id="user-content-connect-sqlite-with-moderncorgsqlite"
-        class="anchor"
-        aria-label="Permalink: Connect SQLite with modernc.org/sqlite"
-        href="#connect-sqlite-with-moderncorgsqlite"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Remember to config:</p>
-    <ul>
-      <li>Write-Ahead Logging: <code>PRAGMA journal_mode=WAL</code></li>
-      <li>Set timeout retry lock: <code>PRAGMA busy_timeout=5000</code></li>
-      <li>
-        Disable connections pool with <code>SetMaxOpenConns</code> sets to 1
-      </li>
-    </ul>
-    <p>
-      Don't use
-      <a href="https://github.com/mattn/go-sqlite3">mattn/go-sqlite3</a>, it's
-      required <code>CGO_ENABLED</code>.
-    </p>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
         Connect Kafka with
         <a href="https://github.com/IBM/sarama">IBM/sarama</a>
       </h3>
@@ -825,7 +812,7 @@ internal
       Don't use
       <a href="https://github.com/confluentinc/confluent-kafka-go"
         >confluentinc/confluent-kafka-go</a
-      >, it's required <code>CGO_ENABLED</code>.
+      >, because it's required <code>CGO_ENABLED</code>.
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
@@ -890,39 +877,6 @@ internal
     </div>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        Use
-        <a
-          href="https://pkg.go.dev/golang.org/x/tools/cmd/stringer"
-          rel="nofollow"
-          >stringer</a
-        >
-        if you want your type enum can be print as string
-      </h3>
-      <a
-        id="user-content-use-stringer-if-you-want-your-type-enum-can-be-print-as-string"
-        class="anchor"
-        aria-label="Permalink: Use stringer if you want your type enum can be print as string"
-        href="#use-stringer-if-you-want-your-type-enum-can-be-print-as-string"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">type</span> <span class="pl-smi">Drink</span> <span class="pl-smi">int</span>
-
-<span class="pl-k">const</span> (
-	<span class="pl-s1">Beer</span> <span class="pl-smi">Drink</span> <span class="pl-c1">=</span> <span class="pl-c1">iota</span>
-	<span class="pl-s1">Water</span>
-	<span class="pl-s1">OrangeJuice</span>
-)</pre>
-    </div>
-    <div class="highlight highlight-source-shell">
-      <pre>go install golang.org/x/tools/cmd/stringer@latest
-
-<span class="pl-c"><span class="pl-c">#</span> Run inside directory which contains Drink</span>
-stringer -type=Drink</pre>
-    </div>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
         Don't waste your time rewrite rate limiter if your use case is simple,
         use
         <a href="https://pkg.go.dev/golang.org/x/time/rate" rel="nofollow"
@@ -947,12 +901,12 @@ stringer -type=Drink</pre>
     <div class="markdown-heading">
       <h3 class="heading-element">
         Replace <code>go fmt</code>, <code>goimports</code> with
-        <a href="https://github.com/mvdan/gofumpt">mvdan/gofumpt</a>.
+        <a href="https://github.com/mvdan/gofumpt">mvdan/gofumpt</a>
       </h3>
       <a
         id="user-content-replace-go-fmt-goimports-with-mvdangofumpt"
         class="anchor"
-        aria-label="Permalink: Replace go fmt, goimports with mvdan/gofumpt."
+        aria-label="Permalink: Replace go fmt, goimports with mvdan/gofumpt"
         href="#replace-go-fmt-goimports-with-mvdangofumpt"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
@@ -963,17 +917,17 @@ stringer -type=Drink</pre>
         Use
         <a href="https://github.com/golangci/golangci-lint"
           >golangci/golangci-lint</a
-        >.
+        >
       </h3>
       <a
         id="user-content-use-golangcigolangci-lint"
         class="anchor"
-        aria-label="Permalink: Use golangci/golangci-lint."
+        aria-label="Permalink: Use golangci/golangci-lint"
         href="#use-golangcigolangci-lint"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>No need to say more. Lint or get the f out!</p>
+    <p>No need to say more. Lint is the way!</p>
     <p>
       If you get <code>fieldalignment</code> error, use
       <a
@@ -981,6 +935,8 @@ stringer -type=Drink</pre>
         rel="nofollow"
         >fieldalignment</a
       >
+      or
+      <a href="https://github.com/dkorunic/betteralign">dkorunic/betteralign</a>
       to fix them.
     </p>
     <p>
@@ -990,17 +946,19 @@ stringer -type=Drink</pre>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Install</span>
 go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
+go install github.com/dkorunic/betteralign/cmd/betteralign@latest
 
 <span class="pl-c"><span class="pl-c">#</span> Fix</span>
-fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
+fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go
+betteralign -apply ./internal/business/<span class="pl-k">*</span>.go</pre>
     </div>
     <div class="markdown-heading">
-      <h2 class="heading-element">Snippet/script</h2>
+      <h2 class="heading-element">Snippets/scripts</h2>
       <a
-        id="user-content-snippetscript"
+        id="user-content-snippetsscripts"
         class="anchor"
-        aria-label="Permalink: Snippet/script"
-        href="#snippetscript"
+        aria-label="Permalink: Snippets/scripts"
+        href="#snippetsscripts"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -1127,17 +1085,6 @@ fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go</pre>
             >Crimes with Go Generics</a
           >
         </p>
-      </li>
-      <li>
-        <p>TODO:</p>
-        <ul>
-          <li>
-            []
-            <a href="https://github.com/go-playground/validator"
-              >https://github.com/go-playground/validator</a
-            >
-          </li>
-        </ul>
       </li>
     </ul>
 

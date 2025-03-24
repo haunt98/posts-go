@@ -69,7 +69,7 @@ only need to import from common pkg libs.
 Another bad practice is adapter service. No need to write a new service if what
 we need is just common pkg libs.
 
-## Taste on style guide
+## Good taste
 
 ### Stop using global var
 
@@ -210,7 +210,7 @@ func Zero[T any]() T {
 }
 ```
 
-### As go evolve, things should change
+### As go evolves, things should change
 
 Since go 1.21:
 
@@ -225,6 +225,10 @@ Since go 1.20:
 Since go 1.18:
 
 - Use `any` instead of `interface{}`.
+
+Use
+[gopls/modernize](https://pkg.go.dev/golang.org/x/tools/gopls/internal/analysis/modernize)
+to automatically simplify code.
 
 ## External libs
 
@@ -300,6 +304,10 @@ defer func() {
 }()
 ```
 
+Combine with
+[go-playground/validator](https://github.com/go-playground/validator) to
+validate request structs.
+
 ### If you want log, just use [uber-go/zap](https://github.com/uber-go/zap)
 
 It is fast!
@@ -311,7 +319,7 @@ It is fast!
 - Don't use `Panic`. Use `Fatal` for errors when start service to check
   dependencies. If you really need panic level, use `DPanic`.
 - If doubt, use `zap.Any`.
-- Use `contextID` or `traceID` in every log lines for easily debug.
+- Use `context_id` or `trace_id` in every log lines for easily debug.
 
 ### To read config, use [spf13/viper](https://github.com/spf13/viper)
 
@@ -338,10 +346,10 @@ possible. Idealy, we should init all prepared statement when we init database
 connection to cached it, not create it every time we need it.
 
 But `database/sql` has its own limit. For example, it is hard to get primary key
-after insert/update. So may be you want to use ORM for those cases. I hear that
+after insert/update. So may be you want to use ORM for those cases,
 [go-gorm/gorm](https://github.com/go-gorm/gorm) is good.
 
-### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis) or [redis/rueidis](https://github.com/redis/rueidis)
+### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis)
 
 Be careful when use [HGETALL](https://redis.io/commands/hgetall/). If key not
 found, empty data will be returned not nil error. See
@@ -403,24 +411,13 @@ Remember to config:
 - `CheckConnLiveness` to true.
 - `ReadTimeout`, `WriteTimeout`
 
-### Connect SQLite with [modernc.org/sqlite](https://gitlab.com/cznic/sqlite)
-
-Remember to config:
-
-- Write-Ahead Logging: `PRAGMA journal_mode=WAL`
-- Set timeout retry lock: `PRAGMA busy_timeout=5000`
-- Disable connections pool with `SetMaxOpenConns` sets to 1
-
-Don't use [mattn/go-sqlite3](https://github.com/mattn/go-sqlite3), it's required
-`CGO_ENABLED`.
-
 ### Connect Kafka with [IBM/sarama](https://github.com/IBM/sarama)
 
 Use `sarama.V1_0_0_0`, because IBM decide to upgrade default version.
 
 Don't use
 [confluentinc/confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go),
-it's required `CGO_ENABLED`.
+because it's required `CGO_ENABLED`.
 
 ### If you want test, just use [stretchr/testify](https://github.com/stretchr/testify).
 
@@ -452,42 +449,23 @@ a := cast.ToInt32(servicev1.ReasonCode_ABC)
 a := int32(servicev1.ReasonCode_ABC)
 ```
 
-### Use [stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer) if you want your type enum can be print as string
-
-```go
-type Drink int
-
-const (
-	Beer Drink = iota
-	Water
-	OrangeJuice
-)
-```
-
-```sh
-go install golang.org/x/tools/cmd/stringer@latest
-
-# Run inside directory which contains Drink
-stringer -type=Drink
-```
-
 ### Don't waste your time rewrite rate limiter if your use case is simple, use [rate](https://pkg.go.dev/golang.org/x/time/rate) or [go-redis/redis_rate](https://github.com/go-redis/redis_rate)
 
 **rate** if you want rate limiter locally in your single instance of service.
 **redis_rate** if you want rate limiter distributed across all your instances of
 service.
 
-### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt).
+### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt)
 
 `gofumpt` provides more rules when format Go codes.
 
-### Use [golangci/golangci-lint](https://github.com/golangci/golangci-lint).
+### Use [golangci/golangci-lint](https://github.com/golangci/golangci-lint)
 
-No need to say more. Lint or get the f out!
+No need to say more. Lint is the way!
 
 If you get `fieldalignment` error, use
 [fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment)
-to fix them.
+or [dkorunic/betteralign](https://github.com/dkorunic/betteralign) to fix them.
 
 My heuristic for fieldalignment (not work all the time): pointer -> string ->
 []byte -> int64 -> int32.
@@ -495,12 +473,14 @@ My heuristic for fieldalignment (not work all the time): pointer -> string ->
 ```sh
 # Install
 go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
+go install github.com/dkorunic/betteralign/cmd/betteralign@latest
 
 # Fix
 fieldalignment -fix ./internal/business/*.go
+betteralign -apply ./internal/business/*.go
 ```
 
-## Snippet/script
+## Snippets/scripts
 
 Change import:
 
@@ -530,6 +510,3 @@ go clean -cache -testcache -modcache -fuzzcache -x
 - [Making SQLite faster in Go](https://turriate.com/articles/making-sqlite-faster-in-go)
 - [Go generic: non-ptr to ptr](https://danielms.site/zet/2023/go-generic-non-ptr-to-ptr/)
 - [Crimes with Go Generics](https://xeiaso.net/blog/gonads-2022-04-24)
-
-- TODO:
-  - [] https://github.com/go-playground/validator
