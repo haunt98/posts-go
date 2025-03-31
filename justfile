@@ -20,7 +20,8 @@ coverage-html: coverage
     go tool cover -html=coverage.out
 
 lint:
-    golangci-lint run ./...
+    golangci-lint run --fix ./...
+    modernize -fix -test ./...
 
 format:
     # go install github.com/haunt98/gofimports/cmd/gofimports@latest
