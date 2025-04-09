@@ -60,7 +60,6 @@ This is just a raw list.
 For fun
 
 - https://github.com/yt-dlp/yt-dlp
-- https://github.com/newsboat/newsboat
 - https://github.com/libvips/libvips
   - https://github.com/libjxl/libjxl
 - https://github.com/aristocratos/btop
@@ -89,6 +88,7 @@ For fun
 - https://github.com/ImageMagick/ImageMagick
 - https://github.com/bloznelis/kbt
 - https://github.com/orhun/daktilo
+- https://github.com/newsboat/newsboat
 
 #### Windows
 
