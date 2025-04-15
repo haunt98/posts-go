@@ -21,6 +21,9 @@ This is just a raw list.
 - https://github.com/Wilfred/difftastic
 - https://github.com/eza-community/eza
 - https://github.com/chmln/sd
+- https://github.com/uutils/coreutils
+- https://github.com/uutils/diffutils
+- https://github.com/uutils/findutils
 
 - https://github.com/WayneD/rsync
 - https://github.com/rclone/rclone
