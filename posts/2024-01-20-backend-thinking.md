@@ -5,7 +5,7 @@
 Transform business requirements to action, which usually involves:
 
 - Service:
-  - ZaloPay use microservices architecture, mostly written using Go and Java
+  - Zalopay use microservices architecture, mostly written using Go and Java
 - API:
   - HTTP (Client-Server) and GRPC (Server-Server)
 - Database/Cache/Storage/Message Broker
@@ -24,7 +24,7 @@ After successfully do all of that, next step is:
   - Metrics
   - Tracing
 
-In ZaloPay, each team has its own responsibilities/domains, aka many different
+In Zalopay, each team has its own responsibilities/domains, aka many different
 services.
 
 Ideally each team can choose custom backend techstack if they want, but mostly
@@ -59,7 +59,7 @@ wait for response.
 
 - Use HTTP Method GET/POST/…
 - HTTP responses status code
-- ZaloPay rule
+- Zalopay rule
   - Only return code 200
   - Response body is only JSON
 
@@ -85,7 +85,7 @@ Correct answer will always be: "It depends". Depends on:
 Why do we use HTTP for Client-Server and GRPC for Server-Server?
 
 - HTTP for Client-Server is pretty standard. Easy for client to debug, ...
-- Before ZaloPay switch to GRPC for Server-Server, we use HTTP. The reason for
+- Before Zalopay switch to GRPC for Server-Server, we use HTTP. The reason for
   switch is mainly performance.
 
 ### Message Broker
@@ -164,7 +164,7 @@ detecting breaking changes.
 ### References
 
 - [Best practices for REST API design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
-  - [ZaloPay API](https://docs.zalopay.vn/v2/)
+  - [Zalopay API](https://docs.zalopay.vn/v2/)
   - [stripe API](https://stripe.com/docs/api)
   - [moov API](https://docs.moov.io/api/)
 - [Using Apache Kafka to process 1 trillion inter-service messages](https://blog.cloudflare.com/using-apache-kafka-to-process-1-trillion-messages/)
@@ -226,7 +226,7 @@ real Kafka, ...). But it's not easy way to setup yourself.
 The easier way is to use mocks. Mock all dependencies to test all possible edge
 cases you can think of.
 
-- Unit tests is the standard (ZaloPay currently requires 90% test coverage).
+- Unit tests is the standard (Zalopay currently requires 90% test coverage).
   - Easy to test small to medium function which have simple rules, likely single
     purpose, with table testing technique.
   - For big, complex function, the strategy testing goes from happy case to each
