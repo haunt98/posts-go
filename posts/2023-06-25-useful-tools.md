@@ -177,7 +177,7 @@ Format
 Language server
 
 - https://github.com/golang/tools/tree/master/gopls
-- https://github.com/Microsoft/pyright
+- https://github.com/luals/lua-language-server
 - https://github.com/artempyanykh/marksman
 - https://github.com/Myriad-Dreamin/tinymist
 
@@ -210,7 +210,6 @@ Misc
 - https://github.com/fullstorydev/grpcurl
 - https://github.com/gitleaks/gitleaks
 - https://github.com/koalaman/shellcheck
-- https://github.com/luals/lua-language-server
 - https://github.com/plantuml/plantuml
 - https://github.com/pyenv/pyenv
 - https://github.com/pypa/pipx
@@ -220,6 +219,7 @@ Misc
 - https://github.com/stedolan/jq
 - https://github.com/tailscale/golink
 - https://github.com/walles/riff
+- https://github.com/Microsoft/pyright
 
 #### Go
 
