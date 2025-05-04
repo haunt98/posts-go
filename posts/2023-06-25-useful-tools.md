@@ -117,9 +117,7 @@ Misc
 - https://github.com/walles/moar
 - https://github.com/antonmedv/fx
 - https://github.com/josephburnett/jd
-- https://github.com/ollama/ollama
 - https://github.com/ggerganov/llama.cpp
-- https://github.com/simonw/llm
 - https://github.com/gitleaks/gitleaks
 - https://github.com/cli/cli
 - https://gitlab.com/gitlab-org/cli
