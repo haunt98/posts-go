@@ -76,6 +76,7 @@ For fun
 - https://github.com/jordanbaird/Ice
 - https://sourceforge.net/projects/skim-app/
 - https://github.com/alienator88/Pearcleaner
+- https://github.com/objective-see/KnockKnock
 
 ## Development
 
