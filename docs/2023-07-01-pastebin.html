@@ -444,20 +444,25 @@ sudo pkill bluetoothd</pre
       </li>
     </ul>
     <div class="markdown-heading">
-      <h2 class="heading-element">git clean up</h2>
+      <h2 class="heading-element">git</h2>
       <a
-        id="user-content-git-clean-up"
+        id="user-content-git"
         class="anchor"
-        aria-label="Permalink: git clean up"
-        href="#git-clean-up"
+        aria-label="Permalink: git"
+        href="#git"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>Clean up:</p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Delete untracked</span>
 git clean -fdx
 
 git gc</pre>
+    </div>
+    <p>Count number of commits:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>git rev-list abc123..HEAD --count</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">Delete <code>.DS_Store</code></h2>
