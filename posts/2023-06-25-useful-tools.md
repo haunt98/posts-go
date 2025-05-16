@@ -131,12 +131,6 @@ Misc
 - https://pkg.go.dev/golang.org/x/telemetry/cmd/gotelemetry
 - https://github.com/mvdan/gofumpt
 - https://github.com/golangci/golangci-lint
-  - https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck
-  - https://github.com/securego/gosec
-  - https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment
-  - https://github.com/dkorunic/betteralign
-- https://github.com/maruel/panicparse
-- https://github.com/gotestyourself/gotestsum
 - https://github.com/bufbuild/buf
 
 ### UI
