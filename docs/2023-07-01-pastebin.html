@@ -524,6 +524,7 @@ rsync -avzP src/ dst</pre>
     </div>
     <p>Commonly flags:</p>
     <ul>
+      <li><code>-a</code>: archive <code>-rlptgoD</code></li>
       <li><code>-v</code>: verbose</li>
       <li><code>-z</code>: compress</li>
       <li>
@@ -531,6 +532,10 @@ rsync -avzP src/ dst</pre>
         <code>--progress</code> to easily resume after interrupt
       </li>
       <li><code>-n</code>: dry run</li>
+      <li>
+        <code>--exclude</code>: exclude files, example
+        <code>--exclude=".DS_Store"</code>
+      </li>
     </ul>
     <p>Be careful flags (need dry run if not sure):</p>
     <ul>
