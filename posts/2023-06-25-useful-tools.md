@@ -6,12 +6,9 @@ This is just a raw list.
 
 ### Terminal
 
-- https://github.com/starship/starship
 - https://github.com/zsh-users/zsh-autosuggestions
 - https://github.com/zsh-users/zsh-history-substring-search
 - https://github.com/junegunn/fzf
-- https://github.com/folke/lazy.nvim
-- https://github.com/ajeetdsouza/zoxide
 - https://github.com/sharkdp/fd
 - https://github.com/sharkdp/bat
 - https://github.com/eth-p/bat-extras
@@ -19,7 +16,10 @@ This is just a raw list.
 - https://github.com/dandavison/delta
 - https://github.com/Wilfred/difftastic
 - https://github.com/eza-community/eza
+- https://github.com/ajeetdsouza/zoxide
+- https://github.com/starship/starship
 - https://github.com/chmln/sd
+- https://github.com/walles/moar
 - https://github.com/uutils/coreutils
 - https://github.com/uutils/diffutils
 - https://github.com/uutils/findutils
@@ -27,11 +27,11 @@ This is just a raw list.
 - https://github.com/WayneD/rsync
 - https://github.com/rclone/rclone
 - https://github.com/restic/restic
+- https://dev.yorhel.nl/ncdu
+- https://github.com/Debian/wcurl
 - https://github.com/pkolaczk/fclones
 - https://github.com/ayoisaiah/f2
-- https://github.com/Debian/wcurl
 - https://github.com/tldr-pages/tlrc
-- https://dev.yorhel.nl/ncdu
 - https://github.com/yitsushi/totp-cli
 
 For fun
@@ -115,7 +115,6 @@ Misc
 
 - https://github.com/mikefarah/yq
 - https://github.com/itchyny/gojq
-- https://github.com/walles/moar
 - https://github.com/antonmedv/fx
 - https://github.com/josephburnett/jd
 - https://github.com/ggerganov/llama.cpp
