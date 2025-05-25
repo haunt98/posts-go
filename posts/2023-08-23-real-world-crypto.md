@@ -201,3 +201,13 @@ Instead of prime number, use elliptic curve.
 - Bob generate secret `b` and public `B = [b]G`.
 - Alice and Bob exchange `A` and `B`
   - Same secret `[a]B == [b]A == [ab]G`
+
+## Asymmetric encryption
+
+Everyone use Alice's public key to encrypt email then send to Alice. Alice use
+private key to decryt received emails.
+
+In practice, asymmetric encryption can only encrypt messages up to a certain
+length.
+
+## Hybrid encryption
