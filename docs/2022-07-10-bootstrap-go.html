@@ -74,42 +74,38 @@
     <div class="highlight highlight-text-adblock">
       <pre>
 main.go
-internal
-    business
-        http
-            handler.go
-            service.go
-            models.go
-
-        grpc
-            handler.go
-            models.go
-        consumer
-            handler.go
-            service.go
-            models.go
+internal/
+    http/
+        handler.go
         service.go
-        repository.go
-        models.go</pre
+        models.go
+    grpc/
+        handler.go
+        models.go
+    consumer/
+        handler.go
+        service.go
+        models.go
+    service.go
+    repository.go
+    models.go</pre
       >
     </div>
     <p>
-      All business codes are inside <code>internal</code>. Each business has a
-      different directory <code>business</code>.
+      All codes are inside <code>internal</code>. Because
+      <code>internal</code> is magic keyword in Go, you can not import pkg
+      inside <code>internal</code>.
     </p>
-    <p>
-      Inside each business, there are 2 handlers: <code>http</code>,
-      <code>grpc</code>:
-    </p>
+    <p>There are 3 common handlers:</p>
     <ul>
       <li>
-        <code>http</code> is for public APIs (Android, iOS, ... are clients).
+        <code>http/</code> is for public APIs (Android, iOS, ... are clients).
       </li>
       <li>
-        <code>grpc</code> is for internal APIs (other services are clients).
+        <code>grpc/</code> is for internal APIs (other services are clients).
       </li>
       <li>
-        <code>consumer</code> is for consuming messages from queue (Kafka,
+        <code>consumer/</code> is for consuming messages from queue (Kafka,
         RabbitMQ, ...).
       </li>
     </ul>
@@ -121,12 +117,12 @@ internal
       <li>
         <code>handler</code> interacts directly with gRPC, REST or consumer
         using specific codes (cookies, ...) In case gRPC, there are frameworks
-        outside handle for us so we can write business/logic codes here too. But
+        outside handle for us so we can write logic codes here too. But
         remember, gRPC only.
       </li>
       <li>
-        <code>service</code> is where we write business/logic codes, and only
-        business/logic codes is written here.
+        <code>service</code> is where we write logic codes, and only logic codes
+        is written here.
       </li>
       <li>
         <code>repository</code> is where we write codes which interacts with
@@ -143,13 +139,9 @@ internal
         <code>http</code>, <code>consumer</code>.
       </li>
       <li>
-        <code>service</code>, <code>models</code> can exist directly inside of
-        <code>business</code> if both <code>grpc</code>, <code>http</code>,
-        <code>consumer</code> has same business/logic.
-      </li>
-      <li>
-        <code>repository</code> should be placed directly inside of
-        <code>business</code>.
+        <code>service</code>, <code>repository</code> can exist directly inside
+        of <code>internal</code> if both <code>grpc</code>, <code>http</code>,
+        <code>consumer</code> has same logic.
       </li>
     </ul>
     <div class="markdown-heading">
@@ -203,6 +195,21 @@ internal
       <li>Can not write unit test.</li>
       <li>Is not thread safe.</li>
     </ul>
+    <div class="markdown-heading">
+      <h3 class="heading-element">Avoid unsigned type</h3>
+      <a
+        id="user-content-avoid-unsigned-type"
+        class="anchor"
+        aria-label="Permalink: Avoid unsigned type"
+        href="#avoid-unsigned-type"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>
+      Just a var can not have negative value, doesn't mean it should use
+      <code>uint</code>. Just use <code>int</code> and do not care about
+      boundary.
+    </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
         Use functional options, but don't overuse it!
@@ -276,8 +283,8 @@ internal
       ></a>
     </div>
     <p>
-      If business logic involves calling too many APIs, but they are not depend
-      on each other. We can fire them parallel :)
+      If logic involves calling too many APIs, but they are not depend on each
+      other. We can fire them parallel :)
     </p>
     <p>
       Personally, I prefer <code>errgroup</code> to <code>WaitGroup</code> (<a
@@ -652,7 +659,7 @@ internal
     </div>
     <p>
       Only init config in main or cmd layer. Do not use
-      <code>viper.Get...</code> in business layer or inside business layer.
+      <code>viper.Get...</code> in inside layer.
     </p>
     <p>Why?</p>
     <ul>
@@ -685,8 +692,8 @@ internal
       <a href="https://go.dev/doc/database/prepared-statements" rel="nofollow"
         >prepared statement</a
       >
-      as much as possible. Idealy, we should init all prepared statement when we
-      init database connection to cached it, not create it every time we need
+      as much as possible. Ideally, we should init all prepared statement when
+      we init database connection to cached it, not create it every time we need
       it.
     </p>
     <p>
@@ -694,6 +701,10 @@ internal
       to get primary key after insert/update. So may be you want to use ORM for
       those cases, <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a> is
       good.
+    </p>
+    <p>
+      Make sure to test your code (ORM or not) with
+      <a href="https://github.com/DATA-DOG/go-sqlmock">DATA-DOG/go-sqlmock</a>.
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
@@ -949,8 +960,8 @@ go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignme
 go install github.com/dkorunic/betteralign/cmd/betteralign@latest
 
 <span class="pl-c"><span class="pl-c">#</span> Fix</span>
-fieldalignment -fix ./internal/business/<span class="pl-k">*</span>.go
-betteralign -apply ./internal/business/<span class="pl-k">*</span>.go</pre>
+fieldalignment -fix ./internal/<span class="pl-k">*</span>.go
+betteralign -apply ./internal/<span class="pl-k">*</span>.go</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">Snippets/scripts</h2>

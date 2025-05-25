@@ -9,42 +9,39 @@ comment.
 
 ```txt
 main.go
-internal
-    business
-        http
-            handler.go
-            service.go
-            models.go
-
-        grpc
-            handler.go
-            models.go
-        consumer
-            handler.go
-            service.go
-            models.go
+internal/
+    http/
+        handler.go
         service.go
-        repository.go
         models.go
+    grpc/
+        handler.go
+        models.go
+    consumer/
+        handler.go
+        service.go
+        models.go
+    service.go
+    repository.go
+    models.go
 ```
 
-All business codes are inside `internal`. Each business has a different
-directory `business`.
+All codes are inside `internal`. Because `internal` is magic keyword in Go, you
+can not import pkg inside `internal`.
 
-Inside each business, there are 2 handlers: `http`, `grpc`:
+There are 3 common handlers:
 
-- `http` is for public APIs (Android, iOS, ... are clients).
-- `grpc` is for internal APIs (other services are clients).
-- `consumer` is for consuming messages from queue (Kafka, RabbitMQ, ...).
+- `http/` is for public APIs (Android, iOS, ... are clients).
+- `grpc/` is for internal APIs (other services are clients).
+- `consumer/` is for consuming messages from queue (Kafka, RabbitMQ, ...).
 
 For each handler, there are usually 3 layers: `handler`, `service`,
 `repository`:
 
 - `handler` interacts directly with gRPC, REST or consumer using specific codes
   (cookies, ...) In case gRPC, there are frameworks outside handle for us so we
-  can write business/logic codes here too. But remember, gRPC only.
-- `service` is where we write business/logic codes, and only business/logic
-  codes is written here.
+  can write logic codes here too. But remember, gRPC only.
+- `service` is where we write logic codes, and only logic codes is written here.
 - `repository` is where we write codes which interacts with database/cache like
   MySQL, Redis, ...
 - `models` is where we put all request, response, data models.
@@ -52,9 +49,8 @@ For each handler, there are usually 3 layers: `handler`, `service`,
 Location:
 
 - `handler` must exist inside `grpc`, `http`, `consumer`.
-- `service`, `models` can exist directly inside of `business` if both `grpc`,
-  `http`, `consumer` has same business/logic.
-- `repository` should be placed directly inside of `business`.
+- `service`, `repository` can exist directly inside of `internal` if both
+  `grpc`, `http`, `consumer` has same logic.
 
 ## Do not repeat!
 
@@ -79,6 +75,11 @@ Why?
 
 - Can not write unit test.
 - Is not thread safe.
+
+### Avoid unsigned type
+
+Just a var can not have negative value, doesn't mean it should use `uint`. Just
+use `int` and do not care about boundary.
 
 ### Use functional options, but don't overuse it!
 
@@ -125,8 +126,8 @@ pass direct field inside `s`.
 
 ### Use [errgroup](https://pkg.go.dev/golang.org/x/sync/errgroup) as much as possible
 
-If business logic involves calling too many APIs, but they are not depend on
-each other. We can fire them parallel :)
+If logic involves calling too many APIs, but they are not depend on each other.
+We can fire them parallel :)
 
 Personally, I prefer `errgroup` to `WaitGroup`
 (https://pkg.go.dev/sync#WaitGroup). Because I always need deal with error. Be
@@ -323,8 +324,8 @@ It is fast!
 
 ### To read config, use [spf13/viper](https://github.com/spf13/viper)
 
-Only init config in main or cmd layer. Do not use `viper.Get...` in business
-layer or inside business layer.
+Only init config in main or cmd layer. Do not use `viper.Get...` in inside
+layer.
 
 Why?
 
@@ -342,12 +343,15 @@ something is wrong.
 
 Also please use
 [prepared statement](https://go.dev/doc/database/prepared-statements) as much as
-possible. Idealy, we should init all prepared statement when we init database
+possible. Ideally, we should init all prepared statement when we init database
 connection to cached it, not create it every time we need it.
 
 But `database/sql` has its own limit. For example, it is hard to get primary key
 after insert/update. So may be you want to use ORM for those cases,
 [go-gorm/gorm](https://github.com/go-gorm/gorm) is good.
+
+Make sure to test your code (ORM or not) with
+[DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock).
 
 ### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis)
 
@@ -476,8 +480,8 @@ go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignme
 go install github.com/dkorunic/betteralign/cmd/betteralign@latest
 
 # Fix
-fieldalignment -fix ./internal/business/*.go
-betteralign -apply ./internal/business/*.go
+fieldalignment -fix ./internal/*.go
+betteralign -apply ./internal/*.go
 ```
 
 ## Snippets/scripts
