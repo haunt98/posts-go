@@ -28,7 +28,6 @@ This is just a raw list.
 - https://github.com/rclone/rclone
 - https://github.com/restic/restic
 - https://dev.yorhel.nl/ncdu
-- https://github.com/Debian/wcurl
 - https://github.com/pkolaczk/fclones
 - https://github.com/ayoisaiah/f2
 - https://github.com/tldr-pages/tlrc
