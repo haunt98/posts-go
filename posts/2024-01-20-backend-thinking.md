@@ -322,3 +322,7 @@ sequenceDiagram
 - [RedisInsight](https://redis.com/redis-enterprise/redis-insight/): Redis GUI
 - [OrbStack](https://orbstack.dev/download): Better Docker Desktop
 - [Kreya](https://kreya.app/): GRPC caller
+
+## Backlog
+
+- https://programmingisterrible.com/post/162346490883/how-do-you-cut-a-monolith-in-half
