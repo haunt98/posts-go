@@ -37,11 +37,11 @@ For fun
 
 - https://github.com/yt-dlp/yt-dlp
 - https://github.com/libvips/libvips
-  - https://github.com/libjxl/libjxl
+    - https://github.com/libjxl/libjxl
 
 - https://github.com/aristocratos/btop
 - https://github.com/asciinema/asciinema
-  - https://github.com/asciinema/agg
+    - https://github.com/asciinema/agg
 - https://github.com/qpdf/qpdf
 - https://github.com/fastfetch-cli/fastfetch
 - https://github.com/laishulu/macism
@@ -66,9 +66,9 @@ For fun
 - https://github.com/iina/iina
 - https://github.com/rxhanson/Rectangle
 - https://github.com/waydabber/BetterDisplay
-  - https://github.com/waydabber/BetterDisplay/wiki/Fully-scalable-HiDPI-desktop#notes-and-troubleshooting
+    - https://github.com/waydabber/BetterDisplay/wiki/Fully-scalable-HiDPI-desktop#notes-and-troubleshooting
 - https://github.com/lwouis/alt-tab-macos
-  - https://github.com/lwouis/alt-tab-macos/issues/3723
+    - https://github.com/lwouis/alt-tab-macos/issues/3723
 - https://github.com/pqrs-org/Karabiner-Elements
 - https://github.com/coteditor/CotEditor
 - https://github.com/zed-industries/zed

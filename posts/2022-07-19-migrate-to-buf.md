@@ -4,8 +4,7 @@ Why? Because `prototool` is outdated, and can not run on M1 mac.
 
 We need 3 files:
 
-- `build.go`: need to install protoc-gen-\* binaries with pin version in
-  `go.mod`
+- `build.go`: need to install protoc-gen-\* binaries with pin version in `go.mod`
 - `buf.yaml`
 - `buf.gen.yaml`
 
@@ -33,16 +32,16 @@ import (
 ```yaml
 version: v1
 deps:
-  - buf.build/envoyproxy/protoc-gen-validate:6607b10f00ed4a3d98f906807131c44a
-  - buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418
-  - buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c
-  - buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7
+    - buf.build/envoyproxy/protoc-gen-validate:6607b10f00ed4a3d98f906807131c44a
+    - buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418
+    - buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c
+    - buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7
 breaking:
-  use:
-    - PACKAGE
+    use:
+        - PACKAGE
 lint:
-  use:
-    - DEFAULT
+    use:
+        - DEFAULT
 ```
 
 `buf.gen.yaml`:
@@ -50,24 +49,24 @@ lint:
 ```yaml
 version: v1
 plugins:
-  - plugin: buf.build/grpc/go:v1.3.0
-    out: pkg
-  - plugin: buf.build/protocolbuffers/go:v1.31.0
-    out: pkg
-  - plugin: buf.build/bufbuild/validate-go:v1.0.2
-    out: pkg
-    opt:
-      - lang=go
-  - plugin: marshal-zap
-    out: pkg
-  - plugin: grpc-gateway
-    out: pkg
-    opt:
-      - logtostderr=true
-  - plugin: swagger
-    out: .
-    opt:
-      - logtostderr=true
+    - plugin: buf.build/grpc/go:v1.3.0
+      out: pkg
+    - plugin: buf.build/protocolbuffers/go:v1.31.0
+      out: pkg
+    - plugin: buf.build/bufbuild/validate-go:v1.0.2
+      out: pkg
+      opt:
+          - lang=go
+    - plugin: marshal-zap
+      out: pkg
+    - plugin: grpc-gateway
+      out: pkg
+      opt:
+          - logtostderr=true
+    - plugin: swagger
+      out: .
+      opt:
+          - logtostderr=true
 ```
 
 Update `Makefile`:
@@ -85,8 +84,8 @@ gen:
 
 Run `make gen` to have fun of course.
 
-If using `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`,
-better make a raw copy of proto file for other services to integrate:
+If using `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`, better make a raw copy of proto file for
+other services to integrate:
 
 ```Makefile
 raw:
@@ -100,9 +99,8 @@ raw:
 
 ## FAQ
 
-Remember `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`,
-`grpc-ecosystem/grpc-gateway` is optional, so feel free to delete if you don't
-use theme.
+Remember `bufbuild/protoc-gen-validate`, `kei2100/protoc-gen-marshal-zap`, `grpc-ecosystem/grpc-gateway` is optional, so
+feel free to delete if you don't use theme.
 
 If use `vendor`:
 
@@ -111,29 +109,25 @@ If use `vendor`:
 
 If you use grpc-gateway:
 
-- Replace `import "third_party/googleapis/google/api/annotations.proto";` with
-  `import "google/api/annotations.proto";`
-- Delete `security_definitions`, `security`, in
-  `option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)`.
+- Replace `import "third_party/googleapis/google/api/annotations.proto";` with `import "google/api/annotations.proto";`
+- Delete `security_definitions`, `security`, in `option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)`.
 
 The last step is delete `prototool.yaml`.
 
 If you are not migrate but start from scratch:
 
 - Add `buf lint` to make sure your proto is good.
-- Add `buf breaking --against "https://your-grpc-repo-goes-here.git"` to make
-  sure each time you update proto, you don't break backward compatibility.
+- Add `buf breaking --against "https://your-grpc-repo-goes-here.git"` to make sure each time you update proto, you don't
+  break backward compatibility.
 
 # Tips
 
 Some experience I got after writing proto files for a living:
 
-- Ignore DRY (Do not Repeat Yourself) when handling proto, don't split proto
-  into many files. Trust me, it saves you from wasting time to debug how to
-  import Go after generated. Because proto import and Go import is
-  [2](https://github.com/golang/protobuf/issues/895) different things. If
-  someone already have split proto files, you should use `sed` to fix the damn
-  things.
+- Ignore DRY (Do not Repeat Yourself) when handling proto, don't split proto into many files. Trust me, it saves you
+  from wasting time to debug how to import Go after generated. Because proto import and Go import is
+  [2](https://github.com/golang/protobuf/issues/895) different things. If someone already have split proto files, you
+  should use `sed` to fix the damn things.
 
 ## Thanks
 

@@ -251,7 +251,7 @@
     <span class="pl-k">participant</span> <span class="pl-ent">B</span>
     <span class="pl-k">participant</span> <span class="pl-ent">C</span>
     <span class="pl-k">participant</span> <span class="pl-ent">D</span>
-    
+
     <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">B</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
     <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">C</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
     <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">D</span><span class="pl-k">:</span> <span class="pl-s">do something</span></pre>
@@ -262,7 +262,7 @@
     <span class="pl-k">participant</span> <span class="pl-ent">B</span>
     <span class="pl-k">participant</span> <span class="pl-ent">C</span>
     <span class="pl-k">participant</span> <span class="pl-ent">D</span>
-    
+
     <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">B</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
     <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">C</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
     <span class="pl-ent">A </span><span class="pl-k">-x</span> <span class="pl-ent">D</span><span class="pl-k">:</span> <span class="pl-s">do something but failed</span></pre>
@@ -274,7 +274,7 @@
     <span class="pl-k">participant</span> <span class="pl-ent">C</span>
     <span class="pl-k">participant</span> <span class="pl-ent">D</span>
     <span class="pl-k">participant</span> <span class="pl-ent">Kafka</span>
-    
+
     <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">B</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
     <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">C</span><span class="pl-k">:</span> <span class="pl-s">do something</span>
     <span class="pl-ent">A </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">Kafka</span><span class="pl-k">:</span> <span class="pl-s">produce message</span>
@@ -540,7 +540,7 @@
       <pre><span class="pl-k">sequenceDiagram</span>
     <span class="pl-k">participant</span> <span class="pl-ent">service</span>
     <span class="pl-k">participant</span> <span class="pl-ent">database</span>
-    
+
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">get (100ms)</span></pre>
     </div>
     <p>Getting data from cache first, then database later.</p>
@@ -549,7 +549,7 @@
     <span class="pl-k">participant</span> <span class="pl-ent">service</span>
     <span class="pl-k">participant</span> <span class="pl-ent">cache</span>
     <span class="pl-k">participant</span> <span class="pl-ent">database</span>
-    
+
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">get (5ms)</span>
     <span class="pl-k">alt</span> <span class="pl-s">not exist in cache</span>
         <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">get (100ms)</span>
@@ -567,7 +567,7 @@
     <span class="pl-k">participant</span> <span class="pl-ent">service</span>
     <span class="pl-k">participant</span> <span class="pl-ent">cache</span>
     <span class="pl-k">participant</span> <span class="pl-ent">database</span>
-    
+
     <span class="pl-k">note over </span><span class="pl-ent">service</span><span class="pl-sg">,</span><span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">Read Through</span>
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">get</span>
     <span class="pl-k">alt</span> <span class="pl-s">not exist in cache</span>
