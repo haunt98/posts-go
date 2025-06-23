@@ -65,8 +65,7 @@
     <ul>
       <li>
         <code>build.go</code>: need to install protoc-gen-* binaries with pin
-        version in
-        <code>go.mod</code>
+        version in <code>go.mod</code>
       </li>
       <li><code>buf.yaml</code></li>
       <li><code>buf.gen.yaml</code></li>
@@ -105,39 +104,39 @@
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
 <span class="pl-ent">deps</span>:
-  - <span class="pl-s">buf.build/envoyproxy/protoc-gen-validate:6607b10f00ed4a3d98f906807131c44a</span>
-  - <span class="pl-s">buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418</span>
-  - <span class="pl-s">buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c</span>
-  - <span class="pl-s">buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7</span>
+    - <span class="pl-s">buf.build/envoyproxy/protoc-gen-validate:6607b10f00ed4a3d98f906807131c44a</span>
+    - <span class="pl-s">buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418</span>
+    - <span class="pl-s">buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c</span>
+    - <span class="pl-s">buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7</span>
 <span class="pl-ent">breaking</span>:
-  <span class="pl-ent">use</span>:
-    - <span class="pl-s">PACKAGE</span>
+    <span class="pl-ent">use</span>:
+        - <span class="pl-s">PACKAGE</span>
 <span class="pl-ent">lint</span>:
-  <span class="pl-ent">use</span>:
-    - <span class="pl-s">DEFAULT</span></pre>
+    <span class="pl-ent">use</span>:
+        - <span class="pl-s">DEFAULT</span></pre>
     </div>
     <p><code>buf.gen.yaml</code>:</p>
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
 <span class="pl-ent">plugins</span>:
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/grpc/go:v1.3.0</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.31.0</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.0.2</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    <span class="pl-ent">opt</span>:
-      - <span class="pl-s">lang=go</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">marshal-zap</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">grpc-gateway</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    <span class="pl-ent">opt</span>:
-      - <span class="pl-s">logtostderr=true</span>
-  - <span class="pl-ent">plugin</span>: <span class="pl-s">swagger</span>
-    <span class="pl-ent">out</span>: <span class="pl-s">.</span>
-    <span class="pl-ent">opt</span>:
-      - <span class="pl-s">logtostderr=true</span></pre>
+    - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/grpc/go:v1.3.0</span>
+      <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
+    - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.31.0</span>
+      <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
+    - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.0.2</span>
+      <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
+      <span class="pl-ent">opt</span>:
+          - <span class="pl-s">lang=go</span>
+    - <span class="pl-ent">plugin</span>: <span class="pl-s">marshal-zap</span>
+      <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
+    - <span class="pl-ent">plugin</span>: <span class="pl-s">grpc-gateway</span>
+      <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
+      <span class="pl-ent">opt</span>:
+          - <span class="pl-s">logtostderr=true</span>
+    - <span class="pl-ent">plugin</span>: <span class="pl-s">swagger</span>
+      <span class="pl-ent">out</span>: <span class="pl-s">.</span>
+      <span class="pl-ent">opt</span>:
+          - <span class="pl-s">logtostderr=true</span></pre>
     </div>
     <p>Update <code>Makefile</code>:</p>
     <div class="highlight highlight-source-makefile">
@@ -199,8 +198,7 @@
         <code
           >import "third_party/googleapis/google/api/annotations.proto";</code
         >
-        with
-        <code>import "google/api/annotations.proto";</code>
+        with <code>import "google/api/annotations.proto";</code>
       </li>
       <li>
         Delete <code>security_definitions</code>, <code>security</code>, in

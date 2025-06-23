@@ -34,7 +34,7 @@ gen:
 
 format-html:
     bunx prettier --write ./templates ./docs
-    deno fmt ./posts
+    bunx prettier --print-width 120 --tab-width 4 --prose-wrap always --write ./posts
 
 srht:
     # https://srht.site/quickstart

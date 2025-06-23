@@ -1,10 +1,8 @@
 # Install Arch Linux
 
-Install Arch Linux is thing I always want to do for my laptop/PC since I had my
-laptop in ninth grade.
+Install Arch Linux is thing I always want to do for my laptop/PC since I had my laptop in ninth grade.
 
-This is not a guide for everyone, this is just save for myself in a future and
-for anyone who want to walk in my shoes.
+This is not a guide for everyone, this is just save for myself in a future and for anyone who want to walk in my shoes.
 
 ## [Installation guide](https://wiki.archlinux.org/index.php/Installation_guide)
 
@@ -114,8 +112,7 @@ mount --mkdir /dev/extended_boot_loader_partition /mnt/boot
 
 ### Installation
 
-Please check [Mirrors](https://wiki.archlinux.org/title/Mirrors) if you have
-slow Internet.
+Please check [Mirrors](https://wiki.archlinux.org/title/Mirrors) if you have slow Internet.
 
 ```sh
 pacstrap -K /mnt base linux linux-firmware
@@ -164,8 +161,7 @@ hwclock --systohc
 
 #### Localization:
 
-Edit `/etc/locale.gen` then uncomment `# en_US.UTF-8 UTF-8` by removing `#` at
-the beginning.
+Edit `/etc/locale.gen` then uncomment `# en_US.UTF-8 UTF-8` by removing `#` at the beginning.
 
 Generate locales:
 
@@ -232,7 +228,7 @@ Edit `/etc/NetworkManager/conf.d/wifi_rand_mac.conf`:
 ```txt
 [device-mac-randomization]
 wifi.scan-rand-mac-address=yes
- 
+
 [connection-mac-randomization]
 ethernet.cloned-mac-address=stable
 wifi.cloned-mac-address=stable
@@ -341,8 +337,7 @@ homectl create joker --real-name="The Joker" --member-of=wheel
 homectl update joker --shell=/usr/bin/zsh
 ```
 
-**Note**: Can not run `homectl` when install Arch Linux. Should run on the first
-boot.
+**Note**: Can not run `homectl` when install Arch Linux. Should run on the first boot.
 
 ### Desktop Environment
 
@@ -356,8 +351,7 @@ pacman -Syu xorg-server
 
 #### [KDE](https://wiki.archlinux.org/title/KDE)
 
-See
-[KDE Distributions/Packaging Recommendations](https://community.kde.org/Distributions/Packaging_Recommendations)
+See [KDE Distributions/Packaging Recommendations](https://community.kde.org/Distributions/Packaging_Recommendations)
 
 ```sh
 pacman -Syu plasma-desktop
@@ -395,8 +389,7 @@ pacman -Syu pipewire wireplumber \
 	gst-plugin-pipewire pipewire-v4l2
 ```
 
-See
-[Advanced Linux Sound Architecture](https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture)
+See [Advanced Linux Sound Architecture](https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture)
 
 ```sh
 pacman -Syu sof-firmware
@@ -490,8 +483,7 @@ Do it at your own risk!!!
 
 ## Maintenance
 
-See
-[pacman/Tips and tricks](https://wiki.archlinux.org/title/Pacman/Tips_and_tricks)
+See [pacman/Tips and tricks](https://wiki.archlinux.org/title/Pacman/Tips_and_tricks)
 
 ```sh
 sudo pacman -Syu
