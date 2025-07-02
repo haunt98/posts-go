@@ -64,8 +64,8 @@
     <p>We need 3 files:</p>
     <ul>
       <li>
-        <code>build.go</code>: need to install protoc-gen-* binaries with pin
-        version in <code>go.mod</code>
+        <code>build.go</code>: need to install some binaries with pin version in
+        <code>go.mod</code>
       </li>
       <li><code>buf.yaml</code></li>
       <li><code>buf.gen.yaml</code></li>
@@ -73,9 +73,8 @@
     <p>FYI, I use:</p>
     <ul>
       <li>
-        <a
-          href="https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.16.0"
-          >grpc-ecosystem/grpc-gateway v1.16.0</a
+        <a href="https://github.com/grpc-ecosystem/grpc-gateway"
+          >grpc-ecosystem/grpc-gateway</a
         >
       </li>
       <li>
@@ -89,80 +88,108 @@
         >
       </li>
     </ul>
-    <p><code>build.go</code>:</p>
+    <div class="markdown-heading">
+      <h2 class="heading-element"><code>build.go</code></h2>
+      <a
+        id="user-content-buildgo"
+        class="anchor"
+        aria-label="Permalink: build.go"
+        href="#buildgo"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-c">//go:build tools</span>
 <span class="pl-c">// +build tools</span>
 
 <span class="pl-k">import</span> (
-  _ <span class="pl-s">"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"</span>
-  _ <span class="pl-s">"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"</span>
   _ <span class="pl-s">"github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap"</span>
 )</pre>
     </div>
-    <p><code>buf.yaml</code></p>
+    <div class="markdown-heading">
+      <h2 class="heading-element"><code>buf.yaml</code></h2>
+      <a
+        id="user-content-bufyaml"
+        class="anchor"
+        aria-label="Permalink: buf.yaml"
+        href="#bufyaml"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <div class="highlight highlight-source-yaml">
-      <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
+      <pre><span class="pl-ent">version</span>: <span class="pl-c1">v2</span>
 <span class="pl-ent">deps</span>:
-    - <span class="pl-s">buf.build/envoyproxy/protoc-gen-validate:6607b10f00ed4a3d98f906807131c44a</span>
+    - <span class="pl-s">buf.build/envoyproxy/protoc-gen-validate:v1.2.1</span>
     - <span class="pl-s">buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418</span>
-    - <span class="pl-s">buf.build/haunt98/googleapis:b38d93f7ade94a698adff9576474ae7c</span>
-    - <span class="pl-s">buf.build/haunt98/grpc-gateway:ecf4f0f58aa8496f8a76ed303c6e06c7</span>
+    - <span class="pl-s">buf.build/haunt98/googleapis</span>
+    - <span class="pl-s">buf.build/haunt98/grpc-gateway:v2.27.1</span>
 <span class="pl-ent">breaking</span>:
     <span class="pl-ent">use</span>:
-        - <span class="pl-s">PACKAGE</span>
-<span class="pl-ent">lint</span>:
-    <span class="pl-ent">use</span>:
-        - <span class="pl-s">DEFAULT</span></pre>
+        - <span class="pl-s">WIRE</span></pre>
     </div>
-    <p><code>buf.gen.yaml</code>:</p>
+    <div class="markdown-heading">
+      <h2 class="heading-element"><code>buf.gen.yaml</code></h2>
+      <a
+        id="user-content-bufgenyaml"
+        class="anchor"
+        aria-label="Permalink: buf.gen.yaml"
+        href="#bufgenyaml"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <div class="highlight highlight-source-yaml">
-      <pre><span class="pl-ent">version</span>: <span class="pl-c1">v1</span>
+      <pre><span class="pl-ent">version</span>: <span class="pl-c1">v2</span>
 <span class="pl-ent">plugins</span>:
-    - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/grpc/go:v1.3.0</span>
+    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/grpc/go:v1.5.1</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.31.0</span>
+    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.36.6</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    - <span class="pl-ent">plugin</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.0.2</span>
+    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.2.1</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-      <span class="pl-ent">opt</span>:
-          - <span class="pl-s">lang=go</span>
-    - <span class="pl-ent">plugin</span>: <span class="pl-s">marshal-zap</span>
+    - <span class="pl-ent">local</span>: <span class="pl-s">protoc-gen-marshal-zap</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    - <span class="pl-ent">plugin</span>: <span class="pl-s">grpc-gateway</span>
+    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/grpc-ecosystem/gateway:v2.27.1</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-      <span class="pl-ent">opt</span>:
-          - <span class="pl-s">logtostderr=true</span>
-    - <span class="pl-ent">plugin</span>: <span class="pl-s">swagger</span>
+    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/grpc-ecosystem/openapiv2:v2.27.1</span>
       <span class="pl-ent">out</span>: <span class="pl-s">.</span>
       <span class="pl-ent">opt</span>:
-          - <span class="pl-s">logtostderr=true</span></pre>
+          - <span class="pl-s">json_names_for_fields=false</span>
+          - <span class="pl-s">enums_as_ints=true</span>
+          - <span class="pl-s">disable_service_tags=true</span>
+          - <span class="pl-s">preserve_rpc_order=true</span></pre>
     </div>
-    <p>Update <code>Makefile</code>:</p>
+    <div class="markdown-heading">
+      <h2 class="heading-element"><code>Makefile</code></h2>
+      <a
+        id="user-content-makefile"
+        class="anchor"
+        aria-label="Permalink: Makefile"
+        href="#makefile"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
     <div class="highlight highlight-source-makefile">
       <pre><span class="pl-en">gen</span>:
-  go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap
-  go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
-  go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-  go install github.com/bufbuild/buf/cmd/buf@latest
-  buf mod update
-  buf format -w
-  buf generate</pre>
+	<span class="pl-c"><span class="pl-c">#</span> go install github.com/kei2100/protoc-gen-marshal-zap/plugin/protoc-gen-marshal-zap</span>
+	go install github.com/bufbuild/buf/cmd/buf@latest
+	<span class="pl-c"><span class="pl-c">#</span> buf config migrate</span>
+	buf dep update
+	buf format --path ./api -w
+	buf generate --path ./api</pre>
     </div>
-    <p>Run <code>make gen</code> to have fun of course.</p>
     <p>
-      If using <code>bufbuild/protoc-gen-validate</code>,
-      <code>kei2100/protoc-gen-marshal-zap</code>, better make a raw copy of
-      proto file for other services to integrate:
+      If using some imports, you better make a raw proto file for other services
+      to integrate:
     </p>
     <div class="highlight highlight-source-makefile">
       <pre><span class="pl-en">raw</span>:
-    mkdir -p ./raw
-    cp ./api.proto ./raw/
-    sed -i "" -e "s/import \"validate\/validate\.proto\";//g" ./raw/api.proto
-    sed -i "" -e "s/\[(validate\.rules)\.string.min_len = 1\]//g" ./raw/api.proto
-    sed -i "" -e "s/import \"marshal-zap\.proto\";//g" ./raw/api.proto
-    sed -i "" -e "s/\[(marshal_zap\.mask) = true]//g" ./raw/api.proto</pre>
+	mkdir -p api/raw
+	cp api/<span class="pl-k">*</span>.proto api/raw/
+	<span class="pl-c"><span class="pl-c">#</span> https://github.com/chmln/sd</span>
+	sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
+	sd -F <span class="pl-s"><span class="pl-pds">'</span>import "marshal-zap.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
+	sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[\s*\(.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
+	buf format --path api/raw -w</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">FAQ</h2>
@@ -174,37 +201,24 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>
-      Remember <code>bufbuild/protoc-gen-validate</code>,
-      <code>kei2100/protoc-gen-marshal-zap</code>,
-      <code>grpc-ecosystem/grpc-gateway</code> is optional, so feel free to
-      delete if you don't use theme.
-    </p>
-    <p>If use <code>vendor</code>:</p>
-    <ul>
-      <li>
-        Replace <code>buf generate</code> with
-        <code>buf generate --exclude-path vendor</code>.
-      </li>
-      <li>
-        Replace <code>buf format -w</code> with
-        <code>buf format -w --exclude-path vendor</code>.
-      </li>
-    </ul>
     <p>If you use grpc-gateway:</p>
     <ul>
       <li>
         Replace
-        <code
-          >import "third_party/googleapis/google/api/annotations.proto";</code
-        >
-        with <code>import "google/api/annotations.proto";</code>
+        <code>third_party/googleapis/google/api/annotations.proto;</code> with
+        <code>protoc-gen-openapiv2/options/annotations.proto</code>
+      </li>
+      <li>
+        Replace
+        <code>grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger</code>
+        with
+        <code>grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger</code>
       </li>
       <li>
         Delete <code>security_definitions</code>, <code>security</code>, in
         <code
           >option
-          (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger)</code
+          (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger)</code
         >.
       </li>
     </ul>
@@ -222,7 +236,7 @@
       </li>
     </ul>
     <div class="markdown-heading">
-      <h1 class="heading-element">Tips</h1>
+      <h2 class="heading-element">Tips</h2>
       <a
         id="user-content-tips"
         class="anchor"
@@ -233,13 +247,15 @@
     </div>
     <p>Some experience I got after writing proto files for a living:</p>
     <ul>
+      <li>Delete <code>vendor</code></li>
       <li>
         Ignore DRY (Do not Repeat Yourself) when handling proto, don't split
-        proto into many files. Trust me, it saves you from wasting time to debug
-        how to import Go after generated. Because proto import and Go import is
+        proto into many files, just copy into 1 big proto. Trust me, it saves
+        you from wasting time to debug how to import Go after generated. Because
+        proto import and Go import is
         <a href="https://github.com/golang/protobuf/issues/895">2</a> different
         things. If someone already have split proto files, you should use
-        <code>sed</code> to fix the damn things.
+        <code>sd</code> to fix the damn things.
       </li>
     </ul>
     <div class="markdown-heading">
