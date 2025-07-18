@@ -91,7 +91,6 @@ Language
 
 - https://github.com/casey/just
 - https://github.com/typst/typst
-- https://github.com/asciidoctor/asciidoctor
 
 Format
 
