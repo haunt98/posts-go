@@ -59,19 +59,6 @@ BIOS/GPT layout:
 |             |                       | BIOS boot partition | 1 MiB          | EF02       |
 | `/mnt`      | `/dev/root_partition` | Root Partition      |                | 8300       |
 
-LVM (optional):
-
-```sh
-# Create physical volumes
-pvcreate /dev/sdaX
-
-# Create volume groups
-vgcreate RootGroup /dev/sdaX /dev/sdaY
-
-# Create logical volumes
-lvcreate -l +100%FREE RootGroup -n rootvol
-```
-
 Format:
 
 ```sh
@@ -86,9 +73,6 @@ mkfs.ext4 -L ROOT /dev/root_partition
 
 # root with btrfs (optional)
 mkfs.btrfs -L ROOT /dev/root_partition
-
-# root on lvm (optional)
-mkfs.ext4 /dev/RootGroup/rootvol
 ```
 
 Mount:
@@ -99,9 +83,6 @@ mount /dev/root_partition /mnt
 
 # root with btrfs (optional)
 mount -o compress=zstd /dev/root_partition /mnt
-
-# root on lvm (optional)
-mount /dev/RootGroup/rootvol /mnt
 
 # efi
 mount --mkdir /dev/efi_system_partition /mnt/efi
@@ -125,9 +106,6 @@ pacstrap -K /mnt intel-ucode
 
 # Btrfs (optional)
 pacstrap -K /mnt btrfs-progs
-
-# LVM (optional)
-pacstrap -K /mnt lvm2
 
 # zsh (optional)
 pacstrap -K /mnt zsh
@@ -191,11 +169,7 @@ Edit `/etc/mkinitcpio.conf`:
 # https://wiki.archlinux.org/title/mkinitcpio#Common_hooks
 # Replace udev with systemd
 #
-# LVM (optional)
-# https://wiki.archlinux.org/title/Install_Arch_Linux_on_LVM#Adding_mkinitcpio_hooks
-# Add lvm2 between block and filesystems
-#
-HOOKS=(base systemd ... block lvm2 filesystems)
+HOOKS=(base systemd ... block filesystems)
 ```
 
 ```sh
