@@ -112,7 +112,7 @@
     <div class="highlight highlight-source-shell">
       <pre>cat /sys/firmware/efi/fw_platform_size
 <span class="pl-c"><span class="pl-c">#</span> 64 or 32 is UEFI</span>
-<span class="pl-c"><span class="pl-c">#</span> File not found is BIOS</span></pre>
+<span class="pl-c"><span class="pl-c">#</span> No such file or directory is BIOS</span></pre>
     </div>
     <div class="markdown-heading">
       <h4 class="heading-element">Connect to the internet</h4>
@@ -336,12 +336,12 @@ pacstrap -K /mnt neovim</pre>
       <pre>arch-chroot /mnt</pre>
     </div>
     <div class="markdown-heading">
-      <h4 class="heading-element">Time zone</h4>
+      <h4 class="heading-element">Time</h4>
       <a
-        id="user-content-time-zone"
+        id="user-content-time"
         class="anchor"
-        aria-label="Permalink: Time zone"
-        href="#time-zone"
+        aria-label="Permalink: Time"
+        href="#time"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -352,11 +352,11 @@ ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 hwclock --systohc</pre>
     </div>
     <div class="markdown-heading">
-      <h4 class="heading-element">Localization:</h4>
+      <h4 class="heading-element">Localization</h4>
       <a
         id="user-content-localization"
         class="anchor"
-        aria-label="Permalink: Localization:"
+        aria-label="Permalink: Localization"
         href="#localization"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
@@ -397,9 +397,9 @@ hwclock --systohc</pre>
     <p>Edit <code>/etc/mkinitcpio.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
       <pre><span class="pl-c"># https://wiki.archlinux.org/title/mkinitcpio#Common_hooks</span>
-<span class="pl-c"># Replace udev with systemd</span>
+<span class="pl-c"># Replace base udev with systemd</span>
 <span class="pl-c">#</span>
-HOOKS=(base systemd ... block filesystems)</pre>
+HOOKS=(systemd ... )</pre>
     </div>
     <div class="highlight highlight-source-shell"><pre>mkinitcpio -P</pre></div>
     <div class="markdown-heading">
@@ -437,14 +437,10 @@ systemctl <span class="pl-c1">enable</span> systemd-resolved.service</pre>
       <pre>[<span class="pl-ii">device</span>]
 wifi.backend=iwd</pre>
     </div>
-    <p>Edit <code>/etc/NetworkManager/conf.d/wifi_rand_mac.conf</code>:</p>
+    <p>Edit <code>/etc/NetworkManager/conf.d/dns.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
-      <pre>[<span class="pl-ii">device-mac-randomization</span>]
-wifi.scan-rand-mac-address=yes
-
-[<span class="pl-ii">connection-mac-randomization</span>]
-ethernet.cloned-mac-address=stable
-wifi.cloned-mac-address=stable</pre>
+      <pre>[<span class="pl-ii">main</span>]
+dns=systemd-resolved</pre>
     </div>
     <div class="markdown-heading">
       <h4 class="heading-element">
