@@ -23,7 +23,7 @@ Check UEFI mode:
 ```sh
 cat /sys/firmware/efi/fw_platform_size
 # 64 or 32 is UEFI
-# File not found is BIOS
+# No such file or directory is BIOS
 ```
 
 #### Connect to the internet
@@ -128,7 +128,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ```
 
-#### Time zone
+#### Time
 
 ```sh
 # Change Region/City to your location
@@ -137,7 +137,7 @@ ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 hwclock --systohc
 ```
 
-#### Localization:
+#### Localization
 
 Edit `/etc/locale.gen` then uncomment `# en_US.UTF-8 UTF-8` by removing `#` at the beginning.
 
@@ -167,9 +167,9 @@ Edit `/etc/mkinitcpio.conf`:
 
 ```txt
 # https://wiki.archlinux.org/title/mkinitcpio#Common_hooks
-# Replace udev with systemd
+# Replace base udev with systemd
 #
-HOOKS=(base systemd ... block filesystems)
+HOOKS=(systemd ... )
 ```
 
 ```sh
@@ -197,15 +197,11 @@ Edit `/etc/NetworkManager/conf.d/wifi_backend.conf`:
 wifi.backend=iwd
 ```
 
-Edit `/etc/NetworkManager/conf.d/wifi_rand_mac.conf`:
+Edit `/etc/NetworkManager/conf.d/dns.conf`:
 
 ```txt
-[device-mac-randomization]
-wifi.scan-rand-mac-address=yes
-
-[connection-mac-randomization]
-ethernet.cloned-mac-address=stable
-wifi.cloned-mac-address=stable
+[main]
+dns=systemd-resolved
 ```
 
 #### [Bluetooth](https://wiki.archlinux.org/title/Bluetooth)
