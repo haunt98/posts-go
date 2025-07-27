@@ -107,9 +107,6 @@ pacstrap -K /mnt intel-ucode
 # Btrfs (optional)
 pacstrap -K /mnt btrfs-progs
 
-# zsh (optional)
-pacstrap -K /mnt zsh
-
 # Text editor
 pacstrap -K /mnt neovim
 ```
@@ -280,7 +277,7 @@ Always remember to check **dependencies** when install packages.
 [Sudo](https://wiki.archlinux.org/index.php/sudo):
 
 ```sh
-pacman -Syu sudo
+pacman -Syu sudo zsh
 
 EDITOR=nvim visudo
 # Uncomment group wheel by removing % at the beginning of %wheel ...
@@ -311,13 +308,11 @@ homectl update joker --shell=/usr/bin/zsh
 
 ### Desktop Environment
 
-Install [Xorg](https://wiki.archlinux.org/index.php/Xorg):
+GPU drivers:
 
-```sh
-pacman -Syu xorg-server
-
-# Remember to install GPU driver
-```
+- [Intel graphics](https://wiki.archlinux.org/title/Intel_graphics)
+- [NVIDIA](https://wiki.archlinux.org/title/NVIDIA)
+- [AMDGPU](https://wiki.archlinux.org/title/AMDGPU)
 
 #### [KDE](https://wiki.archlinux.org/title/KDE)
 
@@ -355,15 +350,11 @@ systemctl enable paccache.timer
 
 ```sh
 pacman -Syu pipewire wireplumber \
-	pipewire-alsa pipewire-pulse \
-	gst-plugin-pipewire pipewire-v4l2
+	pipewire-alsa pipewire-pulse
 ```
 
-See [Advanced Linux Sound Architecture](https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture)
-
-```sh
-pacman -Syu sof-firmware
-```
+See
+[Advanced Linux Sound Architecture/Firmware](https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Firmware)
 
 ### [Flatpak](https://wiki.archlinux.org/title/Flatpak)
 
@@ -429,10 +420,6 @@ kernel.split_lock_mitigate = 0
 - [mm: Randomize free memory](https://lwn.net/Articles/776228/)
 - [mm: introduce Designated Movable Blocks](https://lwn.net/Articles/925941/)
 
-```sh
-# Kernel parameters
-```
-
 ## Hardware dependent
 
 - https://wiki.archlinux.org/title/Laptop
@@ -443,10 +430,10 @@ kernel.split_lock_mitigate = 0
 
 Do it at your own risk!!!
 
-- https://wiki.archlinux.org/title/Unified_kernel_image
 - https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave
-- [Linux Hardening Guide](https://madaidans-insecurities.github.io/guides/linux-hardening.html)
-- https://github.com/GrapheneOS/hardened_malloc
+- https://wiki.archlinux.org/title/Unified_kernel_image
+- https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface
+- https://github.com/Foxboron/sbctl
 - https://github.com/AdnanHodzic/auto-cpufreq
 - https://github.com/nbfc-linux/nbfc-linux
 - https://github.com/erpalma/throttled
@@ -454,11 +441,3 @@ Do it at your own risk!!!
 ## Maintenance
 
 See [pacman/Tips and tricks](https://wiki.archlinux.org/title/Pacman/Tips_and_tricks)
-
-```sh
-sudo pacman -Syu
-```
-
-## In the end
-
-This guide is updated regularly I promise.
