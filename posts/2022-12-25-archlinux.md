@@ -182,7 +182,7 @@ passwd
 #### [NetworkManager](https://wiki.archlinux.org/title/NetworkManager)
 
 ```sh
-pacman -Syu networkmanager dhcpcd iwd
+pacman -Syu networkmanager iwd
 systemctl enable NetworkManager.service
 systemctl enable systemd-resolved.service
 ```
@@ -241,6 +241,13 @@ editor no
 console-mode max
 ```
 
+- [Silent boot](https://wiki.archlinux.org/index.php/Silent_boot)
+- [Improving performance/Watchdogs](https://wiki.archlinux.org/title/Improving_performance#Watchdogs)
+- [IPv6/Disable IPv6](https://wiki.archlinux.org/title/IPv6#Disable_IPv6)
+- [add init_on_alloc/init_on_free boot options](https://lwn.net/Articles/791380/)
+- [mm: Randomize free memory](https://lwn.net/Articles/776228/)
+- [mm: introduce Designated Movable Blocks](https://lwn.net/Articles/925941/)
+
 Edit `/boot/loader/entries/archlinux.conf`:
 
 ```txt
@@ -280,13 +287,10 @@ Always remember to check **dependencies** when install packages.
 pacman -Syu sudo zsh
 
 EDITOR=nvim visudo
-# Uncomment group wheel by removing % at the beginning of %wheel ...
+# Uncomment group wheel
 
 # Add user if don't want to use systemd-homed
-useradd -m -G wheel -c "The Joker" joker
-
-# Or using zsh (optional)
-useradd -m -G wheel -s /usr/bin/zsh -c "The Joker" joker
+useradd -m -G wheel -s /usr/bin/zsh joker
 
 # Set password
 passwd joker
@@ -297,22 +301,12 @@ passwd joker
 
 ```sh
 systemctl enable systemd-homed.service
-
-homectl create joker --real-name="The Joker" --member-of=wheel
-
-# Using zsh (optional)
-homectl update joker --shell=/usr/bin/zsh
+homectl create joker --shell=/usr/bin/zsh --member-of=wheel
 ```
 
 **Note**: Can not run `homectl` when install Arch Linux. Should run on the first boot.
 
 ### Desktop Environment
-
-GPU drivers:
-
-- [Intel graphics](https://wiki.archlinux.org/title/Intel_graphics)
-- [NVIDIA](https://wiki.archlinux.org/title/NVIDIA)
-- [AMDGPU](https://wiki.archlinux.org/title/AMDGPU)
 
 #### [KDE](https://wiki.archlinux.org/title/KDE)
 
@@ -324,11 +318,6 @@ pacman -Syu plasma-desktop
 # Login manager
 pacman -Syu sddm
 ```
-
-#### Worth trying
-
-- [COSMIC](https://wiki.archlinux.org/title/COSMIC)
-- [Pantheon](https://wiki.archlinux.org/title/Pantheon)
 
 ## [List of applications](https://wiki.archlinux.org/index.php/List_of_applications)
 
@@ -364,26 +353,19 @@ pacman -Syu flatpak
 
 ## [Improving performance](https://wiki.archlinux.org/index.php/improving_performance)
 
-- https://wiki.archlinux.org/index.php/swap#Swap_file
-- https://wiki.archlinux.org/index.php/swap#Swappiness
-- https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit
-- https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps
-- https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit_in_existing_filesystems
-- https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM
-- https://wiki.archlinux.org/index.php/Silent_boot
-- https://wiki.archlinux.org/title/Improving_performance#Watchdogs
-- https://wiki.archlinux.org/title/Sysctl#Enable_TCP_Fast_Open
-- [Fast commits for ext4](https://lwn.net/Articles/842385/)
-- [TCP Fast Open: expediting web services](https://lwn.net/Articles/508865/)
-- [The search for the correct amount of split-lock misery](https://lwn.net/Articles/911219/)
+- [Swap/Swap file](https://wiki.archlinux.org/index.php/swap#Swap_file)
+- [Swap/Swappiness](https://wiki.archlinux.org/index.php/swap#Swappiness)
 
-Edit `/etc/systemd/journald.conf.d/00-journal-size.conf` then restart:
+See [systemd/Journal/Journal size limit](https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit). Edit
+`/etc/systemd/journald.conf.d/00-journal-size.conf` then restart `systemd-journald.service`:
 
 ```txt
 [Journal]
 SystemMaxUse=50M
 ```
 
+See
+[Core dump/Disabling automatic core dumps](https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps).
 Edit `/etc/systemd/coredump.conf.d/custom.conf` then restart:
 
 ```txt
@@ -392,17 +374,22 @@ Storage=none
 ProcessSizeMax=0
 ```
 
-Enable ext4 fast commit:
+- [Ext4/Enabling fast_commit](https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit)
+- [Fast commits for ext4](https://lwn.net/Articles/842385/)
 
 ```sh
 tune2fs -O fast_commit /dev/partition
 ```
 
-Periodic TRIM:
+See [Solid state drive/Periodic TRIM](https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM):
 
 ```sh
 systemctl enable fstrim.timer
 ```
+
+- [sysctl/Enable TCP Fast Open](https://wiki.archlinux.org/title/Sysctl#Enable_TCP_Fast_Open)
+- [TCP Fast Open: expediting web services](https://lwn.net/Articles/508865/)
+- [The search for the correct amount of split-lock misery](https://lwn.net/Articles/911219/)
 
 Edit `/etc/sysctl.d/99-sysctl.conf`:
 
@@ -413,31 +400,25 @@ net.ipv4.tcp_fastopen = 3
 kernel.split_lock_mitigate = 0
 ```
 
-## [Security](https://wiki.archlinux.org/title/Security)
+## Hardware
 
-- https://wiki.archlinux.org/title/IPv6#Disable_IPv6
-- [add init_on_alloc/init_on_free boot options](https://lwn.net/Articles/791380/)
-- [mm: Randomize free memory](https://lwn.net/Articles/776228/)
-- [mm: introduce Designated Movable Blocks](https://lwn.net/Articles/925941/)
-
-## Hardware dependent
-
-- https://wiki.archlinux.org/title/Laptop
-- https://wiki.archlinux.org/title/ASUS_Linux
-- https://wiki.archlinux.org/title/PRIME
+- [Intel graphics](https://wiki.archlinux.org/title/Intel_graphics)
+- [NVIDIA](https://wiki.archlinux.org/title/NVIDIA)
+- [AMDGPU](https://wiki.archlinux.org/title/AMDGPU)
+- [PRIME](https://wiki.archlinux.org/title/PRIME)
+- [Laptop](https://wiki.archlinux.org/title/Laptop)
+- [ASUS Linux](https://wiki.archlinux.org/title/ASUS_Linux)
 
 ## Experiment
 
 Do it at your own risk!!!
 
-- https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave
-- https://wiki.archlinux.org/title/Unified_kernel_image
-- https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface
+- [pacman/Pacnew and Pacsave](https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave)
+- [Unified Extensible Firmware Interface/Secure Boot](https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot)
+- [Profile-sync-daemon](https://wiki.archlinux.org/title/Profile-sync-daemon)
+
 - https://github.com/Foxboron/sbctl
+- https://github.com/sched-ext/scx
 - https://github.com/AdnanHodzic/auto-cpufreq
 - https://github.com/nbfc-linux/nbfc-linux
 - https://github.com/erpalma/throttled
-
-## Maintenance
-
-See [pacman/Tips and tricks](https://wiki.archlinux.org/title/Pacman/Tips_and_tricks)
