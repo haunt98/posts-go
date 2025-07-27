@@ -425,7 +425,7 @@ HOOKS=(systemd ... )</pre>
       ></a>
     </div>
     <div class="highlight highlight-source-shell">
-      <pre>pacman -Syu networkmanager dhcpcd iwd
+      <pre>pacman -Syu networkmanager iwd
 systemctl <span class="pl-c1">enable</span> NetworkManager.service
 systemctl <span class="pl-c1">enable</span> systemd-resolved.service</pre>
     </div>
@@ -518,6 +518,44 @@ editor no
 console-mode max</pre
       >
     </div>
+    <ul>
+      <li>
+        <a
+          href="https://wiki.archlinux.org/index.php/Silent_boot"
+          rel="nofollow"
+          >Silent boot</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://wiki.archlinux.org/title/Improving_performance#Watchdogs"
+          rel="nofollow"
+          >Improving performance/Watchdogs</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://wiki.archlinux.org/title/IPv6#Disable_IPv6"
+          rel="nofollow"
+          >IPv6/Disable IPv6</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/791380/" rel="nofollow"
+          >add init_on_alloc/init_on_free boot options</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/776228/" rel="nofollow"
+          >mm: Randomize free memory</a
+        >
+      </li>
+      <li>
+        <a href="https://lwn.net/Articles/925941/" rel="nofollow"
+          >mm: introduce Designated Movable Blocks</a
+        >
+      </li>
+    </ul>
     <p>Edit <code>/boot/loader/entries/archlinux.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
       <pre>title Arch Linux
@@ -581,13 +619,10 @@ options root="LABEL=ROOT" rw quiet loglevel=3 nowatchdog module_blacklist=iTCO_w
       <pre>pacman -Syu sudo zsh
 
 EDITOR=nvim visudo
-<span class="pl-c"><span class="pl-c">#</span> Uncomment group wheel by removing % at the beginning of %wheel ...</span>
+<span class="pl-c"><span class="pl-c">#</span> Uncomment group wheel</span>
 
 <span class="pl-c"><span class="pl-c">#</span> Add user if don't want to use systemd-homed</span>
-useradd -m -G wheel -c <span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> joker
-
-<span class="pl-c"><span class="pl-c">#</span> Or using zsh (optional)</span>
-useradd -m -G wheel -s /usr/bin/zsh -c <span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> joker
+useradd -m -G wheel -s /usr/bin/zsh joker
 
 <span class="pl-c"><span class="pl-c">#</span> Set password</span>
 passwd joker</pre>
@@ -608,11 +643,7 @@ passwd joker</pre>
     </ul>
     <div class="highlight highlight-source-shell">
       <pre>systemctl <span class="pl-c1">enable</span> systemd-homed.service
-
-homectl create joker --real-name=<span class="pl-s"><span class="pl-pds">"</span>The Joker<span class="pl-pds">"</span></span> --member-of=wheel
-
-<span class="pl-c"><span class="pl-c">#</span> Using zsh (optional)</span>
-homectl update joker --shell=/usr/bin/zsh</pre>
+homectl create joker --shell=/usr/bin/zsh --member-of=wheel</pre>
     </div>
     <p>
       <strong>Note</strong>: Can not run <code>homectl</code> when install Arch
@@ -628,24 +659,6 @@ homectl update joker --shell=/usr/bin/zsh</pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>GPU drivers:</p>
-    <ul>
-      <li>
-        <a href="https://wiki.archlinux.org/title/Intel_graphics" rel="nofollow"
-          >Intel graphics</a
-        >
-      </li>
-      <li>
-        <a href="https://wiki.archlinux.org/title/NVIDIA" rel="nofollow"
-          >NVIDIA</a
-        >
-      </li>
-      <li>
-        <a href="https://wiki.archlinux.org/title/AMDGPU" rel="nofollow"
-          >AMDGPU</a
-        >
-      </li>
-    </ul>
     <div class="markdown-heading">
       <h4 class="heading-element">
         <a href="https://wiki.archlinux.org/title/KDE" rel="nofollow">KDE</a>
@@ -672,28 +685,6 @@ homectl update joker --shell=/usr/bin/zsh</pre>
 <span class="pl-c"><span class="pl-c">#</span> Login manager</span>
 pacman -Syu sddm</pre>
     </div>
-    <div class="markdown-heading">
-      <h4 class="heading-element">Worth trying</h4>
-      <a
-        id="user-content-worth-trying"
-        class="anchor"
-        aria-label="Permalink: Worth trying"
-        href="#worth-trying"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <ul>
-      <li>
-        <a href="https://wiki.archlinux.org/title/COSMIC" rel="nofollow"
-          >COSMIC</a
-        >
-      </li>
-      <li>
-        <a href="https://wiki.archlinux.org/title/Pantheon" rel="nofollow"
-          >Pantheon</a
-        >
-      </li>
-    </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">
         <a
@@ -799,68 +790,79 @@ pacman -Syu pipewire wireplumber \
         <a
           href="https://wiki.archlinux.org/index.php/swap#Swap_file"
           rel="nofollow"
-          >https://wiki.archlinux.org/index.php/swap#Swap_file</a
+          >Swap/Swap file</a
         >
       </li>
       <li>
         <a
           href="https://wiki.archlinux.org/index.php/swap#Swappiness"
           rel="nofollow"
-          >https://wiki.archlinux.org/index.php/swap#Swappiness</a
+          >Swap/Swappiness</a
         >
       </li>
+    </ul>
+    <p>
+      See
+      <a
+        href="https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit"
+        rel="nofollow"
+        >systemd/Journal/Journal size limit</a
+      >. Edit
+      <code>/etc/systemd/journald.conf.d/00-journal-size.conf</code> then
+      restart <code>systemd-journald.service</code>:
+    </p>
+    <div class="highlight highlight-text-adblock">
+      <pre>[<span class="pl-ii">Journal</span>]
+SystemMaxUse=50M</pre>
+    </div>
+    <p>
+      See
+      <a
+        href="https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps"
+        rel="nofollow"
+        >Core dump/Disabling automatic core dumps</a
+      >. Edit <code>/etc/systemd/coredump.conf.d/custom.conf</code> then
+      restart:
+    </p>
+    <div class="highlight highlight-text-adblock">
+      <pre>[<span class="pl-ii">Coredump</span>]
+Storage=none
+ProcessSizeMax=0</pre>
+    </div>
+    <ul>
       <li>
         <a
-          href="https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit"
+          href="https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit"
           rel="nofollow"
-          >https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps"
-          rel="nofollow"
-          >https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit_in_existing_filesystems"
-          rel="nofollow"
-          >https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit_in_existing_filesystems</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM"
-          rel="nofollow"
-          >https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://wiki.archlinux.org/index.php/Silent_boot"
-          rel="nofollow"
-          >https://wiki.archlinux.org/index.php/Silent_boot</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://wiki.archlinux.org/title/Improving_performance#Watchdogs"
-          rel="nofollow"
-          >https://wiki.archlinux.org/title/Improving_performance#Watchdogs</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://wiki.archlinux.org/title/Sysctl#Enable_TCP_Fast_Open"
-          rel="nofollow"
-          >https://wiki.archlinux.org/title/Sysctl#Enable_TCP_Fast_Open</a
+          >Ext4/Enabling fast_commit</a
         >
       </li>
       <li>
         <a href="https://lwn.net/Articles/842385/" rel="nofollow"
           >Fast commits for ext4</a
+        >
+      </li>
+    </ul>
+    <div class="highlight highlight-source-shell">
+      <pre>tune2fs -O fast_commit /dev/partition</pre>
+    </div>
+    <p>
+      See
+      <a
+        href="https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM"
+        rel="nofollow"
+        >Solid state drive/Periodic TRIM</a
+      >:
+    </p>
+    <div class="highlight highlight-source-shell">
+      <pre>systemctl <span class="pl-c1">enable</span> fstrim.timer</pre>
+    </div>
+    <ul>
+      <li>
+        <a
+          href="https://wiki.archlinux.org/title/Sysctl#Enable_TCP_Fast_Open"
+          rel="nofollow"
+          >sysctl/Enable TCP Fast Open</a
         >
       </li>
       <li>
@@ -874,30 +876,6 @@ pacman -Syu pipewire wireplumber \
         >
       </li>
     </ul>
-    <p>
-      Edit <code>/etc/systemd/journald.conf.d/00-journal-size.conf</code> then
-      restart:
-    </p>
-    <div class="highlight highlight-text-adblock">
-      <pre>[<span class="pl-ii">Journal</span>]
-SystemMaxUse=50M</pre>
-    </div>
-    <p>
-      Edit <code>/etc/systemd/coredump.conf.d/custom.conf</code> then restart:
-    </p>
-    <div class="highlight highlight-text-adblock">
-      <pre>[<span class="pl-ii">Coredump</span>]
-Storage=none
-ProcessSizeMax=0</pre>
-    </div>
-    <p>Enable ext4 fast commit:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>tune2fs -O fast_commit /dev/partition</pre>
-    </div>
-    <p>Periodic TRIM:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>systemctl <span class="pl-c1">enable</span> fstrim.timer</pre>
-    </div>
     <p>Edit <code>/etc/sysctl.d/99-sysctl.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
       <pre><span class="pl-c"># Enable TCP Fast Open</span>
@@ -906,67 +884,44 @@ net.ipv4.tcp_fastopen = 3
 kernel.split_lock_mitigate = 0</pre>
     </div>
     <div class="markdown-heading">
-      <h2 class="heading-element">
-        <a href="https://wiki.archlinux.org/title/Security" rel="nofollow"
-          >Security</a
-        >
-      </h2>
+      <h2 class="heading-element">Hardware</h2>
       <a
-        id="user-content-security"
+        id="user-content-hardware"
         class="anchor"
-        aria-label="Permalink: Security"
-        href="#security"
+        aria-label="Permalink: Hardware"
+        href="#hardware"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
     <ul>
       <li>
-        <a
-          href="https://wiki.archlinux.org/title/IPv6#Disable_IPv6"
-          rel="nofollow"
-          >https://wiki.archlinux.org/title/IPv6#Disable_IPv6</a
+        <a href="https://wiki.archlinux.org/title/Intel_graphics" rel="nofollow"
+          >Intel graphics</a
         >
       </li>
       <li>
-        <a href="https://lwn.net/Articles/791380/" rel="nofollow"
-          >add init_on_alloc/init_on_free boot options</a
+        <a href="https://wiki.archlinux.org/title/NVIDIA" rel="nofollow"
+          >NVIDIA</a
         >
       </li>
       <li>
-        <a href="https://lwn.net/Articles/776228/" rel="nofollow"
-          >mm: Randomize free memory</a
-        >
-      </li>
-      <li>
-        <a href="https://lwn.net/Articles/925941/" rel="nofollow"
-          >mm: introduce Designated Movable Blocks</a
-        >
-      </li>
-    </ul>
-    <div class="markdown-heading">
-      <h2 class="heading-element">Hardware dependent</h2>
-      <a
-        id="user-content-hardware-dependent"
-        class="anchor"
-        aria-label="Permalink: Hardware dependent"
-        href="#hardware-dependent"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <ul>
-      <li>
-        <a href="https://wiki.archlinux.org/title/Laptop" rel="nofollow"
-          >https://wiki.archlinux.org/title/Laptop</a
-        >
-      </li>
-      <li>
-        <a href="https://wiki.archlinux.org/title/ASUS_Linux" rel="nofollow"
-          >https://wiki.archlinux.org/title/ASUS_Linux</a
+        <a href="https://wiki.archlinux.org/title/AMDGPU" rel="nofollow"
+          >AMDGPU</a
         >
       </li>
       <li>
         <a href="https://wiki.archlinux.org/title/PRIME" rel="nofollow"
-          >https://wiki.archlinux.org/title/PRIME</a
+          >PRIME</a
+        >
+      </li>
+      <li>
+        <a href="https://wiki.archlinux.org/title/Laptop" rel="nofollow"
+          >Laptop</a
+        >
+      </li>
+      <li>
+        <a href="https://wiki.archlinux.org/title/ASUS_Linux" rel="nofollow"
+          >ASUS Linux</a
         >
       </li>
     </ul>
@@ -983,65 +938,68 @@ kernel.split_lock_mitigate = 0</pre>
     <p>Do it at your own risk!!!</p>
     <ul>
       <li>
-        <a
-          href="https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave"
-          rel="nofollow"
-          >https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave</a
-        >
+        <p>
+          <a
+            href="https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave"
+            rel="nofollow"
+            >pacman/Pacnew and Pacsave</a
+          >
+        </p>
       </li>
       <li>
-        <a
-          href="https://wiki.archlinux.org/title/Unified_kernel_image"
-          rel="nofollow"
-          >https://wiki.archlinux.org/title/Unified_kernel_image</a
-        >
+        <p>
+          <a
+            href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot"
+            rel="nofollow"
+            >Unified Extensible Firmware Interface/Secure Boot</a
+          >
+        </p>
       </li>
       <li>
-        <a
-          href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface"
-          rel="nofollow"
-          >https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface</a
-        >
+        <p>
+          <a
+            href="https://wiki.archlinux.org/title/Profile-sync-daemon"
+            rel="nofollow"
+            >Profile-sync-daemon</a
+          >
+        </p>
       </li>
       <li>
-        <a href="https://github.com/Foxboron/sbctl"
-          >https://github.com/Foxboron/sbctl</a
-        >
+        <p>
+          <a href="https://github.com/Foxboron/sbctl"
+            >https://github.com/Foxboron/sbctl</a
+          >
+        </p>
       </li>
       <li>
-        <a href="https://github.com/AdnanHodzic/auto-cpufreq"
-          >https://github.com/AdnanHodzic/auto-cpufreq</a
-        >
+        <p>
+          <a href="https://github.com/sched-ext/scx"
+            >https://github.com/sched-ext/scx</a
+          >
+        </p>
       </li>
       <li>
-        <a href="https://github.com/nbfc-linux/nbfc-linux"
-          >https://github.com/nbfc-linux/nbfc-linux</a
-        >
+        <p>
+          <a href="https://github.com/AdnanHodzic/auto-cpufreq"
+            >https://github.com/AdnanHodzic/auto-cpufreq</a
+          >
+        </p>
       </li>
       <li>
-        <a href="https://github.com/erpalma/throttled"
-          >https://github.com/erpalma/throttled</a
-        >
+        <p>
+          <a href="https://github.com/nbfc-linux/nbfc-linux"
+            >https://github.com/nbfc-linux/nbfc-linux</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/erpalma/throttled"
+            >https://github.com/erpalma/throttled</a
+          >
+        </p>
       </li>
     </ul>
-    <div class="markdown-heading">
-      <h2 class="heading-element">Maintenance</h2>
-      <a
-        id="user-content-maintenance"
-        class="anchor"
-        aria-label="Permalink: Maintenance"
-        href="#maintenance"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>
-      See
-      <a
-        href="https://wiki.archlinux.org/title/Pacman/Tips_and_tricks"
-        rel="nofollow"
-        >pacman/Tips and tricks</a
-      >
-    </p>
 
     <div>
       Feel free to ask me via
