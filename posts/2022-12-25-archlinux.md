@@ -2,7 +2,8 @@
 
 Install Arch Linux is thing I always want to do for my laptop/PC since I had my laptop in ninth grade.
 
-This is not a guide for everyone, this is just save for myself in a future and for anyone who want to walk in my shoes.
+This is not a guide for everyone, this is just a save for myself in the future and for anyone who want to walk in my
+shoes.
 
 ## [Installation guide](https://wiki.archlinux.org/index.php/Installation_guide)
 
@@ -25,6 +26,8 @@ cat /sys/firmware/efi/fw_platform_size
 # 64 or 32 is UEFI
 # No such file or directory is BIOS
 ```
+
+[Unified Extensible Firmware Interface/Secure Boot/Disabling Secure Boot](https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#Disabling_Secure_Boot)
 
 #### Connect to the internet
 
@@ -414,10 +417,8 @@ kernel.split_lock_mitigate = 0
 Do it at your own risk!!!
 
 - [pacman/Pacnew and Pacsave](https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave)
-- [Unified Extensible Firmware Interface/Secure Boot](https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot)
 - [Profile-sync-daemon](https://wiki.archlinux.org/title/Profile-sync-daemon)
 
-- https://github.com/Foxboron/sbctl
 - https://github.com/sched-ext/scx
 - https://github.com/AdnanHodzic/auto-cpufreq
 - https://github.com/nbfc-linux/nbfc-linux
