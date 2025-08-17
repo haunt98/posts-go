@@ -103,7 +103,7 @@
     <p>It looks like this:</p>
     <div class="highlight highlight-text-adblock">
       <pre>
-[Business] time, data -&gt; convert to unix timestamp milliseconds -&gt; [Database] int64</pre
+[Go] time.Time -&gt; convert to unix timestamp seconds/milliseconds -&gt; [Database] int64</pre
       >
     </div>
     <div class="markdown-heading">
@@ -196,8 +196,8 @@
 );</pre>
     </div>
     <p>
-      If use composite index, order is important, either both
-      <code>DESC</code> or both <code>ASC</code>, do not mix:
+      If use composite index, order is important, either both are
+      <code>DESC</code> or <code>ASC</code>, do not mix:
     </p>
     <div class="highlight highlight-source-sql">
       <pre><span class="pl-k">CREATE</span> <span class="pl-k">INDEX</span> <span class="pl-en">idx_user_id_created_at</span>
@@ -211,12 +211,12 @@
 <span class="pl-c"><span class="pl-c">--</span> Good</span>
 <span class="pl-k">SELECT</span> <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> user_upload
-<span class="pl-k">ORDER BY</span> user_id <span class="pl-k">DESC</span>, created_at <span class="pl-k">DESC</span>;
+<span class="pl-k">ORDER BY</span> user_id, created_at;
 
 <span class="pl-c"><span class="pl-c">--</span> Also good</span>
 <span class="pl-k">SELECT</span> <span class="pl-k">*</span>
 <span class="pl-k">FROM</span> user_upload
-<span class="pl-k">ORDER BY</span> user_id, created_at;</pre>
+<span class="pl-k">ORDER BY</span> user_id <span class="pl-k">DESC</span>, created_at <span class="pl-k">DESC</span>;</pre>
     </div>
     <p>Use <code>EXPLAIN</code> to check if index is used or not:</p>
     <ul>
