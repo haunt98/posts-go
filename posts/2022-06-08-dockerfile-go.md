@@ -5,10 +5,10 @@ Each time I start a new Go project, I repeat many steps. Like set up `.gitignore
 So I decide to have a baseline Dockerfile like this:
 
 ```Dockerfile
-FROM golang:1.23.0-bookworm as builder
+FROM golang:1.25.0-trixie as builder
 
-RUN go install golang.org/dl/go1.23.0@latest \
-    && go1.23.0 download
+RUN go install golang.org/dl/go1.25.0@latest \
+    && go1.25.0 download
 
 WORKDIR /build
 
@@ -37,14 +37,14 @@ secure base image. So I stick with it for a while.
 Also, remember to match Distroless Debian version with Go official image Debian version.
 
 ```Dockerfile
-FROM golang:1.23.0-bookworm as builder
+FROM golang:1.25.0-trixie as builder
 ```
 
 This is Go image I use as a build stage. This can be official Go image or custom image is required in some companies.
 
 ```Dockerfile
-RUN go install golang.org/dl/go1.23.0@latest \
-    && go1.23.0 download
+RUN go install golang.org/dl/go1.25.0@latest \
+    && go1.25.0 download
 ```
 
 This is optional. In my case, my company is slow to update Go image so I use this trick to install latest Go version.
