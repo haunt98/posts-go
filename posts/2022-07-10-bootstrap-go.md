@@ -114,7 +114,7 @@ func NewS(opts ...OptionS) *S {
 
 In above example, I construct `s` with `WithA` and `WithB` option. No need to pass direct field inside `s`.
 
-### Use [errgroup](https://pkg.go.dev/golang.org/x/sync/errgroup) as much as possible
+### Use [errgroup](https://pkg.go.dev/golang.org/x/sync/errgroup)
 
 If logic involves calling too many APIs, but they are not depend on each other. We can fire them parallel :)
 
@@ -141,41 +141,21 @@ if err := eg.Wait(); err != nil {
 }
 ```
 
-### Use [semaphore](https://pkg.go.dev/golang.org/x/sync/semaphore) when need to implement WorkerPool
+### Use [singleflight](https://pkg.go.dev/golang.org/x/sync/singleflight)
+
+Imagine you need to get weather data then return for your user, but many users request weather of same location at the
+same time, so your service spam weather service with 4 requests. With `singleflight` you can reduce to just 1 request.
+Remember to choose `key` wisely.
+
+### Use [semaphore](https://pkg.go.dev/golang.org/x/sync/semaphore)
+
+... when need to implement WorkerPool
 
 Please don't use external libs for WorkerPool, I don't want to deal with dependency hell.
 
-### Use [sync.Pool](https://pkg.go.dev/sync#Pool) when need to re-use object, mainly for `bytes.Buffer`
+### Use [sync.Pool](https://pkg.go.dev/sync#Pool)
 
-Example:
-
-```go
-var bufPool = sync.Pool{
-	New: func() any {
-		return new(bytes.Buffer)
-	},
-}
-
-func MarshalWithoutEscapeHTML(v any) ([]byte, error) {
-	b, ok := bufPool.Get().(*bytes.Buffer)
-	if !ok {
-		return nil, ErrBufPoolNotBytesBuffer
-	}
-
-	b.Reset()
-	defer bufPool.Put(b)
-
-	encoder := json.NewEncoder(b)
-	encoder.SetEscapeHTML(false)
-	if err := encoder.Encode(v); err != nil {
-		return nil, err
-	}
-
-	result := make([]byte, b.Len())
-	copy(result, b.Bytes())
-	return result, nil
-}
-```
+... when need to re-use object, mainly for `bytes.Buffer`
 
 ### [Generics](https://go.dev/doc/tutorial/generics) with some tricks
 
@@ -222,37 +202,12 @@ code.
 
 Only need if you need something from `vendor`, to generate mock or something else.
 
-### Use `build.go` to include build tools in go.mod
+### Don't use cli libs
 
-To easily control version of build tools.
+... [spf13/cobra](https://github.com/spf13/cobra), [urfave/cli](https://github.com/urfave/cli)), ... just to start
+service.
 
-For example `build.go`:
-
-```go
-//go:build tools
-// +build tools
-
-package main
-
-import (
-	_ "github.com/golang/protobuf/protoc-gen-go"
-)
-```
-
-And then in `Makefile`:
-
-```Makefile
-build:
-    go install github.com/golang/protobuf/protoc-gen-go
-```
-
-We always get the version of build tools in `go.mod` each time we install it. Future contributors will not cry anymore.
-
-### Don't use cli libs ([spf13/cobra](https://github.com/spf13/cobra), [urfave/cli](https://github.com/urfave/cli)) just for Go service
-
-What is the point to pass many params (`do-it`, `--abc`, `--xyz`) when what we only need is start service?
-
-In my case, service starts with only config, and config should be read from file or environment like
+What is the point to pass many params (`do-it`, `--abc`, `--xyz`) if services read config from env, files like
 [The Twelve Factors](https://12factor.net/) guide.
 
 ### Don't use [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
@@ -268,7 +223,7 @@ Write 1 for both gRPC, REST sounds good, but in the end, it is not worth it.
 
 prototool is deprecated, and buf can generate, lint, format as good as prototool.
 
-### Use [gin-gonic/gin](https://github.com/gin-gonic/gin) for REST.
+### REST with [gin-gonic/gin](https://github.com/gin-gonic/gin)
 
 With `c *gin.Context`:
 
@@ -287,7 +242,7 @@ defer func() {
 
 Combine with [go-playground/validator](https://github.com/go-playground/validator) to validate request structs.
 
-### If you want log, just use [uber-go/zap](https://github.com/uber-go/zap)
+### Log with [uber-go/zap](https://github.com/uber-go/zap)
 
 It is fast!
 
@@ -298,7 +253,7 @@ It is fast!
 - If doubt, use `zap.Any`.
 - Use `context_id` or `trace_id` in every log lines for easily debug.
 
-### To read config, use [spf13/viper](https://github.com/spf13/viper)
+### Read config with [spf13/viper](https://github.com/spf13/viper)
 
 Only init config in main or cmd layer. Do not use `viper.Get...` in inside layer.
 
@@ -309,7 +264,9 @@ Why?
 
 Also, be careful if config value is empty. You should decide to continue or stop the service if there is empty config.
 
-### Don't overuse ORM libs, no need to handle another layer above SQL.
+### Don't overuse ORM libs
+
+... no need to handle another layer above SQL.
 
 Each ORM libs has each different syntax. To learn and use those libs correctly is time consuming. So just stick to plain
 SQL. It is easier to debug when something is wrong.
@@ -368,7 +325,11 @@ func (c *client) HSetWithExpire(ctx context.Context, key string, values []any, e
 
 Remember to config:
 
-- `ReadTimeout`, `WriteTimeout`
+- `ReadTimeout`
+- `WriteTimeout`
+- `ContextTimeoutEnabled` to true
+- `Protocol` to `3`
+- `DisableIdentity` to true
 
 ### Connect MySQL with [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)
 
@@ -389,12 +350,12 @@ Use `sarama.V1_0_0_0`, because IBM decide to upgrade default version.
 Don't use [confluentinc/confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go), because it's required
 `CGO_ENABLED`.
 
-### If you want test, just use [stretchr/testify](https://github.com/stretchr/testify).
+### Test with [stretchr/testify](https://github.com/stretchr/testify).
 
 It is easy to write a suite test, thanks to testify. Also, for mocking, there are many options out there. Pick 1 then
 sleep peacefully.
 
-### If need to mock, choose [matryer/moq](https://github.com/matryer/moq) or [uber/mock](https://github.com/uber/mock)
+### Mock with [matryer/moq](https://github.com/matryer/moq) or [uber/mock](https://github.com/uber/mock)
 
 The first is easy to use but not powerful as the later. If you want to make sure mock func is called with correct times,
 use the later.
@@ -407,23 +368,6 @@ Example with `matryer/moq`:
 //go:generate sh -c "test service_mock_generated.go -nt $GOFILE && exit 0; moq -rm -out service_mock_generated.go . Service"
 ```
 
-### Be careful with [spf13/cast](https://github.com/spf13/cast)
-
-Don't cast enum:
-
-```go
-// Bad
-a := cast.ToInt32(servicev1.ReasonCode_ABC)
-
-// Good
-a := int32(servicev1.ReasonCode_ABC)
-```
-
-### Don't waste your time rewrite rate limiter if your use case is simple, use [rate](https://pkg.go.dev/golang.org/x/time/rate) or [go-redis/redis_rate](https://github.com/go-redis/redis_rate)
-
-**rate** if you want rate limiter locally in your single instance of service. **redis_rate** if you want rate limiter
-distributed across all your instances of service.
-
 ### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt)
 
 `gofumpt` provides more rules when format Go codes.
@@ -432,21 +376,7 @@ distributed across all your instances of service.
 
 No need to say more. Lint is the way!
 
-If you get `fieldalignment` error, use
-[fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment) or
-[dkorunic/betteralign](https://github.com/dkorunic/betteralign) to fix them.
-
 My heuristic for fieldalignment (not work all the time): pointer -> string -> []byte -> int64 -> int32.
-
-```sh
-# Install
-go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
-go install github.com/dkorunic/betteralign/cmd/betteralign@latest
-
-# Fix
-fieldalignment -fix ./internal/*.go
-betteralign -apply ./internal/*.go
-```
 
 ## Snippets/scripts
 

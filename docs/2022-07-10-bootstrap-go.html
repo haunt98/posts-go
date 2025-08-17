@@ -272,13 +272,12 @@ internal/
         <a href="https://pkg.go.dev/golang.org/x/sync/errgroup" rel="nofollow"
           >errgroup</a
         >
-        as much as possible
       </h3>
       <a
-        id="user-content-use-errgroup-as-much-as-possible"
+        id="user-content-use-errgroup"
         class="anchor"
-        aria-label="Permalink: Use errgroup as much as possible"
-        href="#use-errgroup-as-much-as-possible"
+        aria-label="Permalink: Use errgroup"
+        href="#use-errgroup"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -316,65 +315,59 @@ internal/
     <div class="markdown-heading">
       <h3 class="heading-element">
         Use
-        <a href="https://pkg.go.dev/golang.org/x/sync/semaphore" rel="nofollow"
-          >semaphore</a
+        <a
+          href="https://pkg.go.dev/golang.org/x/sync/singleflight"
+          rel="nofollow"
+          >singleflight</a
         >
-        when need to implement WorkerPool
       </h3>
       <a
-        id="user-content-use-semaphore-when-need-to-implement-workerpool"
+        id="user-content-use-singleflight"
         class="anchor"
-        aria-label="Permalink: Use semaphore when need to implement WorkerPool"
-        href="#use-semaphore-when-need-to-implement-workerpool"
+        aria-label="Permalink: Use singleflight"
+        href="#use-singleflight"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>
+      Imagine you need to get weather data then return for your user, but many
+      users request weather of same location at the same time, so your service
+      spam weather service with 4 requests. With <code>singleflight</code> you
+      can reduce to just 1 request. Remember to choose <code>key</code> wisely.
+    </p>
+    <div class="markdown-heading">
+      <h3 class="heading-element">
+        Use
+        <a href="https://pkg.go.dev/golang.org/x/sync/semaphore" rel="nofollow"
+          >semaphore</a
+        >
+      </h3>
+      <a
+        id="user-content-use-semaphore"
+        class="anchor"
+        aria-label="Permalink: Use semaphore"
+        href="#use-semaphore"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>... when need to implement WorkerPool</p>
     <p>
       Please don't use external libs for WorkerPool, I don't want to deal with
       dependency hell.
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        Use
-        <a href="https://pkg.go.dev/sync#Pool" rel="nofollow">sync.Pool</a> when
-        need to re-use object, mainly for <code>bytes.Buffer</code>
+        Use <a href="https://pkg.go.dev/sync#Pool" rel="nofollow">sync.Pool</a>
       </h3>
       <a
-        id="user-content-use-syncpool-when-need-to-re-use-object-mainly-for-bytesbuffer"
+        id="user-content-use-syncpool"
         class="anchor"
-        aria-label="Permalink: Use sync.Pool when need to re-use object, mainly for bytes.Buffer"
-        href="#use-syncpool-when-need-to-re-use-object-mainly-for-bytesbuffer"
+        aria-label="Permalink: Use sync.Pool"
+        href="#use-syncpool"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>Example:</p>
-    <div class="highlight highlight-source-go">
-      <pre><span class="pl-k">var</span> <span class="pl-s1">bufPool</span> <span class="pl-c1">=</span> sync.<span class="pl-smi">Pool</span>{
-	<span class="pl-s1">New</span>: <span class="pl-k">func</span>() <span class="pl-smi">any</span> {
-		<span class="pl-k">return</span> <span class="pl-s1">new</span>(bytes.<span class="pl-smi">Buffer</span>)
-	},
-}
-
-<span class="pl-k">func</span> <span class="pl-s1">MarshalWithoutEscapeHTML</span>(<span class="pl-s1">v</span> <span class="pl-smi">any</span>) ([]<span class="pl-smi">byte</span>, <span class="pl-smi">error</span>) {
-	<span class="pl-s1">b</span>, <span class="pl-s1">ok</span> <span class="pl-c1">:=</span> <span class="pl-s1">bufPool</span>.<span class="pl-c1">Get</span>().(<span class="pl-c1">*</span>bytes.<span class="pl-smi">Buffer</span>)
-	<span class="pl-k">if</span> <span class="pl-c1">!</span><span class="pl-s1">ok</span> {
-		<span class="pl-k">return</span> <span class="pl-c1">nil</span>, <span class="pl-s1">ErrBufPoolNotBytesBuffer</span>
-	}
-
-	<span class="pl-s1">b</span>.<span class="pl-c1">Reset</span>()
-	<span class="pl-k">defer</span> <span class="pl-s1">bufPool</span>.<span class="pl-c1">Put</span>(<span class="pl-s1">b</span>)
-
-	<span class="pl-s1">encoder</span> <span class="pl-c1">:=</span> <span class="pl-s1">json</span>.<span class="pl-c1">NewEncoder</span>(<span class="pl-s1">b</span>)
-	<span class="pl-s1">encoder</span>.<span class="pl-c1">SetEscapeHTML</span>(<span class="pl-c1">false</span>)
-	<span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">encoder</span>.<span class="pl-c1">Encode</span>(<span class="pl-s1">v</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
-		<span class="pl-k">return</span> <span class="pl-c1">nil</span>, <span class="pl-s1">err</span>
-	}
-
-	<span class="pl-s1">result</span> <span class="pl-c1">:=</span> <span class="pl-s1">make</span>([]<span class="pl-smi">byte</span>, <span class="pl-s1">b</span>.<span class="pl-c1">Len</span>())
-	<span class="pl-s1">copy</span>(<span class="pl-s1">result</span>, <span class="pl-s1">b</span>.<span class="pl-c1">Bytes</span>())
-	<span class="pl-k">return</span> <span class="pl-s1">result</span>, <span class="pl-c1">nil</span>
-}</pre>
-    </div>
+    <p>... when need to re-use object, mainly for <code>bytes.Buffer</code></p>
     <div class="markdown-heading">
       <h3 class="heading-element">
         <a href="https://go.dev/doc/tutorial/generics" rel="nofollow"
@@ -469,61 +462,24 @@ internal/
       or something else.
     </p>
     <div class="markdown-heading">
-      <h3 class="heading-element">
-        Use <code>build.go</code> to include build tools in go.mod
-      </h3>
+      <h3 class="heading-element">Don't use cli libs</h3>
       <a
-        id="user-content-use-buildgo-to-include-build-tools-in-gomod"
+        id="user-content-dont-use-cli-libs"
         class="anchor"
-        aria-label="Permalink: Use build.go to include build tools in go.mod"
-        href="#use-buildgo-to-include-build-tools-in-gomod"
+        aria-label="Permalink: Don't use cli libs"
+        href="#dont-use-cli-libs"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
-    </div>
-    <p>To easily control version of build tools.</p>
-    <p>For example <code>build.go</code>:</p>
-    <div class="highlight highlight-source-go">
-      <pre><span class="pl-c">//go:build tools</span>
-<span class="pl-c">// +build tools</span>
-
-<span class="pl-k">package</span> main
-
-<span class="pl-k">import</span> (
-	_ <span class="pl-s">"github.com/golang/protobuf/protoc-gen-go"</span>
-)</pre>
-    </div>
-    <p>And then in <code>Makefile</code>:</p>
-    <div class="highlight highlight-source-makefile">
-      <pre><span class="pl-en">build</span>:
-    go install github.com/golang/protobuf/protoc-gen-go</pre>
     </div>
     <p>
-      We always get the version of build tools in <code>go.mod</code> each time
-      we install it. Future contributors will not cry anymore.
+      ... <a href="https://github.com/spf13/cobra">spf13/cobra</a>,
+      <a href="https://github.com/urfave/cli">urfave/cli</a>), ... just to start
+      service.
     </p>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
-        Don't use cli libs (<a href="https://github.com/spf13/cobra"
-          >spf13/cobra</a
-        >, <a href="https://github.com/urfave/cli">urfave/cli</a>) just for Go
-        service
-      </h3>
-      <a
-        id="user-content-dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service"
-        class="anchor"
-        aria-label="Permalink: Don't use cli libs (spf13/cobra, urfave/cli) just for Go service"
-        href="#dont-use-cli-libs-spf13cobra-urfavecli-just-for-go-service"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
     <p>
       What is the point to pass many params (<code>do-it</code>,
-      <code>--abc</code>, <code>--xyz</code>) when what we only need is start
-      service?
-    </p>
-    <p>
-      In my case, service starts with only config, and config should be read
-      from file or environment like
+      <code>--abc</code>, <code>--xyz</code>) if services read config from env,
+      files like
       <a href="https://12factor.net/" rel="nofollow">The Twelve Factors</a>
       guide.
     </p>
@@ -573,14 +529,13 @@ internal/
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        Use <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a> for
-        REST.
+        REST with <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a>
       </h3>
       <a
-        id="user-content-use-gin-gonicgin-for-rest"
+        id="user-content-rest-with-gin-gonicgin"
         class="anchor"
-        aria-label="Permalink: Use gin-gonic/gin for REST."
-        href="#use-gin-gonicgin-for-rest"
+        aria-label="Permalink: REST with gin-gonic/gin"
+        href="#rest-with-gin-gonicgin"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -612,14 +567,13 @@ internal/
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        If you want log, just use
-        <a href="https://github.com/uber-go/zap">uber-go/zap</a>
+        Log with <a href="https://github.com/uber-go/zap">uber-go/zap</a>
       </h3>
       <a
-        id="user-content-if-you-want-log-just-use-uber-gozap"
+        id="user-content-log-with-uber-gozap"
         class="anchor"
-        aria-label="Permalink: If you want log, just use uber-go/zap"
-        href="#if-you-want-log-just-use-uber-gozap"
+        aria-label="Permalink: Log with uber-go/zap"
+        href="#log-with-uber-gozap"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -646,14 +600,14 @@ internal/
     </ul>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        To read config, use
+        Read config with
         <a href="https://github.com/spf13/viper">spf13/viper</a>
       </h3>
       <a
-        id="user-content-to-read-config-use-spf13viper"
+        id="user-content-read-config-with-spf13viper"
         class="anchor"
-        aria-label="Permalink: To read config, use spf13/viper"
-        href="#to-read-config-use-spf13viper"
+        aria-label="Permalink: Read config with spf13/viper"
+        href="#read-config-with-spf13viper"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -671,17 +625,16 @@ internal/
       or stop the service if there is empty config.
     </p>
     <div class="markdown-heading">
-      <h3 class="heading-element">
-        Don't overuse ORM libs, no need to handle another layer above SQL.
-      </h3>
+      <h3 class="heading-element">Don't overuse ORM libs</h3>
       <a
-        id="user-content-dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql"
+        id="user-content-dont-overuse-orm-libs"
         class="anchor"
-        aria-label="Permalink: Don't overuse ORM libs, no need to handle another layer above SQL."
-        href="#dont-overuse-orm-libs-no-need-to-handle-another-layer-above-sql"
+        aria-label="Permalink: Don't overuse ORM libs"
+        href="#dont-overuse-orm-libs"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>... no need to handle another layer above SQL.</p>
     <p>
       Each ORM libs has each different syntax. To learn and use those libs
       correctly is time consuming. So just stick to plain SQL. It is easier to
@@ -777,7 +730,11 @@ internal/
     </div>
     <p>Remember to config:</p>
     <ul>
-      <li><code>ReadTimeout</code>, <code>WriteTimeout</code></li>
+      <li><code>ReadTimeout</code></li>
+      <li><code>WriteTimeout</code></li>
+      <li><code>ContextTimeoutEnabled</code> to true</li>
+      <li><code>Protocol</code> to <code>3</code></li>
+      <li><code>DisableIdentity</code> to true</li>
     </ul>
     <div class="markdown-heading">
       <h3 class="heading-element">
@@ -827,14 +784,14 @@ internal/
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        If you want test, just use
+        Test with
         <a href="https://github.com/stretchr/testify">stretchr/testify</a>.
       </h3>
       <a
-        id="user-content-if-you-want-test-just-use-stretchrtestify"
+        id="user-content-test-with-stretchrtestify"
         class="anchor"
-        aria-label="Permalink: If you want test, just use stretchr/testify."
-        href="#if-you-want-test-just-use-stretchrtestify"
+        aria-label="Permalink: Test with stretchr/testify."
+        href="#test-with-stretchrtestify"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -844,15 +801,14 @@ internal/
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        If need to mock, choose
-        <a href="https://github.com/matryer/moq">matryer/moq</a> or
+        Mock with <a href="https://github.com/matryer/moq">matryer/moq</a> or
         <a href="https://github.com/uber/mock">uber/mock</a>
       </h3>
       <a
-        id="user-content-if-need-to-mock-choose-matryermoq-or-ubermock"
+        id="user-content-mock-with-matryermoq-or-ubermock"
         class="anchor"
-        aria-label="Permalink: If need to mock, choose matryer/moq or uber/mock"
-        href="#if-need-to-mock-choose-matryermoq-or-ubermock"
+        aria-label="Permalink: Mock with matryer/moq or uber/mock"
+        href="#mock-with-matryermoq-or-ubermock"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -866,49 +822,6 @@ internal/
 <span class="pl-c">// https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen</span>
 <span class="pl-c">//go:generate sh -c "test service_mock_generated.go -nt $GOFILE &amp;&amp; exit 0; moq -rm -out service_mock_generated.go . Service"</span></pre>
     </div>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
-        Be careful with <a href="https://github.com/spf13/cast">spf13/cast</a>
-      </h3>
-      <a
-        id="user-content-be-careful-with-spf13cast"
-        class="anchor"
-        aria-label="Permalink: Be careful with spf13/cast"
-        href="#be-careful-with-spf13cast"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Don't cast enum:</p>
-    <div class="highlight highlight-source-go">
-      <pre><span class="pl-c">// Bad</span>
-<span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-s1">cast</span>.<span class="pl-c1">ToInt32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)
-
-<span class="pl-c">// Good</span>
-<span class="pl-s1">a</span> <span class="pl-c1">:=</span> <span class="pl-s1">int32</span>(<span class="pl-s1">servicev1</span>.<span class="pl-c1">ReasonCode_ABC</span>)</pre>
-    </div>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
-        Don't waste your time rewrite rate limiter if your use case is simple,
-        use
-        <a href="https://pkg.go.dev/golang.org/x/time/rate" rel="nofollow"
-          >rate</a
-        >
-        or
-        <a href="https://github.com/go-redis/redis_rate">go-redis/redis_rate</a>
-      </h3>
-      <a
-        id="user-content-dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate"
-        class="anchor"
-        aria-label="Permalink: Don't waste your time rewrite rate limiter if your use case is simple, use rate or go-redis/redis_rate"
-        href="#dont-waste-your-time-rewrite-rate-limiter-if-your-use-case-is-simple-use-rate-or-go-redisredis_rate"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>
-      <strong>rate</strong> if you want rate limiter locally in your single
-      instance of service. <strong>redis_rate</strong> if you want rate limiter
-      distributed across all your instances of service.
-    </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
         Replace <code>go fmt</code>, <code>goimports</code> with
@@ -940,29 +853,9 @@ internal/
     </div>
     <p>No need to say more. Lint is the way!</p>
     <p>
-      If you get <code>fieldalignment</code> error, use
-      <a
-        href="https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment"
-        rel="nofollow"
-        >fieldalignment</a
-      >
-      or
-      <a href="https://github.com/dkorunic/betteralign">dkorunic/betteralign</a>
-      to fix them.
-    </p>
-    <p>
       My heuristic for fieldalignment (not work all the time): pointer -&gt;
       string -&gt; []byte -&gt; int64 -&gt; int32.
     </p>
-    <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> Install</span>
-go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
-go install github.com/dkorunic/betteralign/cmd/betteralign@latest
-
-<span class="pl-c"><span class="pl-c">#</span> Fix</span>
-fieldalignment -fix ./internal/<span class="pl-k">*</span>.go
-betteralign -apply ./internal/<span class="pl-k">*</span>.go</pre>
-    </div>
     <div class="markdown-heading">
       <h2 class="heading-element">Snippets/scripts</h2>
       <a
