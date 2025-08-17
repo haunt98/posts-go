@@ -289,15 +289,7 @@ sequenceDiagram
 - [Is Redlock safe?](http://antirez.com/news/101)
 - [Cache Consistency with Database](https://danielw.cn/cache-consistency-with-database#cache-patterns)
 
-## Bonus
-
-- [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/download/): Java coding
-- [GoLand](https://www.jetbrains.com/go/download/): Go coding
-- [DataGrip](https://www.jetbrains.com/datagrip/download/): Database GUI
-- [RedisInsight](https://redis.com/redis-enterprise/redis-insight/): Redis GUI
-- [OrbStack](https://orbstack.dev/download): Better Docker Desktop
-- [Kreya](https://kreya.app/): GRPC caller
-
 ## Backlog
 
 - https://programmingisterrible.com/post/162346490883/how-do-you-cut-a-monolith-in-half
+- https://www.seangoedecke.com/good-system-design/
