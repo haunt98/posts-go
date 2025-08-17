@@ -61,12 +61,10 @@ Also read:
 - [A new Go API for Protocol Buffers](https://go.dev/blog/protobuf-apiv2) to know why `v1.20.0` is `v2`.
 - [Go Protobuf Plugin Versioning](https://jbrandhorst.com/post/plugin-versioning/).
 
-Currently there are some:
+Alternatives:
 
 - [bufbuild/connect-go](https://github.com/bufbuild/connect-go). Coming from buf, trust worthy but need time to make it
   match feature parity with grpc-go.
-- [twitchtv/twirp](https://github.com/twitchtv/twirp)
-- [storj/drpc](https://github.com/storj/drpc)
 
 # Thanks
 
