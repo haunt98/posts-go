@@ -44,7 +44,6 @@ For fun
     - https://github.com/asciinema/agg
 - https://github.com/qpdf/qpdf
 - https://github.com/fastfetch-cli/fastfetch
-- https://github.com/laishulu/macism
 
 #### Windows
 
