@@ -66,8 +66,6 @@ For fun
 - https://github.com/rxhanson/Rectangle
 - https://github.com/waydabber/BetterDisplay
     - https://github.com/waydabber/BetterDisplay/wiki/Fully-scalable-HiDPI-desktop#notes-and-troubleshooting
-- https://github.com/lwouis/alt-tab-macos
-    - https://github.com/lwouis/alt-tab-macos/issues/3723
 - https://github.com/pqrs-org/Karabiner-Elements
 - https://github.com/coteditor/CotEditor
 - https://github.com/zed-industries/zed
