@@ -35,11 +35,3 @@ gen:
 format-html:
     bunx prettier --write ./templates ./docs
     bunx prettier --print-width 120 --tab-width 4 --prose-wrap always --write ./posts
-
-srht:
-    # https://srht.site/quickstart
-    # go install git.sr.ht/~xenrox/hut@latest
-    # hut init
-    tar -C docs -cvz . > site.tar.gz
-    hut pages publish -d youngyoshie.srht.site site.tar.gz
-    rm -rf site.tar.gz
