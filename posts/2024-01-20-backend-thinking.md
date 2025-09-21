@@ -292,4 +292,6 @@ sequenceDiagram
 ## Backlog
 
 - https://programmingisterrible.com/post/162346490883/how-do-you-cut-a-monolith-in-half
+- https://rakyll.medium.com/how-to-peacefully-grow-your-service-c40c25fe097f
 - https://www.seangoedecke.com/good-system-design/
+- https://www.seangoedecke.com/good-api-design/
