@@ -189,7 +189,7 @@ tests := []struct{
     dbErr error
     logErr error
     wantErr error
-    // Murr error
+    // More error
     aErr error
     bErr error
     cErr error
