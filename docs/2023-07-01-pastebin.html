@@ -530,8 +530,11 @@ rsync -avzP src/ dst</pre>
       </li>
       <li><code>-n</code>: dry run</li>
       <li>
-        <code>--exclude</code>: exclude files, example
-        <code>--exclude=".DS_Store"</code>
+        <code>--exclude</code>: exclude files, dirs:
+        <ul>
+          <li><code>--exclude=".DS_Store"</code></li>
+          <li><code>--exclude=".git/fsmonitor--daemon/"</code></li>
+        </ul>
       </li>
     </ul>
     <p>Be careful flags (need dry run if not sure):</p>
@@ -543,6 +546,10 @@ rsync -avzP src/ dst</pre>
       <li>
         <code>--delete</code>: delete files in <strong>dst</strong> if not exist
         in <strong>src</strong>, useful to sync dst with src
+      </li>
+      <li>
+        <code>-delete-excluded</code>: delete files in <strong>dst</strong> if
+        match excluded pattern
       </li>
     </ul>
     <div class="markdown-heading">
