@@ -106,6 +106,7 @@ Language server
 - https://github.com/luals/lua-language-server
 - https://github.com/artempyanykh/marksman
 - https://github.com/Myriad-Dreamin/tinymist
+- https://github.com/posit-dev/air
 
 Misc
 
