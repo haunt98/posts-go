@@ -132,7 +132,6 @@ Misc
 ### UI
 
 - https://httpie.io/desktop
-- https://www.jetbrains.com/datagrip/
 - https://github.com/riok/Kreya
 
 #### macOS
@@ -148,4 +147,4 @@ Don't install:
 - Visual Studio Code
 - Postman
 - Docker Desktop
-- Any JetBrains IDE beside DataGrip
+- Any JetBrains IDE
