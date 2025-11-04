@@ -3,7 +3,7 @@ module github.com/haunt98/posts-go
 go 1.24.0
 
 require (
-	github.com/google/go-github/v76 v76.0.0
+	github.com/google/go-github/v77 v77.0.0
 	github.com/make-go-great/netrc-go v0.0.2
 	golang.org/x/oauth2 v0.32.0
 	golang.org/x/sync v0.17.0
