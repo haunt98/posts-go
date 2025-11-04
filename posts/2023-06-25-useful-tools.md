@@ -44,9 +44,8 @@ For fun
     - https://github.com/asciinema/agg
 - https://github.com/qpdf/qpdf
 - https://github.com/fastfetch-cli/fastfetch
-- https://github.com/Genymobile/scrcpy
 
-#### Windows
+Windows
 
 - https://github.com/abbodi1406/KMS_VL_ALL_AIO
 - https://github.com/massgravel/Microsoft-Activation-Scripts
@@ -56,12 +55,10 @@ For fun
 
 - https://github.com/ghostty-org/ghostty
 - https://github.com/kovidgoyal/kitty
-- https://github.com/wez/wezterm
 - https://transmissionbt.com/
-- https://tailscale.com/
 - https://github.com/localsend/localsend
 
-#### macOS
+macOS
 
 - https://github.com/iina/iina
 - https://github.com/rxhanson/Rectangle
@@ -80,13 +77,13 @@ For fun
 
 ### Terminal
 
+Language
+
 - https://github.com/Schniz/fnm
 - https://github.com/oven-sh/bun
 - https://github.com/astral-sh/uv
 - https://github.com/astral-sh/ruff
-
-Language
-
+- https://github.com/astral-sh/ty
 - https://github.com/casey/just
 - https://github.com/typst/typst
 
@@ -104,7 +101,6 @@ Language server
 
 - https://github.com/golang/tools/tree/master/gopls
 - https://github.com/luals/lua-language-server
-- https://github.com/artempyanykh/marksman
 - https://github.com/Myriad-Dreamin/tinymist
 - https://github.com/posit-dev/air
 
@@ -114,15 +110,13 @@ Misc
 - https://github.com/itchyny/gojq
 - https://github.com/antonmedv/fx
 - https://github.com/josephburnett/jd
-- https://github.com/ggerganov/llama.cpp
-- https://github.com/gitleaks/gitleaks
 - https://github.com/cli/cli
 - https://gitlab.com/gitlab-org/cli
 - https://github.com/k1LoW/tbls
 - https://github.com/bojand/ghz
 - https://github.com/grafana/k6
 
-#### Go
+Go more
 
 - https://pkg.go.dev/golang.org/x/telemetry/cmd/gotelemetry
 - https://github.com/mvdan/gofumpt
@@ -134,7 +128,7 @@ Misc
 - https://httpie.io/desktop
 - https://github.com/riok/Kreya
 
-#### macOS
+macOS
 
 - https://github.com/orbstack/orbstack
 
