@@ -393,13 +393,6 @@ hwclock --systohc</pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>Edit <code>/etc/mkinitcpio.conf</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre><span class="pl-c"># https://wiki.archlinux.org/title/mkinitcpio#Common_hooks</span>
-<span class="pl-c"># Replace base udev with systemd</span>
-<span class="pl-c">#</span>
-HOOKS=(systemd ... )</pre>
-    </div>
     <div class="highlight highlight-source-shell"><pre>mkinitcpio -P</pre></div>
     <div class="markdown-heading">
       <h4 class="heading-element">Root password</h4>

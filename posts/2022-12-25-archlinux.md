@@ -163,15 +163,6 @@ myhostname
 
 #### Initramfs
 
-Edit `/etc/mkinitcpio.conf`:
-
-```txt
-# https://wiki.archlinux.org/title/mkinitcpio#Common_hooks
-# Replace base udev with systemd
-#
-HOOKS=(systemd ... )
-```
-
 ```sh
 mkinitcpio -P
 ```
