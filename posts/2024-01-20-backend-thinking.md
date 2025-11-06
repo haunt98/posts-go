@@ -296,3 +296,4 @@ sequenceDiagram
 - https://www.seangoedecke.com/good-system-design/
 - https://www.seangoedecke.com/good-api-design/
 - https://www.seangoedecke.com/invalid-states/
+- https://peter.bourgon.org/go-for-industrial-programming/
