@@ -113,7 +113,6 @@ Misc
 - https://github.com/cli/cli
 - https://gitlab.com/gitlab-org/cli
 - https://github.com/k1LoW/tbls
-- https://github.com/bojand/ghz
 - https://github.com/grafana/k6
 
 Go more
