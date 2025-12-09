@@ -1,6 +1,4 @@
-# Debounce
-
-TODO
+# Idempotency
 
 ## Thanks
 
