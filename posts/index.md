@@ -32,7 +32,6 @@ This is where I dump my thoughts.
 - [Hardware 101](2023-08-20-hardware.html)
 - [Real World Crypto 101](2023-08-23-real-world-crypto.html)
 - [Vietnam survivor](2023-09-14-vietnam-survivor.html)
-- [Bloguru](2023-09-23-bloguru.html)
 - [Unrelated engineer](2023-10-02-unrelated.html)
 - [Debounce](2023-12-16-debounce.html)
 - [Backend Thinking](2024-01-20-backend-thinking.html)
