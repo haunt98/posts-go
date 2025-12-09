@@ -71,13 +71,14 @@
       called anyway.
     </p>
     <p>My buggy code is like this:</p>
-    <pre lang="go"><code>if err := doA(ctx); err != nil {
-    log.Error(err)
-    // Skip error
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span>); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
+    <span class="pl-s1">log</span>.<span class="pl-c1">Error</span>(<span class="pl-s1">err</span>)
+    <span class="pl-c">// Skip error</span>
 }
 
-doB(ctx)
-</code></pre>
+<span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span>)</pre>
+    </div>
     <p>
       The problem is <code>doA</code> taking too long, so <code>ctx</code> is
       canceled, and the parent of <code>ctx</code> is canceled too. So when
@@ -91,42 +92,46 @@ doB(ctx)
         >The Go Playground</a
       >):
     </p>
-    <pre lang="go"><code>func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
-	defer cancel()
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">func</span> <span class="pl-s1">main</span>() {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">cancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">context</span>.<span class="pl-c1">Background</span>(), <span class="pl-c1">2</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">cancel</span>()
 
-	doA(ctx)
-	doB(ctx)
+	<span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span>)
+	<span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span>)
 }
 
-func doA(ctx context.Context) {
-	ctx, ctxCancel := context.WithTimeout(ctx, 1*time.Second)
-	defer ctxCancel()
+<span class="pl-k">func</span> <span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">ctxCancel</span>()
 
-	select {
-	case &lt;-time.After(2 * time.Second):
-		fmt.Println("doA")
-	case &lt;-ctx.Done():
-		fmt.Println("doA", ctx.Err())
+	<span class="pl-k">select</span> {
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-c1">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doA"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-c1">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doA"</span>, <span class="pl-s1">ctx</span>.<span class="pl-c1">Err</span>())
 	}
 }
 
-func doB(ctx context.Context) {
-	ctx, ctxCancel := context.WithTimeout(ctx, 3*time.Second)
-	defer ctxCancel()
+<span class="pl-k">func</span> <span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">3</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">ctxCancel</span>()
 
-	select {
-	case &lt;-time.After(2 * time.Second):
-		fmt.Println("doB")
-	case &lt;-ctx.Done():
-		fmt.Println("doB", ctx.Err())
+	<span class="pl-k">select</span> {
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-c1">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doB"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-c1">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doB"</span>, <span class="pl-s1">ctx</span>.<span class="pl-c1">Err</span>())
 	}
-}
-</code></pre>
+}</pre>
+    </div>
     <p>The output is:</p>
-    <pre lang="txt"><code>doA context deadline exceeded
-doB context deadline exceeded
-</code></pre>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+doA context deadline exceeded
+doB context deadline exceeded</pre
+      >
+    </div>
     <p>As you see both <code>doA</code> and <code>doB</code> are canceled.</p>
     <div class="markdown-heading">
       <h2 class="heading-element">The (temporary) solution</h2>
@@ -170,38 +175,37 @@ doB context deadline exceeded
         >workaround code</a
       >:
     </p>
-    <pre
-      lang="go"
-    ><code>func DisconnectContext(parent context.Context) context.Context {
-	if parent == nil {
-		return context.Background()
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">func</span> <span class="pl-s1">DisconnectContext</span>(<span class="pl-s1">parent</span> context.<span class="pl-smi">Context</span>) context.<span class="pl-smi">Context</span> {
+	<span class="pl-k">if</span> <span class="pl-s1">parent</span> <span class="pl-c1">==</span> <span class="pl-c1">nil</span> {
+		<span class="pl-k">return</span> <span class="pl-s1">context</span>.<span class="pl-c1">Background</span>()
 	}
 
-	return disconnectedContext{
-		parent: parent,
+	<span class="pl-k">return</span> <span class="pl-smi">disconnectedContext</span>{
+		<span class="pl-s1">parent</span>: <span class="pl-s1">parent</span>,
 	}
 }
 
-type disconnectedContext struct {
-	parent context.Context
+<span class="pl-k">type</span> <span class="pl-smi">disconnectedContext</span> <span class="pl-k">struct</span> {
+	<span class="pl-c1">parent</span> context.<span class="pl-smi">Context</span>
 }
 
-func (ctx disconnectedContext) Deadline() (deadline time.Time, ok bool) {
-	return
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-c1">Deadline</span>() (<span class="pl-s1">deadline</span> time.<span class="pl-smi">Time</span>, <span class="pl-s1">ok</span> <span class="pl-smi">bool</span>) {
+	<span class="pl-k">return</span>
 }
 
-func (ctx disconnectedContext) Done() &lt;-chan struct{} {
-	return nil
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-c1">Done</span>() <span class="pl-c1">&lt;-</span><span class="pl-k">chan</span> <span class="pl-k">struct</span>{} {
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 }
 
-func (ctx disconnectedContext) Err() error {
-	return nil
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-c1">Err</span>() <span class="pl-smi">error</span> {
+	<span class="pl-k">return</span> <span class="pl-c1">nil</span>
 }
 
-func (ctx disconnectedContext) Value(key any) any {
-	return ctx.parent.Value(key)
-}
-</code></pre>
+<span class="pl-k">func</span> (<span class="pl-s1">ctx</span> <span class="pl-smi">disconnectedContext</span>) <span class="pl-c1">Value</span>(<span class="pl-s1">key</span> <span class="pl-smi">any</span>) <span class="pl-smi">any</span> {
+	<span class="pl-k">return</span> <span class="pl-s1">ctx</span>.<span class="pl-c1">parent</span>.<span class="pl-c1">Value</span>(<span class="pl-s1">key</span>)
+}</pre>
+    </div>
     <p>
       So the buggy code becomes (<a
         href="https://go.dev/play/p/oIU-WxEJ_F3"
@@ -209,41 +213,45 @@ func (ctx disconnectedContext) Value(key any) any {
         >The Go Playground</a
       >):
     </p>
-    <pre lang="go"><code>func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
-	defer cancel()
-	doA(ctx)
-	doB(ctx)
+    <div class="highlight highlight-source-go">
+      <pre><span class="pl-k">func</span> <span class="pl-s1">main</span>() {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">cancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">context</span>.<span class="pl-c1">Background</span>(), <span class="pl-c1">2</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">cancel</span>()
+	<span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span>)
+	<span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span>)
 }
 
-func doA(ctx context.Context) {
-	ctx, ctxCancel := context.WithTimeout(ctx, 1*time.Second)
-	defer ctxCancel()
+<span class="pl-k">func</span> <span class="pl-s1">doA</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">ctx</span>, <span class="pl-c1">1</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">ctxCancel</span>()
 
-	select {
-	case &lt;-time.After(2 * time.Second):
-		fmt.Println("doA")
-	case &lt;-ctx.Done():
-		fmt.Println("doA", ctx.Err())
+	<span class="pl-k">select</span> {
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-c1">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doA"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-c1">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doA"</span>, <span class="pl-s1">ctx</span>.<span class="pl-c1">Err</span>())
 	}
 }
 
-func doB(ctx context.Context) {
-	ctx, ctxCancel := context.WithTimeout(DisconnectContext(ctx), 3*time.Second)
-	defer ctxCancel()
+<span class="pl-k">func</span> <span class="pl-s1">doB</span>(<span class="pl-s1">ctx</span> context.<span class="pl-smi">Context</span>) {
+	<span class="pl-s1">ctx</span>, <span class="pl-s1">ctxCancel</span> <span class="pl-c1">:=</span> <span class="pl-s1">context</span>.<span class="pl-c1">WithTimeout</span>(<span class="pl-s1">DisconnectContext</span>(<span class="pl-s1">ctx</span>), <span class="pl-c1">3</span><span class="pl-c1">*</span><span class="pl-s1">time</span>.<span class="pl-c1">Second</span>)
+	<span class="pl-k">defer</span> <span class="pl-s1">ctxCancel</span>()
 
-	select {
-	case &lt;-time.After(2 * time.Second):
-		fmt.Println("doB")
-	case &lt;-ctx.Done():
-		fmt.Println("doB", ctx.Err())
+	<span class="pl-k">select</span> {
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">time</span>.<span class="pl-c1">After</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">time</span>.<span class="pl-c1">Second</span>):
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doB"</span>)
+	<span class="pl-k">case</span> <span class="pl-c1">&lt;-</span><span class="pl-s1">ctx</span>.<span class="pl-c1">Done</span>():
+		<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s">"doB"</span>, <span class="pl-s1">ctx</span>.<span class="pl-c1">Err</span>())
 	}
-}
-</code></pre>
+}</pre>
+    </div>
     <p>The output is:</p>
-    <pre lang="txt"><code>doA context deadline exceeded
-doB
-</code></pre>
+    <div class="highlight highlight-text-adblock">
+      <pre>
+doA context deadline exceeded
+doB</pre
+      >
+    </div>
     <p>
       As you see only <code>doA</code> is canceled, <code>doB</code> is done
       perfectly. And that what we want in this case.
