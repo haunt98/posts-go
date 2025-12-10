@@ -401,6 +401,7 @@ go clean -cache -testcache -modcache -fuzzcache -x
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
 - [Common Go Mistakes](https://100go.co/)
 - [Go Practical Tips](https://github.com/func25/go-practical-tips)
+- [TigerStyle](https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md)
 
 - [Three bugs in the Go MySQL Driver](https://github.blog/2020-05-20-three-bugs-in-the-go-mysql-driver/)
 - [Fixing Memory Exhaustion Bugs in My Golang Web App](https://mtlynch.io/notes/picoshare-perf/)
