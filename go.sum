@@ -7,12 +7,12 @@ github.com/google/go-github/v80 v80.0.0 h1:BTyk3QOHekrk5VF+jIGz1TNEsmeoQG9K/UWaa
 github.com/google/go-github/v80 v80.0.0/go.mod h1:pRo4AIMdHW83HNMGfNysgSAv0vmu+/pkY8nZO9FT9Yo=
 github.com/google/go-querystring v1.1.0 h1:AnCroh3fv4ZBgVIf1Iwtovgjaw/GiKJo8M8yD/fhyJ8=
 github.com/google/go-querystring v1.1.0/go.mod h1:Kcdr2DB4koayq7X8pmAG4sNG59So17icRSOU623lUBU=
-github.com/make-go-great/netrc-go v0.0.2 h1:+slj+cMcNL+W/xbHvLPJ8DyTrjcfzQt7bYWZtNV+Isg=
-github.com/make-go-great/netrc-go v0.0.2/go.mod h1:fwFh8yeVT+d88SzIyH+0dWyfgcba8SUchzFuQXlhwws=
+github.com/make-go-great/netrc-go v0.0.3 h1:K6QtXxkvboZqVTsNmzEAv3f6RYUFw8vjxa9rB6DI10g=
+github.com/make-go-great/netrc-go v0.0.3/go.mod h1:NOuPJzMZItYlVgmmUH7XCBUfbe40JKhDZHM7wDCeSXQ=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
-github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
+github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
+github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 golang.org/x/oauth2 v0.34.0 h1:hqK/t4AKgbqWkdkcAeI8XLmbK+4m4G5YeQRrmiotGlw=
 golang.org/x/oauth2 v0.34.0/go.mod h1:lzm5WQJQwKZ3nwavOZ3IS5Aulzxi68dUSgRHujetwEA=
 golang.org/x/sync v0.19.0 h1:vV+1eWNmZ5geRlYjzm2adRgW2/mcpevXNg50YZtPCE4=
