@@ -49,29 +49,20 @@
       ></a>
     </div>
     <p>
-      Previously in my fresher software developer time, I rarely write SQL, I
-      always use ORM to wrap SQL. But time past and too much abstraction bites
-      me. So I decide to only write SQL from now as much as possible, no more
-      ORM for me. But if there is any cool ORM for Go, I guess I try.
-    </p>
-    <p>
       This guide is not kind of guide which cover all cases. Just my little
       tricks when I work with SQL.
     </p>
     <div class="markdown-heading">
-      <h2 class="heading-element">Stay away from database unique id</h2>
+      <h2 class="heading-element">Stay away from database auto increment</h2>
       <a
-        id="user-content-stay-away-from-database-unique-id"
+        id="user-content-stay-away-from-database-auto-increment"
         class="anchor"
-        aria-label="Permalink: Stay away from database unique id"
-        href="#stay-away-from-database-unique-id"
+        aria-label="Permalink: Stay away from database auto increment"
+        href="#stay-away-from-database-auto-increment"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>
-      Use UUID instead. If you can, and you should, choose UUID type which can
-      be sortable.
-    </p>
+    <p>Use UUIDv7 (sortable) instead of UUIDv4 (completely random).</p>
     <div class="markdown-heading">
       <h2 class="heading-element">Stay away from database timestamp</h2>
       <a
@@ -96,7 +87,7 @@
     <p>It looks like this:</p>
     <div class="highlight highlight-text-adblock">
       <pre>
-[Go] time.Time -&gt; convert to unix timestamp seconds/milliseconds -&gt; [Database] int64</pre
+[Go] time.Time -&gt; convert to unix timestamp milliseconds -&gt; [Database] int64</pre
       >
     </div>
     <div class="markdown-heading">
@@ -247,6 +238,10 @@
 ) ENGINE <span class="pl-k">=</span> InnoDB
   DEFAULT CHARSET <span class="pl-k">=</span> utf8mb4;</pre>
     </div>
+    <p>
+      Be careful if you edit/cut string before saving to database. If string
+      contains emoji and you split that emoji then it gets ugly real quick.
+    </p>
     <div class="markdown-heading">
       <h2 class="heading-element">Be careful with NULL</h2>
       <a
@@ -295,7 +290,6 @@
       and make sure size of value will never hit the limit. Prefer
       <code>TEXT</code> if you don't care, just want to store something.
     </p>
-    <p>If you need to store UUID, use <code>VARCHAR(255)</code>.</p>
     <div class="markdown-heading">
       <h2 class="heading-element"><code>LIMIT</code></h2>
       <a
