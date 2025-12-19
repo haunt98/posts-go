@@ -63,7 +63,6 @@
 
 <span class="pl-k">COPY</span> go.mod .
 <span class="pl-k">COPY</span> go.sum .
-<span class="pl-k">COPY</span> vendor .
 <span class="pl-k">COPY</span> . .
 
 <span class="pl-k">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags=<span class="pl-s">"-s -w"</span> .
@@ -120,7 +119,6 @@
 
 <span class="pl-k">COPY</span> go.mod .
 <span class="pl-k">COPY</span> go.sum .
-<span class="pl-k">COPY</span> vendor .
 <span class="pl-k">COPY</span> . .</pre>
     </div>
     <p>
@@ -130,8 +128,6 @@
     <p>
       The 4 <code>COPY</code> lines are familiar if you use Go enough. First is
       <code>go.mod</code> and <code>go.sum</code> because it defines Go modules.
-      The second is <code>vendor</code>, this is optional but I use it because I
-      don't want each time I build Dockerfile, I need to redownload Go modules.
     </p>
     <div class="highlight highlight-source-dockerfile">
       <pre><span class="pl-k">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags=<span class="pl-s">"-s -w"</span> .</pre>
@@ -163,7 +159,7 @@
       <li><code>-trimpath</code> to support reproduce build.</li>
       <li><code>-ldflags="-s -w"</code> to strip debugging information.</li>
     </ul>
-    <p>Also there are some experiment:</p>
+    <p>Some more tricks:</p>
     <ul>
       <li><code>GOMEMLIMIT=1024MiB</code>: soft memory limit.</li>
     </ul>

@@ -14,7 +14,6 @@ WORKDIR /build
 
 COPY go.mod .
 COPY go.sum .
-COPY vendor .
 COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags="-s -w" .
@@ -54,15 +53,12 @@ WORKDIR /build
 
 COPY go.mod .
 COPY go.sum .
-COPY vendor .
 COPY . .
 ```
 
 I use `/build` to emphasize that I am building something in that directory.
 
-The 4 `COPY` lines are familiar if you use Go enough. First is `go.mod` and `go.sum` because it defines Go modules. The
-second is `vendor`, this is optional but I use it because I don't want each time I build Dockerfile, I need to
-redownload Go modules.
+The 4 `COPY` lines are familiar if you use Go enough. First is `go.mod` and `go.sum` because it defines Go modules.
 
 ```Dockerfile
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags timetzdata -trimpath -ldflags="-s -w" .
@@ -79,7 +75,7 @@ This is where I build Go program.
 - `-trimpath` to support reproduce build.
 - `-ldflags="-s -w"` to strip debugging information.
 
-Also there are some experiment:
+Some more tricks:
 
 - `GOMEMLIMIT=1024MiB`: soft memory limit.
 
