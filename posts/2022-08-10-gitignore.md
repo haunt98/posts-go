@@ -25,12 +25,12 @@ My quick check for `.gitignore`.
 # Test coverage
 coverage.out
 
-# Should ignore vendor
 vendor
 ```
 
 ## Python
 
 ```txt
+.venv
 venv
 ```
