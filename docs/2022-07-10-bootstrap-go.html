@@ -138,28 +138,6 @@ internal/
       </li>
     </ul>
     <div class="markdown-heading">
-      <h2 class="heading-element">Do not repeat!</h2>
-      <a
-        id="user-content-do-not-repeat"
-        class="anchor"
-        aria-label="Permalink: Do not repeat!"
-        href="#do-not-repeat"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>If we have too many services, some of the logic will be overlapped.</p>
-    <p>
-      For example, service A and service B both need to make POST call API to
-      service C. If service A and service B both have libs to call service C to
-      do that API, we need to move the libs to some common pkg libs. So in the
-      future, service D which needs to call C will not need to copy libs to
-      handle service C api but only need to import from common pkg libs.
-    </p>
-    <p>
-      Another bad practice is adapter service. No need to write a new service if
-      what we need is just common pkg libs.
-    </p>
-    <div class="markdown-heading">
       <h2 class="heading-element">Good taste</h2>
       <a
         id="user-content-good-taste"
@@ -185,8 +163,9 @@ internal/
     </p>
     <p>Why?</p>
     <ul>
-      <li>Can not write unit test.</li>
-      <li>Is not thread safe.</li>
+      <li>Can be edited on runtime</li>
+      <li>Not thread safe</li>
+      <li>Can not write unit test</li>
     </ul>
     <div class="markdown-heading">
       <h3 class="heading-element">Avoid unsigned type</h3>
@@ -205,22 +184,16 @@ internal/
     </p>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        Use functional options, but don't overuse it!
+        Use functional options to init complex struct
       </h3>
       <a
-        id="user-content-use-functional-options-but-dont-overuse-it"
+        id="user-content-use-functional-options-to-init-complex-struct"
         class="anchor"
-        aria-label="Permalink: Use functional options, but don't overuse it!"
-        href="#use-functional-options-but-dont-overuse-it"
+        aria-label="Permalink: Use functional options to init complex struct"
+        href="#use-functional-options-to-init-complex-struct"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>
-      For simple struct with 1 or 2 fields, no need to use functional options.
-    </p>
-    <p>
-      <a href="https://go.dev/play/p/0XnOLiHuoz3" rel="nofollow">Example</a>:
-    </p>
     <div class="highlight highlight-source-go">
       <pre><span class="pl-k">func</span> <span class="pl-s1">main</span>() {
 	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-s1">NewS</span>(<span class="pl-s1">WithA</span>(<span class="pl-c1">1</span>), <span class="pl-s1">WithB</span>(<span class="pl-s">"b"</span>))
@@ -262,15 +235,18 @@ internal/
     <div class="markdown-heading">
       <h3 class="heading-element">
         Use
+        <a href="https://pkg.go.dev/sync#WaitGroup" rel="nofollow"
+          >sync.WaitGroup</a
+        >,
         <a href="https://pkg.go.dev/golang.org/x/sync/errgroup" rel="nofollow"
           >errgroup</a
         >
       </h3>
       <a
-        id="user-content-use-errgroup"
+        id="user-content-use-syncwaitgroup-errgroup"
         class="anchor"
-        aria-label="Permalink: Use errgroup"
-        href="#use-errgroup"
+        aria-label="Permalink: Use sync.WaitGroup, errgroup"
+        href="#use-syncwaitgroup-errgroup"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -279,13 +255,9 @@ internal/
       other. We can fire them parallel :)
     </p>
     <p>
-      Personally, I prefer <code>errgroup</code> to <code>WaitGroup</code> (<a
-        href="https://pkg.go.dev/sync#WaitGroup"
-        rel="nofollow"
-        >https://pkg.go.dev/sync#WaitGroup</a
-      >). Because I always need deal with error. Be super careful with
-      <code>egCtx</code>, should use this instead of parent
-      <code>ctx</code> inside <code>eg.Go</code>.
+      Use <code>errgroup</code> if you need to cancel all tasks if first error
+      is caught. Be super careful with <code>egCtx</code>, should use this
+      instead of parent <code>ctx</code> inside <code>eg.Go</code>.
     </p>
     <p>Example:</p>
     <div class="highlight highlight-source-go">
@@ -305,62 +277,6 @@ internal/
 	<span class="pl-c">// Handle error</span>
 }</pre>
     </div>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
-        Use
-        <a
-          href="https://pkg.go.dev/golang.org/x/sync/singleflight"
-          rel="nofollow"
-          >singleflight</a
-        >
-      </h3>
-      <a
-        id="user-content-use-singleflight"
-        class="anchor"
-        aria-label="Permalink: Use singleflight"
-        href="#use-singleflight"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>
-      Imagine you need to get weather data then return for your user, but many
-      users request weather of same location at the same time, so your service
-      spam weather service with 4 requests. With <code>singleflight</code> you
-      can reduce to just 1 request. Remember to choose <code>key</code> wisely.
-    </p>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
-        Use
-        <a href="https://pkg.go.dev/golang.org/x/sync/semaphore" rel="nofollow"
-          >semaphore</a
-        >
-      </h3>
-      <a
-        id="user-content-use-semaphore"
-        class="anchor"
-        aria-label="Permalink: Use semaphore"
-        href="#use-semaphore"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>... when need to implement WorkerPool</p>
-    <p>
-      Please don't use external libs for WorkerPool, I don't want to deal with
-      dependency hell.
-    </p>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
-        Use <a href="https://pkg.go.dev/sync#Pool" rel="nofollow">sync.Pool</a>
-      </h3>
-      <a
-        id="user-content-use-syncpool"
-        class="anchor"
-        aria-label="Permalink: Use sync.Pool"
-        href="#use-syncpool"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>... when need to re-use object, mainly for <code>bytes.Buffer</code></p>
     <div class="markdown-heading">
       <h3 class="heading-element">
         <a href="https://go.dev/doc/tutorial/generics" rel="nofollow"
@@ -394,15 +310,27 @@ internal/
 }</pre>
     </div>
     <div class="markdown-heading">
-      <h3 class="heading-element">As go evolves, things should change</h3>
+      <h3 class="heading-element">Modernize style</h3>
       <a
-        id="user-content-as-go-evolves-things-should-change"
+        id="user-content-modernize-style"
         class="anchor"
-        aria-label="Permalink: As go evolves, things should change"
-        href="#as-go-evolves-things-should-change"
+        aria-label="Permalink: Modernize style"
+        href="#modernize-style"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
+    <p>Sync go 1.26:</p>
+    <ul>
+      <li>Use <code>a := new(1)</code></li>
+    </ul>
+    <p>Sync go 1.24:</p>
+    <ul>
+      <li>Use <code>os.Root</code> instead of <code>os.Open</code></li>
+    </ul>
+    <p>Sync go 1.22:</p>
+    <ul>
+      <li>Use <code>cmp.Or</code> as fallback mechanism</li>
+    </ul>
     <p>Since go 1.21:</p>
     <ul>
       <li>
@@ -428,8 +356,11 @@ internal/
         rel="nofollow"
         >gopls/modernize</a
       >
-      to automatically simplify code.
+      to modernize code.
     </p>
+    <div class="highlight highlight-source-shell">
+      <pre>modernize -fix -test ./...</pre>
+    </div>
     <div class="markdown-heading">
       <h2 class="heading-element">External libs</h2>
       <a
@@ -441,94 +372,48 @@ internal/
       ></a>
     </div>
     <div class="markdown-heading">
-      <h3 class="heading-element">No need <code>vendor</code></h3>
+      <h3 class="heading-element">No need <code>go mod vendor</code></h3>
       <a
-        id="user-content-no-need-vendor"
+        id="user-content-no-need-go-mod-vendor"
         class="anchor"
-        aria-label="Permalink: No need vendor"
-        href="#no-need-vendor"
+        aria-label="Permalink: No need go mod vendor"
+        href="#no-need-go-mod-vendor"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>
-      Only need if you need something from <code>vendor</code>, to generate mock
-      or something else.
-    </p>
-    <div class="markdown-heading">
-      <h3 class="heading-element">Don't use cli libs</h3>
-      <a
-        id="user-content-dont-use-cli-libs"
-        class="anchor"
-        aria-label="Permalink: Don't use cli libs"
-        href="#dont-use-cli-libs"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>
-      ... <a href="https://github.com/spf13/cobra">spf13/cobra</a>,
-      <a href="https://github.com/urfave/cli">urfave/cli</a>), ... just to start
-      service.
-    </p>
-    <p>
-      What is the point to pass many params (<code>do-it</code>,
-      <code>--abc</code>, <code>--xyz</code>) if services read config from env,
-      files like
-      <a href="https://12factor.net/" rel="nofollow">The Twelve Factors</a>
-      guide.
-    </p>
+    <p>Save storage space.</p>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        Don't use
-        <a href="https://github.com/grpc-ecosystem/grpc-gateway"
-          >grpc-ecosystem/grpc-gateway</a
-        >
+        Use <a href="https://github.com/bufbuild/buf">bufbuild/buf</a> for proto
+        related
       </h3>
       <a
-        id="user-content-dont-use-grpc-ecosystemgrpc-gateway"
+        id="user-content-use-bufbuildbuf-for-proto-related"
         class="anchor"
-        aria-label="Permalink: Don't use grpc-ecosystem/grpc-gateway"
-        href="#dont-use-grpc-ecosystemgrpc-gateway"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Just don't.</p>
-    <p>
-      Use
-      <a href="https://github.com/protocolbuffers/protobuf-go"
-        >protocolbuffers/protobuf-go</a
-      >, <a href="https://github.com/grpc/grpc-go">grpc/grpc-go</a> for gRPC.
-    </p>
-    <p>
-      Write 1 for both gRPC, REST sounds good, but in the end, it is not worth
-      it.
-    </p>
-    <div class="markdown-heading">
-      <h3 class="heading-element">
-        Don't use
-        <a href="https://github.com/uber/prototool">uber/prototool</a>, use
-        <a href="https://github.com/bufbuild/buf">bufbuild/buf</a>
-      </h3>
-      <a
-        id="user-content-dont-use-uberprototool-use-bufbuildbuf"
-        class="anchor"
-        aria-label="Permalink: Don't use uber/prototool, use bufbuild/buf"
-        href="#dont-use-uberprototool-use-bufbuildbuf"
+        aria-label="Permalink: Use bufbuild/buf for proto related"
+        href="#use-bufbuildbuf-for-proto-related"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
     <p>
-      prototool is deprecated, and buf can generate, lint, format as good as
-      prototool.
+      Please don't use
+      <a href="https://github.com/grpc-ecosystem/grpc-gateway"
+        >grpc-ecosystem/grpc-gateway</a
+      >:
     </p>
+    <ul>
+      <li>Can not upload files</li>
+    </ul>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        REST with <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a>
+        Use <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a> for
+        HTTP framework
       </h3>
       <a
-        id="user-content-rest-with-gin-gonicgin"
+        id="user-content-use-gin-gonicgin-for-http-framework"
         class="anchor"
-        aria-label="Permalink: REST with gin-gonic/gin"
-        href="#rest-with-gin-gonicgin"
+        aria-label="Permalink: Use gin-gonic/gin for HTTP framework"
+        href="#use-gin-gonicgin-for-http-framework"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -547,7 +432,7 @@ internal/
     <div class="highlight highlight-source-go">
       <pre><span class="pl-k">defer</span> <span class="pl-k">func</span>() {
     <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">c</span>.<span class="pl-c1">Request</span>.<span class="pl-c1">MultipartForm</span>.<span class="pl-c1">RemoveAll</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
-        <span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">err</span>)
+        <span class="pl-c">// Handle error</span>
     }
 }()</pre>
     </div>
@@ -573,10 +458,6 @@ internal/
     <p>It is fast!</p>
     <ul>
       <li>
-        Don't overuse <code>func (*Logger) With</code>. Because if log line is
-        too long, there is a possibility that we can lost it.
-      </li>
-      <li>
         Use <code>MarshalLogObject</code> when we need to hide some field of
         object when log (field is long or has sensitive value)
       </li>
@@ -587,8 +468,8 @@ internal/
       </li>
       <li>If doubt, use <code>zap.Any</code>.</li>
       <li>
-        Use <code>context_id</code> or <code>trace_id</code> in every log lines
-        for easily debug.
+        Add some kind of <code>trace_id</code> in every log lines for easily
+        debug.
       </li>
     </ul>
     <div class="markdown-heading">
@@ -618,36 +499,18 @@ internal/
       or stop the service if there is empty config.
     </p>
     <div class="markdown-heading">
-      <h3 class="heading-element">Don't overuse ORM libs</h3>
+      <h3 class="heading-element">
+        Connect database with
+        <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a>
+      </h3>
       <a
-        id="user-content-dont-overuse-orm-libs"
+        id="user-content-connect-database-with-go-gormgorm"
         class="anchor"
-        aria-label="Permalink: Don't overuse ORM libs"
-        href="#dont-overuse-orm-libs"
+        aria-label="Permalink: Connect database with go-gorm/gorm"
+        href="#connect-database-with-go-gormgorm"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>... no need to handle another layer above SQL.</p>
-    <p>
-      Each ORM libs has each different syntax. To learn and use those libs
-      correctly is time consuming. So just stick to plain SQL. It is easier to
-      debug when something is wrong.
-    </p>
-    <p>
-      Also please use
-      <a href="https://go.dev/doc/database/prepared-statements" rel="nofollow"
-        >prepared statement</a
-      >
-      as much as possible. Ideally, we should init all prepared statement when
-      we init database connection to cached it, not create it every time we need
-      it.
-    </p>
-    <p>
-      But <code>database/sql</code> has its own limit. For example, it is hard
-      to get primary key after insert/update. So may be you want to use ORM for
-      those cases, <a href="https://github.com/go-gorm/gorm">go-gorm/gorm</a> is
-      good.
-    </p>
     <p>
       Make sure to test your code (ORM or not) with
       <a href="https://github.com/DATA-DOG/go-sqlmock">DATA-DOG/go-sqlmock</a>.
@@ -667,8 +530,9 @@ internal/
     </div>
     <p>
       Be careful when use
-      <a href="https://redis.io/commands/hgetall/" rel="nofollow">HGETALL</a>.
-      If key not found, empty data will be returned not nil error. See
+      <a href="https://redis.io/docs/latest/commands/hgetall//" rel="nofollow"
+        >HGETALL</a
+      >. If key not found, empty data will be returned not nil error. See
       <a href="https://github.com/redis/go-redis/issues/1668"
         >redis/go-redis/issues/1668</a
       >
@@ -683,13 +547,10 @@ internal/
       for:
     </p>
     <ul>
-      <li>HSET and EXPIRE in 1 command.</li>
-      <li>Multiple GET in 1 command.</li>
+      <li>HSET and EXPIRE in 1 command</li>
     </ul>
     <p>
       Prefer to use <code>Pipelined</code> instead of <code>Pipeline</code>.
-      Inside <code>Pipelined</code>, please return <code>redis.Cmder</code> for
-      each command.
     </p>
     <p>Example:</p>
     <div class="highlight highlight-source-go">
@@ -766,10 +627,6 @@ internal/
       ></a>
     </div>
     <p>
-      Use <code>sarama.V1_0_0_0</code>, because IBM decide to upgrade default
-      version.
-    </p>
-    <p>
       Don't use
       <a href="https://github.com/confluentinc/confluent-kafka-go"
         >confluentinc/confluent-kafka-go</a
@@ -778,12 +635,12 @@ internal/
     <div class="markdown-heading">
       <h3 class="heading-element">
         Test with
-        <a href="https://github.com/stretchr/testify">stretchr/testify</a>.
+        <a href="https://github.com/stretchr/testify">stretchr/testify</a>
       </h3>
       <a
         id="user-content-test-with-stretchrtestify"
         class="anchor"
-        aria-label="Permalink: Test with stretchr/testify."
+        aria-label="Permalink: Test with stretchr/testify"
         href="#test-with-stretchrtestify"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
@@ -817,18 +674,21 @@ internal/
     </div>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        Replace <code>go fmt</code>, <code>goimports</code> with
+        Replace <code>go fmt</code> with
         <a href="https://github.com/mvdan/gofumpt">mvdan/gofumpt</a>
       </h3>
       <a
-        id="user-content-replace-go-fmt-goimports-with-mvdangofumpt"
+        id="user-content-replace-go-fmt-with-mvdangofumpt"
         class="anchor"
-        aria-label="Permalink: Replace go fmt, goimports with mvdan/gofumpt"
-        href="#replace-go-fmt-goimports-with-mvdangofumpt"
+        aria-label="Permalink: Replace go fmt with mvdan/gofumpt"
+        href="#replace-go-fmt-with-mvdangofumpt"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p><code>gofumpt</code> provides more rules when format Go codes.</p>
+    <p><code>gofumpt</code> provides more strict rules when format Go codes.</p>
+    <div class="highlight highlight-source-shell">
+      <pre>gofumpt -w -extra <span class="pl-c1">.</span></pre>
+    </div>
     <div class="markdown-heading">
       <h3 class="heading-element">
         Use
@@ -849,13 +709,16 @@ internal/
       My heuristic for fieldalignment (not work all the time): pointer -&gt;
       string -&gt; []byte -&gt; int64 -&gt; int32.
     </p>
+    <div class="highlight highlight-source-shell">
+      <pre>golangci-lint run --fix --no-config ./...</pre>
+    </div>
     <div class="markdown-heading">
-      <h2 class="heading-element">Snippets/scripts</h2>
+      <h2 class="heading-element">Scripts</h2>
       <a
-        id="user-content-snippetsscripts"
+        id="user-content-scripts"
         class="anchor"
-        aria-label="Permalink: Snippets/scripts"
-        href="#snippetsscripts"
+        aria-label="Permalink: Scripts"
+        href="#scripts"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>

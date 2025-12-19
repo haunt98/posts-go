@@ -46,16 +46,6 @@ Location:
 - `handler` must exist inside `grpc`, `http`, `consumer`.
 - `service`, `repository` can exist directly inside of `internal` if both `grpc`, `http`, `consumer` has same logic.
 
-## Do not repeat!
-
-If we have too many services, some of the logic will be overlapped.
-
-For example, service A and service B both need to make POST call API to service C. If service A and service B both have
-libs to call service C to do that API, we need to move the libs to some common pkg libs. So in the future, service D
-which needs to call C will not need to copy libs to handle service C api but only need to import from common pkg libs.
-
-Another bad practice is adapter service. No need to write a new service if what we need is just common pkg libs.
-
 ## Good taste
 
 ### Stop using global var
@@ -64,19 +54,16 @@ If I see someone using global var, I swear I will shoot them twice in the face.
 
 Why?
 
-- Can not write unit test.
-- Is not thread safe.
+- Can be edited on runtime
+- Not thread safe
+- Can not write unit test
 
 ### Avoid unsigned type
 
 Just a var can not have negative value, doesn't mean it should use `uint`. Just use `int` and do not care about
 boundary.
 
-### Use functional options, but don't overuse it!
-
-For simple struct with 1 or 2 fields, no need to use functional options.
-
-[Example](https://go.dev/play/p/0XnOLiHuoz3):
+### Use functional options to init complex struct
 
 ```go
 func main() {
@@ -114,12 +101,12 @@ func NewS(opts ...OptionS) *S {
 
 In above example, I construct `s` with `WithA` and `WithB` option. No need to pass direct field inside `s`.
 
-### Use [errgroup](https://pkg.go.dev/golang.org/x/sync/errgroup)
+### Use [sync.WaitGroup](https://pkg.go.dev/sync#WaitGroup), [errgroup](https://pkg.go.dev/golang.org/x/sync/errgroup)
 
 If logic involves calling too many APIs, but they are not depend on each other. We can fire them parallel :)
 
-Personally, I prefer `errgroup` to `WaitGroup` (https://pkg.go.dev/sync#WaitGroup). Because I always need deal with
-error. Be super careful with `egCtx`, should use this instead of parent `ctx` inside `eg.Go`.
+Use `errgroup` if you need to cancel all tasks if first error is caught. Be super careful with `egCtx`, should use this
+instead of parent `ctx` inside `eg.Go`.
 
 Example:
 
@@ -141,22 +128,6 @@ if err := eg.Wait(); err != nil {
 }
 ```
 
-### Use [singleflight](https://pkg.go.dev/golang.org/x/sync/singleflight)
-
-Imagine you need to get weather data then return for your user, but many users request weather of same location at the
-same time, so your service spam weather service with 4 requests. With `singleflight` you can reduce to just 1 request.
-Remember to choose `key` wisely.
-
-### Use [semaphore](https://pkg.go.dev/golang.org/x/sync/semaphore)
-
-... when need to implement WorkerPool
-
-Please don't use external libs for WorkerPool, I don't want to deal with dependency hell.
-
-### Use [sync.Pool](https://pkg.go.dev/sync#Pool)
-
-... when need to re-use object, mainly for `bytes.Buffer`
-
 ### [Generics](https://go.dev/doc/tutorial/generics) with some tricks
 
 Take value then return pointer, useful with database struct full of pointers:
@@ -177,7 +148,19 @@ func Zero[T any]() T {
 }
 ```
 
-### As go evolves, things should change
+### Modernize style
+
+Sync go 1.26:
+
+- Use `a := new(1)`
+
+Sync go 1.24:
+
+- Use `os.Root` instead of `os.Open`
+
+Sync go 1.22:
+
+- Use `cmp.Or` as fallback mechanism
 
 Since go 1.21:
 
@@ -193,37 +176,25 @@ Since go 1.18:
 
 - Use `any` instead of `interface{}`.
 
-Use [gopls/modernize](https://pkg.go.dev/golang.org/x/tools/gopls/internal/analysis/modernize) to automatically simplify
-code.
+Use [gopls/modernize](https://pkg.go.dev/golang.org/x/tools/gopls/internal/analysis/modernize) to modernize code.
+
+```sh
+modernize -fix -test ./...
+```
 
 ## External libs
 
-### No need `vendor`
+### No need `go mod vendor`
 
-Only need if you need something from `vendor`, to generate mock or something else.
+Save storage space.
 
-### Don't use cli libs
+### Use [bufbuild/buf](https://github.com/bufbuild/buf) for proto related
 
-... [spf13/cobra](https://github.com/spf13/cobra), [urfave/cli](https://github.com/urfave/cli)), ... just to start
-service.
+Please don't use [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway):
 
-What is the point to pass many params (`do-it`, `--abc`, `--xyz`) if services read config from env, files like
-[The Twelve Factors](https://12factor.net/) guide.
+- Can not upload files
 
-### Don't use [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
-
-Just don't.
-
-Use [protocolbuffers/protobuf-go](https://github.com/protocolbuffers/protobuf-go),
-[grpc/grpc-go](https://github.com/grpc/grpc-go) for gRPC.
-
-Write 1 for both gRPC, REST sounds good, but in the end, it is not worth it.
-
-### Don't use [uber/prototool](https://github.com/uber/prototool), use [bufbuild/buf](https://github.com/bufbuild/buf)
-
-prototool is deprecated, and buf can generate, lint, format as good as prototool.
-
-### REST with [gin-gonic/gin](https://github.com/gin-gonic/gin)
+### Use [gin-gonic/gin](https://github.com/gin-gonic/gin) for HTTP framework
 
 With `c *gin.Context`:
 
@@ -235,7 +206,7 @@ Remember to free resources after parse multipart form:
 ```go
 defer func() {
     if err := c.Request.MultipartForm.RemoveAll(); err != nil {
-        fmt.Println(err)
+        // Handle error
     }
 }()
 ```
@@ -246,12 +217,11 @@ Combine with [go-playground/validator](https://github.com/go-playground/validato
 
 It is fast!
 
-- Don't overuse `func (*Logger) With`. Because if log line is too long, there is a possibility that we can lost it.
 - Use `MarshalLogObject` when we need to hide some field of object when log (field is long or has sensitive value)
 - Don't use `Panic`. Use `Fatal` for errors when start service to check dependencies. If you really need panic level,
   use `DPanic`.
 - If doubt, use `zap.Any`.
-- Use `context_id` or `trace_id` in every log lines for easily debug.
+- Add some kind of `trace_id` in every log lines for easily debug.
 
 ### Read config with [spf13/viper](https://github.com/spf13/viper)
 
@@ -264,32 +234,20 @@ Why?
 
 Also, be careful if config value is empty. You should decide to continue or stop the service if there is empty config.
 
-### Don't overuse ORM libs
-
-... no need to handle another layer above SQL.
-
-Each ORM libs has each different syntax. To learn and use those libs correctly is time consuming. So just stick to plain
-SQL. It is easier to debug when something is wrong.
-
-Also please use [prepared statement](https://go.dev/doc/database/prepared-statements) as much as possible. Ideally, we
-should init all prepared statement when we init database connection to cached it, not create it every time we need it.
-
-But `database/sql` has its own limit. For example, it is hard to get primary key after insert/update. So may be you want
-to use ORM for those cases, [go-gorm/gorm](https://github.com/go-gorm/gorm) is good.
+### Connect database with [go-gorm/gorm](https://github.com/go-gorm/gorm)
 
 Make sure to test your code (ORM or not) with [DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock).
 
 ### Connect Redis with [redis/go-redis](https://github.com/redis/go-redis)
 
-Be careful when use [HGETALL](https://redis.io/commands/hgetall/). If key not found, empty data will be returned not nil
-error. See [redis/go-redis/issues/1668](https://github.com/redis/go-redis/issues/1668)
+Be careful when use [HGETALL](https://redis.io/docs/latest/commands/hgetall//). If key not found, empty data will be
+returned not nil error. See [redis/go-redis/issues/1668](https://github.com/redis/go-redis/issues/1668)
 
 Use [Pipelines](https://redis.uptrace.dev/guide/go-redis-pipelines.html) for:
 
-- HSET and EXPIRE in 1 command.
-- Multiple GET in 1 command.
+- HSET and EXPIRE in 1 command
 
-Prefer to use `Pipelined` instead of `Pipeline`. Inside `Pipelined`, please return `redis.Cmder` for each command.
+Prefer to use `Pipelined` instead of `Pipeline`.
 
 Example:
 
@@ -345,12 +303,10 @@ Remember to config:
 
 ### Connect Kafka with [IBM/sarama](https://github.com/IBM/sarama)
 
-Use `sarama.V1_0_0_0`, because IBM decide to upgrade default version.
-
 Don't use [confluentinc/confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go), because it's required
 `CGO_ENABLED`.
 
-### Test with [stretchr/testify](https://github.com/stretchr/testify).
+### Test with [stretchr/testify](https://github.com/stretchr/testify)
 
 It is easy to write a suite test, thanks to testify. Also, for mocking, there are many options out there. Pick 1 then
 sleep peacefully.
@@ -368,9 +324,13 @@ Example with `matryer/moq`:
 //go:generate sh -c "test service_mock_generated.go -nt $GOFILE && exit 0; moq -rm -out service_mock_generated.go . Service"
 ```
 
-### Replace `go fmt`, `goimports` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt)
+### Replace `go fmt` with [mvdan/gofumpt](https://github.com/mvdan/gofumpt)
 
-`gofumpt` provides more rules when format Go codes.
+`gofumpt` provides more strict rules when format Go codes.
+
+```sh
+gofumpt -w -extra .
+```
 
 ### Use [golangci/golangci-lint](https://github.com/golangci/golangci-lint)
 
@@ -378,7 +338,11 @@ No need to say more. Lint is the way!
 
 My heuristic for fieldalignment (not work all the time): pointer -> string -> []byte -> int64 -> int32.
 
-## Snippets/scripts
+```sh
+golangci-lint run --fix --no-config ./...
+```
+
+## Scripts
 
 Change import:
 
