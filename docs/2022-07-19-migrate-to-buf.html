@@ -40,24 +40,20 @@
     </h2>
     <div class="markdown-heading">
       <h1 class="heading-element">
-        Migrate to <code>buf</code> from <code>prototool</code>
+        Use <a href="https://github.com/bufbuild/buf">bufbuild/buf</a>
       </h1>
       <a
-        id="user-content-migrate-to-buf-from-prototool"
+        id="user-content-use-bufbuildbuf"
         class="anchor"
-        aria-label="Permalink: Migrate to buf from prototool"
-        href="#migrate-to-buf-from-prototool"
+        aria-label="Permalink: Use bufbuild/buf"
+        href="#use-bufbuildbuf"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>
-      Why? Because <code>prototool</code> is outdated, and can not run on M1
-      mac.
-    </p>
     <p>We need 3 files:</p>
     <ul>
       <li>
-        <code>build.go</code>: need to install some binaries with pin version in
+        <code>build.go</code>: install some binaries with pin version in
         <code>go.mod</code>
       </li>
       <li><code>buf.yaml</code></li>
@@ -66,11 +62,6 @@
     <p>FYI, I use:</p>
     <ul>
       <li>
-        <a href="https://github.com/grpc-ecosystem/grpc-gateway"
-          >grpc-ecosystem/grpc-gateway</a
-        >
-      </li>
-      <li>
         <a href="github.com/bufbuild/protoc-gen-validate"
           >bufbuild/protoc-gen-validate</a
         >
@@ -78,6 +69,11 @@
       <li>
         <a href="github.com/kei2100/protoc-gen-marshal-zap"
           >kei2100/protoc-gen-marshal-zap</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/grpc-ecosystem/grpc-gateway"
+          >grpc-ecosystem/grpc-gateway</a
         >
       </li>
     </ul>
@@ -112,7 +108,7 @@
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">version</span>: <span class="pl-c1">v2</span>
 <span class="pl-ent">deps</span>:
-    - <span class="pl-s">buf.build/envoyproxy/protoc-gen-validate:v1.2.1</span>
+    - <span class="pl-s">buf.build/envoyproxy/protoc-gen-validate:v1.3.0</span>
     - <span class="pl-s">buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418</span>
     - <span class="pl-s">buf.build/haunt98/googleapis</span>
     - <span class="pl-s">buf.build/haunt98/grpc-gateway:v2.27.1</span>
@@ -133,11 +129,11 @@
     <div class="highlight highlight-source-yaml">
       <pre><span class="pl-ent">version</span>: <span class="pl-c1">v2</span>
 <span class="pl-ent">plugins</span>:
-    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/grpc/go:v1.5.1</span>
+    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/grpc/go:v1.6.0</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.36.6</span>
+    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/protocolbuffers/go:v1.36.11</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
-    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.2.1</span>
+    - <span class="pl-ent">remote</span>: <span class="pl-s">buf.build/bufbuild/validate-go:v1.3.0</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
     - <span class="pl-ent">local</span>: <span class="pl-s">protoc-gen-marshal-zap</span>
       <span class="pl-ent">out</span>: <span class="pl-s">pkg</span>
@@ -170,19 +166,16 @@
 	buf format --path ./api -w
 	buf generate --path ./api</pre>
     </div>
-    <p>
-      If using some imports, you better make a raw proto file for other services
-      to integrate:
-    </p>
+    <p>For easily import, you better make a raw version of proto:</p>
     <div class="highlight highlight-source-makefile">
       <pre><span class="pl-en">raw</span>:
-	mkdir -p api/raw
-	cp api/<span class="pl-k">*</span>.proto api/raw/
+	mkdir -p ./api/raw
+	cp ./api/<span class="pl-k">*</span>.proto ./api/raw/
 	<span class="pl-c"><span class="pl-c">#</span> https://github.com/chmln/sd</span>
-	sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
-	sd -F <span class="pl-s"><span class="pl-pds">'</span>import "marshal-zap.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
-	sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[\s*\(.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
-	buf format --path api/raw -w</pre>
+	sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> ./api/raw/<span class="pl-k">*</span>.proto
+	sd -F <span class="pl-s"><span class="pl-pds">'</span>import "marshal-zap.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> ./api/raw/<span class="pl-k">*</span>.proto
+	sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[\s*\(.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> ./api/raw/<span class="pl-k">*</span>.proto
+	buf format --path ./api/raw -w</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">FAQ</h2>
@@ -194,29 +187,7 @@
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>If you use grpc-gateway:</p>
-    <ul>
-      <li>
-        Replace
-        <code>third_party/googleapis/google/api/annotations.proto;</code> with
-        <code>protoc-gen-openapiv2/options/annotations.proto</code>
-      </li>
-      <li>
-        Replace
-        <code>grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger</code>
-        with
-        <code>grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger</code>
-      </li>
-      <li>
-        Delete <code>security_definitions</code>, <code>security</code>, in
-        <code
-          >option
-          (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger)</code
-        >.
-      </li>
-    </ul>
-    <p>The last step is delete <code>prototool.yaml</code>.</p>
-    <p>If you are not migrate but start from scratch:</p>
+    <p>Some extra tips:</p>
     <ul>
       <li>Add <code>buf lint</code> to make sure your proto is good.</li>
       <li>
@@ -240,30 +211,14 @@
     </div>
     <p>Some experience I got after writing proto files for a living:</p>
     <ul>
-      <li>Delete <code>vendor</code></li>
       <li>
-        Ignore DRY (Do not Repeat Yourself) when handling proto, don't split
-        proto into many files, just copy into 1 big proto. Trust me, it saves
-        you from wasting time to debug how to import Go after generated. Because
-        proto import and Go import is
-        <a href="https://github.com/golang/protobuf/issues/895">2</a> different
-        things. If someone already have split proto files, you should use
-        <code>sd</code> to fix the damn things.
+        Don't split proto into many files, just copy into 1 big proto. Trust me,
+        it saves you from wasting time to debug how to import Go after
+        generated. Because proto import and Go import is
+        <a href="https://github.com/golang/protobuf/issues/895"
+          >2 different things</a
+        >. If someone already have split proto files, you should merge yourself.
       </li>
-    </ul>
-    <div class="markdown-heading">
-      <h2 class="heading-element">Thanks</h2>
-      <a
-        id="user-content-thanks"
-        class="anchor"
-        aria-label="Permalink: Thanks"
-        href="#thanks"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <ul>
-      <li><a href="https://github.com/uber/prototool">uber/prototool</a></li>
-      <li><a href="https://github.com/bufbuild/buf">bufbuild/buf</a></li>
     </ul>
 
     <div>
