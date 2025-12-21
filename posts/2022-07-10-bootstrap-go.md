@@ -157,6 +157,7 @@ Sync go 1.26:
 Sync go 1.24:
 
 - Use `os.Root` instead of `os.Open`
+- Use `omitzero` instead of `omitempty`
 
 Sync go 1.22:
 
@@ -358,19 +359,5 @@ go clean -cache -testcache -modcache -fuzzcache -x
 
 ## Thanks
 
-- [Functional options for friendly APIs](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis)
-- [Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully)
-- [Designing Go Libraries: The Talk: The Article](https://abhinavg.net/2022/12/06/designing-go-libraries/)
-- [GopherCon 2023: Future-Proof Go Packages](https://abhinavg.net/2023/09/27/future-proof-packages/)
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
-- [Common Go Mistakes](https://100go.co/)
-- [Go Practical Tips](https://github.com/func25/go-practical-tips)
 - [TigerStyle](https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md)
-
-- [Three bugs in the Go MySQL Driver](https://github.blog/2020-05-20-three-bugs-in-the-go-mysql-driver/)
-- [Fixing Memory Exhaustion Bugs in My Golang Web App](https://mtlynch.io/notes/picoshare-perf/)
-- [Prevent Logging Secrets in Go by Using Custom Types](https://www.commonfate.io/blog/prevent-logging-secrets-in-go-by-using-custom-types)
-- [Speed Up GoMock with Conditional Generation](https://jonwillia.ms/2019/12/22/conditional-gomock-mockgen)
-- [Making SQLite faster in Go](https://turriate.com/articles/making-sqlite-faster-in-go)
-- [Go generic: non-ptr to ptr](https://danielms.site/zet/2023/go-generic-non-ptr-to-ptr/)
-- [Crimes with Go Generics](https://xeiaso.net/blog/gonads-2022-04-24)
