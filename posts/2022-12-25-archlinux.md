@@ -176,16 +176,9 @@ passwd
 #### [NetworkManager](https://wiki.archlinux.org/title/NetworkManager)
 
 ```sh
-pacman -Syu networkmanager iwd
+pacman -Syu networkmanager
 systemctl enable NetworkManager.service
 systemctl enable systemd-resolved.service
-```
-
-Edit `/etc/NetworkManager/conf.d/wifi_backend.conf`:
-
-```txt
-[device]
-wifi.backend=iwd
 ```
 
 Edit `/etc/NetworkManager/conf.d/dns.conf`:

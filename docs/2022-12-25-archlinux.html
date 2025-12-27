@@ -419,14 +419,9 @@ hwclock --systohc</pre>
       ></a>
     </div>
     <div class="highlight highlight-source-shell">
-      <pre>pacman -Syu networkmanager iwd
+      <pre>pacman -Syu networkmanager
 systemctl <span class="pl-c1">enable</span> NetworkManager.service
 systemctl <span class="pl-c1">enable</span> systemd-resolved.service</pre>
-    </div>
-    <p>Edit <code>/etc/NetworkManager/conf.d/wifi_backend.conf</code>:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>[<span class="pl-ii">device</span>]
-wifi.backend=iwd</pre>
     </div>
     <p>Edit <code>/etc/NetworkManager/conf.d/dns.conf</code>:</p>
     <div class="highlight highlight-text-adblock">
