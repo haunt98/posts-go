@@ -550,8 +550,12 @@ rsync -avzP src/ dst</pre>
         in <strong>src</strong>, useful to sync dst with src
       </li>
       <li>
-        <code>-delete-excluded</code>: delete files in <strong>dst</strong> if
+        <code>--delete-excluded</code>: delete files in <strong>dst</strong> if
         match excluded pattern
+      </li>
+      <li>
+        <code>--inplace</code>: update destination file directly instead of
+        creating new copy then move it
       </li>
     </ul>
     <div class="markdown-heading">
