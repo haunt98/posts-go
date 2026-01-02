@@ -301,14 +301,19 @@ pacman -Syu plasma-meta
 pacman -Syu sddm
 ```
 
+#### More
+
+- [Budgie](https://wiki.archlinux.org/title/Budgie)
+- [COSMIC](https://wiki.archlinux.org/title/COSMIC)
+- [Pantheon](https://wiki.archlinux.org/title/Pantheon)
+
 ## [List of applications](https://wiki.archlinux.org/title/List_of_applications)
 
 ### [pacman](https://wiki.archlinux.org/title/Pacman)
 
-Uncomment in `/etc/pacman.conf`:
+Uncomment under `[options]` in `/etc/pacman.conf`:
 
 ```txt
-# Misc options
 Color
 ParallelDownloads
 ```
