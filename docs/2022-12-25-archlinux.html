@@ -60,7 +60,7 @@
     <div class="markdown-heading">
       <h2 class="heading-element">
         <a
-          href="https://wiki.archlinux.org/index.php/Installation_guide"
+          href="https://wiki.archlinux.org/title/Installation_guide"
           rel="nofollow"
           >Installation guide</a
         >
@@ -87,7 +87,7 @@
     <div class="highlight highlight-source-shell"><pre>lsblk</pre></div>
     <p>
       <a
-        href="https://wiki.archlinux.org/index.php/USB_flash_installation_medium"
+        href="https://wiki.archlinux.org/title/USB_flash_installation_medium"
         rel="nofollow"
         >USB flash installation medium</a
       >
@@ -128,7 +128,9 @@
     </div>
     <p>
       For wifi, use
-      <a href="https://wiki.archlinux.org/index.php/Iwd" rel="nofollow">iwd</a>.
+      <a href="https://wiki.archlinux.org/title/Iwd#iwctl" rel="nofollow"
+        >iwd/iwctl</a
+      >.
     </p>
     <div class="markdown-heading">
       <h4 class="heading-element">Partition the disks</h4>
@@ -141,7 +143,7 @@
       ></a>
     </div>
     <p>
-      <a href="https://wiki.archlinux.org/index.php/GPT_fdisk" rel="nofollow"
+      <a href="https://wiki.archlinux.org/title/GPT_fdisk" rel="nofollow"
         >GPT fdisk</a
       >:
     </p>
@@ -151,7 +153,7 @@
     <ul>
       <li>
         <a
-          href="https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme"
+          href="https://wiki.archlinux.org/title/Partitioning#Partition_scheme"
           rel="nofollow"
           >Partition scheme</a
         >
@@ -306,7 +308,7 @@ pacstrap -K /mnt neovim</pre>
     </div>
     <div class="markdown-heading">
       <h4 class="heading-element">
-        <a href="https://wiki.archlinux.org/index.php/Fstab" rel="nofollow"
+        <a href="https://wiki.archlinux.org/title/Fstab" rel="nofollow"
           >fstab</a
         >
       </h4>
@@ -482,7 +484,7 @@ timedatectl status</pre>
     </div>
     <p>
       Use
-      <a href="https://wiki.archlinux.org/index.php/Systemd-boot" rel="nofollow"
+      <a href="https://wiki.archlinux.org/title/Systemd-boot" rel="nofollow"
         >systemd-boot</a
       >
     </p>
@@ -494,7 +496,7 @@ systemctl <span class="pl-c1">enable</span> systemd-boot-update.service</pre>
     </div>
     <p>
       <a
-        href="https://wiki.archlinux.org/index.php/persistent_block_device_naming#by-label"
+        href="https://wiki.archlinux.org/title/Persistent_block_device_naming#by-label"
         rel="nofollow"
         >Label partition</a
       >
@@ -510,17 +512,8 @@ console-mode max</pre
     </div>
     <ul>
       <li>
-        <a
-          href="https://wiki.archlinux.org/index.php/Silent_boot"
-          rel="nofollow"
+        <a href="https://wiki.archlinux.org/title/Silent_boot" rel="nofollow"
           >Silent boot</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://wiki.archlinux.org/title/Improving_performance#Watchdogs"
-          rel="nofollow"
-          >Improving performance/Watchdogs</a
         >
       </li>
       <li>
@@ -565,16 +558,12 @@ initrd /initramfs-linux.img
 <span class="pl-c"># https://wiki.archlinux.org/title/backlight#Kernel_command-line_options</span>
 <span class="pl-c"># acpi_backlight=vendor</span>
 <span class="pl-c">#</span>
-<span class="pl-c"># NVIDIA</span>
-<span class="pl-c"># https://wiki.archlinux.org/title/NVIDIA#DRM_kernel_mode_setting</span>
-<span class="pl-c"># nvidia-drm.modeset=1</span>
-<span class="pl-c">#</span>
 options root="LABEL=ROOT" rw quiet loglevel=3 nowatchdog module_blacklist=iTCO_wdt,sp5100_tco ipv6.disable=1 init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
         <a
-          href="https://wiki.archlinux.org/index.php/General_recommendations"
+          href="https://wiki.archlinux.org/title/General_recommendations"
           rel="nofollow"
           >General recommendations</a
         >
@@ -602,8 +591,7 @@ options root="LABEL=ROOT" rw quiet loglevel=3 nowatchdog module_blacklist=iTCO_w
       ></a>
     </div>
     <p>
-      <a href="https://wiki.archlinux.org/index.php/sudo" rel="nofollow">Sudo</a
-      >:
+      <a href="https://wiki.archlinux.org/title/Sudo" rel="nofollow">Sudo</a>:
     </p>
     <div class="highlight highlight-source-shell">
       <pre>pacman -Syu sudo zsh
@@ -612,16 +600,14 @@ EDITOR=nvim visudo
 <span class="pl-c"><span class="pl-c">#</span> Uncomment group wheel</span>
 
 <span class="pl-c"><span class="pl-c">#</span> Add user if don't want to use systemd-homed</span>
-useradd -m -G wheel -s /usr/bin/zsh joker
+useradd -m -G wheel -s /usr/bin/zsh anon
 
 <span class="pl-c"><span class="pl-c">#</span> Set password</span>
-passwd joker</pre>
+passwd anon</pre>
     </div>
     <ul>
       <li>
-        <a
-          href="https://wiki.archlinux.org/index.php/Systemd-homed"
-          rel="nofollow"
+        <a href="https://wiki.archlinux.org/title/Systemd-homed" rel="nofollow"
           >systemd-homed (optional if no useradd before)</a
         >:
       </li>
@@ -633,7 +619,7 @@ passwd joker</pre>
     </ul>
     <div class="highlight highlight-source-shell">
       <pre>systemctl <span class="pl-c1">enable</span> systemd-homed.service
-homectl create joker --shell=/usr/bin/zsh --member-of=wheel</pre>
+homectl create anon --shell=/usr/bin/zsh --member-of=wheel</pre>
     </div>
     <p>
       <strong>Note</strong>: Can not run <code>homectl</code> when install Arch
@@ -670,7 +656,7 @@ homectl create joker --shell=/usr/bin/zsh --member-of=wheel</pre>
       >
     </p>
     <div class="highlight highlight-source-shell">
-      <pre>pacman -Syu plasma-desktop
+      <pre>pacman -Syu plasma-meta
 
 <span class="pl-c"><span class="pl-c">#</span> Login manager</span>
 pacman -Syu sddm</pre>
@@ -678,7 +664,7 @@ pacman -Syu sddm</pre>
     <div class="markdown-heading">
       <h2 class="heading-element">
         <a
-          href="https://wiki.archlinux.org/index.php/List_of_applications"
+          href="https://wiki.archlinux.org/title/List_of_applications"
           rel="nofollow"
           >List of applications</a
         >
@@ -693,7 +679,7 @@ pacman -Syu sddm</pre>
     </div>
     <div class="markdown-heading">
       <h3 class="heading-element">
-        <a href="https://wiki.archlinux.org/index.php/pacman" rel="nofollow"
+        <a href="https://wiki.archlinux.org/title/Pacman" rel="nofollow"
           >pacman</a
         >
       </h3>
@@ -712,7 +698,9 @@ Color
 ParallelDownloads</pre>
     </div>
     <div class="highlight highlight-source-shell">
-      <pre>systemctl <span class="pl-c1">enable</span> paccache.timer</pre>
+      <pre>sudo pacman -Syu pacman-contrib
+
+systemctl <span class="pl-c1">enable</span> paccache.timer</pre>
     </div>
     <div class="markdown-heading">
       <h3 class="heading-element">
@@ -762,7 +750,7 @@ pacman -Syu pipewire wireplumber \
     <div class="markdown-heading">
       <h2 class="heading-element">
         <a
-          href="https://wiki.archlinux.org/index.php/improving_performance"
+          href="https://wiki.archlinux.org/title/Improving_performance"
           rel="nofollow"
           >Improving performance</a
         >
@@ -777,15 +765,13 @@ pacman -Syu pipewire wireplumber \
     </div>
     <ul>
       <li>
-        <a
-          href="https://wiki.archlinux.org/index.php/swap#Swap_file"
-          rel="nofollow"
+        <a href="https://wiki.archlinux.org/title/Swap#Swap_file" rel="nofollow"
           >Swap/Swap file</a
         >
       </li>
       <li>
         <a
-          href="https://wiki.archlinux.org/index.php/swap#Swappiness"
+          href="https://wiki.archlinux.org/title/Swap#Swappiness"
           rel="nofollow"
           >Swap/Swappiness</a
         >
@@ -794,7 +780,7 @@ pacman -Syu pipewire wireplumber \
     <p>
       See
       <a
-        href="https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit"
+        href="https://wiki.archlinux.org/title/Systemd/Journal#Journal_size_limit"
         rel="nofollow"
         >systemd/Journal/Journal size limit</a
       >. Edit
@@ -808,7 +794,7 @@ SystemMaxUse=50M</pre>
     <p>
       See
       <a
-        href="https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps"
+        href="https://wiki.archlinux.org/title/Core_dump#Disabling_automatic_core_dumps"
         rel="nofollow"
         >Core dump/Disabling automatic core dumps</a
       >. Edit <code>/etc/systemd/coredump.conf.d/custom.conf</code> then
@@ -839,7 +825,7 @@ ProcessSizeMax=0</pre>
     <p>
       See
       <a
-        href="https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM"
+        href="https://wiki.archlinux.org/title/Solid_state_drive#Periodic_TRIM"
         rel="nofollow"
         >Solid state drive/Periodic TRIM</a
       >:
@@ -951,6 +937,15 @@ kernel.split_lock_mitigate = 0</pre>
             >https://github.com/sched-ext/scx</a
           >
         </p>
+        <ul>
+          <li>
+            <a
+              href="https://wiki.cachyos.org/configuration/sched-ext/"
+              rel="nofollow"
+              >sched-ext Tutorial</a
+            >
+          </li>
+        </ul>
       </li>
       <li>
         <p>

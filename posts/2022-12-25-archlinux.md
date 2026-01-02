@@ -5,7 +5,7 @@ Install Arch Linux is thing I always want to do for my laptop/PC since I had my 
 This is not a guide for everyone, this is just a save for myself in the future and for anyone who want to walk in my
 shoes.
 
-## [Installation guide](https://wiki.archlinux.org/index.php/Installation_guide)
+## [Installation guide](https://wiki.archlinux.org/title/Installation_guide)
 
 ### Pre-installation
 
@@ -15,7 +15,7 @@ Check disks carefully:
 lsblk
 ```
 
-[USB flash installation medium](https://wiki.archlinux.org/index.php/USB_flash_installation_medium)
+[USB flash installation medium](https://wiki.archlinux.org/title/USB_flash_installation_medium)
 
 #### Verify the boot mode
 
@@ -31,17 +31,17 @@ cat /sys/firmware/efi/fw_platform_size
 
 #### Connect to the internet
 
-For wifi, use [iwd](https://wiki.archlinux.org/index.php/Iwd).
+For wifi, use [iwd/iwctl](https://wiki.archlinux.org/title/Iwd#iwctl).
 
 #### Partition the disks
 
-[GPT fdisk](https://wiki.archlinux.org/index.php/GPT_fdisk):
+[GPT fdisk](https://wiki.archlinux.org/title/GPT_fdisk):
 
 ```sh
 cgdisk /dev/sdx
 ```
 
-- [Partition scheme](https://wiki.archlinux.org/index.php/Partitioning#Partition_scheme)
+- [Partition scheme](https://wiki.archlinux.org/title/Partitioning#Partition_scheme)
 - [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition)
 
 UEFI/GPT layout:
@@ -116,7 +116,7 @@ pacstrap -K /mnt neovim
 
 ### Configure
 
-#### [fstab](https://wiki.archlinux.org/index.php/Fstab)
+#### [fstab](https://wiki.archlinux.org/title/Fstab)
 
 ```sh
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -207,7 +207,7 @@ timedatectl status
 
 #### Boot loader
 
-Use [systemd-boot](https://wiki.archlinux.org/index.php/Systemd-boot)
+Use [systemd-boot](https://wiki.archlinux.org/title/Systemd-boot)
 
 Install using XBOOTLDR:
 
@@ -217,7 +217,7 @@ bootctl --esp-path=/efi --boot-path=/boot install
 systemctl enable systemd-boot-update.service
 ```
 
-[Label partition](https://wiki.archlinux.org/index.php/persistent_block_device_naming#by-label)
+[Label partition](https://wiki.archlinux.org/title/Persistent_block_device_naming#by-label)
 
 Edit `/efi/loader/loader.conf`:
 
@@ -228,8 +228,7 @@ editor no
 console-mode max
 ```
 
-- [Silent boot](https://wiki.archlinux.org/index.php/Silent_boot)
-- [Improving performance/Watchdogs](https://wiki.archlinux.org/title/Improving_performance#Watchdogs)
+- [Silent boot](https://wiki.archlinux.org/title/Silent_boot)
 - [IPv6/Disable IPv6](https://wiki.archlinux.org/title/IPv6#Disable_IPv6)
 - [add init_on_alloc/init_on_free boot options](https://lwn.net/Articles/791380/)
 - [mm: Randomize free memory](https://lwn.net/Articles/776228/)
@@ -255,20 +254,16 @@ initrd /initramfs-linux.img
 # https://wiki.archlinux.org/title/backlight#Kernel_command-line_options
 # acpi_backlight=vendor
 #
-# NVIDIA
-# https://wiki.archlinux.org/title/NVIDIA#DRM_kernel_mode_setting
-# nvidia-drm.modeset=1
-#
 options root="LABEL=ROOT" rw quiet loglevel=3 nowatchdog module_blacklist=iTCO_wdt,sp5100_tco ipv6.disable=1 init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1
 ```
 
-## [General recommendations](https://wiki.archlinux.org/index.php/General_recommendations)
+## [General recommendations](https://wiki.archlinux.org/title/General_recommendations)
 
 Always remember to check **dependencies** when install packages.
 
 ### System administration
 
-[Sudo](https://wiki.archlinux.org/index.php/sudo):
+[Sudo](https://wiki.archlinux.org/title/Sudo):
 
 ```sh
 pacman -Syu sudo zsh
@@ -277,18 +272,18 @@ EDITOR=nvim visudo
 # Uncomment group wheel
 
 # Add user if don't want to use systemd-homed
-useradd -m -G wheel -s /usr/bin/zsh joker
+useradd -m -G wheel -s /usr/bin/zsh anon
 
 # Set password
-passwd joker
+passwd anon
 ```
 
-- [systemd-homed (optional if no useradd before)](https://wiki.archlinux.org/index.php/Systemd-homed):
+- [systemd-homed (optional if no useradd before)](https://wiki.archlinux.org/title/Systemd-homed):
 - [Home Directories](https://systemd.io/HOME_DIRECTORY/)
 
 ```sh
 systemctl enable systemd-homed.service
-homectl create joker --shell=/usr/bin/zsh --member-of=wheel
+homectl create anon --shell=/usr/bin/zsh --member-of=wheel
 ```
 
 **Note**: Can not run `homectl` when install Arch Linux. Should run on the first boot.
@@ -300,15 +295,15 @@ homectl create joker --shell=/usr/bin/zsh --member-of=wheel
 See [KDE Distributions/Packaging Recommendations](https://community.kde.org/Distributions/Packaging_Recommendations)
 
 ```sh
-pacman -Syu plasma-desktop
+pacman -Syu plasma-meta
 
 # Login manager
 pacman -Syu sddm
 ```
 
-## [List of applications](https://wiki.archlinux.org/index.php/List_of_applications)
+## [List of applications](https://wiki.archlinux.org/title/List_of_applications)
 
-### [pacman](https://wiki.archlinux.org/index.php/pacman)
+### [pacman](https://wiki.archlinux.org/title/Pacman)
 
 Uncomment in `/etc/pacman.conf`:
 
@@ -319,6 +314,8 @@ ParallelDownloads
 ```
 
 ```sh
+sudo pacman -Syu pacman-contrib
+
 systemctl enable paccache.timer
 ```
 
@@ -338,12 +335,12 @@ See
 pacman -Syu flatpak
 ```
 
-## [Improving performance](https://wiki.archlinux.org/index.php/improving_performance)
+## [Improving performance](https://wiki.archlinux.org/title/Improving_performance)
 
-- [Swap/Swap file](https://wiki.archlinux.org/index.php/swap#Swap_file)
-- [Swap/Swappiness](https://wiki.archlinux.org/index.php/swap#Swappiness)
+- [Swap/Swap file](https://wiki.archlinux.org/title/Swap#Swap_file)
+- [Swap/Swappiness](https://wiki.archlinux.org/title/Swap#Swappiness)
 
-See [systemd/Journal/Journal size limit](https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit). Edit
+See [systemd/Journal/Journal size limit](https://wiki.archlinux.org/title/Systemd/Journal#Journal_size_limit). Edit
 `/etc/systemd/journald.conf.d/00-journal-size.conf` then restart `systemd-journald.service`:
 
 ```txt
@@ -352,7 +349,7 @@ SystemMaxUse=50M
 ```
 
 See
-[Core dump/Disabling automatic core dumps](https://wiki.archlinux.org/index.php/Core_dump#Disabling_automatic_core_dumps).
+[Core dump/Disabling automatic core dumps](https://wiki.archlinux.org/title/Core_dump#Disabling_automatic_core_dumps).
 Edit `/etc/systemd/coredump.conf.d/custom.conf` then restart:
 
 ```txt
@@ -368,7 +365,7 @@ ProcessSizeMax=0
 tune2fs -O fast_commit /dev/partition
 ```
 
-See [Solid state drive/Periodic TRIM](https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM):
+See [Solid state drive/Periodic TRIM](https://wiki.archlinux.org/title/Solid_state_drive#Periodic_TRIM):
 
 ```sh
 systemctl enable fstrim.timer
@@ -404,6 +401,7 @@ Do it at your own risk!!!
 - [Profile-sync-daemon](https://wiki.archlinux.org/title/Profile-sync-daemon)
 
 - https://github.com/sched-ext/scx
+    - [sched-ext Tutorial](https://wiki.cachyos.org/configuration/sched-ext/)
 - https://github.com/AdnanHodzic/auto-cpufreq
 - https://github.com/nbfc-linux/nbfc-linux
 - https://github.com/erpalma/throttled
