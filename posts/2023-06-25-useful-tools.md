@@ -11,7 +11,6 @@ This is just a raw list.
 - https://github.com/junegunn/fzf
 - https://github.com/sharkdp/fd
 - https://github.com/sharkdp/bat
-- https://github.com/eth-p/bat-extras
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/dandavison/delta
 - https://github.com/Wilfred/difftastic
@@ -20,9 +19,6 @@ This is just a raw list.
 - https://github.com/starship/starship
 - https://github.com/chmln/sd
 - https://github.com/walles/moar
-- https://github.com/uutils/coreutils
-- https://github.com/uutils/diffutils
-- https://github.com/uutils/findutils
 
 - https://github.com/WayneD/rsync
 - https://github.com/rclone/rclone
