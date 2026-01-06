@@ -516,16 +516,16 @@ sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[\s*\(.*?];<span clas
     </div>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Result is dst/src</span>
-rsync -avzP src dst
+rsync -avP src dst
 
 <span class="pl-c"><span class="pl-c">#</span> Result is dst/* with * is from src</span>
-rsync -avzP src/ dst</pre>
+rsync -avP src/ dst</pre>
     </div>
     <p>Commonly flags:</p>
     <ul>
       <li><code>-a</code>: archive <code>-rlptgoD</code></li>
       <li><code>-v</code>: verbose</li>
-      <li><code>-z</code>: compress</li>
+      <li><code>-z</code>: compress, use when sync via network</li>
       <li>
         <code>-P</code>: enable both <code>--partial</code>,
         <code>--progress</code> to easily resume after interrupt
