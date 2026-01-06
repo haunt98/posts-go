@@ -35,9 +35,6 @@ For fun
 - https://github.com/libvips/libvips
     - https://github.com/libjxl/libjxl
 
-- https://github.com/aristocratos/btop
-- https://github.com/asciinema/asciinema
-    - https://github.com/asciinema/agg
 - https://github.com/qpdf/qpdf
 - https://github.com/fastfetch-cli/fastfetch
 
