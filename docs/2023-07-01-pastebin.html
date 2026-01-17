@@ -662,18 +662,37 @@ ffmpeg -i src.mkv -map 0 -map -0:1 -c copy dst.mkv</pre>
     </div>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Add --vips-progress to show progress</span>
-vips jxlsave filename.jpg filename.jxl --keep=none
-vips jpegsave filename.png filename.jpg --keep=none
+vips jxlsave filename.jpg filename.jxl
+vips jpegsave filename.png filename.jpg
 
 <span class="pl-c"><span class="pl-c">#</span> Batch convert (require fd)</span>
-fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp|gif<span class="pl-pds">"</span></span> --exec vips jxlsave {} {.}.jxl --keep=none
+fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp|gif<span class="pl-pds">"</span></span> --exec vips jxlsave {} {.}.jxl
 fd <span class="pl-s"><span class="pl-pds">"</span>jpg|jpeg|png|webp|gif<span class="pl-pds">"</span></span> --exec-batch rm
 
-fd <span class="pl-s"><span class="pl-pds">"</span>png|webp|gif<span class="pl-pds">"</span></span> --exec vips jpegsave {} {.}.jpg --keep=none
+fd <span class="pl-s"><span class="pl-pds">"</span>png|webp|gif<span class="pl-pds">"</span></span> --exec vips jpegsave {} {.}.jpg
 fd <span class="pl-s"><span class="pl-pds">"</span>png|webp|gif<span class="pl-pds">"</span></span> --exec-batch rm
 
 <span class="pl-c"><span class="pl-c">#</span> Rotate</span>
 vips rot filename.jxl new_filename.jxl d90</pre>
+    </div>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/exiftool/exiftool">exiftool</a>
+      </h2>
+      <a
+        id="user-content-exiftool"
+        class="anchor"
+        aria-label="Permalink: exiftool"
+        href="#exiftool"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> Show all time tags</span>
+exiftool -time:all -s Untitled.jpg
+
+<span class="pl-c"><span class="pl-c">#</span> Batch rename</span>
+exiftool <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;FileModifyDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;ModifyDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;MediaCreateDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;CreateDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;DateTimeOriginal<span class="pl-pds">"</span></span> -d <span class="pl-s"><span class="pl-pds">"</span>%Y%m%d_%H%M%S_%%.c.%%e<span class="pl-pds">"</span></span> <span class="pl-c1">.</span></pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
