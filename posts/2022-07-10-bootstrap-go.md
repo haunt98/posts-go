@@ -150,16 +150,16 @@ func Zero[T any]() T {
 
 ### Modernize style
 
-Sync go 1.26:
+Since go 1.26:
 
 - Use `a := new(1)`
 
-Sync go 1.24:
+Since go 1.24:
 
 - Use `os.Root` instead of `os.Open`
 - Use `omitzero` instead of `omitempty`
 
-Sync go 1.22:
+Since go 1.22:
 
 - Use `cmp.Or` as fallback mechanism
 
@@ -199,8 +199,8 @@ Please don't use [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem
 
 With `c *gin.Context`:
 
-- Don't use `c` when passing context, use `c.Request.Context()` instead.
-- Don't use `c.Request.URL.Path`, use `c.FullPath()` instead.
+- Don't use `c` when passing context, use `c.Request.Context()` instead
+- Don't use `c.Request.URL.Path`, use `c.FullPath()` instead
 
 Remember to free resources after parse multipart form:
 
@@ -218,11 +218,10 @@ Combine with [go-playground/validator](https://github.com/go-playground/validato
 
 It is fast!
 
-- Use `MarshalLogObject` when we need to hide some field of object when log (field is long or has sensitive value)
-- Don't use `Panic`. Use `Fatal` for errors when start service to check dependencies. If you really need panic level,
-  use `DPanic`.
-- If doubt, use `zap.Any`.
-- Add some kind of `trace_id` in every log lines for easily debug.
+- Use `MarshalLogObject` when need to hide PII or long fields
+- Prefer `DPanic` to `Panic`
+- Use `Fatal` when init service
+- If doubt, use `zap.Any`
 
 ### Read config with [spf13/viper](https://github.com/spf13/viper)
 
@@ -248,7 +247,7 @@ Use [Pipelines](https://redis.uptrace.dev/guide/go-redis-pipelines.html) for:
 
 - HSET and EXPIRE in 1 command
 
-Prefer to use `Pipelined` instead of `Pipeline`.
+Prefer `Pipelined` to `Pipeline`.
 
 Example:
 
@@ -337,7 +336,7 @@ gofumpt -w -extra .
 
 No need to say more. Lint is the way!
 
-My heuristic for fieldalignment (not work all the time): pointer -> string -> []byte -> int64 -> int32.
+Use fieldalignment for performance: pointer -> string -> []byte -> int64/float64 -> int32/float32 -> bool.
 
 ```sh
 golangci-lint run --fix --no-config ./...
