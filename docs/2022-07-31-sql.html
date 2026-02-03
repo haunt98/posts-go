@@ -54,61 +54,56 @@
       tricks when I work with SQL.
     </p>
     <div class="markdown-heading">
-      <h2 class="heading-element">Stay away from database auto increment</h2>
+      <h2 class="heading-element">Primary key</h2>
       <a
-        id="user-content-stay-away-from-database-auto-increment"
+        id="user-content-primary-key"
         class="anchor"
-        aria-label="Permalink: Stay away from database auto increment"
-        href="#stay-away-from-database-auto-increment"
+        aria-label="Permalink: Primary key"
+        href="#primary-key"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <p>Use UUIDv7 (sortable) instead of UUIDv4 (completely random).</p>
-    <div class="markdown-heading">
-      <h2 class="heading-element">Stay away from database timestamp</h2>
-      <a
-        id="user-content-stay-away-from-database-timestamp"
-        class="anchor"
-        aria-label="Permalink: Stay away from database timestamp"
-        href="#stay-away-from-database-timestamp"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>
-      Stay away from all kind of database timestamp (MySQL timestamp, SQLite
-      timestamp, ...) Just use int64 then pass the timestamp in service layer
-      not database layer.
-    </p>
-    <p>
-      Why? Because time and date and location are too much complex to handle. In
-      my business, I use timestamp in milliseconds. Then I save timestamp as
-      int64 value to database. Each time I get timestamp from database, I parse
-      to time struct in Go with location or format I want. No more hassle!
-    </p>
-    <p>It looks like this:</p>
-    <div class="highlight highlight-text-adblock">
-      <pre>
-[Go] time.Time -&gt; convert to unix timestamp milliseconds -&gt; [Database] int64</pre
-      >
-    </div>
-    <div class="markdown-heading">
-      <h2 class="heading-element">Extra field for extra things</h2>
-      <a
-        id="user-content-extra-field-for-extra-things"
-        class="anchor"
-        aria-label="Permalink: Extra field for extra things"
-        href="#extra-field-for-extra-things"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>
-      Create new column in database is scary, so I suggest avoid it if you can.
-      How to avoid, first design table with extra field. It is black hole, put
-      everything in there if you want.
-    </p>
-    <p>I always use MySQL json data type for extra field.</p>
-    <p>JSON data type is also useful for dumping request, response data.</p>
     <ul>
+      <li>Don't use database auto increment</li>
+      <li>Use UUIDv7 (sortable) instead of UUIDv4 (completely random)</li>
+    </ul>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Timestamp</h2>
+      <a
+        id="user-content-timestamp"
+        class="anchor"
+        aria-label="Permalink: Timestamp"
+        href="#timestamp"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>
+      Don't use MySQL type timestamp, use int64 then pass the timestamp (prefer
+      UnixMilli) to avoid date, time, location complex conversion.
+    </p>
+    <div class="highlight highlight-text-adblock">
+      <pre>[Go] time.Time -&gt; t.UnixMilli() -&gt; [Database] int64</pre>
+    </div>
+    <div class="markdown-heading">
+      <h2 class="heading-element">JSON field</h2>
+      <a
+        id="user-content-json-field"
+        class="anchor"
+        aria-label="Permalink: JSON field"
+        href="#json-field"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <ul>
+      <li>
+        <p>
+          Use MySQL JSON data type for extra field, to avoid adding new column
+          in database
+        </p>
+      </li>
+      <li>
+        <p>JSON data type is also useful for dumping request, response data.</p>
+      </li>
       <li>
         <p>
           Use <code>JSON_CONTAINS_PATH(col, 'one', '$.key')</code> to check json
@@ -147,12 +142,12 @@
       </li>
     </ul>
     <div class="markdown-heading">
-      <h2 class="heading-element">Use index!!!</h2>
+      <h2 class="heading-element">Index</h2>
       <a
-        id="user-content-use-index"
+        id="user-content-index"
         class="anchor"
-        aria-label="Permalink: Use index!!!"
-        href="#use-index"
+        aria-label="Permalink: Index"
+        href="#index"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -221,12 +216,12 @@
       </li>
     </ul>
     <div class="markdown-heading">
-      <h2 class="heading-element">Be careful with UTF-8</h2>
+      <h2 class="heading-element">UTF-8</h2>
       <a
-        id="user-content-be-careful-with-utf-8"
+        id="user-content-utf-8"
         class="anchor"
-        aria-label="Permalink: Be careful with UTF-8"
-        href="#be-careful-with-utf-8"
+        aria-label="Permalink: UTF-8"
+        href="#utf-8"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -240,16 +235,16 @@
   DEFAULT CHARSET <span class="pl-k">=</span> utf8mb4;</pre>
     </div>
     <p>
-      Be careful if you edit/cut string before saving to database. If string
-      contains emoji and you split that emoji then it gets ugly real quick.
+      Be careful if you edit/cut string which has emoji before saving to
+      database.
     </p>
     <div class="markdown-heading">
-      <h2 class="heading-element">Be careful with NULL</h2>
+      <h2 class="heading-element">NULL</h2>
       <a
-        id="user-content-be-careful-with-null"
+        id="user-content-null"
         class="anchor"
-        aria-label="Permalink: Be careful with NULL"
-        href="#be-careful-with-null"
+        aria-label="Permalink: NULL"
+        href="#null"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
@@ -519,13 +514,13 @@
             >SQL NULLs are Weird!</a
           >
         </p>
-        <ul>
-          <li>
-            <a href="https://www.sqlite.org/nulls.html" rel="nofollow"
-              >NULL Handling in SQLite Versus Other Database Engines</a
-            >
-          </li>
-        </ul>
+      </li>
+      <li>
+        <p>
+          <a href="https://www.sqlite.org/nulls.html" rel="nofollow"
+            >NULL Handling in SQLite Versus Other Database Engines</a
+          >
+        </p>
       </li>
     </ul>
 
