@@ -39,6 +39,196 @@
     <h2>
       <a href="index.html"><code>~</code></a>
     </h2>
+    <div class="markdown-heading">
+      <h1 class="heading-element">Ticket system</h1>
+      <a
+        id="user-content-ticket-system"
+        class="anchor"
+        aria-label="Permalink: Ticket system"
+        href="#ticket-system"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>
+      Ticket system is a system which allows user to submit some kind of action,
+      then system saves it as a ticket. Ticket later can be approve, reject by
+      people or auto.
+    </p>
+    <p>
+      Ticket system is very polular in domains which require Customer Service
+      (CS) to help user. For example, to allow user submit identity infomartion
+      for Electronic Know Your Customer (EKYC).
+    </p>
+    <p>
+      This servers as a checklist for future me to speed run building a new
+      ticket system from scratch.
+    </p>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Database</h2>
+      <a
+        id="user-content-database"
+        class="anchor"
+        aria-label="Permalink: Database"
+        href="#database"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>At least has 2 tables:</p>
+    <ul>
+      <li>Table <code>tickets</code>: All tickets go here</li>
+      <li>
+        Table <code>user_tickets</code>: Only map user with latest
+        <strong>approve</strong> ticket. Because we only care about approve not
+        reject.
+      </li>
+    </ul>
+    <div class="markdown-heading">
+      <h3 class="heading-element">Table <code>tickets</code></h3>
+      <a
+        id="user-content-table-tickets"
+        class="anchor"
+        aria-label="Permalink: Table tickets"
+        href="#table-tickets"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>Required fields:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Explain</th>
+          <th>Index</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>id</code></td>
+          <td>Primary key, known as <code>ticket_id</code></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><code>user_id</code></td>
+          <td></td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td><code>status</code></td>
+          <td>Status approve/reject/processing/...</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><code>extra</code></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><code>created_at_ms</code></td>
+          <td></td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td><code>updated_at_ms</code></td>
+          <td></td>
+          <td>x</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Also depends on business, need to save:</p>
+    <ul>
+      <li>Who approve/reject ticket</li>
+      <li>Reason why ticket is reject</li>
+    </ul>
+    <div class="markdown-heading">
+      <h3 class="heading-element">Table <code>user_tickets</code></h3>
+      <a
+        id="user-content-table-user_tickets"
+        class="anchor"
+        aria-label="Permalink: Table user_tickets"
+        href="#table-user_tickets"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>Required fields:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Explain</th>
+          <th>Index</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>user_id</code></td>
+          <td>Primary key</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><code>ticket_id</code></td>
+          <td>Reference to <code>tickets.id</code></td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td><code>extra</code></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><code>created_at_ms</code></td>
+          <td></td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td><code>updated_at_ms</code></td>
+          <td></td>
+          <td>x</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Design system</h2>
+      <a
+        id="user-content-design-system"
+        class="anchor"
+        aria-label="Permalink: Design system"
+        href="#design-system"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>To reduce hit database, use cache layer.</p>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">client</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">cs_system</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">ticket_system</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">cache</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">database</span>
+
+    <span class="pl-ent">client </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">ticket_system</span><span class="pl-k">:</span> <span class="pl-s">query tickets by user_id</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">query tickets by user_id</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">query tickets</span>
+
+    <span class="pl-ent">client </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">ticket_system</span><span class="pl-k">:</span> <span class="pl-s">submit ticket</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">create ticket</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">create ticket</span>
+
+    <span class="pl-ent">cs_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">ticket_system</span><span class="pl-k">:</span> <span class="pl-s">query tickets</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">query tickets</span>
+
+    <span class="pl-ent">cs_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">ticket_system</span><span class="pl-k">:</span> <span class="pl-s">approve/reject ticket</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">update ticket</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">update ticket</span></pre>
+    </div>
+    <p>
+      Query tickets can not use cache layer, only database. So we need to
+      improve:
+    </p>
+    <ul>
+      <li>Limit time range to query</li>
+      <li>Use slave database node to query, master to create/update</li>
+    </ul>
+
     <div>
       <br />Source code is available on
       <a href="https://github.com/haunt98/posts-go">GitHub</a>
