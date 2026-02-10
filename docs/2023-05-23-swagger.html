@@ -55,26 +55,21 @@
     </p>
     <p>So step by step:</p>
     <ul>
-      <li>Write API spec in <code>YAML</code>.</li>
-      <li>Convert to API spec in <code>JSON</code>.</li>
-      <li>Format spec files.</li>
-      <li>Render spec in local.</li>
-      <li>Push to company host for other teams to see.</li>
+      <li>Write API spec in <code>YAML</code></li>
+      <li>Convert to API spec in <code>JSON</code></li>
+      <li>Format spec files</li>
     </ul>
     <p>
       Only step 1 is manual, aka I write my API spec completely with my hand (no
-      auto gen from code whatever). The others can be done with tools:
+      auto gen from code). The others can be done with tools:
     </p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Convert</span>
-go install github.com/mikefarah/yq/v4@latest
+<span class="pl-c"><span class="pl-c">#</span> go install github.com/mikefarah/yq/v4@latest</span>
 yq -o=json <span class="pl-s"><span class="pl-pds">'</span>.<span class="pl-pds">'</span></span> ./docs/swagger.yaml <span class="pl-k">&gt;</span> ./docs/swagger.json
 
 <span class="pl-c"><span class="pl-c">#</span> Format</span>
-bunx prettier --write ./docs/swagger.yaml ./docs/swagger.json
-
-<span class="pl-c"><span class="pl-c">#</span> Render locally</span>
-bunx @redocly/cli preview-docs ./docs/swagger.json</pre>
+bunx prettier --write ./docs/swagger.yaml ./docs/swagger.json</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">Thanks</h2>
@@ -91,9 +86,6 @@ bunx @redocly/cli preview-docs ./docs/swagger.json</pre>
       <li><a href="https://github.com/oven-sh/bun">oven-sh/bun</a></li>
       <li>
         <a href="https://github.com/prettier/prettier">prettier/prettier</a>
-      </li>
-      <li>
-        <a href="https://github.com/Redocly/redocly-cli">Redocly/redocly-cli</a>
       </li>
     </ul>
 
