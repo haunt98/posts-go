@@ -5,10 +5,10 @@ Each time I start a new Go project, I repeat many steps. Like set up `.gitignore
 So I decide to have a baseline Dockerfile like this:
 
 ```Dockerfile
-FROM golang:1.25.0-trixie as builder
+FROM golang:1.26.0-trixie as builder
 
-RUN go install golang.org/dl/go1.25.0@latest \
-    && go1.25.0 download
+RUN go install golang.org/dl/go1.26.0@latest \
+    && go1.26.0 download
 
 WORKDIR /build
 
@@ -21,6 +21,9 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -o ./app -tags tim
 FROM gcr.io/distroless/base-debian12
 
 COPY --from=builder /build/app /app
+
+ENV TZ=Asia/Ho_Chi_Minh
+ENV GOMEMLIMIT=1024MiB
 
 ENTRYPOINT ["/app"]
 ```
@@ -36,14 +39,14 @@ secure base image. So I stick with it for a while.
 Also, remember to match Distroless Debian version with Go official image Debian version.
 
 ```Dockerfile
-FROM golang:1.25.0-trixie as builder
+FROM golang:1.26.0-trixie as builder
 ```
 
 This is Go image I use as a build stage. This can be official Go image or custom image is required in some companies.
 
 ```Dockerfile
-RUN go install golang.org/dl/go1.25.0@latest \
-    && go1.25.0 download
+RUN go install golang.org/dl/go1.26.0@latest \
+    && go1.26.0 download
 ```
 
 This is optional. In my case, my company is slow to update Go image so I use this trick to install latest Go version.
@@ -75,19 +78,23 @@ This is where I build Go program.
 - `-trimpath` to support reproduce build.
 - `-ldflags="-s -w"` to strip debugging information.
 
-Some more tricks:
-
-- `GOMEMLIMIT=1024MiB`: soft memory limit.
-
 ```Dockerfile
 FROM gcr.io/distroless/base-debian12
 
 COPY --from=builder /build/app /app
 
+ENV TZ=Asia/Ho_Chi_Minh
+ENV GOMEMLIMIT=1024MiB
+
 ENTRYPOINT ["/app"]
 ```
 
 Finally, I copy `app` to Distroless base image.
+
+Some more tricks:
+
+- `ENV TZ=Asia/Ho_Chi_Minh`: location
+- `ENV GOMEMLIMIT=1024MiB`: soft memory limit
 
 ## Thanks
 
