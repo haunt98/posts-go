@@ -201,6 +201,7 @@
       <pre><span class="pl-k">sequenceDiagram</span>
     <span class="pl-k">participant</span> <span class="pl-ent">client</span>
     <span class="pl-k">participant</span> <span class="pl-ent">cs_system</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">other_system</span>
     <span class="pl-k">participant</span> <span class="pl-ent">ticket_system</span>
     <span class="pl-k">participant</span> <span class="pl-ent">cache</span>
     <span class="pl-k">participant</span> <span class="pl-ent">database</span>
@@ -218,7 +219,11 @@
 
     <span class="pl-ent">cs_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">ticket_system</span><span class="pl-k">:</span> <span class="pl-s">approve/reject ticket</span>
     <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">update ticket</span>
-    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">update ticket</span></pre>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">update ticket</span>
+
+    <span class="pl-ent">other_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">ticket_system</span><span class="pl-k">:</span> <span class="pl-s">query latest approved ticket by user_id</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">query user_tickets by user_id</span>
+    <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">query user_tickets</span></pre>
     </div>
     <p>
       Query tickets can not use cache layer, only database. So we need to

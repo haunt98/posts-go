@@ -53,6 +53,7 @@ To reduce hit database, use cache layer.
 sequenceDiagram
     participant client
     participant cs_system
+    participant other_system
     participant ticket_system
     participant cache
     participant database
@@ -71,6 +72,10 @@ sequenceDiagram
     cs_system ->> ticket_system: approve/reject ticket
     ticket_system ->> database: update ticket
     ticket_system ->> cache: update ticket
+
+    other_system ->> ticket_system: query latest approved ticket by user_id
+    ticket_system ->> cache: query user_tickets by user_id
+    ticket_system ->> database: query user_tickets
 ```
 
 Query tickets can not use cache layer, only database. So we need to improve:
