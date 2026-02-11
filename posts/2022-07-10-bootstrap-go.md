@@ -153,6 +153,7 @@ func Zero[T any]() T {
 Since go 1.26:
 
 - Use `a := new(1)`
+- Use `errors.AsType` instead of `errors.As`
 
 Since go 1.24:
 

@@ -55,10 +55,10 @@
     </p>
     <p>So I decide to have a baseline Dockerfile like this:</p>
     <div class="highlight highlight-source-dockerfile">
-      <pre><span class="pl-k">FROM</span> golang:1.25.0-trixie as builder
+      <pre><span class="pl-k">FROM</span> golang:1.26.0-trixie as builder
 
-<span class="pl-k">RUN</span> go install golang.org/dl/go1.25.0@latest \
-    &amp;&amp; go1.25.0 download
+<span class="pl-k">RUN</span> go install golang.org/dl/go1.26.0@latest \
+    &amp;&amp; go1.26.0 download
 
 <span class="pl-k">WORKDIR</span> /build
 
@@ -71,6 +71,9 @@
 <span class="pl-k">FROM</span> gcr.io/distroless/base-debian12
 
 <span class="pl-k">COPY</span> --from=builder /build/app /app
+
+<span class="pl-k">ENV</span> TZ=Asia/Ho_Chi_Minh
+<span class="pl-k">ENV</span> GOMEMLIMIT=1024MiB
 
 <span class="pl-k">ENTRYPOINT</span> [<span class="pl-s">"/app"</span>]</pre>
     </div>
@@ -101,15 +104,15 @@
       Debian version.
     </p>
     <div class="highlight highlight-source-dockerfile">
-      <pre><span class="pl-k">FROM</span> golang:1.25.0-trixie as builder</pre>
+      <pre><span class="pl-k">FROM</span> golang:1.26.0-trixie as builder</pre>
     </div>
     <p>
       This is Go image I use as a build stage. This can be official Go image or
       custom image is required in some companies.
     </p>
     <div class="highlight highlight-source-dockerfile">
-      <pre><span class="pl-k">RUN</span> go install golang.org/dl/go1.25.0@latest \
-    &amp;&amp; go1.25.0 download</pre>
+      <pre><span class="pl-k">RUN</span> go install golang.org/dl/go1.26.0@latest \
+    &amp;&amp; go1.26.0 download</pre>
     </div>
     <p>
       This is optional. In my case, my company is slow to update Go image so I
@@ -160,18 +163,22 @@
       <li><code>-trimpath</code> to support reproduce build.</li>
       <li><code>-ldflags="-s -w"</code> to strip debugging information.</li>
     </ul>
-    <p>Some more tricks:</p>
-    <ul>
-      <li><code>GOMEMLIMIT=1024MiB</code>: soft memory limit.</li>
-    </ul>
     <div class="highlight highlight-source-dockerfile">
       <pre><span class="pl-k">FROM</span> gcr.io/distroless/base-debian12
 
 <span class="pl-k">COPY</span> --from=builder /build/app /app
 
+<span class="pl-k">ENV</span> TZ=Asia/Ho_Chi_Minh
+<span class="pl-k">ENV</span> GOMEMLIMIT=1024MiB
+
 <span class="pl-k">ENTRYPOINT</span> [<span class="pl-s">"/app"</span>]</pre>
     </div>
     <p>Finally, I copy <code>app</code> to Distroless base image.</p>
+    <p>Some more tricks:</p>
+    <ul>
+      <li><code>ENV TZ=Asia/Ho_Chi_Minh</code>: location</li>
+      <li><code>ENV GOMEMLIMIT=1024MiB</code>: soft memory limit</li>
+    </ul>
     <div class="markdown-heading">
       <h2 class="heading-element">Thanks</h2>
       <a
