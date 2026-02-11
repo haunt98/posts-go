@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.min.css"
+      integrity="sha512-BrOPA520KmDMqieeM7XFe6a3u3Sb3F1JBaQnrIAmWg3EYrciJ+Qqe6ZcKCdfPv26rGcgTrJnZ/IdQEct8h3Zhw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>haunt98 posts</title>
+  </head>
+  <style>
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+      font-family:
+        Google Sans Flex,
+        Sudo UI Var,
+        Inter,
+        SF Pro,
+        sans-serif;
+      font-weight: 500;
+      --fontStack-monospace: Iosevka Pacman, Jetbrains Mono, SF Mono, monospace;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <h2>
+      <a href="index.html"><code>~</code></a>
+    </h2>
+    <div class="markdown-heading">
+      <h1 class="heading-element">KEK DEK</h1>
+      <a
+        id="user-content-kek-dek"
+        class="anchor"
+        aria-label="Permalink: KEK DEK"
+        href="#kek-dek"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>KEK is Key Encryption Key. DEK is Data Encryption Key.</p>
+    <p>Use KEK DEK for database encryption at rest.</p>
+    <p>KEK is saved in key vault. DEK is random for each record.</p>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">client</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">service</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">key_vault</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">database</span>
+
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">init</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">key_vault</span><span class="pl-k">:</span> <span class="pl-s">get KEK_v1, KEK_v2, ...</span>
+
+    <span class="pl-ent">client </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">submit data</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">random DEK</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">encrypt data using DEK</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">encrypt DEK using latest KEK</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">save encrypted data, encrypted DEK, KEK version</span>
+
+    <span class="pl-ent">client </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">get data</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">get encrypted data, encrypted DEK, KEK version</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">decrypt DEK using saved KEK version</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">decrypt data using DEK</span></pre>
+    </div>
+    <p>When rotate key:</p>
+    <ul>
+      <li>Create new KEK</li>
+      <li>New record will use new KEK</li>
+      <li>Old record can decrypt using old KEK</li>
+    </ul>
+    <p>Migrate old data:</p>
+    <ul>
+      <li>Encrypted data is untouched</li>
+      <li>
+        Query all encrypted DEK with old KEK version, then update with latest
+        KEK
+      </li>
+    </ul>
+
+    <div>
+      <br />Source code is available on
+      <a href="https://github.com/haunt98/posts-go">GitHub</a>
+    </div>
+  </body>
+</html>
