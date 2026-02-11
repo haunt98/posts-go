@@ -125,12 +125,12 @@
         <tr>
           <td><code>created_at_ms</code></td>
           <td></td>
-          <td>x</td>
+          <td></td>
         </tr>
         <tr>
           <td><code>updated_at_ms</code></td>
           <td></td>
-          <td>x</td>
+          <td></td>
         </tr>
       </tbody>
     </table>
@@ -177,12 +177,12 @@
         <tr>
           <td><code>created_at_ms</code></td>
           <td></td>
-          <td>x</td>
+          <td></td>
         </tr>
         <tr>
           <td><code>updated_at_ms</code></td>
           <td></td>
-          <td>x</td>
+          <td></td>
         </tr>
       </tbody>
     </table>
@@ -221,7 +221,7 @@
     <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">update ticket</span>
     <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">update ticket</span>
 
-    <span class="pl-ent">other_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">ticket_system</span><span class="pl-k">:</span> <span class="pl-s">query latest approved ticket by user_id</span>
+    <span class="pl-ent">other_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">ticket_system</span><span class="pl-k">:</span> <span class="pl-s">query latest approve ticket by user_id</span>
     <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">cache</span><span class="pl-k">:</span> <span class="pl-s">query user_tickets by user_id</span>
     <span class="pl-ent">ticket_system </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">query user_tickets</span></pre>
     </div>
@@ -231,7 +231,7 @@
     </p>
     <ul>
       <li>Limit time range to query</li>
-      <li>Use slave database node to query, master to create/update</li>
+      <li>Use read replica to query, master to create/update</li>
     </ul>
 
     <div>

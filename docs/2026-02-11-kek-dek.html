@@ -51,7 +51,9 @@
     </div>
     <p>KEK is Key Encryption Key. DEK is Data Encryption Key.</p>
     <p>Use KEK DEK for database encryption at rest.</p>
-    <p>KEK is saved in key vault. DEK is random for each record.</p>
+    <p>
+      KEK is saved in key vault. DEK is <strong>random</strong> for each record.
+    </p>
     <div class="highlight highlight-source-mermaid">
       <pre><span class="pl-k">sequenceDiagram</span>
     <span class="pl-k">participant</span> <span class="pl-ent">client</span>
@@ -81,7 +83,7 @@
     </ul>
     <p>Migrate old data:</p>
     <ul>
-      <li>Encrypted data is untouched</li>
+      <li>Encrypted data is <strong>untouched</strong></li>
       <li>
         Query all encrypted DEK with old KEK version, then update with latest
         KEK
