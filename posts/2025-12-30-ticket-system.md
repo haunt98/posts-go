@@ -25,8 +25,8 @@ Required fields:
 | `user_id`       |                                      | x     |
 | `status`        | Status approve/reject/processing/... |       |
 | `extra`         |                                      |       |
-| `created_at_ms` |                                      | x     |
-| `updated_at_ms` |                                      | x     |
+| `created_at_ms` |                                      |       |
+| `updated_at_ms` |                                      |       |
 
 Also depends on business, need to save:
 
@@ -42,8 +42,8 @@ Required fields:
 | `user_id`       | Primary key               |       |
 | `ticket_id`     | Reference to `tickets.id` | x     |
 | `extra`         |                           |       |
-| `created_at_ms` |                           | x     |
-| `updated_at_ms` |                           | x     |
+| `created_at_ms` |                           |       |
+| `updated_at_ms` |                           |       |
 
 ## Design system
 
@@ -73,7 +73,7 @@ sequenceDiagram
     ticket_system ->> database: update ticket
     ticket_system ->> cache: update ticket
 
-    other_system ->> ticket_system: query latest approved ticket by user_id
+    other_system ->> ticket_system: query latest approve ticket by user_id
     ticket_system ->> cache: query user_tickets by user_id
     ticket_system ->> database: query user_tickets
 ```
@@ -81,4 +81,4 @@ sequenceDiagram
 Query tickets can not use cache layer, only database. So we need to improve:
 
 - Limit time range to query
-- Use slave database node to query, master to create/update
+- Use read replica to query, master to create/update
