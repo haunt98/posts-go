@@ -33,3 +33,4 @@ This is where I dump my thoughts.
 - [Debounce](2023-12-16-idempotency.html)
 - [Backend Thinking](2024-01-20-backend-thinking.html)
 - [Ticket system](2025-12-30-ticket-system.html)
+- [KEK DEK](2026-02-11-kek-dek.html)
