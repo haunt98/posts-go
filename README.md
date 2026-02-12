@@ -14,7 +14,7 @@ Steps:
 
 - Update index in `posts/index.md`
 
-- Generate HTML by running `make`
+- Generate HTML by running `just`
 
 ## Thanks
 
