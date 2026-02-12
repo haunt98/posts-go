@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="github-markdown.css" />
+    <title>haunt98 posts</title>
+  </head>
+  <style>
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+      font-family:
+        Google Sans Flex,
+        Sudo UI Var,
+        Inter,
+        SF Pro,
+        sans-serif;
+      font-weight: 500;
+      --fontStack-monospace: Iosevka Pacman, Jetbrains Mono, SF Mono, monospace;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <h2>
+      <a href="index.html"><code>~</code></a>
+    </h2>
+    <div class="markdown-heading">
+      <h1 class="heading-element">Dynamic config</h1>
+      <a
+        id="user-content-dynamic-config"
+        class="anchor"
+        aria-label="Permalink: Dynamic config"
+        href="#dynamic-config"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">admin_tool</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">service</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">storage</span>
+
+    <span class="pl-ent">admin_tool </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">storage</span><span class="pl-k">:</span> <span class="pl-s">create/update/delete config</span>
+
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">init</span>
+
+    <span class="pl-k">loop</span> <span class="pl-s">Get config periodically</span>
+        <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">storage</span><span class="pl-k">:</span> <span class="pl-s">get config</span>
+        <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">save config to internal memory</span>
+    <span class="pl-k">end</span>
+
+    <span class="pl-ent">service</span><span class="pl-k">-&gt;&gt;</span><span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">get config in internal memory</span></pre>
+    </div>
+    <p>I choose Redis as config storage.</p>
+    <ul>
+      <li>Must have fallback value if can not get config from storage</li>
+      <li>
+        There is a small delay between updating config and service get the new
+        config, because service update config periodically, not real time.
+      </li>
+    </ul>
+
+    <div>
+      <br />Source code is available on
+      <a href="https://github.com/haunt98/posts-go">GitHub</a>
+    </div>
+  </body>
+</html>

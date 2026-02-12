@@ -10,7 +10,7 @@ This is where I dump my thoughts.
 - [SQL](2022-07-31-sql.html)
 - [Experiment go](2022-07-31-experiment-go.html)
 - [gitignore](2022-08-10-gitignore.html)
-- [Reload config](2022-10-26-reload-config.html)
+- [Dynamic config](2022-10-26-dynamic-config.html)
 - [Install Arch Linux](2022-12-25-archlinux.html)
 - [Speed up writing Go test ASAP](2022-12-25-go-test-asap.html)
 - [Incident come and go](2023-03-05-incident.html)
