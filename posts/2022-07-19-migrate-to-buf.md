@@ -31,7 +31,7 @@ deps:
     - buf.build/envoyproxy/protoc-gen-validate:v1.3.0
     - buf.build/kei2100/protoc-gen-marshal-zap:081f499bbca4486784773e060c1c1418
     - buf.build/haunt98/googleapis
-    - buf.build/haunt98/grpc-gateway:v2.27.1
+    - buf.build/haunt98/grpc-gateway:v2.27.2
 breaking:
     use:
         - WIRE
@@ -42,7 +42,7 @@ breaking:
 ```yaml
 version: v2
 plugins:
-    - remote: buf.build/grpc/go:v1.6.0
+    - remote: buf.build/grpc/go:v1.6.1
       out: pkg
     - remote: buf.build/protocolbuffers/go:v1.36.11
       out: pkg
@@ -50,9 +50,9 @@ plugins:
       out: pkg
     - local: protoc-gen-marshal-zap
       out: pkg
-    - remote: buf.build/grpc-ecosystem/gateway:v2.27.1
+    - remote: buf.build/grpc-ecosystem/gateway:v2.27.2
       out: pkg
-    - remote: buf.build/grpc-ecosystem/openapiv2:v2.27.1
+    - remote: buf.build/grpc-ecosystem/openapiv2:v2.27.2
       out: .
       opt:
           - json_names_for_fields=false
