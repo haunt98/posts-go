@@ -13,12 +13,16 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/sync/errgroup"
 
+	"github.com/make-go-great/copy-go"
 	"github.com/make-go-great/netrc-go"
 )
 
 const (
-	postFilesPath    = "posts"
-	templatePostPath = "templates/post.html"
+	postFilesPath = "posts"
+	templatePath  = "templates"
+
+	postFilename = "post.html"
+	cssFilename  = "github-markdown.css"
 
 	generatedPath = "docs"
 
@@ -45,16 +49,20 @@ func main() {
 		log.Fatalln("Failed to mkdir all", generatedPath)
 	}
 
+	if err := copy.Copy(filepath.Join(templatePath, cssFilename), filepath.Join(generatedPath, cssFilename)); err != nil {
+		log.Fatalln("Failed to copy", err)
+	}
+
 	// Read post files directory
 	postFiles, err := os.ReadDir(postFilesPath)
 	if err != nil {
-		log.Fatalln("Failed to read dir", postFilesPath)
+		log.Fatalln("Failed to read dir", err)
 	}
 
 	// Prepare template
-	templatePostBytes, err := os.ReadFile(templatePostPath)
+	templatePostBytes, err := os.ReadFile(filepath.Join(templatePath, postFilename))
 	if err != nil {
-		log.Fatalln("Failed to read file", templatePostPath, err)
+		log.Fatalln("Failed to read file", err)
 	}
 
 	templatePost, err := template.New("post").Parse(string(templatePostBytes))

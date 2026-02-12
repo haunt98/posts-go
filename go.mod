@@ -4,6 +4,7 @@ go 1.24.0
 
 require (
 	github.com/google/go-github/v82 v82.0.0
+	github.com/make-go-great/copy-go v0.10.0
 	github.com/make-go-great/netrc-go v0.0.3
 	golang.org/x/oauth2 v0.35.0
 	golang.org/x/sync v0.19.0

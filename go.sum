@@ -7,6 +7,8 @@ github.com/google/go-github/v82 v82.0.0 h1:OH09ESON2QwKCUVMYmMcVu1IFKFoaZHwqYaUt
 github.com/google/go-github/v82 v82.0.0/go.mod h1:hQ6Xo0VKfL8RZ7z1hSfB4fvISg0QqHOqe9BP0qo+WvM=
 github.com/google/go-querystring v1.2.0 h1:yhqkPbu2/OH+V9BfpCVPZkNmUXhb2gBxJArfhIxNtP0=
 github.com/google/go-querystring v1.2.0/go.mod h1:8IFJqpSRITyJ8QhQ13bmbeMBDfmeEJZD5A0egEOmkqU=
+github.com/make-go-great/copy-go v0.10.0 h1:zJrR3nKttaj/xucZoQj9dlJvNHqE2AgQAYewaofNAAQ=
+github.com/make-go-great/copy-go v0.10.0/go.mod h1:1VQfW59T0FZmKxV3hTlzbEcfceajtk3gq/WmiwfYl1I=
 github.com/make-go-great/netrc-go v0.0.3 h1:K6QtXxkvboZqVTsNmzEAv3f6RYUFw8vjxa9rB6DI10g=
 github.com/make-go-great/netrc-go v0.0.3/go.mod h1:NOuPJzMZItYlVgmmUH7XCBUfbe40JKhDZHM7wDCeSXQ=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
