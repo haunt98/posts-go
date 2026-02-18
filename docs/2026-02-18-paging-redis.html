@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="github-markdown.css" />
+    <title>haunt98 posts</title>
+  </head>
+  <style>
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+      font-family:
+        Google Sans Flex,
+        Sudo UI Var,
+        Inter,
+        SF Pro,
+        sans-serif;
+      font-weight: 500;
+      --fontStack-monospace: Iosevka Pacman, Jetbrains Mono, SF Mono, monospace;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <body class="markdown-body">
+    <h2>
+      <a href="index.html"><code>~</code></a>
+    </h2>
+    <div class="markdown-heading">
+      <h1 class="heading-element">Paging using Redis</h1>
+      <a
+        id="user-content-paging-using-redis"
+        class="anchor"
+        aria-label="Permalink: Paging using Redis"
+        href="#paging-using-redis"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>Make use of Redis sorted set for paging.</p>
+    <p>
+      This is my way to bypass database for paging. It's not perfect, just
+      purely quick hacks.
+    </p>
+    <p>
+      Each record has <code>created_at_ms</code>, I use this as
+      <strong>score</strong> for Redis sorted set, also build a string
+      representation of record to store in sorted set.
+    </p>
+    <p>
+      What field need for query will be used for string representation, for
+      example <code>request_id|user_id|created_at_ms|updated_at_ms|status</code>
+    </p>
+    <ul>
+      <li>
+        For create/update record, I use <strong>ZADD</strong> with
+        <code>created_at_ms</code> and string representation
+      </li>
+      <li>
+        For query records, I use <strong>ZREVRANGEBYSCORE</strong> to limit by
+        <code>created_at_ms</code> first then parse string representation to
+        limit more
+      </li>
+    </ul>
+    <p>
+      The problem is once you make a string representation, it's kinda
+      hardcoded. If you want to add new field to filter, you will need to
+      migrate from old string representation to new one.
+    </p>
+
+    <div>
+      <br />Source code is available on
+      <a href="https://github.com/haunt98/posts-go">GitHub</a>
+    </div>
+  </body>
+</html>
