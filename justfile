@@ -33,9 +33,8 @@ gen:
     go run .
 
 format-html:
-    bunx prettier --write ./templates ./docs
+    bunx prettier --write ./templates/*.html ./docs/*.html
     bunx prettier --print-width 120 --tab-width 4 --prose-wrap always --write ./posts
 
 upstream:
     wcurl --curl-options="--clobber --netrc" https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown.css --output ./templates/github-markdown.css
-    bunx esbuild ./templates/github-markdown.css --minify --outdir=./templates --allow-overwrite 
