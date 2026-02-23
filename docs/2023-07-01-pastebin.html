@@ -624,11 +624,11 @@ f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">
 <span class="pl-c"><span class="pl-c">#</span> -c:v libx265 -crf 26 -preset fast: control quality</span>
 <span class="pl-c"><span class="pl-c">#</span> -an: no audio</span>
 <span class="pl-c"><span class="pl-c">#</span> -c:a aac -b:a 128k: audio codec and bitrate</span>
-ffmpeg -i input -c:v libx265 -crf 26 -preset fast -an output.mp4
+ffmpeg -i input -vf <span class="pl-s"><span class="pl-pds">"</span>fps=30<span class="pl-pds">"</span></span> -c:v libx265 -crf 26 -preset fast -an output.mp4
 
 <span class="pl-c"><span class="pl-c">#</span> Compress on macOS</span>
-<span class="pl-c"><span class="pl-c">#</span> -c:v hevc_videotoolbox -q:v 65: control quality</span>
-ffmpeg -i input -c:v hevc_videotoolbox -q:v 65 -an output.mp4
+<span class="pl-c"><span class="pl-c">#</span> -c:v hevc_videotoolbox -b:v 2500k -tag:v hvc1: control quality</span>
+ffmpeg -i input -vf <span class="pl-s"><span class="pl-pds">"</span>fps=30<span class="pl-pds">"</span></span> -c:v hevc_videotoolbox -b:v 2500k -tag:v hvc1 -an output.mp4
 
 <span class="pl-c"><span class="pl-c">#</span> Remove unwanted stream</span>
 <span class="pl-c"><span class="pl-c">#</span> -map 0: include all streams</span>
@@ -640,6 +640,11 @@ ffmpeg -i src.mkv -map 0 -map -0:1 -c copy dst.mkv</pre>
       <li>
         <a href="https://trac.ffmpeg.org/wiki/Encode/H.265" rel="nofollow"
           >H.265/HEVC Video Encoding Guide</a
+        >
+      </li>
+      <li>
+        <a href="https://trac.ffmpeg.org/wiki/HWAccelIntro" rel="nofollow"
+          >HWAccelIntro</a
         >
       </li>
     </ul>
