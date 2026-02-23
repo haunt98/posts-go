@@ -621,10 +621,14 @@ f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">
     </div>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Compress</span>
-<span class="pl-c"><span class="pl-c">#</span> -crf: quality, 0 is lossless, more is lower quality</span>
+<span class="pl-c"><span class="pl-c">#</span> -c:v libx265 -crf 26 -preset fast: control quality</span>
 <span class="pl-c"><span class="pl-c">#</span> -an: no audio</span>
 <span class="pl-c"><span class="pl-c">#</span> -c:a aac -b:a 128k: audio codec and bitrate</span>
 ffmpeg -i input -c:v libx265 -crf 26 -preset fast -an output.mp4
+
+<span class="pl-c"><span class="pl-c">#</span> Compress on macOS</span>
+<span class="pl-c"><span class="pl-c">#</span> -c:v hevc_videotoolbox -q:v 65: control quality</span>
+ffmpeg -i input -c:v hevc_videotoolbox -q:v 65 -an output.mp4
 
 <span class="pl-c"><span class="pl-c">#</span> Remove unwanted stream</span>
 <span class="pl-c"><span class="pl-c">#</span> -map 0: include all streams</span>
