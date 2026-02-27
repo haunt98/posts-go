@@ -1,9 +1,9 @@
 module github.com/haunt98/posts-go
 
-go 1.24.0
+go 1.25.0
 
 require (
-	github.com/google/go-github/v83 v83.0.0
+	github.com/google/go-github/v84 v84.0.0
 	github.com/make-go-great/copy-go v0.10.0
 	github.com/make-go-great/netrc-go v0.0.3
 	golang.org/x/oauth2 v0.35.0
