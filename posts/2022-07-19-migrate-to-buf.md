@@ -82,7 +82,7 @@ raw:
 	# https://github.com/chmln/sd
 	sd -F 'import "validate/validate.proto";' '' ./api/raw/*.proto
 	sd -F 'import "marshal-zap.proto";' '' ./api/raw/*.proto
-	sd -f s '\s\[\s*\(.*?];' ';' ./api/raw/*.proto
+	sd -f s -A '\s\[\s*\(.*?];' ';' ./api/raw/*.proto
 	buf format --path ./api/raw -w
 ```
 

@@ -168,7 +168,7 @@
 	<span class="pl-c"><span class="pl-c">#</span> https://github.com/chmln/sd</span>
 	sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> ./api/raw/<span class="pl-k">*</span>.proto
 	sd -F <span class="pl-s"><span class="pl-pds">'</span>import "marshal-zap.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> ./api/raw/<span class="pl-k">*</span>.proto
-	sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[\s*\(.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> ./api/raw/<span class="pl-k">*</span>.proto
+	sd -f s -A <span class="pl-s"><span class="pl-pds">'</span>\s\[\s*\(.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> ./api/raw/<span class="pl-k">*</span>.proto
 	buf format --path ./api/raw -w</pre>
     </div>
     <div class="markdown-heading">
