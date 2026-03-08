@@ -44,9 +44,14 @@
     </div>
     <p>KEK is Key Encryption Key. DEK is Data Encryption Key.</p>
     <p>Use KEK DEK for database encryption at rest.</p>
-    <p>
-      KEK is saved in key vault. DEK is <strong>random</strong> for each record.
-    </p>
+    <ul>
+      <li>KEK is saved in key vault</li>
+      <li>DEK is <strong>random</strong> for each record</li>
+      <li>
+        Do not save DEK directly in database, use KEK to encrypt DEK, then save
+        encrypted DEK instead
+      </li>
+    </ul>
     <div class="highlight highlight-source-mermaid">
       <pre><span class="pl-k">sequenceDiagram</span>
     <span class="pl-k">participant</span> <span class="pl-ent">client</span>
@@ -80,6 +85,26 @@
       <li>
         Query all encrypted DEK with old KEK version, then update only new
         encrypted DEK and new KEK version
+      </li>
+    </ul>
+    <div class="markdown-heading">
+      <h2 class="heading-element">References</h2>
+      <a
+        id="user-content-references"
+        class="anchor"
+        aria-label="Permalink: References"
+        href="#references"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <ul>
+      <li>
+        <a
+          href="https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html"
+          rel="nofollow"
+          >AWS Encryption context</a
+        >: Add additional authenticated data (AAD) into encryption and
+        decryption process in application level.
       </li>
     </ul>
 
