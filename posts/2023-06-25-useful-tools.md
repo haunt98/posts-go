@@ -8,6 +8,7 @@ This is just a raw list.
 
 - https://github.com/zsh-users/zsh-autosuggestions
 - https://github.com/zsh-users/zsh-history-substring-search
+- https://github.com/newren/git-filter-repo
 - https://github.com/junegunn/fzf
 - https://github.com/sharkdp/fd
 - https://github.com/sharkdp/bat
@@ -99,13 +100,14 @@ Language server
 
 Misc
 
+- https://github.com/jqlang/jq
 - https://github.com/mikefarah/yq
-- https://github.com/itchyny/gojq
 - https://github.com/antonmedv/fx
 - https://github.com/josephburnett/jd
 - https://github.com/cli/cli
 - https://gitlab.com/gitlab-org/cli
 - https://github.com/k1LoW/tbls
+- https://github.com/bojand/ghz
 - https://github.com/grafana/k6
 
 Go more

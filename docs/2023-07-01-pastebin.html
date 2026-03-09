@@ -470,6 +470,22 @@ git gc</pre>
       <pre>git rev-list abc123..HEAD --count</pre>
     </div>
     <div class="markdown-heading">
+      <h2 class="heading-element">Homebrew</h2>
+      <a
+        id="user-content-homebrew"
+        class="anchor"
+        aria-label="Permalink: Homebrew"
+        href="#homebrew"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <div class="highlight highlight-source-shell">
+      <pre>
+brew list --installed-on-request
+brew uses --installed XXX</pre
+      >
+    </div>
+    <div class="markdown-heading">
       <h2 class="heading-element">Delete <code>.DS_Store</code></h2>
       <a
         id="user-content-delete-ds_store"
@@ -489,24 +505,6 @@ git gc</pre>
     <p>With <a href="https://github.com/sharkdp/fd">fd</a>:</p>
     <div class="highlight highlight-source-shell">
       <pre>fd -H <span class="pl-s"><span class="pl-pds">'</span>^\.DS_Store$<span class="pl-pds">'</span></span> -tf -X rm</pre>
-    </div>
-    <div class="markdown-heading">
-      <h2 class="heading-element">
-        <a href="https://github.com/chmln/sd">sd</a>
-      </h2>
-      <a
-        id="user-content-sd"
-        class="anchor"
-        aria-label="Permalink: sd"
-        href="#sd"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> Remove proto option</span>
-sd -F <span class="pl-s"><span class="pl-pds">'</span>import "validate/validate.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
-sd -F <span class="pl-s"><span class="pl-pds">'</span>import "marshal-zap.proto";<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto
-sd -f s <span class="pl-s"><span class="pl-pds">'</span>\s\[\s*\(.*?];<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span> api/raw/<span class="pl-k">*</span>.proto</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
