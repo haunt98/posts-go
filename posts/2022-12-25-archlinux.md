@@ -296,9 +296,6 @@ See [KDE Distributions/Packaging Recommendations](https://community.kde.org/Dist
 
 ```sh
 pacman -Syu plasma-meta
-
-# Login manager
-pacman -Syu sddm
 ```
 
 #### More
