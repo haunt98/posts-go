@@ -14,7 +14,6 @@ This is just a raw list.
 - https://github.com/sharkdp/bat
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/dandavison/delta
-- https://github.com/Wilfred/difftastic
 - https://github.com/eza-community/eza
 - https://github.com/ajeetdsouza/zoxide
 - https://github.com/starship/starship
