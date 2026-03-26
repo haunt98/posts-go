@@ -46,11 +46,18 @@
     <p>Use KEK DEK for database encryption at rest.</p>
     <ul>
       <li>KEK is saved in key vault</li>
-      <li>DEK is <strong>random</strong> for each record</li>
       <li>
-        Do not save DEK directly in database, use KEK to encrypt DEK, then save
-        encrypted DEK instead
+        DEK is <strong>random</strong> for each record
+        <ul>
+          <li>
+            Do not save DEK directly in database, use KEK to encrypt DEK, then
+            save encrypted DEK instead
+          </li>
+          <li>Use DEK to encrypt data, then save encrypted data in database</li>
+          <li>Save KEK version in database</li>
+        </ul>
       </li>
+      <li>Use <strong>AES-256-GCM with AAD</strong> algorithm to encrypt</li>
     </ul>
     <div class="highlight highlight-source-mermaid">
       <pre><span class="pl-k">sequenceDiagram</span>
@@ -73,18 +80,78 @@
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">decrypt DEK using saved KEK version</span>
     <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">decrypt data using DEK</span></pre>
     </div>
-    <p>When rotate key:</p>
+    <p>When rotate KEK:</p>
     <ul>
       <li>Create new KEK</li>
       <li>New record will use new KEK</li>
       <li>Old record can decrypt using old KEK</li>
-    </ul>
-    <p>Migrate old data:</p>
-    <ul>
-      <li>Encrypted data is <strong>untouched</strong></li>
       <li>
-        Query all encrypted DEK with old KEK version, then update only new
-        encrypted DEK and new KEK version
+        Migrate data with old KEK
+        <ul>
+          <li>Encrypted data is <strong>untouched</strong></li>
+          <li>
+            Query all encrypted DEK with old KEK version, then update only new
+            encrypted DEK and new KEK version
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="markdown-heading">
+      <h2 class="heading-element">Query encrypted field</h2>
+      <a
+        id="user-content-query-encrypted-field"
+        class="anchor"
+        aria-label="Permalink: Query encrypted field"
+        href="#query-encrypted-field"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p>To query encrypted field, we need hash:</p>
+    <ul>
+      <li>
+        Hash key is saved in key vault, same as KEK
+        <ul>
+          <li>Use hash key to hash data, then save hash data in database</li>
+          <li>Save hash key version in database, same as KEK version</li>
+        </ul>
+      </li>
+      <li>
+        Composite index for column hash key version and hash data
+        <code>[32]byte</code>, <code>BINARY(32)</code> for MySQL in database
+      </li>
+      <li>Use <strong>HMAC-SHA256</strong> algorithm to hash</li>
+    </ul>
+    <div class="highlight highlight-source-mermaid">
+      <pre><span class="pl-k">sequenceDiagram</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">client</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">service</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">key_vault</span>
+    <span class="pl-k">participant</span> <span class="pl-ent">database</span>
+
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">init</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">key_vault</span><span class="pl-k">:</span> <span class="pl-s">get HASH_KEY_v1, HASH_KEY_v2, ...</span>
+
+    <span class="pl-ent">client </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">submit data</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">hash data using latest HASH_KEY</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">save hash data, HASH_KEY version</span>
+
+    <span class="pl-ent">client </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">query data</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">service</span><span class="pl-k">:</span> <span class="pl-s">hash data using all HASH_KEY</span>
+    <span class="pl-ent">service </span><span class="pl-k">-&gt;&gt;</span> <span class="pl-ent">database</span><span class="pl-k">:</span> <span class="pl-s">query using all HASH_KEY version and hashed data</span></pre>
+    </div>
+    <p>When rotate HASH_KEY:</p>
+    <ul>
+      <li>Create new HASH_KEY</li>
+      <li>New record will use new HASH_KEY</li>
+      <li>Old record can query using old HASH_KEY</li>
+      <li>
+        Migrate data with old HASH_KEY
+        <ul>
+          <li>
+            Query all data with old HASH_KEY version, decrypt data using KEK
+            DEK, then update new hash data and new HASH_KEY version
+          </li>
+        </ul>
       </li>
     </ul>
     <div class="markdown-heading">
