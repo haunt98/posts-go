@@ -111,25 +111,29 @@ killall Finder</pre>
 <span class="pl-c"><span class="pl-c">#</span> Value 3-8</span>
 defaults write -g NSColorSimulatedHardwareEnclosureNumber -int 7</pre>
     </div>
-    <p>Disable IPv6:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-sudo networksetup -listallnetworkservices
-sudo networksetup -setv6off Wi-Fi</pre
-      >
-    </div>
     <p>Clean up leftover data:</p>
     <div class="highlight highlight-text-adblock">
       <pre>
 /Library/Application Support
+/Library/Caches
 /Library/LaunchAgents
 /Library/LaunchDaemons
+/Library/Logs
 /Library/Preferences
+/Library/PrivilegedHelperTools
+
 /Users/Shared
+
+~/Library/Application Scripts
 ~/Library/Application Support
+~/Library/Caches
 ~/Library/Fonts (Removed)
 ~/Library/LaunchAgents
-~/Library/Preferences</pre
+~/Library/Logs
+~/Library/Preferences
+
+~/.local/share
+~/.cache</pre
       >
     </div>
     <p>Clean up leftover shell:</p>
