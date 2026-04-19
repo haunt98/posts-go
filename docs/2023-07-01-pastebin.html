@@ -411,7 +411,15 @@ sudo mdutil -Xv /Volumes/XXX</pre
       ></a>
     </div>
     <p>Edit <code>~/.ssh/config</code></p>
-    <pre lang="ssh"><code>Host *
+    <pre lang="ssh"><code>Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/XXX_ed25519
+
+Host git.sr.ht
+    HostName git.sr.ht
+    IdentityFile ~/.ssh/XXX_ed25519
+
+Host *
     IdentitiesOnly yes
     UseKeychain yes
 </code></pre>
@@ -461,6 +469,13 @@ perl -ne 'print if length($_) &gt; 120' ~/.zsh_history
         href="#git"
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
+    </div>
+    <p>Sign commits, tags:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>git config --global gpg.format ssh
+git config --global user.signingkey <span class="pl-k">~</span>/.ssh/XXX_ed25519.pub
+git config --global commit.gpgsign <span class="pl-c1">true</span>
+git config --global tag.gpgsign <span class="pl-c1">true</span></pre>
     </div>
     <p>Clean up:</p>
     <div class="highlight highlight-source-shell">
