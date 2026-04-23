@@ -9,7 +9,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/go-github/v84/github"
+	"github.com/google/go-github/v85/github"
 	"golang.org/x/oauth2"
 	"golang.org/x/sync/errgroup"
 
