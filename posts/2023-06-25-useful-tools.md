@@ -62,8 +62,6 @@ macOS
 - https://github.com/zed-industries/zed
 - https://github.com/crystalidea/macs-fan-control
 - https://github.com/jordanbaird/Ice
-- https://sourceforge.net/projects/skim-app/
-- https://github.com/alienator88/Pearcleaner
 - https://github.com/objective-see/KnockKnock
 
 ## Development
