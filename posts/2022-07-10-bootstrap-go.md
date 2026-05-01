@@ -167,7 +167,7 @@ Since go 1.22:
 Since go 1.21:
 
 - Use `slices.SortFunc` instead of `sort.Slice`.
-- Use `ctx.WithoutCancel` to disconnect context from parent.
+- Use `context.WithoutCancel(ctx)` to disconnect context from parent.
 - Use `clear(m)` to clear map entirely.
 
 Since go 1.20:
