@@ -333,7 +333,8 @@ internal/
         Use <code>slices.SortFunc</code> instead of <code>sort.Slice</code>.
       </li>
       <li>
-        Use <code>ctx.WithoutCancel</code> to disconnect context from parent.
+        Use <code>context.WithoutCancel(ctx)</code> to disconnect context from
+        parent.
       </li>
       <li>Use <code>clear(m)</code> to clear map entirely.</li>
     </ul>
