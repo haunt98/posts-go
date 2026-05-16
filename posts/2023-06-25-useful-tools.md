@@ -71,7 +71,6 @@ macOS
 Language
 
 - https://github.com/Schniz/fnm
-- https://github.com/oven-sh/bun
 - https://github.com/astral-sh/uv
 - https://github.com/astral-sh/ruff
 - https://github.com/astral-sh/ty
