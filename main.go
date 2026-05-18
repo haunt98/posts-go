@@ -9,8 +9,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/go-github/v86/github"
-	"golang.org/x/oauth2"
+	"github.com/google/go-github/v87/github"
 	"golang.org/x/sync/errgroup"
 
 	"github.com/make-go-great/copy-go"
@@ -83,17 +82,16 @@ func main() {
 			break
 		}
 	}
+
+	ghAccessToken = strings.TrimSpace(ghAccessToken)
 	if ghAccessToken == "" {
 		log.Fatalln("Empty GitHub token in netrc")
 	}
 
-	ghTokenSrc := oauth2.StaticTokenSource(
-		&oauth2.Token{
-			AccessToken: strings.TrimSpace(ghAccessToken),
-		},
-	)
-	ghHTTPClient := oauth2.NewClient(ctx, ghTokenSrc)
-	ghClient := github.NewClient(ghHTTPClient)
+	ghClient, err := github.NewClient(github.WithAuthToken(ghAccessToken))
+	if err != nil {
+		log.Fatalln("Failed to create GitHub client", err)
+	}
 
 	eg := new(errgroup.Group)
 
