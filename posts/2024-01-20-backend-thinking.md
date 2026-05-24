@@ -201,7 +201,7 @@ affecting main flow.
 
 Test is not a way to find bug, but to make sure what we code is actually what we think/expect.
 
-Best case is test with real dependencies (real servives, real Redis, real MySQL, real Kafka, ...). But it's not easy way
+Best case is test with real dependencies (real services, real Redis, real MySQL, real Kafka, ...). But it's not easy way
 to setup yourself.
 
 The easier way is to use mocks. Mock all dependencies to test all possible edge cases you can think of.

@@ -3,8 +3,8 @@
 Ticket system is a system which allows user to submit some kind of action, then system saves it as a ticket. Ticket
 later can be approve, reject by people or auto.
 
-Ticket system is very polular in domains which require Customer Service (CS) to help user. For example, to allow user
-submit identity infomartion for Electronic Know Your Customer (EKYC).
+Ticket system is very popular in domains which require Customer Service (CS) to help user. For example, to allow user
+submit identity information for Electronic Know Your Customer (EKYC).
 
 This servers as a checklist for future me to speed run building a new ticket system from scratch.
 
