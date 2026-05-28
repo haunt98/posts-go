@@ -103,7 +103,7 @@ Misc
 - https://github.com/cli/cli
     - `gh config set telemetry disabled`
 - https://gitlab.com/gitlab-org/cli
-    - `glab config set telemetry false`
+    - `glab config set --global telemetry false`
 - https://github.com/k1LoW/tbls
 - https://github.com/bojand/ghz
 - https://github.com/grafana/k6
