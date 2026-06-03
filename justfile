@@ -33,8 +33,8 @@ gen:
     go run .
 
 format-html:
-    npx prettier --log-level error --write ./templates/*.html ./docs/*.html
-    npx prettier --log-level error --print-width 120 --tab-width 4 --prose-wrap always --write ./posts
+    npx prettier --log-level error --write **/*.html
+    npx prettier --log-level error --print-width 120 --tab-width 4 --prose-wrap always --write **/*.md
 
 upstream:
     wcurl --curl-options="--clobber --netrc" https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown.css --output ./templates/github-markdown.css
