@@ -41,6 +41,7 @@ For fun
 - https://github.com/anomalyco/opencode
 - https://github.com/earendil-works/pi
 - https://github.com/rtk-ai/rtk
+    - `rtk telemetry disable`
     - `rtk init --global --opencode`
     - `rtk init --global --agent pi`
 
