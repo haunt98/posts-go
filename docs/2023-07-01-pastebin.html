@@ -83,6 +83,10 @@ xcode-select --install</pre>
     <div class="highlight highlight-source-shell">
       <pre>defaults write com.apple.dock ResetLaunchPad -bool <span class="pl-c1">true</span><span class="pl-k">;</span> killall Dock</pre>
     </div>
+    <p>Disable font smoothing:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>defaults -currentHost write -g AppleFontSmoothing -int 0</pre>
+    </div>
     <p>Reduce padding in menu bar (Log out then log in to apply):</p>
     <div class="highlight highlight-source-shell">
       <pre>
