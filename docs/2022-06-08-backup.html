@@ -75,12 +75,20 @@
         manager
       </li>
       <li>
-        <a href="https://getaegis.app/" rel="nofollow">Aegis Authenticator</a>:
-        2FA manager
+        <a href="https://github.com/beemdevelopment/Aegis"
+          >Aegis Authenticator</a
+        >: 2FA manager
       </li>
       <li>
-        <a href="https://rclone.org/" rel="nofollow">Rclone</a>: sync data to
+        <a href="https://github.com/rclone/rclone">Rclone</a>: sync data to
         cloud
+      </li>
+      <li>
+        <a href="https://github.com/restic/restic">restic</a>: encrypt data
+      </li>
+      <li>
+        <a href="https://github.com/localsend/localsend">LocalSend</a>: share
+        data between devices
       </li>
     </ul>
     <p>
@@ -140,10 +148,10 @@
       So that is my dotfiles, for my regular data, like Wallpaper or Books,
       Images, I use Google Drive (actually I pay for it). But the step: open the
       webpage, click the upload button and choose files seems boring and
-      time-consuming. So I use Rclone, it supports Google Drive, One Drive and
-      many providers but I only use Google Drive for now. The commands are
-      simple:
+      time-consuming. So I use Rclone, it supports many providers but I only use
+      Google Drive for now.
     </p>
+    <p>Rclone commands:</p>
     <div class="highlight highlight-source-shell">
       <pre><span class="pl-c"><span class="pl-c">#</span> Sync from local to remote</span>
 <span class="pl-c"><span class="pl-c">#</span> remote can be gdrive, 1drive, ..., anything you previously config with rclone</span>
@@ -167,18 +175,25 @@ rclone sync remote:MyBooks MyBooks -P --exclude .DS_Store</pre>
     </p>
     <p>
       As long as Bitwarden provides free passwords stored, I use all of its
-      apps, extensions so that I can easily sync passwords between laptops and
-      phones. The thing I need to remember is the master password of Bitwarden
-      in my head.
+      apps, extensions so that I can easily sync passwords between laptop and
+      phone. The thing I need to remember is the master password of Bitwarden in
+      my head.
     </p>
-    <p>
-      With Bitwardent/Aegis, I also can export the data (must always be
-      encrypted), then:
-    </p>
+    <p>The steps I do weekly:</p>
     <ul>
-      <li>Sync to Google Drive</li>
-      <li>Store locally in my laptop</li>
+      <li>Export Aegis/Bitwarden data from my phone</li>
+      <li>Send exported data to my laptop</li>
+      <li>Use restic to encrypt</li>
+      <li>Delete exported data from both my phone/laptop</li>
     </ul>
+    <p>restic commands:</p>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> Only first time</span>
+restic init --repo ./encrypted
+
+restic backup ./unencrypted --repo ./encrypted
+restic restore latest --repo ./encrypted --target <span class="pl-c1">.</span></pre>
+    </div>
     <div class="markdown-heading">
       <h2 class="heading-element">Recovery strategy</h2>
       <a
@@ -195,19 +210,19 @@ rclone sync remote:MyBooks MyBooks -P --exclude .DS_Store</pre>
     </p>
     <ul>
       <li>
-        If I lost my laptops, single laptop or all, do not panic as long as I
-        have my phones. The OTPs are in there, the passwords are in Bitwarden
-        cloud, other data is in Google Drive so nothing is lost here.
+        If I lost my laptop, do not panic as long as I have my phone. The OTPs
+        are in there, the passwords are in Bitwarden cloud, other data is in
+        Google Drive so nothing is lost here.
       </li>
       <li>
-        If I lost my phone, but not my laptops, I use the OTPs which are stored
-        locally in my laptops.
+        If I lost my phone, but not my laptop, I use the OTPs which are stored
+        locally in my laptop.
       </li>
       <li>
-        In the worst situation, I lost everything, my laptops, my phone. The
-        first step is to recover my SIM, then log in to Google account using the
-        password and SMS OTP. After that, log in to Bitwarden account using the
-        master password and OTP from Gmail, which I log in previously.
+        In the worst situation, I lost everything. The first step is to recover
+        my SIM, then log in to Google account using SMS OTP. After that, log in
+        to Bitwarden account using the master password and OTP from Gmail, which
+        I log in previously.
       </li>
     </ul>
     <div class="markdown-heading">
@@ -261,7 +276,7 @@ rclone sync remote:MyBooks MyBooks -P --exclude .DS_Store</pre>
           <td>3,387,900</td>
           <td>1</td>
           <td>2025</td>
-          <td></td>
+          <td>OK</td>
           <td>REDACTED_SERIAL</td>
         </tr>
         <tr>
@@ -325,7 +340,7 @@ rclone sync remote:MyBooks MyBooks -P --exclude .DS_Store</pre>
           <td>562,400</td>
           <td>1</td>
           <td>2025</td>
-          <td></td>
+          <td>OK</td>
           <td></td>
         </tr>
         <tr>
