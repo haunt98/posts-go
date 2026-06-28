@@ -57,8 +57,7 @@
     <div class="highlight highlight-source-shell">
       <pre>
 caffeinate -u -t 3600
-caffeinate -i</pre
-      >
+caffeinate -i</pre>
     </div>
     <p>Use Touch ID in Terminal:</p>
     <div class="highlight highlight-source-shell">
@@ -91,8 +90,7 @@ xcode-select --install</pre>
     <div class="highlight highlight-source-shell">
       <pre>
 defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
-defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre
-      >
+defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre>
     </div>
     <p>Tweak Finder:</p>
     <div class="highlight highlight-source-shell">
@@ -137,8 +135,7 @@ defaults write -g NSColorSimulatedHardwareEnclosureNumber -int 7</pre>
 ~/Library/Preferences
 
 ~/.local/share
-~/.cache</pre
-      >
+~/.cache</pre>
     </div>
     <p>Clean up leftover shell:</p>
     <div class="highlight highlight-text-adblock">
@@ -146,12 +143,29 @@ defaults write -g NSColorSimulatedHardwareEnclosureNumber -int 7</pre>
 /etc/bashrc
 /etc/profile
 /etc/zshrc
-/etc/paths.d</pre
-      >
+/etc/paths.d</pre>
     </div>
     <p>Clean up clipboard:</p>
     <div class="highlight highlight-source-shell">
       <pre>pbcopy <span class="pl-k">&lt;</span> /dev/null</pre>
+    </div>
+    <p>Bluetooth stutter:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>
+sudo rm /Library/Preferences/com.apple.Bluetooth.plist
+sudo pkill bluetoothd</pre>
+    </div>
+    <p>Disable Spotlight for external disk:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>
+mdutil -s /Volumes/XXX
+sudo mdutil -d /Volumes/XXX
+sudo mdutil -Xv /Volumes/XXX</pre>
+    </div>
+    <p>Reset Your Photos wallpapers:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>killall WallpaperAgent
+rm -rf <span class="pl-k">~</span>/Library/Containers/com.apple.wallpaper.extension.image/Data/Library/Preferences/com.apple.wallpaper.extension.image.plist <span class="pl-k">~</span>/Library/Application<span class="pl-cce">\ </span>Support/com.apple.wallpaper/</pre>
     </div>
     <p>
       <a
@@ -161,27 +175,11 @@ defaults write -g NSColorSimulatedHardwareEnclosureNumber -int 7</pre>
         <strong>Track pad</strong> settings to make right click instant</a
       >
     </p>
-    <p>Fix OpenVPN Client 3</p>
+    <p>Fix OpenVPN Client 3:</p>
     <div class="highlight highlight-source-shell">
       <pre>
 sudo launchctl unload -w /Library/LaunchDaemons/org.openvpn.client.plist
-sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre
-      >
-    </div>
-    <p>Bluetooth stutter:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-sudo rm /Library/Preferences/com.apple.Bluetooth.plist
-sudo pkill bluetoothd</pre
-      >
-    </div>
-    <p>Disable Spotlight for external disk:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-mdutil -s /Volumes/XXX
-sudo mdutil -d /Volumes/XXX
-sudo mdutil -Xv /Volumes/XXX</pre
-      >
+sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
     </div>
     <p>Thanks:</p>
     <ul>
@@ -490,8 +488,7 @@ git gc</pre>
     <div class="highlight highlight-source-shell">
       <pre>
 brew list --installed-on-request
-brew uses --installed XXX</pre
-      >
+brew uses --installed XXX</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">Delete <code>.DS_Store</code></h2>
