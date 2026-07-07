@@ -9,7 +9,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/go-github/v88/github"
+	"github.com/google/go-github/v89/github"
 	"golang.org/x/sync/errgroup"
 
 	"github.com/make-go-great/copy-go"
