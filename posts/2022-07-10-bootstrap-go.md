@@ -159,6 +159,7 @@ Since go 1.24:
 
 - Use `os.Root` instead of `os.Open`
 - Use `omitzero` instead of `omitempty`
+- Use `t.Context` instead of `context.Background()`
 
 Since go 1.22:
 
