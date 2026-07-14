@@ -4,6 +4,16 @@ It is hard to write bootstrap tool to quickly create Go service. So I write this
 checklist for me every damn time I need to write a Go service from scratch. Also, this is my personal opinion, so feel
 free to comment.
 
+## `go.mod`
+
+`module` name is git repo name.
+
+`go` version in format `1.x.0`.
+
+```sh
+go mod tidy && go mod edit -toolchain=none
+```
+
 ## Structure
 
 ```txt
