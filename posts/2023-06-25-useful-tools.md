@@ -106,13 +106,13 @@ Misc
 - https://github.com/mikefarah/yq
 - https://github.com/antonmedv/fx
 - https://github.com/josephburnett/jd
+- https://github.com/medialab/xan
 - https://github.com/cli/cli
     - `gh config set telemetry disabled`
 - https://gitlab.com/gitlab-org/cli
     - `glab config set --global telemetry false`
     - `glab skills install glab --global --force`
 - https://github.com/k1LoW/tbls
-- https://github.com/bojand/ghz
 - https://github.com/grafana/k6
 
 Go more
