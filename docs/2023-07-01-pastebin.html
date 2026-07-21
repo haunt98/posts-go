@@ -584,34 +584,6 @@ rsync -avP src/ dst</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
-        <a href="https://github.com/ayoisaiah/f2">F2</a>
-      </h2>
-      <a
-        id="user-content-f2"
-        class="anchor"
-        aria-label="Permalink: F2"
-        href="#f2"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Include hash md5</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
-f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Not include time</span>
-f2 --exclude=<span class="pl-s"><span class="pl-pds">"</span>\d+x\d+_[a-z\d]{32}<span class="pl-pds">"</span></span> --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
-
-<span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
-f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
-    </div>
-    <div class="markdown-heading">
-      <h2 class="heading-element">
         <a href="https://github.com/FFmpeg/FFmpeg">ffmpeg</a>
       </h2>
       <a
@@ -710,7 +682,35 @@ vips rot filename.jxl new_filename.jxl d90</pre>
 exiftool -time:all -s Untitled.jpg
 
 <span class="pl-c"><span class="pl-c">#</span> Batch rename</span>
-exiftool <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;FileModifyDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;ModifyDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;MediaCreateDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;CreateDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;DateTimeOriginal<span class="pl-pds">"</span></span> -d <span class="pl-s"><span class="pl-pds">"</span>%Y%m%d_%H%M%S_%%.c.%%e<span class="pl-pds">"</span></span> <span class="pl-c1">.</span></pre>
+exiftool <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;FileModifyDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;ModifyDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;MediaCreateDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;CreateDate<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>-FileName&lt;DateTimeOriginal<span class="pl-pds">"</span></span> -d <span class="pl-s"><span class="pl-pds">"</span>%Y%m%d_%H%M%S_%%.2c.%%e<span class="pl-pds">"</span></span> <span class="pl-c1">.</span></pre>
+    </div>
+    <div class="markdown-heading">
+      <h2 class="heading-element">
+        <a href="https://github.com/ayoisaiah/f2">F2</a>
+      </h2>
+      <a
+        id="user-content-f2"
+        class="anchor"
+        aria-label="Permalink: F2"
+        href="#f2"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> If dry run, remove --exec</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Include hash md5</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Include ImageSize (require exiftool)</span>
+f2 --replace <span class="pl-s"><span class="pl-pds">"</span>{mtime.YYYY}{mtime.MM}{mtime.DD}_{mtime.H}{mtime.mm}{mtime.ss}_{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Not include time</span>
+f2 --exclude=<span class="pl-s"><span class="pl-pds">"</span>\d+x\d+_[a-z\d]{32}<span class="pl-pds">"</span></span> --sort=mtime --replace <span class="pl-s"><span class="pl-pds">"</span>{xt.ImageSize}_{hash.md5}{ext}<span class="pl-pds">"</span></span> --exec
+
+<span class="pl-c"><span class="pl-c">#</span> Remove space in directory</span>
+f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> --replace <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> --string-mode --only-dir --exec</pre>
     </div>
     <div class="markdown-heading">
       <h2 class="heading-element">
