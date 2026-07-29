@@ -39,17 +39,9 @@ For fun
 - https://github.com/fastfetch-cli/fastfetch
 
 - https://github.com/anomalyco/opencode
-- https://github.com/earendil-works/pi
 - https://github.com/rtk-ai/rtk
     - `rtk telemetry disable`
     - `rtk init --global --opencode`
-    - `rtk init --global --agent pi`
-
-Windows
-
-- https://github.com/abbodi1406/KMS_VL_ALL_AIO
-- https://github.com/massgravel/Microsoft-Activation-Scripts
-- https://github.com/abbodi1406/vcredist
 
 ### UI
 
