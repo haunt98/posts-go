@@ -6,8 +6,10 @@ This is just a raw list.
 
 ### Terminal
 
+- https://github.com/neovim/neovim
+    - `ln -s /dev/null ~/.local/state/nvim/lsp.log`
+    - `ln -s /dev/null ~/.local/state/nvim/nvim.log`
 - https://github.com/zsh-users/zsh-autosuggestions
-- https://github.com/zsh-users/zsh-history-substring-search
 - https://github.com/newren/git-filter-repo
 - https://github.com/junegunn/fzf
 - https://github.com/sharkdp/fd
@@ -18,7 +20,6 @@ This is just a raw list.
 - https://github.com/ajeetdsouza/zoxide
 - https://github.com/starship/starship
 - https://github.com/chmln/sd
-- https://github.com/walles/moar
 
 - https://github.com/WayneD/rsync
 - https://github.com/rclone/rclone
@@ -39,6 +40,7 @@ For fun
 - https://github.com/fastfetch-cli/fastfetch
 
 - https://github.com/anomalyco/opencode
+    - `ln -s /dev/null ~/.local/share/opencode/log/opencode.log`
 - https://github.com/rtk-ai/rtk
     - `rtk telemetry disable`
     - `rtk init --global --opencode`
@@ -57,7 +59,13 @@ macOS
 - https://github.com/waydabber/BetterDisplay
     - https://github.com/waydabber/BetterDisplay/wiki/Fully-scalable-HiDPI-desktop#notes-and-troubleshooting
 - https://github.com/pqrs-org/Karabiner-Elements
+    - `ln -s /dev/null ~/.local/share/karabiner/log/console_user_server.log`
+    - `ln -s /dev/null ~/.local/share/karabiner/log/core_service.log`
+    - `sudo ln -s /dev/null /private/var/log/karabiner/core_service.log`
+    - `sudo ln -s /dev/null /private/var/log/karabiner/virtual_hid_device_service.log`
 - https://github.com/zed-industries/zed
+    - `ln -s /dev/null ~/Library/Logs/Zed/Zed.log`
+    - `ln -s /dev/null ~/Library/Logs/Zed/telemetry.log`
 - https://github.com/crystalidea/macs-fan-control
 - https://github.com/jordanbaird/Ice
 - https://github.com/objective-see/KnockKnock
@@ -117,6 +125,7 @@ Go more
 ### UI
 
 - https://httpie.io/desktop
+    - `ln -s /dev/null ~/Library/Logs/HTTPie/main.log`
 - https://github.com/riok/Kreya
 
 macOS
