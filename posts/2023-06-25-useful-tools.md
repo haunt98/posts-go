@@ -41,9 +41,6 @@ For fun
 
 - https://github.com/anomalyco/opencode
     - `ln -s /dev/null ~/.local/share/opencode/log/opencode.log`
-- https://github.com/rtk-ai/rtk
-    - `rtk telemetry disable`
-    - `rtk init --global --opencode`
 
 ### UI
 
