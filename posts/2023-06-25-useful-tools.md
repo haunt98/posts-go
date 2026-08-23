@@ -39,6 +39,9 @@ For fun
 - https://github.com/qpdf/qpdf
 - https://github.com/fastfetch-cli/fastfetch
 
+- https://github.com/Genymobile/scrcpy
+- https://github.com/Genymobile/gnirehtet
+
 - https://github.com/anomalyco/opencode
     - `ln -s /dev/null ~/.local/share/opencode/log/opencode.log`
 
@@ -51,21 +54,21 @@ For fun
 
 macOS
 
+- https://github.com/zed-industries/zed
+    - `ln -s /dev/null ~/Library/Logs/Zed/Zed.log`
+    - `ln -s /dev/null ~/Library/Logs/Zed/telemetry.log`
 - https://github.com/iina/iina
-- https://github.com/rxhanson/Rectangle
-- https://github.com/waydabber/BetterDisplay
-    - https://github.com/waydabber/BetterDisplay/wiki/Fully-scalable-HiDPI-desktop#notes-and-troubleshooting
+- https://github.com/objective-see/KnockKnock
+- https://github.com/objective-see/LuLu
 - https://github.com/pqrs-org/Karabiner-Elements
     - `ln -s /dev/null ~/.local/share/karabiner/log/console_user_server.log`
     - `ln -s /dev/null ~/.local/share/karabiner/log/core_service.log`
     - `sudo ln -s /dev/null /private/var/log/karabiner/core_service.log`
     - `sudo ln -s /dev/null /private/var/log/karabiner/virtual_hid_device_service.log`
-- https://github.com/zed-industries/zed
-    - `ln -s /dev/null ~/Library/Logs/Zed/Zed.log`
-    - `ln -s /dev/null ~/Library/Logs/Zed/telemetry.log`
+- https://github.com/rxhanson/Rectangle
+- https://github.com/waydabber/BetterDisplay
+    - https://github.com/waydabber/BetterDisplay/wiki/Fully-scalable-HiDPI-desktop#notes-and-troubleshooting
 - https://github.com/crystalidea/macs-fan-control
-- https://github.com/jordanbaird/Ice
-- https://github.com/objective-see/KnockKnock
 
 ## Development
 
