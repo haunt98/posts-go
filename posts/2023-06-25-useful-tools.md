@@ -120,6 +120,7 @@ Go more
 - https://pkg.go.dev/golang.org/x/telemetry/cmd/gotelemetry
 - https://github.com/mvdan/gofumpt
 - https://github.com/golangci/golangci-lint
+- https://github.com/dominikh/go-tools
 - https://github.com/bufbuild/buf
 
 ### UI
