@@ -9,7 +9,6 @@ This is just a raw list.
 - https://github.com/neovim/neovim
     - `ln -s /dev/null ~/.local/state/nvim/lsp.log`
     - `ln -s /dev/null ~/.local/state/nvim/nvim.log`
-- https://github.com/zsh-users/zsh-autosuggestions
 - https://github.com/newren/git-filter-repo
 - https://github.com/junegunn/fzf
 - https://github.com/sharkdp/fd
@@ -44,6 +43,7 @@ For fun
 
 - https://github.com/anomalyco/opencode
     - `ln -s /dev/null ~/.local/share/opencode/log/opencode.log`
+- https://github.com/modem-dev/hunk
 
 ### UI
 
@@ -57,9 +57,6 @@ macOS
 - https://github.com/zed-industries/zed
     - `ln -s /dev/null ~/Library/Logs/Zed/Zed.log`
     - `ln -s /dev/null ~/Library/Logs/Zed/telemetry.log`
-- https://github.com/iina/iina
-- https://github.com/objective-see/KnockKnock
-- https://github.com/objective-see/LuLu
 - https://github.com/pqrs-org/Karabiner-Elements
     - `ln -s /dev/null ~/.local/share/karabiner/log/console_user_server.log`
     - `ln -s /dev/null ~/.local/share/karabiner/log/core_service.log`
@@ -68,6 +65,9 @@ macOS
 - https://github.com/rxhanson/Rectangle
 - https://github.com/waydabber/BetterDisplay
     - https://github.com/waydabber/BetterDisplay/wiki/Fully-scalable-HiDPI-desktop#notes-and-troubleshooting
+- https://github.com/iina/iina
+- https://github.com/objective-see/KnockKnock
+- https://github.com/objective-see/LuLu
 - https://github.com/crystalidea/macs-fan-control
 
 ## Development
