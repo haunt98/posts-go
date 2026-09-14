@@ -66,53 +66,6 @@ caffeinate -i</pre>
 <span class="pl-c"><span class="pl-c">#</span> Uncomment last line</span>
 sudo nano /etc/pam.d/sudo_local</pre>
     </div>
-    <p>Hide Developer in Spotlight:</p>
-    <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c1">cd</span> /Applications
-touch Xcode.app
-
-<span class="pl-c"><span class="pl-c">#</span> Xcode mini version</span>
-xcode-select --install</pre>
-    </div>
-    <p>Repeat key:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>defaults write -g ApplePressAndHoldEnabled -bool <span class="pl-c1">false</span></pre>
-    </div>
-    <p>Reset launchpad:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>defaults write com.apple.dock ResetLaunchPad -bool <span class="pl-c1">true</span><span class="pl-k">;</span> killall Dock</pre>
-    </div>
-    <p>Disable font smoothing:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>defaults -currentHost write -g AppleFontSmoothing -int 0</pre>
-    </div>
-    <p>Reduce padding in menu bar (Log out then log in to apply):</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
-defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6</pre>
-    </div>
-    <p>Tweak Finder:</p>
-    <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> Use list view</span>
-defaults write com.apple.finder FXPreferredViewStyle -string <span class="pl-s"><span class="pl-pds">"</span>Nlsv<span class="pl-pds">"</span></span>
-<span class="pl-c"><span class="pl-c">#</span> Show path bar</span>
-defaults write com.apple.finder ShowPathbar -bool <span class="pl-c1">true</span>
-<span class="pl-c"><span class="pl-c">#</span> Show status bar</span>
-defaults write com.apple.finder ShowStatusBar -bool <span class="pl-c1">true</span>
-<span class="pl-c"><span class="pl-c">#</span> Show filename extensions</span>
-defaults write NSGlobalDomain AppleShowAllExtensions -bool <span class="pl-c1">true</span>
-<span class="pl-c"><span class="pl-c">#</span> Keep folders on top when sorting by name</span>
-defaults write com.apple.finder _FXSortFoldersFirst -bool <span class="pl-c1">true</span>
-
-killall Finder</pre>
-    </div>
-    <p>Enable accent color:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>defaults write -g NSColorSimulateHardwareAccent -bool YES
-<span class="pl-c"><span class="pl-c">#</span> Value 3-8</span>
-defaults write -g NSColorSimulatedHardwareEnclosureNumber -int 7</pre>
-    </div>
     <p>Clean up leftover data:</p>
     <div class="highlight highlight-text-adblock">
       <pre>
@@ -145,27 +98,12 @@ defaults write -g NSColorSimulatedHardwareEnclosureNumber -int 7</pre>
 /etc/zshrc
 /etc/paths.d</pre>
     </div>
-    <p>Clean up clipboard:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>pbcopy <span class="pl-k">&lt;</span> /dev/null</pre>
-    </div>
-    <p>Bluetooth stutter:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-sudo rm /Library/Preferences/com.apple.Bluetooth.plist
-sudo pkill bluetoothd</pre>
-    </div>
     <p>Disable Spotlight for external disk:</p>
     <div class="highlight highlight-source-shell">
       <pre>
 mdutil -s /Volumes/XXX
 sudo mdutil -d /Volumes/XXX
 sudo mdutil -Xv /Volumes/XXX</pre>
-    </div>
-    <p>Reset Your Photos wallpapers:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>killall WallpaperAgent
-rm -rf <span class="pl-k">~</span>/Library/Containers/com.apple.wallpaper.extension.image/Data/Library/Preferences/com.apple.wallpaper.extension.image.plist <span class="pl-k">~</span>/Library/Application<span class="pl-cce">\ </span>Support/com.apple.wallpaper/</pre>
     </div>
     <p>
       <a
@@ -175,9 +113,11 @@ rm -rf <span class="pl-k">~</span>/Library/Containers/com.apple.wallpaper.extens
         <strong>Track pad</strong> settings to make right click instant</a
       >
     </p>
-    <p>Fix OpenVPN Client 3:</p>
+    <p>OpenVPN Client 3:</p>
     <div class="highlight highlight-source-shell">
       <pre>
+sudo ln -s /dev/null /private/var/log/ovpnagent.log
+
 sudo launchctl unload -w /Library/LaunchDaemons/org.openvpn.client.plist
 sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
     </div>
@@ -190,58 +130,14 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
       </li>
       <li>
         <a
-          href="https://flaky.build/native-fix-for-applications-hiding-under-the-macbook-pro-notch"
-          rel="nofollow"
-          >Native fix for applications hiding under the MacBook Pro notch</a
-        >
-        <ul>
-          <li>
-            <a href="https://apple.stackexchange.com/q/406316" rel="nofollow"
-              >Can the spacing of menu bar apps be modified in macOS Big Sur and
-              later?</a
-            >
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a
-          href="https://appletoolbox.com/macos-how-to-disable-ipv6/"
-          rel="nofollow"
-          >macOS: How to Disable IPv6</a
-        >
-      </li>
-      <li>
-        <a
           href="https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116"
           >How to fully uninstall Logitech G HUB on macOS via terminal/command
           line</a
         >
       </li>
       <li>
-        <a href="https://www.bejarano.io/hardening-macos/" rel="nofollow"
-          >Hardening macOS</a
-        >
-        <ul>
-          <li>
-            <a href="https://github.com/drduh/macOS-Security-and-Privacy-Guide"
-              >https://github.com/drduh/macOS-Security-and-Privacy-Guide</a
-            >
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="https://mac.install.guide/mac-setup/" rel="nofollow"
-          >Mac Setup</a
-        >
-      </li>
-      <li>
         <a href="https://github.com/OpenVPN/openvpn3/issues/243"
           >https://github.com/OpenVPN/openvpn3/issues/243</a
-        >
-      </li>
-      <li>
-        <a href="https://stackoverflow.com/q/15872666" rel="nofollow"
-          >https://stackoverflow.com/q/15872666</a
         >
       </li>
       <li>
@@ -258,25 +154,6 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
           rel="nofollow"
           >Upgrading Homebrew and avoiding the failed to verify attestation
           error</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://georgegarside.com/blog/macos/imac-m1-accent-colours-any-mac/"
-          rel="nofollow"
-          >Use iMac M1 accent colours on any Mac</a
-        >
-        <ul>
-          <li>
-            <a href="https://mahdi.jp/apps/accents" rel="nofollow"
-              >https://mahdi.jp/apps/accents</a
-            >
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="https://stackoverflow.com/q/72369320" rel="nofollow"
-          >Why always something is running at port 5000 on my mac</a
         >
       </li>
       <li>
