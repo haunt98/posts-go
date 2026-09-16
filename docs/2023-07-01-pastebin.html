@@ -54,11 +54,7 @@
       ></a>
     </div>
     <p>Never sleep:</p>
-    <div class="highlight highlight-source-shell">
-      <pre>
-caffeinate -u -t 3600
-caffeinate -i</pre>
-    </div>
+    <div class="highlight highlight-source-shell"><pre>caffeinate -i</pre></div>
     <p>Use Touch ID in Terminal:</p>
     <ul>
       <li>
@@ -99,16 +95,6 @@ sudo nano /etc/pam.d/sudo_local</pre>
     </ul>
     <div class="highlight highlight-text-adblock">
       <pre>
-/Library/Application Support
-/Library/Caches
-/Library/LaunchAgents
-/Library/LaunchDaemons
-/Library/Logs
-/Library/Preferences
-/Library/PrivilegedHelperTools
-
-/Users/Shared
-
 ~/Library/Application Scripts
 ~/Library/Application Support
 ~/Library/Caches
@@ -118,7 +104,17 @@ sudo nano /etc/pam.d/sudo_local</pre>
 ~/Library/Preferences
 
 ~/.local/share
-~/.cache</pre>
+~/.cache
+
+/Library/Application Support
+/Library/Caches
+/Library/LaunchAgents
+/Library/LaunchDaemons
+/Library/Logs
+/Library/Preferences
+/Library/PrivilegedHelperTools
+
+/Users/Shared</pre>
     </div>
     <p>Clean up leftover shell:</p>
     <div class="highlight highlight-text-adblock">
@@ -195,13 +191,13 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
     <p><code>about:config</code>:</p>
     <ul>
       <li>
-        <p>Disable unused features:</p>
+        Disable unused features:
         <ul>
           <li><code>identity.fxaccounts.enabled</code>: false</li>
         </ul>
       </li>
       <li>
-        <p>Good settings:</p>
+        Good settings:
         <ul>
           <li><code>network.IDN_show_punycode</code>: true</li>
           <li><code>browser.tabs.insertAfterCurrent</code>: true</li>
@@ -231,68 +227,9 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
         >
       </li>
       <li>
-        <a
-          href="https://blog.mozilla.org/security/2021/01/07/encrypted-client-hello-the-future-of-esni-in-firefox/"
-          rel="nofollow"
-          >Encrypted Client Hello: the future of ESNI in Firefox</a
-        >
-      </li>
-      <li>
         <a href="https://www.xudongz.com/blog/2017/idn-phishing/" rel="nofollow"
           >Phishing with Unicode Domains</a
         >
-      </li>
-      <li>
-        <a href="https://sizeof.cat/links/" rel="nofollow"
-          >https://sizeof.cat/links/</a
-        >
-      </li>
-    </ul>
-    <div class="markdown-heading">
-      <h2 class="heading-element">ssh config</h2>
-      <a
-        id="user-content-ssh-config"
-        class="anchor"
-        aria-label="Permalink: ssh config"
-        href="#ssh-config"
-        ><span aria-hidden="true" class="octicon octicon-link"></span
-      ></a>
-    </div>
-    <p>Edit <code>~/.ssh/config</code></p>
-    <pre lang="ssh"><code>Host github.com
-    HostName github.com
-    IdentityFile ~/.ssh/XXX_ed25519
-
-Host git.sr.ht
-    HostName git.sr.ht
-    IdentityFile ~/.ssh/XXX_ed25519
-
-Host *
-    IdentitiesOnly yes
-    UseKeychain yes
-</code></pre>
-    <p>Thanks:</p>
-    <ul>
-      <li>
-        <a
-          href="https://tim.siosm.fr/blog/2023/01/13/openssh-key-management/"
-          rel="nofollow"
-          >OpenSSH client side key management for better privacy and security</a
-        >
-      </li>
-      <li>
-        <a href="https://stackoverflow.com/a/41576222" rel="nofollow"
-          >Git keeps asking me for my ssh key passphrase</a
-        >
-        <ul>
-          <li>
-            <a
-              href="https://developer.apple.com/library/archive/technotes/tn2449/_index.html"
-              rel="nofollow"
-              >OpenSSH updates in macOS 10.12.2</a
-            >
-          </li>
-        </ul>
       </li>
     </ul>
     <div class="markdown-heading">
