@@ -60,13 +60,43 @@ caffeinate -u -t 3600
 caffeinate -i</pre>
     </div>
     <p>Use Touch ID in Terminal:</p>
+    <ul>
+      <li>
+        <a href="https://apple.stackexchange.com/a/466029" rel="nofollow"
+          >Can Touch ID on Mac authenticate sudo in Terminal?</a
+        >
+      </li>
+    </ul>
     <div class="highlight highlight-source-shell">
       <pre>sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
 
 <span class="pl-c"><span class="pl-c">#</span> Uncomment last line</span>
 sudo nano /etc/pam.d/sudo_local</pre>
     </div>
+    <p>Repeat key:</p>
+    <ul>
+      <li>
+        <a
+          href="https://stackoverflow.com/questions/33152551/how-can-i-disable-applepressandholdenabled-for-a-specific-application-repeat"
+          rel="nofollow"
+          >https://stackoverflow.com/questions/33152551/how-can-i-disable-applepressandholdenabled-for-a-specific-application-repeat</a
+        >
+      </li>
+    </ul>
+    <div class="highlight highlight-source-shell">
+      <pre>defaults write -g ApplePressAndHoldEnabled -bool <span class="pl-c1">false</span></pre>
+    </div>
     <p>Clean up leftover data:</p>
+    <ul>
+      <li>
+        <a
+          href="http://blog.greggant.com/posts/2022/04/10/reclaiming-space-from-system-data-in-macos.html"
+          rel="nofollow"
+          >Reclaiming storage/space from 'System Data' in macOS: A tutorial on
+          understanding the System Data usage</a
+        >
+      </li>
+    </ul>
     <div class="highlight highlight-text-adblock">
       <pre>
 /Library/Application Support
@@ -105,15 +135,14 @@ mdutil -s /Volumes/XXX
 sudo mdutil -d /Volumes/XXX
 sudo mdutil -Xv /Volumes/XXX</pre>
     </div>
-    <p>
-      <a
-        href="https://mastodon.online/@nikitonsky/112220593113484602"
-        rel="nofollow"
-        >Disable <strong>Smart zoom</strong> in
-        <strong>Track pad</strong> settings to make right click instant</a
-      >
-    </p>
     <p>OpenVPN Client 3:</p>
+    <ul>
+      <li>
+        <a href="https://github.com/OpenVPN/openvpn3/issues/243"
+          >https://github.com/OpenVPN/openvpn3/issues/243</a
+        >
+      </li>
+    </ul>
     <div class="highlight highlight-source-shell">
       <pre>
 sudo ln -s /dev/null /private/var/log/ovpnagent.log
@@ -124,36 +153,18 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
     <p>Thanks:</p>
     <ul>
       <li>
-        <a href="https://apple.stackexchange.com/a/466029" rel="nofollow"
-          >Can Touch ID on Mac authenticate sudo in Terminal?</a
-        >
-      </li>
-      <li>
         <a
-          href="https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116"
-          >How to fully uninstall Logitech G HUB on macOS via terminal/command
-          line</a
-        >
-      </li>
-      <li>
-        <a href="https://github.com/OpenVPN/openvpn3/issues/243"
-          >https://github.com/OpenVPN/openvpn3/issues/243</a
-        >
-      </li>
-      <li>
-        <a
-          href="http://blog.greggant.com/posts/2022/04/10/reclaiming-space-from-system-data-in-macos.html"
+          href="https://mastodon.online/@nikitonsky/112220593113484602"
           rel="nofollow"
-          >Reclaiming storage/space from 'System Data' in macOS: A tutorial on
-          understanding the System Data usage</a
+          >Disable <strong>Smart zoom</strong> in
+          <strong>Track pad</strong> settings to make right click instant</a
         >
       </li>
       <li>
         <a
-          href="https://til.simonwillison.net/homebrew/no-verify-attestations"
+          href="https://zed.dev/docs/development/macos#speeding-up-verification"
           rel="nofollow"
-          >Upgrading Homebrew and avoiding the failed to verify attestation
-          error</a
+          >Building Zed for macOS/Speeding up verification</a
         >
       </li>
       <li>
@@ -165,9 +176,9 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
       </li>
       <li>
         <a
-          href="https://zed.dev/docs/development/macos#speeding-up-verification"
-          rel="nofollow"
-          >Building Zed for macOS/Speeding up verification</a
+          href="https://gist.github.com/timotgl/f3d8c49ad582ec1af8ff01143465e116"
+          >How to fully uninstall Logitech G HUB on macOS via terminal/command
+          line</a
         >
       </li>
     </ul>
@@ -192,26 +203,8 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
       <li>
         <p>Good settings:</p>
         <ul>
-          <li>
-            <code
-              >media.videocontrols.picture-in-picture.video-toggle.always-show</code
-            >: true
-          </li>
           <li><code>network.IDN_show_punycode</code>: true</li>
           <li><code>browser.tabs.insertAfterCurrent</code>: true</li>
-        </ul>
-      </li>
-      <li>
-        <p>Encrypted Client Hello (ECH):</p>
-        <ul>
-          <li><code>network.dns.echconfig.enabled</code>: true</li>
-          <li><code>network.dns.use_https_rr_as_altsvc</code>: true</li>
-        </ul>
-      </li>
-      <li>
-        <p>Experiment</p>
-        <ul>
-          <li><code>image.jxl.enabled</code>: true</li>
         </ul>
       </li>
     </ul>
@@ -312,9 +305,10 @@ Host *
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <pre><code># Long line in zsh history
-perl -ne 'print if length($_) &gt; 120' ~/.zsh_history
-</code></pre>
+    <div class="highlight highlight-source-shell">
+      <pre><span class="pl-c"><span class="pl-c">#</span> Long line in zsh history</span>
+perl -ne <span class="pl-s"><span class="pl-pds">'</span>print if length($_) &gt; 120<span class="pl-pds">'</span></span> <span class="pl-k">~</span>/.zsh_history</pre>
+    </div>
     <div class="markdown-heading">
       <h2 class="heading-element">git</h2>
       <a
