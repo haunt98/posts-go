@@ -33,7 +33,8 @@ For fun
 
 - https://github.com/yt-dlp/yt-dlp
 - https://github.com/libvips/libvips
-    - https://github.com/libjxl/libjxl
+- https://github.com/libjxl/libjxl
+- https://github.com/exiftool/exiftool
 
 - https://github.com/qpdf/qpdf
 - https://github.com/fastfetch-cli/fastfetch
