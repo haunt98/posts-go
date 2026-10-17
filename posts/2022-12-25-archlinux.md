@@ -99,7 +99,7 @@ mount --mkdir /dev/extended_boot_loader_partition /mnt/boot
 Please check [Mirrors](https://wiki.archlinux.org/title/Mirrors) if you have slow Internet.
 
 ```sh
-pacstrap -K /mnt base linux linux-firmware
+pacstrap -K /mnt base linux linux-firmware dracut
 
 # AMD (optional)
 pacstrap -K /mnt amd-ucode
@@ -163,8 +163,20 @@ myhostname
 
 #### Initramfs
 
+Use [dracut](https://wiki.archlinux.org/title/Dracut) instead of
+[mkinitcpio](https://wiki.archlinux.org/title/Mkinitcpio).
+
 ```sh
-mkinitcpio -P
+dracut --add-confdir no-network /boot/initramfs-linux.img
+
+dracut -f --regenerate-all
+```
+
+After first boot:
+
+```sh
+ln -sf /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
+ln -sf /dev/null /etc/pacman.d/hooks/60-mkinitcpio-remove.hook
 ```
 
 #### Root password

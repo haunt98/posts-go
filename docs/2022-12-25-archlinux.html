@@ -276,7 +276,7 @@ mount --mkdir /dev/extended_boot_loader_partition /mnt/boot</pre>
       if you have slow Internet.
     </p>
     <div class="highlight highlight-source-shell">
-      <pre>pacstrap -K /mnt base linux linux-firmware
+      <pre>pacstrap -K /mnt base linux linux-firmware dracut
 
 <span class="pl-c"><span class="pl-c">#</span> AMD (optional)</span>
 pacstrap -K /mnt amd-ucode
@@ -389,7 +389,28 @@ hwclock --systohc</pre>
         ><span aria-hidden="true" class="octicon octicon-link"></span
       ></a>
     </div>
-    <div class="highlight highlight-source-shell"><pre>mkinitcpio -P</pre></div>
+    <p>
+      Use
+      <a href="https://wiki.archlinux.org/title/Dracut" rel="nofollow"
+        >dracut</a
+      >
+      instead of
+      <a href="https://wiki.archlinux.org/title/Mkinitcpio" rel="nofollow"
+        >mkinitcpio</a
+      >.
+    </p>
+    <div class="highlight highlight-source-shell">
+      <pre>
+dracut --add-confdir no-network /boot/initramfs-linux.img
+
+dracut -f --regenerate-all</pre>
+    </div>
+    <p>After first boot:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>
+ln -sf /dev/null /etc/pacman.d/hooks/90-mkinitcpio-install.hook
+ln -sf /dev/null /etc/pacman.d/hooks/60-mkinitcpio-remove.hook</pre>
+    </div>
     <div class="markdown-heading">
       <h4 class="heading-element">Root password</h4>
       <a
