@@ -67,6 +67,8 @@ macOS
     - https://github.com/waydabber/BetterDisplay/wiki/Fully-scalable-HiDPI-desktop#notes-and-troubleshooting
 - https://github.com/iina/iina
 - https://github.com/objective-see/KnockKnock
+- https://github.com/crystalidea/macs-fan-control
+- https://github.com/linearmouse/linearmouse
 
 ## Development
 
