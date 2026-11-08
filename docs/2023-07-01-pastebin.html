@@ -248,6 +248,29 @@ sudo launchctl load -w /Library/LaunchDaemons/org.openvpn.client.plist</pre>
 perl -ne <span class="pl-s"><span class="pl-pds">'</span>print if length($_) &gt; 120<span class="pl-pds">'</span></span> <span class="pl-k">~</span>/.zsh_history</pre>
     </div>
     <div class="markdown-heading">
+      <h2 class="heading-element">ssh</h2>
+      <a
+        id="user-content-ssh"
+        class="anchor"
+        aria-label="Permalink: ssh"
+        href="#ssh"
+        ><span aria-hidden="true" class="octicon octicon-link"></span
+      ></a>
+    </div>
+    <p><code>~/.ssh/config</code>:</p>
+    <div class="highlight highlight-text-adblock">
+      <pre>Host <span class="pl-k">*</span>
+    AddKeysToAgent yes
+    IdentitiesOnly yes
+    UseKeychain yes</pre>
+    </div>
+    <div class="highlight highlight-source-shell">
+      <pre>ssh-keygen -t ed25519 -C <span class="pl-s"><span class="pl-pds">"</span>your_email@example.com<span class="pl-pds">"</span></span>
+
+<span class="pl-c1">eval</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-s"><span class="pl-pds">$(</span>ssh-agent -s<span class="pl-pds">)</span></span><span class="pl-pds">"</span></span>
+ssh-add --apple-use-keychain <span class="pl-k">~</span>/.ssh/id_ed25519</pre>
+    </div>
+    <div class="markdown-heading">
       <h2 class="heading-element">git</h2>
       <a
         id="user-content-git"
@@ -260,7 +283,7 @@ perl -ne <span class="pl-s"><span class="pl-pds">'</span>print if length($_) &gt
     <p>Sign commits, tags:</p>
     <div class="highlight highlight-source-shell">
       <pre>git config --global gpg.format ssh
-git config --global user.signingkey <span class="pl-k">~</span>/.ssh/XXX_ed25519.pub
+git config --global user.signingkey <span class="pl-k">~</span>/.ssh/id_ed25519.pub
 git config --global commit.gpgsign <span class="pl-c1">true</span>
 git config --global tag.gpgsign <span class="pl-c1">true</span></pre>
     </div>
