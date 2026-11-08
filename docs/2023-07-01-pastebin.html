@@ -548,14 +548,8 @@ f2 --find <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">
       ></a>
     </div>
     <div class="highlight highlight-source-shell">
-      <pre><span class="pl-c"><span class="pl-c">#</span> Compress pdf</span>
-qpdf input.pdf output.pdf --verbose --linearize --optimize-images
-
-<span class="pl-c"><span class="pl-c">#</span> Compress better but slower</span>
-qpdf input.pdf output.pdf --verbose --linearize --optimize-images --recompress-flate --compression-level=9 --object-streams=generate
-
-<span class="pl-c"><span class="pl-c">#</span> Decrypt</span>
-qpdf input.pdf output.pdf --verbose --decrypt --remove-restrictions</pre>
+      <pre><span class="pl-c"><span class="pl-c">#</span> Decrypt</span>
+qpdf --password=password --decrypt --replace-input input.pdf</pre>
     </div>
 
     <div>
