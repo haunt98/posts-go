@@ -296,7 +296,11 @@ git config --global tag.gpgsign <span class="pl-c1">true</span></pre>
       <pre><span class="pl-c"><span class="pl-c">#</span> Delete untracked</span>
 git clean -fdx
 
-git gc</pre>
+git gc
+
+<span class="pl-c"><span class="pl-c">#</span> Delete .gitignore files but already committed</span>
+git rm -r --cached <span class="pl-c1">.</span>
+git add <span class="pl-c1">.</span></pre>
     </div>
     <p>Count number of commits:</p>
     <div class="highlight highlight-source-shell">
