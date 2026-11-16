@@ -83,6 +83,10 @@ sudo nano /etc/pam.d/sudo_local</pre>
     <div class="highlight highlight-source-shell">
       <pre>defaults write -g ApplePressAndHoldEnabled -bool <span class="pl-c1">false</span></pre>
     </div>
+    <p>Dock related:</p>
+    <div class="highlight highlight-source-shell">
+      <pre>defaults write com.apple.dock tilesize -int 64<span class="pl-k">;</span> killall Dock</pre>
+    </div>
     <p>Clean up leftover data:</p>
     <ul>
       <li>
